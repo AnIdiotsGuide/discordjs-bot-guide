@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-  * [End of an Era](drama.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Long Version](getting-started/the-long-version.md)
   * [Getting Started - Linux TL;DR](getting-started/linux-tldr.md)
@@ -23,4 +22,3 @@
   * [Storing Data in a JSON file](storing-data-in-a-json-file.md)
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
-
