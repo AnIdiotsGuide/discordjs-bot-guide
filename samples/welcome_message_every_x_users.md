@@ -1,7 +1,5 @@
 # Welcome Message every X users
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 This sample will show how to keep an array/object of new users coming into a server. Then, when this array reaches a certain number of users, it shows a message welcoming those users as a group. When your server becomes popular and you get dozens of users every day, you will find this to be much less annoying than welcoming one user at a time!
 
 The events we're going to use in this example:
@@ -29,7 +27,7 @@ bot.on("guildMemberRemove", (member) => {
 });
 ```
 
-But wait, where do we welcome users? That's done in `guildMemberAdd`, when the count reaches the number you want: 
+But wait, where do we welcome users? That's done in `guildMemberAdd`, when the count reaches the number you want:
 
 ```js
 bot.on("guildMemberAdd", (member) => {
@@ -54,7 +52,7 @@ Two lines require a little more explanation:
 The only issue with the above code is that it would only work if your bot is on a single server. Though this might be alright you, there's a chance you want to support multiple servers. How do we do that? We change `newUsers` to an `Array` instead, and each server gets its own cache. Here is a **complete** example that does nothing but welcome new users:
 
 ```js
-const Discord = require('discord.js'); 
+const Discord = require('discord.js');
 const bot = new Discord.Client();
 
 const newUsers = [];
@@ -79,6 +77,3 @@ bot.on("guildMemberRemove", (member) => {
 
 bot.login("Your.Token");
 ```
-
-
-

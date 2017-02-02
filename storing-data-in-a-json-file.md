@@ -1,7 +1,5 @@
 # Storing Data in a JSON file
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 In this example we're going to read and write data to and from a JSON file. We'll keep is simple by using this JSON file for a points system. Yes, that's like Mee6 - admitedly that's a piece of shit bot, but people seem to love it so here we are.
 
 > **Note**: It should be noted that JSON is not the best storage system for this. It's prone to corruption if you do a lot of read/writes. We'll have an SQLite version coming up soon!
@@ -21,13 +19,13 @@ So here's an example of an object that contains a list of users, along with thei
 }
 ```
 
-Simple enough, right? Nothing to it. It's a [JavaScript Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)! But, it's just an example. don't write this just yet. 
+Simple enough, right? Nothing to it. It's a [JavaScript Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)! But, it's just an example. don't write this just yet.
 
 Instead, create a file in your bot folder called `points.json` with as only content 2 characters: `{}` . Save it and you now have an *empty* JSON file we can read and write.
 
 ## Reading the file
 
-Reading a JSON file is simply a question of loading the file with `fs` module: 
+Reading a JSON file is simply a question of loading the file with `fs` module:
 
 ```js
 const fs = require("fs");
@@ -49,11 +47,11 @@ let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
 
 bot.on("message", message => {
   if(message.author.bot) return; // always ignore bots!
-  
+
   // if the points don't exist, init to 0;
   if(!points[message.author.id]) points[message.author.id] = {points: 0, level: 0};
   points[message.author.id].points++;
-  
+
   // And then, we save the edited file.
   fs.writeFile('./points.json', JSON.stringify(points), (err) => {if(err) console.error(err)});
 });
@@ -75,14 +73,14 @@ Alright, so we have a level. Let's do like all the lame bots out there and outpu
 ```js
   let userLevel = points[message.author.id] ? points[message.author.id].level : 0;
   if(userLevel < curLevel) {
-    // Level up! 
+    // Level up!
     message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
   }
 ```
 
 ## Letting a user see their level
 
-Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it. 
+Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it.
 
 ```js
   if(message.content.startsWith(prefix + "level") {
@@ -110,14 +108,14 @@ bot.on("message", message => {
   if(!points[message.author.id]) points[message.author.id] = {points: 0, level: 0};
   let userData = points[message.author.id];
   userData.points++;
-  
+
   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));  
   if(curLevel > userData.level) {
     // Level up!
     userData.level = curLevel;
     message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
   }
-  
+
   if(message.content.startsWith(prefix + "level")) {
     message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
   }

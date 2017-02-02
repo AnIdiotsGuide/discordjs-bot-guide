@@ -1,7 +1,5 @@
 # Getting Started with Discord.js
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 > **This is the TL;DR version for Windows**. If you wish for a long version with more explanations, please see [this guide](the-long-version.html)
 
 ## Create App and Bot Account
@@ -14,11 +12,11 @@
 
 ## Pre-requisite software
 
-Install the following software in Windows: 
+Install the following software in Windows:
 
  - nodejs from [the downloads page](https://nodejs.org/en/download/) (Version 6.X and higher required)
 
-If you need sound support, you'll need 2 more things: 
+If you need sound support, you'll need 2 more things:
 
 - ffmpeg which is available [on this page](http://adaptivesamples.com/how-to-install-ffmpeg-on-windows/)
 - The new windows build tools:
@@ -26,7 +24,7 @@ If you need sound support, you'll need 2 more things:
   - Run the following command: `npm i -g --production windows-build-tools`
   - This installs Python 2.7 and the C++ Build Tools standalone.
 
-Once you have this all installed, create a folder for your project and install discord.js: 
+Once you have this all installed, create a folder for your project and install discord.js:
 
 `md mybot`
 `cd mybot`
@@ -34,7 +32,7 @@ Once you have this all installed, create a folder for your project and install d
 
 ## Example Code
 
-The following is a simple ping/pong bot. Save as a text file (e.g. `mybot.js`), replacing the string on the last line with the secret bot token you got earlier: 
+The following is a simple ping/pong bot. Save as a text file (e.g. `mybot.js`), replacing the string on the last line with the secret bot token you got earlier:
 
 ```js
 var Discord = require("discord.js");
@@ -55,9 +53,9 @@ client.login("yourcomplicatedBotTokenhere");
 
 ## Launching the bot
 
-In your command prompt, from inside the folder where `mybot.js` is located, launch it with: 
+In your command prompt, from inside the folder where `mybot.js` is located, launch it with:
 
-`node mybot.js`	
+`node mybot.js`
 
 If no errors are shown, the bot should join the server(s) you added it to.
 

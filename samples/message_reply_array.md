@@ -1,10 +1,8 @@
 # Message Reply Array
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 This sample shows the use of a simple string array to reply specific strings when triggered. 
 
-I have often seen the following type of code happen in new bots: 
+I have often seen the following type of code happen in new bots:
 
 ```js
 bot.on('message', (message) => {
@@ -23,7 +21,7 @@ bot.on('message', (message) => {
 
 Ignore the fact that this code doesn't have a prefix and also does not ignore itself or other bots for now. The important fact here is that we can reduce this to a much simpler code, through the use of a array. Well, actually, to make things simpler, let's use an object instead.
 
-First, we declare this object: 
+First, we declare this object:
 
 ```js
 var responseObject = {
@@ -33,7 +31,7 @@ var responseObject = {
 };
 ```
 
-This simple object (which can easily be in a JSON file) can then be used in a single command checker, which would look like this: 
+This simple object (which can easily be in a JSON file) can then be used in a single command checker, which would look like this:
 
 ```js
 bot.on('message', (message) => {
@@ -43,6 +41,6 @@ bot.on('message', (message) => {
 });
 ```
 
-That code basically says: "If you find the message content to be a key of the responseObject, send a message containing that key's value". 
+That code basically says: "If you find the message content to be a key of the responseObject, send a message containing that key's value".
 
 Boom. Done.

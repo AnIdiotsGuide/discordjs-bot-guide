@@ -1,31 +1,29 @@
 #Frequently Asked Questions
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 In this page, some very basic, frequently-asked questions are answered. It's important to understand that **these examples are generic** and will most likely not work if you just copy/paste them in your code. You need to **understand** these lines, not just blindly shove them in your code. 
 
 ## Common Errors & Fixes
 
 ### Bad Request
 
-#### Problem: 
+#### Problem:
 ```
 UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: Bad Request
 ```
 
-#### Solution: 
-There can be 3 causes for this error: 
+#### Solution:
+There can be 3 causes for this error:
 
 - **Your message is empty**: An empty message, aka a 0-length string. Messages cannot be empty.
 - **Your message is too big**: Any message over 2000 character is rejected, just like in the client
-- **There is an error in your embed**: If you're attempting to send an embed, there is an error in it. For example an empty field, a field that's too large, etc. 
+- **There is an error in your embed**: If you're attempting to send an embed, there is an error in it. For example an empty field, a field that's too large, etc.
 
 #### Cannot find module `discord.js`
 
-#### Problem: 
+#### Problem:
 You didn't install Discord.js or installed it in the wrong folder
 
-#### Solution: 
+#### Solution:
 
 - Make sure you are in the **correct** folder where you have your bot's files
 - SHIFT+Right-Click in the folder and select **Open command window here**
@@ -42,7 +40,7 @@ You didn't install Discord.js or installed it in the wrong folder
 SyntaxError: Unexpected end of input
 ```
 
-#### Solution: 
+#### Solution:
 
 Your code has an error somewhere. This is *impossible* to troubleshoot without the **complete** code, since the error can be anywhere (in fact the error stack often tells you it's at the end of your code).
 

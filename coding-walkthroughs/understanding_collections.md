@@ -1,7 +1,5 @@
 # Understanding Collections
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 In this page we will explore Collections, and how to use them to grab data from various part of the API.
 
 A **Collection** is a *utility class* that stores data. In *Discord.js 9.x*, they extend the *Map* data type with additional helpers to assist in retrieving information from them.
@@ -21,13 +19,13 @@ Very simply, to get anything by ID you can use `Collection.get(id)`. For instanc
 
 ## Finding by key
 
-If you don't have the ID but only some other property, you may use `find()` to search by property: 
+If you don't have the ID but only some other property, you may use `find()` to search by property:
 
 `let guild = bot.guilds.find("name", "Discord.js Official");`
 
 ## Custom filtering
 
-*Collections* also have a custom way to filter their content with an anonymous function: 
+*Collections* also have a custom way to filter their content with an anonymous function:
 
 `let large_guilds = bot.builds.filter(g=> g.members.size>100);`
 

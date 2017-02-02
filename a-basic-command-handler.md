@@ -1,8 +1,6 @@
 # A Basic Command Handler Example```
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
-> This was *supposed* to be covered in my next YouTube video. But, the footage was unuseable and I'm no longer making videos, so all you get is this code.
+> This was *supposed* to be covered in her next YouTube video. But, the footage was unuseable and she's no longer making videos, so all you get is this code.
 
 A *Command Handler* is essentially a way to separate your commands into different files, instead of having a bunch of `if/else` conditions inside your code (or a `switch/case` if you're being fancy).
 
@@ -83,11 +81,11 @@ exports.run = (bot, message, args) => {
 }
 ```
 
-Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `bot` (the client), `message` (the message variable from the handler) and `args` (the array of arguments). The actual code is not changed in any way, it's a simple copy/paste into the file itself. Everything works the same. 
+Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `bot` (the client), `message` (the message variable from the handler) and `args` (the array of arguments). The actual code is not changed in any way, it's a simple copy/paste into the file itself. Everything works the same.
 
 ## Example Events
 
-Events are handled almost exactly in the same way, except that the number of arguments depends on which event it is. For example, the `ready` event: 
+Events are handled almost exactly in the same way, except that the number of arguments depends on which event it is. For example, the `ready` event:
 
 ```js
 exports.run = (bot) => {
@@ -95,9 +93,9 @@ exports.run = (bot) => {
 }
 ```
 
-Note that the `ready` event normally doesn't have any arguments, it's just (). But because we're in separate modules, it's necessary to "pass" the `bot` variable to it or it would not be accessible. 
+Note that the `ready` event normally doesn't have any arguments, it's just (). But because we're in separate modules, it's necessary to "pass" the `bot` variable to it or it would not be accessible.
 
-Here's another example with the `guildMemberAdd` event: 
+Here's another example with the `guildMemberAdd` event:
 
 ```js
 exports.run = (bot, member) => {
@@ -110,9 +108,9 @@ Now we have `bot` and also `member` which is the argument provided *by* the `gui
 
 ## BONUS: The "reload" command
 
-Because of the way `require()` works in node, if you modify any of the command files in `./commands` , the changes are not reflected immediately when you call that command again - because `require()` *caches* the file in memory instead of reading it every time. While this is great for efficiency, it means we need to clear that cached version if we change commands. 
+Because of the way `require()` works in node, if you modify any of the command files in `./commands` , the changes are not reflected immediately when you call that command again - because `require()` *caches* the file in memory instead of reading it every time. While this is great for efficiency, it means we need to clear that cached version if we change commands.
 
-The *Reload* command does just that, simply deletes the cache so the next time that specific command is run, it'll refresh its code from the file. 
+The *Reload* command does just that, simply deletes the cache so the next time that specific command is run, it'll refresh its code from the file.
 
 ```js
 exports.run = (bot, message, args) => {

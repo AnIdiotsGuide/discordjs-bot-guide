@@ -1,7 +1,5 @@
 # Getting Started - Linux Short Version
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 > **This is the TL;DR version for Linux**. If you wish for a long version with more explanations, please see [this guide](the-long-version.html)
 
 ## Create App and Bot Account
@@ -14,11 +12,11 @@
 
 ## Pre-requisite software
 
-Install the following through your package manager: 
+Install the following through your package manager:
 
  - nodejs (Version 6.X and higher required, see [here](https://nodejs.org/en/download/package-manager/))
 
-Once you have this all installed, create a folder for your project and install discord.js: 
+Once you have this all installed, create a folder for your project and install discord.js:
 
 `mkdir mybot && cd mybot`
 `npm install discord.js`
@@ -27,7 +25,7 @@ Once you have this all installed, create a folder for your project and install d
 
 ## Example Code
 
-The following is a simple ping/pong bot. Save as a text file (e.g. `mybot.js`), replacing the string on the last line with the secret bot token you got earlier: 
+The following is a simple ping/pong bot. Save as a text file (e.g. `mybot.js`), replacing the string on the last line with the secret bot token you got earlier:
 
 ```js
 var Discord = require("discord.js");
@@ -48,9 +46,9 @@ client.login("yourcomplicatedBotTokenhere");
 
 ## Launching the bot
 
-In your terminal, from inside the folder where `mybot.js` is located, launch it with: 
+In your terminal, from inside the folder where `mybot.js` is located, launch it with:
 
-`node mybot.js`	
+`node mybot.js`
 
 If no errors are shown, the bot should join the server(s) you added it to.
 

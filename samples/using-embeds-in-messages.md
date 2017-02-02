@@ -1,7 +1,5 @@
 # Embeds and Messages
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 You've seen them all around - these sexy dark grey boxes with a nice color on the left, images, and **tables** oh my god. So nice-looking, right? Well, let me show you how to make them!
 
 > **Fair Warning**: Embeds might look nice but they can be disabled through permissions and user preferences, and will not look the same on mobile - especially complex ones. It's strongly recommended *not* to use them unless you have a text-only fallback. Yes they're nice, but, don't use them if you don't *need* to!
@@ -15,7 +13,7 @@ Here are a few rules for embeds:
 
 Those aren't just guidelines, they are rules, and breaking those rules means your embed will not send - it will return `Bad Request`.
 
-There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, *very* basic embed that writes on a single line: 
+There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, *very* basic embed that writes on a single line:
 
 ```js
 msg.channel.sendMessage("", {embed: {
@@ -23,10 +21,10 @@ msg.channel.sendMessage("", {embed: {
   description: "A very simple Embed!"
 }});
 ```
-  
-The `color` determines the bar on the left (here, a very nice blue), and the `description` is the main contents of the message. 
 
-Alternatively to sendMessage("", embed) you can also use the sendEmbed shortcut: 
+The `color` determines the bar on the left (here, a very nice blue), and the `description` is the main contents of the message.
+
+Alternatively to sendMessage("", embed) you can also use the sendEmbed shortcut:
 
 ```js
 msg.channel.sendEmbed({ color: 3447003,
@@ -35,7 +33,7 @@ msg.channel.sendEmbed({ color: 3447003,
 
 ### Adding "Fields"
 
-Fields are what can make embeds really nice - each field can have a title and value, and fields can also be stacked horizontally - as columns. Here's a more complex example of an embed that has many different fields, as well as icons and a footer: 
+Fields are what can make embeds really nice - each field can have a title and value, and fields can also be stacked horizontally - as columns. Here's a more complex example of an embed that has many different fields, as well as icons and a footer:
 
 ```js
 msg.channel.sendEmbed({
@@ -72,7 +70,7 @@ This results in the following:
 
 ## RichEmbed Builder
 
-There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `RichEmbed` builder. 
+There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `RichEmbed` builder.
 
 The same rules apply for `RichEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `RichEmbed`. It also has a nice fancy image, to boot!
 
@@ -104,10 +102,10 @@ const embed = new Discord.RichEmbed()
    */
   .addField('\u200b', '\u200b', true)
   .addField('Inline Field 3', 'You can have a maximum of 25 fields.', true);
-  
+
   msg.channel.sendEmbed(embed);
 ```
 
-Which produces the following: 
+Which produces the following:
 
 ![](http://i.imgur.com/oSVvWSF.png)

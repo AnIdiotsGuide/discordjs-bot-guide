@@ -8,24 +8,24 @@ And I am honoured to be continuing it.
 
 ## Introduction
 
-I decided to write this guide because it's become obvious that the examples for discord.js and the documentation can be quite daunting for newcomers. There was definitely a space for this kind of document online, made obvious by the recurring questions that pop up almost every day on support channels.
+She decided to write this guide because it became obvious that the examples for discord.js and the documentation can be quite daunting for newcomers. There was definitely a space for this kind of document online, made obvious by the recurring questions that pop up almost every day on the support channels.
 
-Seeing as though there needed to be some more detailed explanations as well as code samples, I figured a guide would be a great place to start!
+Seeing as though there needed to be some more detailed explanations as well as code samples, She figured a guide would be a great place to start!
 
 ## Get Support
 If you have any questions after reading this guide please join us on the official Discord.js server:
 
-[![Join the Official Idiot's Guide Server](http://i.imgur.com/Kn0SocQ.png)](https://discord.gg/gkZCQtH)
+[![Join the Official Idiot's Guide Server](assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)
 
 ![Online Member Count](https://discordapp.com/api/guilds/260202843686830080/embed.png)
 
-[![Join the Official Discord.js Server](http://i.imgur.com/jjiBDsd.png)](https://discord.gg/bRCvFy9)
+[![Join the Official Discord.js Server](assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
 
 ![Online Member Count](https://discordapp.com/api/guilds/222078108977594368/embed.png)
 
 ## Updating of this guide
 
-![Guide transfer](http://i.imgur.com/BCar28U.png)
+![Guide transfer](assets/permission.png)
 
 Last Updated: `02/02/2017`
 

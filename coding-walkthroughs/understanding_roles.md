@@ -1,12 +1,10 @@
 # Understanding Roles
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 Roles are a powerful feature in Discord, and admittedly have been one of the hardest parts to master in discord.js. This walkthrough aims at explaining how roles and permissions work. We'll also explore how to use roles to protect your commands.
 
 ## Role hierarchy
 
-Let's start with a basic overview of the hierarchy of roles in Discord. 
+Let's start with a basic overview of the hierarchy of roles in Discord.
 
 ... or actually not, they already explain it better than I care to: [Role Management 101](https://support.discordapp.com/hc/en-us/articles/214836687-Role-Management-101). Read up on that, then come back here. I'll wait. (Yeah I know that's cheesy, so sue me).
 
@@ -70,11 +68,11 @@ member.addRole(role).catch(console.error);
 member.removeRole(role).catch(console.error);
 ```
 
-Alright I feel like I have to add a *little* precision here on implementation: 
+Alright I feel like I have to add a *little* precision here on implementation:
 
-- You can **not** add or remove a role that is higher than the bot's. This should be obvious. 
+- You can **not** add or remove a role that is higher than the bot's. This should be obvious.
 - The bot requires MANAGE_ROLES permissions for this. You can check for it using the code further down this page.
-- Because of global rate limits, you cannot do 2 role "actions" immediately one after the other. The first action will work, the second will not. You can go around that by using `<GuildMember>.setRoles([array, of, roles])`. This will overwrite all existing roles and only apply the ones in the array so be careful with it. 
+- Because of global rate limits, you cannot do 2 role "actions" immediately one after the other. The first action will work, the second will not. You can go around that by using `<GuildMember>.setRoles([array, of, roles])`. This will overwrite all existing roles and only apply the ones in the array so be careful with it.
 
 ## Permission code
 
@@ -94,7 +92,7 @@ msg.channel.permissionsFor(msg.member).serialize()
 
 ### Get all permissions of a member on a guild
 
-Just as easy, wooh! 
+Just as easy, wooh!
 
 ```js
 let perms = msg.member.permissions;
@@ -109,7 +107,7 @@ Now get to coding!
 
 ## ADDENDUM: Permission Names
 
-This is the list of internal permission names, used for `.hasPermission(name)` in the above examples: 
+This is the list of internal permission names, used for `.hasPermission(name)` in the above examples:
 
 ```json
 { CREATE_INSTANT_INVITE: true,

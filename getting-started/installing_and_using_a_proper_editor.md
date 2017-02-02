@@ -1,38 +1,36 @@
 # Installing and Using a proper editor
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 Let's take a moment to appreciate the fact that the best code, is not just code that *works* but also code that is *readable*. And *readable* code is already easier to troubleshoot. To simplify the life of any code, a good editor is key. A good editor will tell you where your mistakes are, validate your code, give you best practices, and some will even run your code for you.
 
 In this tutorial we'll be looking at one such editor: Atom. Now, I'm not personally biased towards or away from Atom, but the editor, and some help from people who use it, were readily available, so this is the one I'm showing you.
 
-Other alternatives would be VS Code and Sublime Text 3. You'll have to look up specific instructions for those editors on your own. 
+Other alternatives would be VS Code and Sublime Text 3. You'll have to look up specific instructions for those editors on your own.
 
 ## Getting Atom Installed
 
 Far be it from me to actually show you how to install stuff on your computer - I will pretend for a moment you know what you're doing, and give you the outline:
 
-1. Go to the [Atom.io website](https://atom.io/). 
+1. Go to the [Atom.io website](https://atom.io/).
 2. Click the big red **Download Windows Installer** button (statistically, you're probably on Windows).
 3. Once the .exe is downloaded, run it, and install it.
 
-Atom starts off with a simple interface with a nice welcome screen and a guide, so if you feel like it, go ahead and read up a bit. 
+Atom starts off with a simple interface with a nice welcome screen and a guide, so if you feel like it, go ahead and read up a bit.
 
 ## Opening your project
 
-To the contrary of some more basic editors, Atom has the ability to open a project *folder* so you don't have to keep opening files individually. 
+To the contrary of some more basic editors, Atom has the ability to open a project *folder* so you don't have to keep opening files individually.
 
 - Go to **File**, **Open Folder** (CTRL+SHIFT+O)
 - Browse to the location of your main bot file (mybot.js, app.js, or whatever)
 - Click on **Select Folder** (*Note: your files will not appear here, only the folder structure. Don't worry they haven't gone anywhere)
 
-On the left of the editor you will have all the files. Just double-click any of them to open it. To clean things up, you can close the Welcome Screen and such. 
+On the left of the editor you will have all the files. Just double-click any of them to open it. To clean things up, you can close the Welcome Screen and such.
 
 > Already, you can see that this code looks super clean, and colorful. Also the dark theme doesn't hurt the eyes so that's a plus.
 
 ## Getting ESLint installed
 
-A "Linter" is a plugin or app that verifies your code to tell you where the errors are, and also helps in formatting the code with proper indentation and styles. 
+A "Linter" is a plugin or app that verifies your code to tell you where the errors are, and also helps in formatting the code with proper indentation and styles.
 
 > There's obviously a debate with what linter you should use. ESLint? JSHint? Some other obscure library? I'll use ESLint because... I know how to use it. Not endorsing it in any way!
 
@@ -41,21 +39,21 @@ ESLint works in 2 parts. The first is the plugin for Atom, which is installed th
 - Hit Windows+R on your keyboard
 - Type in `cmd` then press Enter
 - Enter the command `apm install linter-eslint` then press Enter
-- This may take a few seconds to a minute to complete, be patient. 
+- This may take a few seconds to a minute to complete, be patient.
 - Keep the Command Prompt open.
 
 Next, we need to install the eslint npm module, which is what actually verifies your code. `linter-eslint` just integrates those results in Atom.
 
-In the command line, type `npm i -g eslint` then press Enter. Once it completes (it will show you a list of eslint and installed dependencies). 
+In the command line, type `npm i -g eslint` then press Enter. Once it completes (it will show you a list of eslint and installed dependencies).
 
-You'll need to restart Atom to take the changes into effect. 
+You'll need to restart Atom to take the changes into effect.
 
 ## Setting up ESLint options
 
 ESLint, by default, will expect *very* strict code from you, and will complain for a number of things.
-If you use the wrong type of quotes (single vs double), or if you use 4 instead of 2 spaces, alarms will go blaring. 
+If you use the wrong type of quotes (single vs double), or if you use 4 instead of 2 spaces, alarms will go blaring.
 
-ESLint options can be global or local to your project. Let's do a local one as an example. 
+ESLint options can be global or local to your project. Let's do a local one as an example.
 
 - Create a new file in Atom
 - Save it as `.eslintrc.json` in your project folder (where your app.js/mybot.js is)
@@ -101,4 +99,3 @@ Don't be daunted by this: it's just a little config in JSON format. I won't go i
 - Make linebreaks Windows styles
 - Warn on single quotes, prefer double quotes
 - Warn when the semicolon is absent
-

@@ -1,16 +1,14 @@
 # Selfbots, the greatest thing in the universe
 
-> **Please Note**: This guide will be updated less often due to [personal reasons](/drama.md)
-
 So, my friend, you are wondering what is a selfbot? Well let me tell you a little story.
 
 The first time you see it, you wonder what happened: someone typed for 2 seconds, and a wall of text appears as if by magic. Or something appears and then all of that person's messages disappear one after the other, relegated to `/dev/null` or some other weird place.
 
-That, my friend, is selfbots in action. 
+That, my friend, is selfbots in action.
 
 ## What is a selfbot?
 
-First, let's define what a *userbot is*. A Userbot is **a bot that is running under a user account, instead of a true bot account**. Userbots do not have the blue [BOT] tag next to them... and they are **not** accepted by Discord as a valid way to make bots. At least, not since they introduced bot accounts under their [Discord Applications](https://discordapp.com/developers/applications/me) page. 
+First, let's define what a *userbot is*. A Userbot is **a bot that is running under a user account, instead of a true bot account**. Userbots do not have the blue [BOT] tag next to them... and they are **not** accepted by Discord as a valid way to make bots. At least, not since they introduced bot accounts under their [Discord Applications](https://discordapp.com/developers/applications/me) page.
 
 On the other hand, a **selfbot** runs under an **active** user account. In other words, **your** account. When it posts a message, it's like you did. It can edit and delete your messages, has the same permissions you have, is on the same servers. **It's you**.
 
@@ -18,21 +16,21 @@ On the other hand, a **selfbot** runs under an **active** user account. In other
 
 ## What are the rules for selfbots?
 
-I mentioned that *userbots* are not tolerated by Hammer & Chisel. Selfbots, however, are tolerated under a specific set of semi-offical rules under which they turn a blind eye: 
+I mentioned that *userbots* are not tolerated by Hammer & Chisel. Selfbots, however, are tolerated under a specific set of semi-offical rules under which they turn a blind eye:
 
 - A selfbot **must not**, under any circumstance, respond to other user's messages. This means it should not respond to commands, should not autoreply to certain keywords, etc. **You** must be the only one that can control it.
 - A selfbot **must not**, under any circumstance, do "invite scraping". This is the action of detecting server invites in chat, and automatically joining a server using that invite. That is akin to creating a virus, and it is not acceptable.
-- As selfbots run under your account they are subject to the same Terms of Service. That is to say, they should not *spam*, *insult or demean others*, *post NSFW material*, *spread viruses or illegal material*, etc. They have to follow the same rules that you follow. 
+- As selfbots run under your account they are subject to the same Terms of Service. That is to say, they should not *spam*, *insult or demean others*, *post NSFW material*, *spread viruses or illegal material*, etc. They have to follow the same rules that you follow.
 
 **IF**, and **only if** you accept the above rules of selfbots, then you may proceed.
 
 ## How do I make a selfbot?
 
-The code that creates selfbots is essentially the same as regular bots, because... well it's the same library, right? 
+The code that creates selfbots is essentially the same as regular bots, because... well it's the same library, right?
 
 ### Respond only to you
 
-The first difference is your `message` handler. It should start with a line that prevents the bot from interacting with anyone else's messages (see rule #1 above): 
+The first difference is your `message` handler. It should start with a line that prevents the bot from interacting with anyone else's messages (see rule #1 above):
 
 ```js
 bot.on("message", message => {
@@ -62,7 +60,7 @@ I've already covered why Bot Tokens should remain secret in the [Getting Started
 
 ## Example selfbot commands
 
-Here are a few useful examples of commands that I like to use. 
+Here are a few useful examples of commands that I like to use.
 
 ### Prune Command
 
@@ -76,7 +74,7 @@ bot.on("message", message => {
 
   var prefix = "/"; // always use a prefix it's good practice.
   if(!message.content.startsWith(prefix)) return; // ignore messages that... you know the drill.
-  
+
   // We covered this already, yay!
   const params = message.content.split(" ").slice(1);
 
@@ -104,7 +102,7 @@ I've included the author check, prefix and params slice at the top for this firs
 
 I love lenny, he's really a great friend to have. And his buddy /justright is also pretty cool! This command is... not really a command in the traditional sense of the word, because it's not built with the regular `if(msg.content.startsWith("something"))` we've seen before.
 
-What it does is, check if the message is *only* the prefix + any of the names in a map. The map itself can be placed outside of the `message` handler, or right before the commands are called: 
+What it does is, check if the message is *only* the prefix + any of the names in a map. The map itself can be placed outside of the `message` handler, or right before the commands are called:
 
 ```js
 var shortcuts = new Map([
@@ -125,7 +123,7 @@ bot.on("message", message => {
   if(message.author !== bot.user) return;
   var prefix = "/";
   if(!message.content.startsWith(prefix)) return;
-  
+
   // custom shortcut check
   var command_name = message.content.slice(1); // removes the prefix, keeps the rest
   if(shortcuts.has(command_name)) {
@@ -134,7 +132,7 @@ bot.on("message", message => {
     setTimeout( () => { message.edit(shortcuts.get(command_name)) }, 50);
     return;
   }
-  
+
   // The Rest of your code
   // ...
 });
@@ -142,6 +140,6 @@ bot.on("message", message => {
 
 ### A complete implementation
 
-The examples above are from my own personal selfbot. For your viewing pleasure I have uploaded it to github and will continue to update it as I use it and add more features. 
+The examples above are from my own personal selfbot. For your viewing pleasure I have uploaded it to github and will continue to update it as I use it and add more features.
 
 [Root's Selfbot](https://github.com/eslachance/djs-selfbot-v9) > Have fun!
