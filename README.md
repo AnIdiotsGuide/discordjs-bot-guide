@@ -15,14 +15,18 @@ Seeing as though there needed to be some more detailed explanations as well as c
 ## Get Support
 If you have any questions after reading this guide please join us on the official Discord.js server:
 
-[![Join the Official Idiot's Guide Server](https://i.imgur.com/giRbeKh.png)](https://discord.gg/gkZCQtH)
+[![Join the Official Idiot's Guide Server](http://i.imgur.com/Kn0SocQ.png)](https://discord.gg/gkZCQtH)
 
-![The Official Idiot's Guide Server](https://discordapp.com/api/guilds/260202843686830080/embed.png)
+![Online Member Count](https://discordapp.com/api/guilds/260202843686830080/embed.png)
+
+[![Join the Official Discord.js Server](http://i.imgur.com/jjiBDsd.png)](https://discord.gg/bRCvFy9)
+
+![Online Member Count](https://discordapp.com/api/guilds/222078108977594368/embed.png)
 
 ## Updating of this guide
 
-![evie.codes giving permission to york](http://i.imgur.com/BCar28U.png)
+![Guide transfer](http://i.imgur.com/BCar28U.png)
 
 Last Updated: `02/02/2017`
 
-On Version: `11.0.2`
+On Version: `11.0.4`
