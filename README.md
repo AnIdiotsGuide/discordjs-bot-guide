@@ -21,7 +21,7 @@ If you have any questions after reading this guide please join us on the officia
 
 ## Updating of this guide
 
-[evie.codes giving permission to york](http://i.imgur.com/6dOiQZv.png)
+![evie.codes giving permission to york](http://i.imgur.com/6dOiQZv.png)
 
 Last Updated: `02/02/2017`
 
