@@ -22,4 +22,5 @@
   * [Storing Data in a JSON file](storing-data-in-a-json-file.md)
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
+  * [Cleverbot Intergration](samples/cleverbot-intergration.md)
 
