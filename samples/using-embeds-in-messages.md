@@ -2,18 +2,19 @@
 
 You've seen them all around - these sexy dark grey boxes with a nice color on the left, images, and **tables** oh my god. So nice-looking, right? Well, let me show you how to make them!
 
-> **Fair Warning**: Embeds might look nice but they can be disabled through permissions and user preferences, and will not look the same on mobile - especially complex ones. It's strongly recommended *not* to use them unless you have a text-only fallback. Yes they're nice, but, don't use them if you don't *need* to!
+> **Fair Warning**: Embeds might look nice but they can be disabled through permissions and user preferences, and will not look the same on mobile - especially complex ones. It's strongly recommended _not_ to use them unless you have a text-only fallback. Yes they're nice, but, don't use them if you don't _need_ to!
 
 ## Object-based embeds
 
 Here are a few rules for embeds:
-- Every field is optional
-- At least one field must be present
-- No field can be empty, null, or undefined.
+
+* Every field is optional
+* At least one field must be present
+* No field can be empty, null, or undefined.
 
 Those aren't just guidelines, they are rules, and breaking those rules means your embed will not send - it will return `Bad Request`.
 
-There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, *very* basic embed that writes on a single line:
+There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, _very_ basic embed that writes on a single line:
 
 ```js
 <Message>.channel.sendMessage("", {embed: {
@@ -22,9 +23,9 @@ There are 2 ways to do embeds. The first, is by writing the embed yourself, as a
 }});
 ```
 
-The `color` determines the bar on the left (here, a very nice blue), and the `description` is the main contents of the message.
+The `color` determines the bar on the left \(here, a very nice blue\), and the `description` is the main contents of the message.
 
-Alternatively to sendMessage("", embed) you can also use the sendEmbed shortcut:
+Alternatively to sendMessage\("", embed\) you can also use the sendEmbed shortcut:
 
 ```js
 <Message>.channel.sendEmbed({ color: 3447003,
@@ -67,7 +68,7 @@ Fields are what can make embeds really nice - each field can have a title and va
 
 This results in the following:
 
-![Example Embed](assets/embeds/embedexample1.png)
+![](/assets/embeds/embedexample1.png)
 
 ## RichEmbed Builder
 
@@ -109,4 +110,5 @@ const embed = new Discord.RichEmbed()
 
 Which produces the following:
 
-![Example Embed](assets/embeds/embedexample2.png)
+![](/assets/embeds/embedexample2.png)
+
