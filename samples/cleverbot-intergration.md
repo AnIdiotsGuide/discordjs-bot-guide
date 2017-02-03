@@ -32,19 +32,22 @@ Cleverbot.prepare(function(){
   });
 });
 ```
-Alright, we've bot both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file (and you should!).
+
+Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file \(and you should!\).
 
 Installed? Good! Now, let's get to the final step... the code.
 
-We have both our example codes, now we need to combine them for a working bot. 
+We have both our example codes, now we need to combine them for a working bot.
 
 > NOTE: A lot of the naive developers would just shove the cleverbot example straight in their message event and wonder why it wasn't working. It would create a new instance of Cleverbot and would eventually cause a memory leak.
 
 Right, we need to take the first two lines of the cleverbot example...
+
 ```js
 var Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
 ```
+
 ...and put them with our discord definitions.
 
 ```js
@@ -53,6 +56,7 @@ const Cleverbot = require('cleverbot-node');
 const client = new Discord.Client();
 const clbot = new Cleverbot;
 ```
+
 As you can see, I changed a few things, we don't and shouldn't be hoisting them up with `var` and we don't plan on redefining them, so we'll use `const`. I also renamed `cleverbot` to `clbot` to reduce any possible confusion.
 
 Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we'll check the channel `type` with the following code
@@ -62,6 +66,7 @@ if (message.channel.type === 'dm') {
   // Cleverbot code goes here.
 }
 ```
+
 Your code should look something like this...
 
 ```js
@@ -92,5 +97,6 @@ client.on('ready', () => {
 client.login("yourcomplicatedBotTokenhere");
 ```
 
-If everything is as above, then just send your bot a DM and watch the magic unfold!
+If everything is as above, then just send your bot a DM and watch the magic unfold!  
 ![Success!](/assets/cleverbot.png)
+
