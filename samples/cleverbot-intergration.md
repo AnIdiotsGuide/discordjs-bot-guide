@@ -78,7 +78,7 @@ const clbot = new Cleverbot;
 client.on("message", message => {
   if (message.channel.type === 'dm') {
     let args = message.content.split(' ').slice(1);
-    CleverBot.prepare(() => {
+    Cleverbot.prepare(() => {
       clbot.write(args, (response) => {
         message.channel.startTyping();
         setTimeout(() => {
