@@ -15,7 +15,7 @@ The first step in creating a bot is to create your own Discord _application_. Th
 
 To create the application, head to the [Discordapp.com Application Page](https://discordapp.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
 
-![enter image description here](http://i.imgur.com/geAQzyc.png)
+![enter image description here](assets/gettingstarted/gs1.png)
 
 Click on \(you guessed it!\) **New Application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one.
 
@@ -24,7 +24,7 @@ Click on \(you guessed it!\) **New Application**. This brings you to the followi
 ### Create the bot account
 
 Once you click on the **Create Application** button, you're brought to the application page, on which you see 2 new sections, once for the App ID \(keep this one in mind for later\) as well as a section that lets you create the **Bot User**. This is exactly what we want, so go ahead and click **Create a Bot User**, then **Yes, Do it**.  
-![enter image description here](http://i.imgur.com/apFCWyQ.png)
+![enter image description here](assets/gettingstarted/gs2.png)
 
 ### Add your bot to a server
 
@@ -34,18 +34,18 @@ Unfortunately, there's no cute button here to do this automatically, the link is
 
 [https://discordapp.com/oauth2/authorize?client\_id=APP\_ID&scope=bot](https://discordapp.com/oauth2/authorize?client_id=APP_ID&scope=bot)
 
-![enter image description here](http://i.imgur.com/5ojWF2M.png)
+![enter image description here](assets/gettingstarted/gs3.png)
 
 When you do this, You get shown a window letting you choose the server where to add the bot, simply select the server and click **Authorize**.
 
-![enter image description here](http://i.imgur.com/3XT7MCi.png)
+![enter image description here](assets/gettingstarted/gs4.png)
 
 ### Getting your Bot Token
 
 > Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really, really important: Your bot's **token** is meant to be **SECRET**. It is the way by which your bot authenticates with the Discord server in the same way that you login to Discord with a username and password. **Revealing your token is like putting your password on the internet**, and anyone that gets this token can use **your** bot connection to do things. Like delete all the messages on your server and ban everyone. If your token ever reaches the internet, **change it immediately**. This includes putting it on pastebin/hastebin, having it in a public github repository, displaying a screenshot of it, anything. **GOT IT? GOOD!**
 
 With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:  
-![enter image description here](http://i.imgur.com/6iaWr3u.png)
+![enter image description here](assets/gettingstarted/gs5.png)
 
 > No, this is not a valid token. Yes, the app is now deleted as you read this message.
 
@@ -109,7 +109,7 @@ Ok let's just... actually get this guy to work, because this is literally **a fu
 
 If all went well \(hopefully it did\) your bot is now connected to your server, it's in your userlist, and ready to answer all your commands... Well, at least, _one_ command: `ping`. In its current state, the bot will reply "pong!" to any message that starts with, _exactly_, `ping`. Let's demonstrate!
 
-![enter image description here](http://i.imgur.com/kSJDuwg.png)
+![enter image description here](assets/gettingstarted/gs6.png)
 
 Success! You now have a bot running! As you probably realize by now I could probably blabber on from here, showing you a bunch of stuff. But the scope of this tutorial is completed, so I'll shut up now! Ciao!
 
@@ -126,6 +126,3 @@ Before you start getting support from Discord servers to help you with your bot,
 * [An Idiot's Guide](https://www.youtube.com/channel/UCLun-hgcYUgNvCCj4sIa-jA) is another great channel with more material. York's guides are great, and he continues to update them.
 * [Discord.js Official Server](https://discord.gg/bRCvFy9): Regardless of [personal reasons I'm not there anymore](/drama.md), the official discord.js server still has a lot of competent people that can help you.
 * [York's Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
-
-
-

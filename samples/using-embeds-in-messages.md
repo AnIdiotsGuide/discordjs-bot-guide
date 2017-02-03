@@ -16,7 +16,7 @@ Those aren't just guidelines, they are rules, and breaking those rules means you
 There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, *very* basic embed that writes on a single line:
 
 ```js
-msg.channel.sendMessage("", {embed: {
+<Message>.channel.sendMessage("", {embed: {
   color: 3447003,
   description: "A very simple Embed!"
 }});
@@ -27,7 +27,7 @@ The `color` determines the bar on the left (here, a very nice blue), and the `de
 Alternatively to sendMessage("", embed) you can also use the sendEmbed shortcut:
 
 ```js
-msg.channel.sendEmbed({ color: 3447003,
+<Message>.channel.sendEmbed({ color: 3447003,
   description: "A very simple Embed!" });
 ```
 
@@ -36,11 +36,11 @@ msg.channel.sendEmbed({ color: 3447003,
 Fields are what can make embeds really nice - each field can have a title and value, and fields can also be stacked horizontally - as columns. Here's a more complex example of an embed that has many different fields, as well as icons and a footer:
 
 ```js
-msg.channel.sendEmbed({
+<Message>.channel.sendEmbed({
     color: 3447003,
     author: {
-      name: bot.user.username,
-      icon_url: bot.user.avatarURL
+      name: <Client>.user.username,
+      icon_url: <Client>.user.avatarURL
     },
     title: 'This is an embed',
     url: 'http://google.com',
@@ -60,13 +60,14 @@ msg.channel.sendEmbed({
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: bot.user.avatarURL,
+      icon_url: <Client>.user.avatarURL,
       text: '© Example'
     }});
 ```
 
 This results in the following:
-![](http://i.imgur.com/j6Q0Fic.png)
+
+![Example Embed](assets/embeds/embedexample1.png)
 
 ## RichEmbed Builder
 
@@ -103,9 +104,9 @@ const embed = new Discord.RichEmbed()
   .addField('\u200b', '\u200b', true)
   .addField('Inline Field 3', 'You can have a maximum of 25 fields.', true);
 
-  msg.channel.sendEmbed(embed);
+  <Message>.channel.sendEmbed(embed);
 ```
 
 Which produces the following:
 
-![](http://i.imgur.com/oSVvWSF.png)
+![Example Embed](assets/embeds/embedexample2.png)
