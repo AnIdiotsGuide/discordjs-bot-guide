@@ -1,11 +1,11 @@
 # Message Reply Array
 
-This sample shows the use of a simple string array to reply specific strings when triggered. 
+This sample shows the use of a simple string array to reply specific strings when triggered.
 
 I have often seen the following type of code happen in new bots:
 
 ```js
-bot.on('message', (message) => {
+<Client>.on('message', (message) => {
   if(message.content === "ayy") {
     message.channel.sendMessage("Ayy, lmao!");
   }
@@ -31,10 +31,10 @@ var responseObject = {
 };
 ```
 
-This simple object (which can easily be in a JSON file) can then be used in a single command checker, which would look like this:
+This simple object \(which can easily be in a JSON file\) can then be used in a single command checker, which would look like this:
 
 ```js
-bot.on('message', (message) => {
+<Client>.on('message', (message) => {
   if(responseObject[message.content]) {
     message.channel.sendMessage(responseObject[message.content]);
   }
@@ -44,3 +44,4 @@ bot.on('message', (message) => {
 That code basically says: "If you find the message content to be a key of the responseObject, send a message containing that key's value".
 
 Boom. Done.
+

@@ -14,7 +14,7 @@ Initializing the discord collection is simple: `var newUsers = new Discord.Colle
 Adding new members that join to the collection is simple:
 
 ```js
-bot.on("guildMemberAdd", (member) => {
+<Client>.on("guildMemberAdd", (member) => {
   newUsers.set(member.user.id, member.user);
 });
 ```
@@ -22,7 +22,7 @@ bot.on("guildMemberAdd", (member) => {
 If a user leaves while he's on that list though, it would cause your bot to welcome @invalid-user. To fix this, we remove that user from the collection:
 
 ```js
-bot.on("guildMemberRemove", (member) => {
+<Client>.on("guildMemberRemove", (member) => {
   if(newUsers.exists("id", member.user.id)) newUsers.delete(member.user.id);
 });
 ```
@@ -30,7 +30,7 @@ bot.on("guildMemberRemove", (member) => {
 But wait, where do we welcome users? That's done in `guildMemberAdd`, when the count reaches the number you want:
 
 ```js
-bot.on("guildMemberAdd", (member) => {
+<Client>.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.user.id, member.user);
 
@@ -77,3 +77,6 @@ bot.on("guildMemberRemove", (member) => {
 
 bot.login("Your.Token");
 ```
+
+
+

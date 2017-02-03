@@ -13,7 +13,7 @@
   * [Understanding Events and Handlers](coding-walkthroughs/events_and_handlers.md)
   * [Understanding Collections](coding-walkthroughs/understanding_collections.md)
   * [Understanding Roles](coding-walkthroughs/understanding_roles.md)
-* Code Examples
+* [Code Examples](code-examples.md)
   * [Welcome Message every X users](samples/welcome_message_every_x_users.md)
   * [Message Reply Array](samples/message_reply_array.md)
   * [Command with arguments](samples/command_with_arguments.md)
@@ -22,3 +22,4 @@
   * [Storing Data in a JSON file](storing-data-in-a-json-file.md)
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
+
