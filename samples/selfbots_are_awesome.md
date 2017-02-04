@@ -141,5 +141,5 @@ The next step is to add the check at the beginning of your message handler. Well
 
 The examples above are from my own personal selfbot. For your viewing pleasure I have uploaded it to github and will continue to update it as I use it and add more features.
 
-[Root's Selfbot](https://github.com/eslachance/djs-selfbot-v9) &gt; Have fun!
+[〈evie.codes〉's Selfbot](https://github.com/eslachance/djs-selfbot-v9) &gt; Have fun!
 

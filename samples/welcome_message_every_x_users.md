@@ -53,11 +53,11 @@ The only issue with the above code is that it would only work if your bot is on 
 
 ```js
 const Discord = require('discord.js');
-const bot = new Discord.Client();
+const client = new Discord.Client();
 
 const newUsers = [];
 
-bot.on("guildMemberAdd", (member) => {
+client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   if(!newUsers[guild.id]) newUsers[guild.id] = new Discord.Collection();
   newUsers[guild.id].set(member.user.id, member.user);
@@ -68,14 +68,14 @@ bot.on("guildMemberAdd", (member) => {
     newUsers[guild.id] = new Discord.Collection();
   }
 
-bot.on("guildMemberRemove", (member) => {
+client.on("guildMemberRemove", (member) => {
   const guild = member.guild;
   if(newUsers[guild.id].exists("id", member.user.id)) newUsers.delete(member.user.id);
 });
 
 });
 
-bot.login("Your.Token");
+client.login("Your.Token");
 ```
 
 
