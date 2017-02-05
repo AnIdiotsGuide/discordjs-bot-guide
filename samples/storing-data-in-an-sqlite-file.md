@@ -116,7 +116,7 @@ client.on('message', message => {
   if (message.channel.type !== 'text') return;
   sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
     if (!row) {
-      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?, ?)', [message.guild.id, message.author.id, 1, 0]);
+      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.guild.id, message.author.id, 1, 0]);
     } else {
       sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
     }
@@ -212,7 +212,7 @@ client.on('message', message => {
 
   sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
     if (!row) {
-      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?, ?)', [message.guild.id, message.author.id, 1, 0]);
+      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.guild.id, message.author.id, 1, 0]);
     } else {
       let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
       if (curLevel > row.level) {
