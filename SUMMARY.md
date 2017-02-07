@@ -13,6 +13,7 @@
   * [Understanding Events and Handlers](coding-walkthroughs/events_and_handlers.md)
   * [Understanding Collections](coding-walkthroughs/understanding_collections.md)
   * [Understanding Roles](coding-walkthroughs/understanding_roles.md)
+  * [Discord Webhooks \(Part 1\)](samples/discord-webhooks.md)
 * [Code Examples](code-examples.md)
   * [Welcome Message every X users](samples/welcome_message_every_x_users.md)
   * [Message Reply Array](samples/message_reply_array.md)
@@ -24,5 +25,4 @@
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
   * [Cleverbot Intergration](samples/cleverbot-intergration.md)
-  * [Discord Webhooks](samples/discord-webhooks.md)
 
