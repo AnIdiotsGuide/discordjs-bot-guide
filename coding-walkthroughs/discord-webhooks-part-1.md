@@ -33,11 +33,11 @@ Right, we'll start off slow, we need to create a webhook first, if we look at th
 .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
-.then(wb => <Message>.author.sendMessage(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error)) 
+.then(wb => <Message>.author.sendMessage(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
 ```
 This is what it should look like if you test the code.
-![Created the webhook](/assets/Fer42SI[1].png)
-![Successfully created webhook](/assets/webhookdm.png)
+![Created the webhook](/assets/webhooks/wh01.png)
+![Successfully created webhook](/assets/webhooks/wh02.png)
 
 > **NOTE:** This webhook link has long since been deleted.
 
@@ -65,7 +65,7 @@ Here's the regex on it's own
 ```
 Using the above regex with `match`, `replace` and `test` will allow you to isolate the image url in the string and leave the remaining string to be used as the webhook's name, there's an amazing online tool called [regex101.com](https://regex101.com/), with that tool I was able to create the above regex, here's an image of it in action.
 
-![Regex in action.](/assets/9LrdpEB[1].png)
+![Regex in action.](/assets/webhooks/wh03.png)
 
 I'm not going to go into much detail, but the fact that both of the test strings are highlighted, and it's saying there's 2 matches is all we need to know, it works with links starting with `http` and `https`, and it looks for valid extensions, which are jpg, jpeg and png.
 
@@ -85,9 +85,9 @@ message.channel.createWebhook(name, avatar)
 ```
 
 Alright, now let's throw that together with our bot code and issue the command!
-![Command usage.](/assets/U0DtzcN[1].png)
+![Command usage.](/assets/webhooks/wh04.png)
 And let's check the channel webhooks!
-![Channel Webhooks](/assets/UJ2gd4E[1].png)
+![Channel Webhooks](/assets/webhooks/wh05.png)
 
 Wooo! we did it!
 
