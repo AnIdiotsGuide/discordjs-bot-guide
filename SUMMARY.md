@@ -24,4 +24,5 @@
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
   * [Cleverbot Intergration](samples/cleverbot-intergration.md)
+  * [Discord Webhooks](samples/discord-webhooks.md)
 
