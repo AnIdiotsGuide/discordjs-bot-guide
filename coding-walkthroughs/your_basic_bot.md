@@ -1,24 +1,24 @@
-# Your First Bot
+#Your First Bot
 
 This chapter assumes you've followed the Getting Started chapter and your bot code compiles. Also, I have to repeat: if you don't understand the code you're about to see, coding a bot might not be for you. Go to [CodeAcademy](https://www.codecademy.com/learn/javascript) and learn Javascript.
 
 In this chapter I'll guide you through the development of a simple bot with some useful commands. We'll start with the example we created in the first chapter:
 
 ```js
-var Discord = require("discord.js");
-var bot = new Discord.Client();
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
-bot.on("message", msg => {
-	if (msg.content.startsWith("ping")) {
-		msg.channel.sendMessage("pong!");
-	}
-});
+client.login("SuperSecretBotTokenHere");
 
-bot.on('ready', () => {
+client.on('ready', () => {
   console.log('I am ready!');
 });
 
-bot.login("yourcomplicatedBotTokenhere");
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.sendMessage("pong!");
+  }
+});
 ```
 
 ## Introducing Events
@@ -27,8 +27,8 @@ Before we dive into any further coding, we need to first understand what an *Eve
 
 This is an event:
 ```js
-bot.on("message", message => {
-    // This code runs when the event is triggered
+client.on("message", (message) => {
+  // This code runs when the event is triggered
 });
 ```
 
@@ -45,14 +45,14 @@ One of the first useful things you might want to learn is how to add a second co
 > From now on I will omit the code that requires and initiates the discord.js and concentrate on specific parts of the code.
 
 ```js
-bot.on("message", msg => {
-    if (msg.content.startsWith("ping")) {
-      msg.channel.sendMessage("pong!");
-    }
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.sendMessage("pong!");
+  } else
 
-    else if (msg.content.startsWith("foo")) {
-      msg.channel.sendMessage("bar!");
-    }
+  if (message.content.startsWith("foo")) {
+    message.channel.sendMessage("bar!");
+  }
 });
 ```
 
@@ -71,19 +71,18 @@ Second, in the example above we respond when the message *starts with* the 3 cha
 To work around this, we'll be using prefix, which we will store in a variable. This way we get the prefix as well as the ability to change it for all commands in one place. Here's an example code that does this:
 
 ```js
-bot.on("message", msg => {
-
+client.on("message", (message) => {
   // Set the prefix
   let prefix = "!";
+
   // Exit and stop if it's not there
-  if(!msg.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(prefix)) return;
 
-  if (msg.content.startsWith(prefix + "ping")) {
-    msg.channel.sendMessage("pong!");
-  }
-
-  else if (msg.content.startsWith(prefix + "foo")) {
-    msg.channel.sendMessage("bar!");
+  if (message.content.startsWith(prefix + "ping")) {
+    message.channel.sendMessage("pong!");
+  } else
+  if (message.content.startsWith(prefix + "foo")) {
+    message.channel.sendMessage("bar!");
   }
 });
 ```
@@ -104,11 +103,11 @@ We're pretty much done with the basic bot. There's one last thing that I want to
 Now, one person types `!help` in a channel, and both bots respond. But, they will also see the **other** bot saying `!help commands: [...]`, will see that as a request for help, answer each other... in an infinite loop. To prevent that from happening, we can add a second condition inside our `message` event handler, right below the one that checks for the prefix:
 
 ```js
-bot.on("message", msg => {
+client.on("message", (message) => {
   let prefix = "!";
-  if(!msg.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(prefix)) return;
   // our new check:
-  if(msg.author.bot) return;  
+  if (message.author.bot) return;
   // [rest of the code]
 });
 ```
@@ -122,27 +121,26 @@ And now, we have a bot that only responds to 2 commands and does not waste any p
 The full bot code would now be:
 
 ```js
-var Discord = require("discord.js");
-var bot = new Discord.Client();
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
-bot.on("message", msg => {
+client.login("SuperSecretBotTokenHere");
+
+client.on("message", (message) => {
   // Set the prefix
   let prefix = "!";
   // Exit and stop if it's not there
-  if(!msg.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(prefix)) return;
   // Exit if any bot
-  if(msg.author.bot) return;  
+  if (message.author.bot) return;
 
-  if (msg.content.startsWith(prefix + "ping")) {
-    msg.channel.sendMessage("pong!");
-  }
-
-  else if (msg.content.startsWith(prefix + "foo")) {
-    msg.channel.sendMessage("bar!");
+  if (message.content.startsWith(prefix + "ping")) {
+    message.channel.sendMessage("pong!");
+  } else
+  if (message.content.startsWith(prefix + "foo")) {
+    message.channel.sendMessage("bar!");
   }
 });
-
-bot.login("yourcomplicatedBotTokenhere");
 ```
 
 ## What's next *now*?

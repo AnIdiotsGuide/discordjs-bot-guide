@@ -22,7 +22,7 @@ If you have any questions after reading this guide please join us on the officia
 
 ![Guide transfer](assets/permission.png)
 
-Last Updated: `07/02/2017`
+Last Updated: `08/02/2017`
 
-On Version: `11.0.10`
+On Version: `11.1.0`
 

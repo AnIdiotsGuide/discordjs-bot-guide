@@ -1,4 +1,4 @@
-# Adding a `config.json` file to your bot?
+#Adding a `config.json` file to your bot?
 
 Now that you have a bot up and running, we can start splitting it into some more useful parts. And the first part of this is separating some of the variables we have defined into a configuration file, `config.json`. We'll be loading this file on boot.
 
@@ -51,16 +51,16 @@ client.login(config.token);
 The other thing we have, is of course the prefix. Again from [Your First Bot](/coding-walkthroughs/your_basic_bot.md), we have this line in our message handler:
 
 ```js
-client.on("message", msg => {
+client.on("message", (message) => {
   let prefix = "!";
-  if(!msg.content.startsWith(prefix)) return;
+  if(!message.content.startsWith(prefix)) return;
 
-  if (msg.content.startsWith(prefix + "ping")) {
-    msg.channel.sendMessage("pong!");
-  }
-
-  else if (msg.content.startsWith(prefix + "foo")) {
-    msg.channel.sendMessage("bar!");
+  if (message.content.startsWith(prefix + "ping")) {
+    message.channel.sendMessage("pong!");
+  } else
+  
+  if (message.content.startsWith(prefix + "foo")) {
+    message.channel.sendMessage("bar!");
   }
 });
 ```
@@ -68,15 +68,15 @@ client.on("message", msg => {
 We're using `prefix` in a few places, so we need to change them all. Here's how it looks like after the changes:
 
 ```js
-client.on("message", msg => {
-  if(!msg.content.startsWith(config.prefix)) return;
+client.on("message", (message) => {
+  if(!message.content.startsWith(config.prefix)) return;
 
-  if (msg.content.startsWith(config.prefix + "ping")) {
-    msg.channel.sendMessage("pong!");
-  }
-
-  else if (msg.content.startsWith(config.prefix + "foo")) {
-    msg.channel.sendMessage("bar!");
+  if (message.content.startsWith(config.prefix + "ping")) {
+    message.channel.sendMessage("pong!");
+  } else
+  
+  if (message.content.startsWith(config.prefix + "foo")) {
+    message.channel.sendMessage("bar!");
   }
 });
 ```
@@ -96,9 +96,9 @@ const fs = require("fs")
 Now, let's say you wanted a prefix-changing command. This would take the shape of:
 
 ```js
-if(msg.content.startsWith(config.prefix + "prefix"))
+if(message.content.startsWith(config.prefix + "prefix"))
   // get arguments for the command, as: !prefix +
-  let args = msg.content.split(" ").slice(1);
+  let args = message.content.split(" ").slice(1);
   // change the configuration in memory
   config.prefix = args[0];
 
@@ -123,10 +123,10 @@ So is there anything else you could put in that config file? Absolutely. One thi
 }
 ```
 
-Then, in the eval command, I could use the following line to prevent access to all the plebs that think they can use my eval!:
+Then, in the [eval command](/samples/making-an-eval-command.md), I could use the following line to prevent access to all the plebs that think they can use my eval!:
 
 ```js
-if(msg.author.id !== config.ownerID) return;
+if(message.author.id !== config.ownerID) return;
 ```
 
 Awesome! Now go back to coding!

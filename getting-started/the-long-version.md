@@ -82,20 +82,20 @@ Ok finally, we're ready to start coding. **\o/**
 Let's take a look at the most basic of examples, the ping-pong bot. Here's the code in its entirety:
 
 ```js
-var Discord = require("discord.js");
-var client = new Discord.Client();
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
-client.on("message", msg => {
-    if (msg.content.startsWith("ping")) {
-        msg.channel.sendMessage("pong!");
-    }
-});
+client.login("SuperSecretBotTokenHere");
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
-client.login("yourcomplicatedBotTokenhere");
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.sendMessage("pong!");
+  }
+});
 ```
 
 > The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically it whatever you want. I recommend sticking to `client` though!
