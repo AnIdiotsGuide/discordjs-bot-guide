@@ -98,7 +98,7 @@ client.on("message", (message) => {
 });
 ```
 
-> The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically it whatever you want. I recommend sticking to `client` though!
+> The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically call it whatever you want. I recommend sticking to `client` though!
 
 Ok let's just... actually get this guy to work, because this is literally **a functional bot**. So let's make it run!
 
