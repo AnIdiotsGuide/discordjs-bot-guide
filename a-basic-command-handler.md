@@ -36,10 +36,14 @@ client.on("message", message => {
   command = command.slice(config.prefix.length);
 
   let args = message.content.split(" ").slice(1);
-
   // The list of if/else is replaced with those simple 2 lines:
-  let commandFile = require(`./commands/${command}.js`);
-  commandFile.run(client, message, args);
+
+  try {
+    let commandFile = require(`./commands/${command}.js`);
+    commandFile.run(client, message, args);
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 client.login(config.token);
