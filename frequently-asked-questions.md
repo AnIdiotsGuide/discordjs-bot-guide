@@ -91,7 +91,7 @@ Examples are built with the &lt;Classes&gt; defined within brackets. This means 
 
 ```js
 // Get a Member from message Mention
-<Guild>.members.get(<Message>.mentions.users.first());
+<Guild>.member(<Message>.mentions.users.first());
 // Returns <Member>
 ```
 
