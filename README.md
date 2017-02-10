@@ -22,7 +22,10 @@ If you have any questions after reading this guide please join us on the officia
 
 ![Guide transfer](assets/permission.png)
 
-Last Updated: `08/02/2017`
+### Support me on Patreon
+![](/assets/becomeAPatronBanner.png)
 
-On Version: `11.1.0`
+Last Updated: `10/02/2017`
+
+On Version: `11.1.3`
 
