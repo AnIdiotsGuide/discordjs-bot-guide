@@ -88,7 +88,7 @@ A _Prune_ command is used to delete your own messages from the channel you're on
         msg_array = msg_array.filter(m => m.author.id === <Client>.user.id);
         // limit to the requested number + 1 for the command message
         msg_array.length = messagecount + 1;
-        // Has to delete messages individually. Cannot use `deleteMessages()` on self<Client>s.
+        // Has to delete messages individually. Cannot use `deleteMessages()` on selfbots.
         msg_array.map(m => m.delete().catch(console.error));
       });
   }
