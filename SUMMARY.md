@@ -10,6 +10,7 @@
 * [Coding Walkthrough](coding-walkthrough.md)
   * [Your First Bot](coding-walkthroughs/your_basic_bot.md)
   * [Adding a config.json file](adding-a-configjson-file.md)
+  * [Using Git to share and update code](coding-walkthroughs/using-git-to-share-and-update-code.md)
   * [Understanding Events and Handlers](coding-walkthroughs/events_and_handlers.md)
   * [Understanding Collections](coding-walkthroughs/understanding_collections.md)
   * [Understanding Roles](coding-walkthroughs/understanding_roles.md)
@@ -25,3 +26,4 @@
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
   * [Cleverbot Intergration](samples/cleverbot-intergration.md)
+
