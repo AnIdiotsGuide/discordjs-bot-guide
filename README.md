@@ -16,14 +16,14 @@ Seeing as though there needed to be some more detailed explanations as well as c
 
 If you have any questions after reading this guide please join us on the official Discord.js server:
 
-[![Join the Official Idiot's Guide Server](assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
+[![Join the Official Idiot's Guide Server](/assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](/assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
 
 ## Updating of this guide
 
 ![Guide transfer](assets/permission.png)
 
 ### Support me on Patreon
-![](/assets/becomeAPatronBanner.png)
+[![Support me on Patreon](/assets/becomeAPatronBanner.png)](https://www.patreon.com/anidiotsguide)
 
 Last Updated: `10/02/2017`
 
