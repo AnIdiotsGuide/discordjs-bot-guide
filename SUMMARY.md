@@ -1,6 +1,8 @@
 # Summary
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
 ​
+​
+​
 
 * [Introduction](README.md)
 * [Getting Started](getting-started/README.md)
