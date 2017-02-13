@@ -1,5 +1,5 @@
 # Summary
-[![Support me on Patreon](/assets/becomeAPatronBanner.png)](https://www.patreon.com/anidiotsguide)
+* [![Support me on Patreon](/assets/becomeAPatronBanner.png)](https://www.patreon.com/anidiotsguide)
 * [Introduction](README.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Long Version](getting-started/the-long-version.md)
