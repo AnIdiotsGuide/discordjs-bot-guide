@@ -39,7 +39,7 @@ This means that now, `config` is your configuration object. `config.token` is yo
 So let's use what we have in [Your First Bot](/coding-walkthroughs/your_basic_bot.md), and use the token from the config file, instead of putting it directly in the file. The last line of our bot looks like this:
 
 ```js
-client.login("yourcomplicatedBotTokenhere");
+client.login("SuperSecretBotTokenHere");
 ```
 
 And we simply need to change it to this:
@@ -58,7 +58,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.sendMessage("pong!");
   } else
-  
+
   if (message.content.startsWith(prefix + "foo")) {
     message.channel.sendMessage("bar!");
   }
@@ -74,7 +74,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(config.prefix + "ping")) {
     message.channel.sendMessage("pong!");
   } else
-  
+
   if (message.content.startsWith(config.prefix + "foo")) {
     message.channel.sendMessage("bar!");
   }

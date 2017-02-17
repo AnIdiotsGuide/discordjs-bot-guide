@@ -9,12 +9,12 @@ The events we're going to use in this example:
 
 Also, we're going to be using a `Discord.Collection()` object to save the users. Why? Because it's available, has great helper methods, and is _built_ to support the Discord.js objects we're putting in it!
 
-Initializing the discord collection is simple: `var newUsers = new Discord.Collection();` . This has to be done _outside_ of the events we're going to use. I have it at the top of my file, _after_ the `const Discord = require("discord.js")` line, obviously.
+Initializing the discord collection is simple: `let newUsers = new Discord.Collection();` . This has to be done _outside_ of the events we're going to use. I have it at the top of my file, _after_ the `const Discord = require("discord.js")` line, obviously.
 
 Adding new members that join to the collection is simple:
 
 ```js
-<Client>.on("guildMemberAdd", (member) => {
+client.on("guildMemberAdd", (member) => {
   newUsers.set(member.user.id, member.user);
 });
 ```
@@ -22,7 +22,7 @@ Adding new members that join to the collection is simple:
 If a user leaves while he's on that list though, it would cause your bot to welcome @invalid-user. To fix this, we remove that user from the collection:
 
 ```js
-<Client>.on("guildMemberRemove", (member) => {
+client.on("guildMemberRemove", (member) => {
   if(newUsers.exists("id", member.user.id)) newUsers.delete(member.user.id);
 });
 ```
@@ -30,12 +30,12 @@ If a user leaves while he's on that list though, it would cause your bot to welc
 But wait, where do we welcome users? That's done in `guildMemberAdd`, when the count reaches the number you want:
 
 ```js
-<Client>.on("guildMemberAdd", (member) => {
+client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.user.id, member.user);
 
   if(newUsers.size > 10) {
-    var userlist = newUsers.map(u => u.mention()).join(" ");
+    let userlist = newUsers.map(u => u.mention()).join(" ");
     guild.channels.get(guild.id).sendMessage("Welcome our new users!\n"+userlist);
     newUsers = new Discord.Collection();
   }
@@ -63,7 +63,7 @@ client.on("guildMemberAdd", (member) => {
   newUsers[guild.id].set(member.user.id, member.user);
 
   if(newUsers[guild.id].size > 10) {
-    var userlist = newUsers[guild.id].map(u => u.mention()).join(" ");
+    let userlist = newUsers[guild.id].map(u => u.mention()).join(" ");
     guild.channels.get(guild.id).sendMessage("Welcome our new users!\n"+userlist);
     newUsers[guild.id] = new Discord.Collection();
   }
@@ -77,6 +77,3 @@ client.on("guildMemberRemove", (member) => {
 
 client.login("Your.Token");
 ```
-
-
-

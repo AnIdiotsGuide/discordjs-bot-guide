@@ -33,8 +33,8 @@ The code that creates selfbots is essentially the same as regular bots, because.
 The first difference is your `message` handler. It should start with a line that prevents the bot from interacting with anyone else's messages \(see rule \#1 above\):
 
 ```js
-<Client>.on("message", <Message> => {
-  if(<Message>.author !== <Client>.user) return;
+client.on("message", message => {
+  if(message.author !== client.user) return;
   // rest of the code for commands go here
 });
 ```
@@ -43,7 +43,7 @@ This condition says: "if the author of the message is **not** the bot user, stop
 
 ### The Token
 
-The second difference, is how the bot logs in. To log a regular bot, you grab the Bot Token from the Applications Page, then put it in the `<Client>.login()` function.
+The second difference, is how the bot logs in. To log a regular bot, you grab the Bot Token from the Applications Page, then put it in the `client.login()` function.
 
 In the case of a selfbot, this token can be obtained from the Discord application, from the Console:
 
@@ -69,23 +69,23 @@ A _Prune_ command is used to delete your own messages from the channel you're on
 > `fetchMessages()` is limited to 100 messages total, and gets _all_ the messages and not just your own. This means you will probably never be able to delete 100 messages since they'll be mixed in with other people's. I generally don't use it to prune more than 10 messages anyway.
 
 ```js
-<Client>.on("message", <Message> => {
-  if (<Message>.author !== <Client>.user) return;
-  var prefix = "/"; // always use a prefix it's good practice.
-  if (!<Message>.content.startsWith(prefix)) return; // ignore messages that... you know the drill.
+client.on("message", message => {
+  if (message.author !== client.user) return;
+  let prefix = "/"; // always use a prefix it's good practice.
+  if (!message.content.startsWith(prefix)) return; // ignore messages that... you know the drill.
   // We covered this already, yay!
-  const params = <Message>.content.split(" ").slice(1);
-  if (<Message>.content.startsWith(prefix + "prune")) {
+  const params = message.content.split(" ").slice(1);
+  if (message.content.startsWith(prefix + "prune")) {
     // get number of messages to prune
     let messagecount = parseInt(params[0]);
     // get the channel logs
-    <Message>.channel.fetchMessages({
+    message.channel.fetchMessages({
         limit: 100
       })
       .then(messages => {
         let msg_array = messages.array();
         // filter the message to only your own
-        msg_array = msg_array.filter(m => m.author.id === <Client>.user.id);
+        msg_array = msg_array.filter(m => m.author.id === client.user.id);
         // limit to the requested number + 1 for the command message
         msg_array.length = messagecount + 1;
         // Has to delete messages individually. Cannot use `deleteMessages()` on selfbots.
@@ -104,7 +104,7 @@ I love lenny, he's really a great friend to have. And his buddy /justright is al
 What it does is, check if the message is _only_ the prefix + any of the names in a map. The map itself can be placed outside of the `message` handler, or right before the commands are called:
 
 ```js
-var shortcuts = new Map([
+let shortcuts = new Map([
   ["lenny", "( ͡° ͜ʖ ͡°)"],
   ["shrug", "¯\\_(ツ)_/¯"],
   ["justright", "✋😩👌"],
@@ -118,17 +118,17 @@ There's technically only 2 "new" commands here. The rest are there because I lik
 The next step is to add the check at the beginning of your message handler. Well not quite: this code should be _right after_ your prefix check, before you split into parameters, for maximum code efficiency.
 
 ```js
-<Client> .on("message", <Message> => {
-  if (<Message>.author !== <Client>.user) return;
-  var prefix = "/";
-  if (!<Message>.content.startsWith(prefix)) return;
+client .on("message", message => {
+  if (message.author !== client.user) return;
+  let prefix = "/";
+  if (!message.content.startsWith(prefix)) return;
 
   // custom shortcut check
-  var command_name = <Message>.content.slice(1); // removes the prefix, keeps the rest
+  let command_name = message.content.slice(1); // removes the prefix, keeps the rest
   if (shortcuts.has(command_name)) {
     // setTimeout is used here because of a bug in message delays in Discord.
     // Otherwise the message would edit and then "seem" to un-edit itself... ¯\_(ツ)_/¯
-    setTimeout(() => {<Message>.edit(shortcuts.get(command_name))}, 50);
+    setTimeout(() => {message.edit(shortcuts.get(command_name))}, 50);
     return;
   }
 
@@ -142,4 +142,3 @@ The next step is to add the check at the beginning of your message handler. Well
 The examples above are from my own personal selfbot. For your viewing pleasure I have uploaded it to github and will continue to update it as I use it and add more features.
 
 [〈evie.codes〉's Selfbot](https://github.com/eslachance/djs-selfbot-v9) &gt; Have fun!
-

@@ -45,15 +45,15 @@ So every time an action happens, we simply increments the proper element in the 
 const fs = require("fs");
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
 
-<Client>.on("message", <Message> => {
-  if (<Message>.author.bot) return; // always ignore bots!
+client.on("message", message => {
+  if (message.author.bot) return; // always ignore bots!
 
   // if the points don't exist, init to 0;
-  if (!points[<Message>.author.id]) points[<Message>.author.id] = {
+  if (!points[message.author.id]) points[message.author.id] = {
     points: 0,
     level: 0
   };
-  points[<Message>.author.id].points++;
+  points[message.author.id].points++;
 
   // And then, we save the edited file.
   fs.writeFile('./points.json', JSON.stringify(points), (err) => {
@@ -69,17 +69,17 @@ And now, we can access the points of a user by grabbing from the object. However
 So I put in the `levels` property in there because why else would you have points, right? Here, we have a little bit of math. Don't be scared, it's pretty simple!
 
 ```js
-  let userPoints = points[<Message>.author.id] ? points[<Message>.author.id].points : 0;
+  let userPoints = points[message.author.id] ? points[message.author.id].points : 0;
   let curLevel = Math.floor(0.1 * Math.sqrt(userPoints));
 ```
 
 Alright, so we have a level. Let's do like all the lame bots out there and output a message when a new level is reached! yay.
 
 ```js
-  let userLevel = points[<Message>.author.id] ? points[<Message>.author.id].level : 0;
+  let userLevel = points[message.author.id] ? points[message.author.id].level : 0;
   if(userLevel < curLevel) {
     // Level up!
-    <Message>.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+    message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
   }
 ```
 
@@ -88,8 +88,8 @@ Alright, so we have a level. Let's do like all the lame bots out there and outpu
 Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it.
 
 ```js
-  if(<Message>.content.startsWith(prefix + "level") {
-    <Message>.reply(`You are currently level ${curLevel}, with ${userPoints} points.`);
+  if(message.content.startsWith(prefix + "level") {
+    message.reply(`You are currently level ${curLevel}, with ${userPoints} points.`);
   }
 ```
 
@@ -100,7 +100,7 @@ Ok so we've got a bunch of little bits of code, and your head is probably spinni
 ```js
 const Discord = require("discord.js");
 const fs = require("fs");
-const client = Discord.Client();
+const client = new Discord.Client();
 client.login("your token");
 
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
@@ -134,4 +134,3 @@ client.on("message", message => {
 ```
 
 Now take this, and make it **better than Mee6**! Go ahead, I challenge you ;\)
-

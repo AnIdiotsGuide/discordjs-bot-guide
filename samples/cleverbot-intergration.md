@@ -4,21 +4,23 @@ I've had this request since I started my Idiot's Guide, in fact it was one of th
 
 So to get started, let's grab the example from [getting started](/getting-started/the-long-version.md) and shove it in a file.
 
-```js
-var Discord = require("discord.js");
-var client = new Discord.Client();
+> NOTE: As of 3 days ago (time of updating this article) the cleverbot creators have locked down their api to a paid model, they do have a free tier, which has 5,000 api calls a month.
 
-client.on("message", message => {
-    if (message.content.startsWith("ping")) {
-        message.channel.sendMessage("pong!");
-    }
-});
+```js
+const Discord = require("discord.js");
+const client = new Discord.Client();
+
+client.login("SuperSecretBotTokenHere");
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
-client.login("yourcomplicatedBotTokenhere");
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.sendMessage("pong!");
+  }
+});
 ```
 
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
@@ -57,9 +59,9 @@ const client = new Discord.Client();
 const clbot = new Cleverbot;
 ```
 
-As you can see, I changed a few things, we don't and shouldn't be hoisting them up with `var` and we don't plan on redefining them, so we'll use `const`. I also renamed `cleverbot` to `clbot` to reduce any possible confusion.
+I renamed `cleverbot` to `clbot` to reduce any possible confusion between the variable names as JavaScript is case sensitive.
 
-Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we'll check the channel `type` with the following code
+Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we'll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\)
 
 ```js
 if (message.channel.type === 'dm') {
@@ -74,6 +76,8 @@ const Discord = require("discord.js");
 const Cleverbot = require('cleverbot-node');
 const client = new Discord.Client();
 const clbot = new Cleverbot;
+
+client.login("yourcomplicatedBotTokenhere");
 
 client.on("message", message => {
   if (message.channel.type === 'dm') {
@@ -92,10 +96,7 @@ client.on("message", message => {
 client.on('ready', () => {
   console.log('I am ready!');
 });
-
-client.login("yourcomplicatedBotTokenhere");
 ```
 
 If everything is as above, then just send your bot a DM and watch the magic unfold!  
 ![Success!](/assets/cleverbot.png)
-

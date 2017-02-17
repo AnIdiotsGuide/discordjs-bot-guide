@@ -10,18 +10,17 @@ As per usual let's grab the example source code.
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.on("message", message => {
-    if (message.content.startsWith("ping")) {
-        message.channel.sendMessage("pong!");
-    }
-});
+client.login("SuperSecretBotTokenHere");
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
-client.login("yourcomplicatedBotTokenhere");
-
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.sendMessage("pong!");
+  }
+});
 ```
 
 Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.

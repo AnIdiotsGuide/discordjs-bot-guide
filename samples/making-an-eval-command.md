@@ -25,7 +25,7 @@ I don't care if it's a server owner, someone you've been talking to for months, 
 So how do you secure it? Simple: only allow use from your own user ID. So for example my user ID is `139412744439988224` so I check whether the message author's ID is mine:
 
 ```js
-if(<Message>.author.id !== "139412744439988224") return;
+if(message.author.id !== "139412744439988224") return;
 ```
 
 It's as simple as that to protect the command directly inside of your condition or file or whatever. Of course, if you have some sort of command handler there's most likely a way to restrict to an ID too. This isn't specific to discord.js : there's always a way to do this. If there isn't \(if a command handler won't let you restrict by ID\), then you're using the **wrong lib**.
@@ -50,11 +50,11 @@ function clean(text) {
 Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory:
 
 ```js
-<Client>.on('message', <Message> => {
+client.on('message', message => {
   const prefix = "+";
-  const args = <Message>.content.split(" ").slice(1);
+  const args = message.content.split(" ").slice(1);
 
-  if (<Message>.content.startsWith(prefix + "eval")) {
+  if (message.content.startsWith(prefix + "eval")) {
     try {
       var code = args.join(" ");
       var evaled = eval(code);
@@ -62,9 +62,9 @@ Alright, So let's get down to the brass tax: The actual eval command. Here it is
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
-      <Message>.channel.sendCode("xl", clean(evaled));
+      message.channel.sendCode("xl", clean(evaled));
     } catch (err) {
-      <Message>.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
 });
@@ -79,4 +79,3 @@ That's it. That's the command. Note a couple of things though:
 > **I AM NOT RESPONSIBLE IF YOU FUCK UP, AND NEITHER ARE ANY OF THE DISCORD.JS USERS AND DEVELOPERS**
 
 Hopefully the warnings were clear enough to help you understand the dangers... but the idea of eval is still attractive enough that you'll use it for yourself anyway!
-

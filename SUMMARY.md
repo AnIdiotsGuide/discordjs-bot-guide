@@ -25,9 +25,8 @@
   * [Command with arguments](samples/command_with_arguments.md)
   * [Selfbots, the greatest thing in the universe](samples/selfbots_are_awesome.md)
   * [Making an Eval command](samples/making-an-eval-command.md)
-  * [Storing Data in a JSON file](storing-data-in-a-json-file.md)
+  * [Storing Data in a JSON file](samples/storing-data-in-a-json-file.md)
   * [Storing Data in an SQLite file](samples/storing-data-in-an-sqlite-file.md)
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
   * [Cleverbot Intergration](samples/cleverbot-intergration.md)
-
