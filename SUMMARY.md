@@ -18,6 +18,7 @@
   * [Understanding Events and Handlers](coding-walkthroughs/events_and_handlers.md)
   * [Understanding Collections](coding-walkthroughs/understanding_collections.md)
   * [Understanding Roles](coding-walkthroughs/understanding_roles.md)
+  * [Creating a Music Bot](/coding_a_music_bot.md)
   * [Discord Webhooks \(Part 1\)](coding-walkthroughs/discord-webhooks-part-1.md)
 * [Code Examples](code-examples.md)
   * [Welcome Message every X users](samples/welcome_message_every_x_users.md)
