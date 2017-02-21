@@ -24,5 +24,5 @@ If you have any questions after reading this guide please join us on the officia
 
 Last Updated: `13/02/2017`
 
-On Version: `11.1.5`
+On Version: `11.1.6`
 
