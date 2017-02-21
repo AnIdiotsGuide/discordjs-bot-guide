@@ -30,4 +30,4 @@
   * [Storing Data in an SQLite file](samples/storing-data-in-an-sqlite-file.md)
   * [A Basic Command Handler](a-basic-command-handler.md)
   * [Using Embeds in messages](samples/using-embeds-in-messages.md)
-  * [Cleverbot Intergration](samples/cleverbot-intergration.md)
+  * [Cleverbot Integration](samples/cleverbot-integration.md)
