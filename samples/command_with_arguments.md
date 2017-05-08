@@ -11,7 +11,7 @@ In [Your First Bot](../coding-walkthroughs/your_basic_bot.md) we actually simpli
 
 ```js
 if (message.content.startsWith(prefix + "ping")) {
-  message.channel.sendMessage("pong!");
+  message.channel.send("pong!");
 }
 ```
 

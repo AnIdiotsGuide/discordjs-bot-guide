@@ -7,13 +7,13 @@ I have often seen the following type of code happen in new bots:
 ```js
 client.on('message', (message) => {
   if(message.content === "ayy") {
-    message.channel.sendMessage("Ayy, lmao!");
+    message.channel.send("Ayy, lmao!");
   }
   if(message.content === "wat") {
-    message.channel.sendMessage("Say what?");
+    message.channel.send("Say what?");
   }
   if(message.content === "lol") {
-    message.channel.sendMessage("roflmaotntpmp");
+    message.channel.send("roflmaotntpmp");
   }
   // Imagine 20, 50, 70 almost identical conditions.
 }
@@ -36,7 +36,7 @@ This simple object \(which can easily be in a JSON file\) can then be used in a 
 ```js
 client.on('message', (message) => {
   if(responseObject[message.content]) {
-    message.channel.sendMessage(responseObject[message.content]);
+    message.channel.send(responseObject[message.content]);
   }
 });
 ```

@@ -4,7 +4,7 @@ So, you've seen a lot of people on the Discord.js Official server use some sort 
 
 ## What is eval exactly?
 
-In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `bot.guilds.size`, it'll return however many guilds the bot is currently on. And if I eval `bot.guilds.map(g=>g.name).join("\n")` then it will return a list of guild names separated by a line return. Cool, right?
+In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.map(g=>g.name).join("\n")` then it will return a list of guild names separated by a line return. Cool, right?
 
 ## But eval is dangerous
 
@@ -55,6 +55,7 @@ client.on('message', message => {
   const args = message.content.split(" ").slice(1);
 
   if (message.content.startsWith(prefix + "eval")) {
+    if(message.author.id !== "139412744439988224") return;
     try {
       var code = args.join(" ");
       var evaled = eval(code);
@@ -62,9 +63,9 @@ client.on('message', message => {
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
-      message.channel.sendCode("xl", clean(evaled));
+      message.channel.send(clean(evaled), {code:"xl"});
     } catch (err) {
-      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
 });

@@ -17,7 +17,7 @@ Those aren't just guidelines, they are rules, and breaking those rules means you
 There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, _very_ basic embed that writes on a single line:
 
 ```js
-message.channel.sendMessage("", {embed: {
+message.channel.send("", {embed: {
   color: 3447003,
   description: "A very simple Embed!"
 }});
@@ -25,19 +25,12 @@ message.channel.sendMessage("", {embed: {
 
 The `color` determines the bar on the left \(here, a very nice blue\), and the `description` is the main contents of the message.
 
-Alternatively to sendMessage\("", embed\) you can also use the sendEmbed shortcut:
-
-```js
-message.channel.sendEmbed({ color: 3447003,
-  description: "A very simple Embed!" });
-```
-
 ### Adding "Fields"
 
 Fields are what can make embeds really nice - each field can have a title and value, and fields can also be stacked horizontally - as columns. Here's a more complex example of an embed that has many different fields, as well as icons and a footer:
 
 ```js
-message.channel.sendEmbed({
+message.channel.send("", {embed: {
     color: 3447003,
     author: {
       name: <Client>.user.username,
@@ -63,7 +56,9 @@ message.channel.sendEmbed({
     footer: {
       icon_url: <Client>.user.avatarURL,
       text: '© Example'
-    }});
+    }
+  }
+});
 ```
 
 This results in the following:
@@ -105,9 +100,11 @@ const embed = new Discord.RichEmbed()
   .addField('\u200b', '\u200b', true)
   .addField('Inline Field 3', 'You can have a maximum of 25 fields.', true);
 
-  message.channel.sendEmbed(embed);
+  message.channel.send({embed});
 ```
 
 Which produces the following:
 
 ![](/assets/embeds/embedexample2.png)
+
+How ever, if you want a quick and easy way of designing an embed, try out this new tool by `leovoel`, the [Embed Visualizer](https://leovoel.github.io/embed-visualizer/) shows you exactly how your embed will look, and will generate the code for you at the press of a button.

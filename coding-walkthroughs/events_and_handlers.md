@@ -44,7 +44,7 @@ Another useful event is [`guildMemberAdd`](http://hydrabolt.github.io/discord.js
 ```js
 client.on("guildMemberAdd", (member) => {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  member.guild.defaultChannel.sendMessage(`"${member.user.username}" has joined this server`);
+  member.guild.defaultChannel.send(`"${member.user.username}" has joined this server`);
 });
 ```
 

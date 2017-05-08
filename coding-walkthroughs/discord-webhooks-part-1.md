@@ -18,7 +18,7 @@ client.on('ready', () => {
 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   }
 });
 ```
@@ -32,7 +32,7 @@ Right, we'll start off slow, we need to create a webhook first, if we look at th
 .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
-.then(wb => <Message>.author.sendMessage(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
+.then(wb => <Message>.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
 ```
 This is what it should look like if you test the code.
 ![Created the webhook](/assets/webhooks/wh01.png)
@@ -50,7 +50,7 @@ client.on("message", message => {
   if (message.content.startsWith(prefix + 'createHook')) {
     message.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
       .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
-        .then(wb => message.author.sendMessage(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`))
+        .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`))
         .catch(console.error))
       .catch(console.error);
   }
@@ -78,7 +78,7 @@ const name = nameAvatar.replace(linkCheck, '');
 message.channel.createWebhook(name, avatar)
   .then(webhook => webhook.edit(name, avatar)
     .catch(error => console.log(error)))
-  .then(wb => message.author.sendMessage(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}\n\nPlease keep this safe, as you could be exploited.`)
+  .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}\n\nPlease keep this safe, as you could be exploited.`)
     .catch(error => console.log(error)))
   .catch(error => console.log(error));
 ```

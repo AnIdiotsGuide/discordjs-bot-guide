@@ -97,14 +97,14 @@ Examples are built with the &lt;Classes&gt; defined within brackets. This means 
 
 ```js
 // Send a Direct Message to a user
-<User>.sendMessage("hello");
+<User>.send("hello");
 ```
 
 ```js
 // Mention a user in a message
-<Channel>.sendMessage(`Hello ${user}, and welcome!`);
+<Channel>.send(`Hello ${user}, and welcome!`);
 // or
-<Channel>.sendMessage("Hello " + <User>.toString() + ", and welcome!");
+<Channel>.send("Hello " + <User>.toString() + ", and welcome!");
 ```
 
 ## Channels and Guilds
@@ -129,5 +129,5 @@ Examples are built with the &lt;Classes&gt; defined within brackets. This means 
 
 ```js
 // Send a message to the guild's default channel (often `#general`)
-<Guild>.defaultChannel.sendMessage("I'm bored so I'll spam you.");
+<Guild>.defaultChannel.send("I'm bored so I'll spam you.");
 ```

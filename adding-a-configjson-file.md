@@ -51,16 +51,16 @@ client.login(config.token);
 The other thing we have, is of course the prefix. Again from [Your First Bot](/coding-walkthroughs/your_basic_bot.md), we have this line in our message handler:
 
 ```js
+const prefix = "!";
 client.on("message", (message) => {
-  let prefix = "!";
   if(!message.content.startsWith(prefix)) return;
 
   if (message.content.startsWith(prefix + "ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   } else
 
   if (message.content.startsWith(prefix + "foo")) {
-    message.channel.sendMessage("bar!");
+    message.channel.send("bar!");
   }
 });
 ```
@@ -72,11 +72,11 @@ client.on("message", (message) => {
   if(!message.content.startsWith(config.prefix)) return;
 
   if (message.content.startsWith(config.prefix + "ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   } else
 
   if (message.content.startsWith(config.prefix + "foo")) {
-    message.channel.sendMessage("bar!");
+    message.channel.send("bar!");
   }
 });
 ```

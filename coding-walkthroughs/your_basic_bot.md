@@ -16,7 +16,7 @@ client.on('ready', () => {
 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   }
 });
 ```
@@ -47,11 +47,11 @@ One of the first useful things you might want to learn is how to add a second co
 ```js
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   } else
 
   if (message.content.startsWith("foo")) {
-    message.channel.sendMessage("bar!");
+    message.channel.send("bar!");
   }
 });
 ```
@@ -79,10 +79,10 @@ client.on("message", (message) => {
   if (!message.content.startsWith(prefix)) return;
 
   if (message.content.startsWith(prefix + "ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   } else
   if (message.content.startsWith(prefix + "foo")) {
-    message.channel.sendMessage("bar!");
+    message.channel.send("bar!");
   }
 });
 ```
@@ -135,10 +135,10 @@ client.on("message", (message) => {
   if (message.author.bot) return;
 
   if (message.content.startsWith(prefix + "ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   } else
   if (message.content.startsWith(prefix + "foo")) {
-    message.channel.sendMessage("bar!");
+    message.channel.send("bar!");
   }
 });
 ```

@@ -46,7 +46,7 @@ client.on('ready', () => {
 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   }
 });
 ```

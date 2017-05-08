@@ -57,7 +57,7 @@ This would be the content of the `./commands/ping.js` file, which is called with
 
 ```js
 exports.run = (client, message, args) => {
-    message.channel.sendMessage("pong!").catch(console.error);
+    message.channel.send("pong!").catch(console.error);
 }
 ```
 
@@ -104,7 +104,7 @@ Here's another example with the `guildMemberAdd` event:
 ```js
 exports.run = (client, member) => {
   let guild = member.guild;
-  guild.defaultChannel.sendMessage(`Welcome ${member.user} to this server.`).catch(console.error);
+  guild.defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
 }
 ```
 

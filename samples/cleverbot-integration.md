@@ -4,8 +4,6 @@ I've had this request since I started my Idiot's Guide, in fact it was one of th
 
 So to get started, let's grab the example from [getting started](/getting-started/the-long-version.md) and shove it in a file.
 
-> NOTE: As of 3 days ago (time of updating this article) the cleverbot creators have locked down their api to a paid model, they do have a free tier, which has 5,000 api calls a month.
-
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -18,7 +16,7 @@ client.on('ready', () => {
 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
-    message.channel.sendMessage("pong!");
+    message.channel.send("pong!");
   }
 });
 ```
@@ -28,12 +26,13 @@ Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](htt
 ```js
 var Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
-Cleverbot.prepare(function(){
-  cleverbot.write(cleverMessage, function (response) {
-    alert(response.message);
-  });
+cleverbot.configure({botapi: "IAMKEY"});
+cleverbot.write(cleverMessage, function (response) {
+   console.log(response.output);
 });
 ```
+
+>NOTE: As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), they do offer a free tier, but that's 5,000 api calls per month, and please note it says it's a free __trial__.
 
 Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file \(and you should!\).
 
@@ -57,6 +56,7 @@ const Discord = require("discord.js");
 const Cleverbot = require('cleverbot-node');
 const client = new Discord.Client();
 const clbot = new Cleverbot;
+clbot.configure({botapi: "IAMKEY"});
 ```
 
 I renamed `cleverbot` to `clbot` to reduce any possible confusion between the variable names as JavaScript is case sensitive.
@@ -81,14 +81,12 @@ client.login("yourcomplicatedBotTokenhere");
 
 client.on("message", message => {
   if (message.channel.type === 'dm') {
-    Cleverbot.prepare(() => {
-      clbot.write(message.content, (response) => {
-        message.channel.startTyping();
-        setTimeout(() => {
-          message.channel.sendMessage(response.message).catch(console.error);
-          message.channel.stopTyping();
-        }, Math.random() * (1 - 3) + 1 * 1000);
-      });
+    clbot.write(message.content, (response) => {
+      message.channel.startTyping();
+      setTimeout(() => {
+        message.channel.send(response.output).catch(console.error);
+        message.channel.stopTyping();
+      }, Math.random() * (1 - 3) + 1 * 1000);
     });
   }
 });
