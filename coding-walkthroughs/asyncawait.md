@@ -90,7 +90,7 @@ retrieve information from Discord to get the User object, that takes a while, on
 the data, Discord.JS will resolve the method, running the function inside the `then`, passing
 the object `User`, described in the docs.
 
-## Back to Async/Await
+## Async/Await usage
 
 Once we know how to use the `Object Promise` and we know how to work with it, it's now time
 to learn how to use ES8 Promises, with `async`/`await`.
@@ -176,3 +176,22 @@ SyntaxError: Unexpected identifier
 ```
 
 This example failed because the function inside `setTimeout` doesn't have the `async` keyword.
+
+> **REQUIREMENTS** You must have Node.js v7.x to use Async/Await, since v7.6 you are not required
+to use the flag `--harmony` when you run your bot. And Discord.JS v12 will **require** Node.js v8.x.
+
+> To know your **Node version**, run `node -v` or `node --version`.
+
+> To install Node.JS v7.x go [here](https://nodejs.org/en/download/), but if you want to install it
+with the package manager (console commands), follow the instructions [here](https://nodejs.org/en/download/package-manager/).
+
+# Documentation
+
+The following links are from MDN (Mozilla Developer Network), they provide syntax, description and examples.
+
+[JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+
+[AsyncFunction (Statement)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+[AsyncFunction (Operator)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function)
+[await (Operator)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
