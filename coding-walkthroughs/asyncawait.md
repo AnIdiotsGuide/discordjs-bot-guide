@@ -182,16 +182,16 @@ to use the flag `--harmony` when you run your bot. And Discord.JS v12 will **req
 
 > To know your **Node version**, run `node -v` or `node --version`.
 
-> To install Node.JS v7.x go [here](https://nodejs.org/en/download/), but if you want to install it
+> Download Node.JS v7.x [here](https://nodejs.org/en/download/), but if you want to install it
 with the package manager (console commands), follow the instructions [here](https://nodejs.org/en/download/package-manager/).
 
 # Documentation
 
 The following links are from MDN (Mozilla Developer Network), they provide syntax, description and examples.
 
-[JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+- [JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
 
-[AsyncFunction (Statement)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-[AsyncFunction (Operator)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function)
-[await (Operator)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
-[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- [AsyncFunction (Statement)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [AsyncFunction (Operator)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function)
+- [await (Operator)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
