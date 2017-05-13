@@ -248,4 +248,3 @@ client.on('message', message => {
 ```
 
 Now, when ever anyone in your guild talks, the code will either create a new table row for them, or update their table role by taking the current amount of points and simply adding 1 to it. My challenge for you dear reader, is to make this multi-guild friendly.
-

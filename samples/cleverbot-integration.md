@@ -5,18 +5,18 @@ I've had this request since I started my Idiot's Guide, in fact it was one of th
 So to get started, let's grab the example from [getting started](/getting-started/the-long-version.md) and shove it in a file.
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
+client.login('SuperSecretBotTokenHere');
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
-client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
+client.on('message', (message) => {
+  if (message.content.startsWith('ping')) {
+    message.channel.send('pong!');
   }
 });
 ```
@@ -26,7 +26,7 @@ Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](htt
 ```js
 var Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
-cleverbot.configure({botapi: "IAMKEY"});
+cleverbot.configure({botapi: 'IAMKEY'});
 cleverbot.write(cleverMessage, function (response) {
    console.log(response.output);
 });
@@ -52,11 +52,11 @@ cleverbot = new Cleverbot;
 ...and put them with our discord definitions.
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const Cleverbot = require('cleverbot-node');
 const client = new Discord.Client();
 const clbot = new Cleverbot;
-clbot.configure({botapi: "IAMKEY"});
+clbot.configure({botapi: 'IAMKEY'});
 ```
 
 I renamed `cleverbot` to `clbot` to reduce any possible confusion between the variable names as JavaScript is case sensitive.
@@ -72,14 +72,14 @@ if (message.channel.type === 'dm') {
 Your code should look something like this...
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const Cleverbot = require('cleverbot-node');
 const client = new Discord.Client();
 const clbot = new Cleverbot;
 
-client.login("yourcomplicatedBotTokenhere");
+client.login('yourcomplicatedBotTokenhere');
 
-client.on("message", message => {
+client.on('message', message => {
   if (message.channel.type === 'dm') {
     clbot.write(message.content, (response) => {
       message.channel.startTyping();

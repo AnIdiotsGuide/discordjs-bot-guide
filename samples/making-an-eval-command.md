@@ -4,7 +4,7 @@ So, you've seen a lot of people on the Discord.js Official server use some sort 
 
 ## What is eval exactly?
 
-In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.map(g=>g.name).join("\n")` then it will return a list of guild names separated by a line return. Cool, right?
+In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.map(g=>g.name).join('\n')` then it will return a list of guild names separated by a line return. Cool, right?
 
 ## But eval is dangerous
 
@@ -25,7 +25,7 @@ I don't care if it's a server owner, someone you've been talking to for months, 
 So how do you secure it? Simple: only allow use from your own user ID. So for example my user ID is `139412744439988224` so I check whether the message author's ID is mine:
 
 ```js
-if(message.author.id !== "139412744439988224") return;
+if(message.author.id !== '139412744439988224') return;
 ```
 
 It's as simple as that to protect the command directly inside of your condition or file or whatever. Of course, if you have some sort of command handler there's most likely a way to restrict to an ID too. This isn't specific to discord.js : there's always a way to do this. If there isn't \(if a command handler won't let you restrict by ID\), then you're using the **wrong lib**.
@@ -40,8 +40,8 @@ First though I strongly suggest using the following function \(plop it outside o
 
 ```js
 function clean(text) {
-  if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  if (typeof(text) === 'string')
+    return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
   else
       return text;
 }
@@ -51,19 +51,19 @@ Alright, So let's get down to the brass tax: The actual eval command. Here it is
 
 ```js
 client.on('message', message => {
-  const prefix = "+";
-  const args = message.content.split(" ").slice(1);
+  const prefix = '+';
+  const args = message.content.split(' ').slice(1);
 
-  if (message.content.startsWith(prefix + "eval")) {
-    if(message.author.id !== "139412744439988224") return;
+  if (message.content.startsWith(prefix + 'eval')) {
+    if(message.author.id !== '139412744439988224') return;
     try {
-      var code = args.join(" ");
-      var evaled = eval(code);
+      const code = args.join(' ');
+      const evaled = eval(code);
 
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
+      if (typeof evaled !== 'string')
+        evaled = require('util').inspect(evaled);
 
-      message.channel.send(clean(evaled), {code:"xl"});
+      message.channel.send(clean(evaled), {code:'xl'});
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
@@ -74,7 +74,7 @@ client.on('message', message => {
 That's it. That's the command. Note a couple of things though:
 
 * Your IDE or editor might scream at the `eval(code)` for being `unsafe`. See the rest of this page for WHY it says that. Can't say you haven't been warned!
-* If the response isn't a string, `util.inspect()` is used to "stringify" the code in a safe way that won't error out on objects with circular references \(like most Collections\).
+* If the response isn't a string, `util.inspect()` is used to 'stringify' the code in a safe way that won't error out on objects with circular references \(like most Collections\).
 * If the response is more than 2000 characters this will return nothing.
 
 > **I AM NOT RESPONSIBLE IF YOU FUCK UP, AND NEITHER ARE ANY OF THE DISCORD.JS USERS AND DEVELOPERS**

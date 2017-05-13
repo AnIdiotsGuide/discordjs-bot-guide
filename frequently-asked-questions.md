@@ -47,7 +47,7 @@ SyntaxError: Unexpected end of input
 
 Your code has an error somewhere. This is _impossible_ to troubleshoot without the **complete** code, since the error can be anywhere \(in fact the error stack often tells you it's at the end of your code\).
 
-The following trick is a lifesaver, so pay attention: Your code editor is trying to help you. Whatever editor you're using \(except notepad.exe. Don't use notepad!\), clicking on any \(and I mean any\) special character such as parentheses, square brackets, curly braces, double and single quotes, will automatically highlight the one that matches it. The screenshot below shows this: I clicked on the curly brace at the bottom, it shows me the one on top by highlighting it. Learn this, and how different functions and event handlers "look" like.
+The following trick is a lifesaver, so pay attention: Your code editor is trying to help you. Whatever editor you're using \(except notepad.exe. Don't use notepad!\), clicking on any \(and I mean any\) special character such as parentheses, square brackets, curly braces, double and single quotes, will automatically highlight the one that matches it. The screenshot below shows this: I clicked on the curly brace at the bottom, it shows me the one on top by highlighting it. Learn this, and how different functions and event handlers 'look' like.
 
 ![](assets/editorhelp.png)
 
@@ -62,16 +62,16 @@ Examples are built with the &lt;Classes&gt; defined within brackets. This means 
 ## Bot and Bot Client
 
 ```js
-// Set the bot's "Playing: " status (must be in an event!)
-<Client>.on("ready", () => {
-    <Client>.user.setGame("with my code");
+// Set the bot's 'Playing: ' status (must be in an event!)
+client.on('ready', () => {
+    client.user.setGame('with my code');
 });
 ```
 
 ```js
 // Set the bot's online/offline/dnd/invisible status
-<Client>.on("ready", () => {
-    <Client>.user.setStatus("online");
+client.on('ready', () => {
+    client.user.setStatus('online');
 });
 ```
 
@@ -79,55 +79,55 @@ Examples are built with the &lt;Classes&gt; defined within brackets. This means 
 
 ```js
 // Get a User by ID
-<Client>.users.get("user id here");
-// Returns <User>
+client.users.get('user id here');
+// Returns message.author
 ```
 
 ```js
 // Get a Member by ID
-<Guild>.members.get("user ID here");
+message.guild.members.get('user ID here');
 // Returns <Member>
 ```
 
 ```js
 // Get a Member from message Mention
-<Guild>.member(<Message>.mentions.users.first());
+message.guild.member(message.mentions.users.first());
 // Returns <Member>
 ```
 
 ```js
 // Send a Direct Message to a user
-<User>.send("hello");
+message.author.send('hello');
 ```
 
 ```js
 // Mention a user in a message
-<Channel>.send(`Hello ${user}, and welcome!`);
+message.channel.send(`Hello ${user}, and welcome!`);
 // or
-<Channel>.send("Hello " + <User>.toString() + ", and welcome!");
+message.channel.send('Hello ' + message.author.toString() + ', and welcome!');
 ```
 
 ## Channels and Guilds
 
 ```js
 // Get a Guild by ID
-<Client>.guilds.get("the guild id");
-// Returns <Guild>
+client.guilds.get('the guild id');
+// Returns message.guild
 ```
 
 ```js
 // Get a channel by ID
-<Client>.channels.get("the channel id");
-// Returns <Channel>
+client.channels.get('the channel id');
+// Returns message.channel
 ```
 
 ```js
 // Get a Channel by Name (note: THIS IS NOT RECOMMENDED as more than one channel can have the same name!)
-<Guild>.channels.find("name", "channel-name");
-// returns <Channel>
+message.guild.channels.find('name', 'channel-name');
+// returns message.channel
 ```
 
 ```js
 // Send a message to the guild's default channel (often `#general`)
-<Guild>.defaultChannel.send("I'm bored so I'll spam you.");
+message.guild.defaultChannel.send('I\'m bored so I\'ll spam you.');
 ```

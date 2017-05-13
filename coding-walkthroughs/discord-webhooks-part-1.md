@@ -7,18 +7,18 @@ This has been a rather demanded topic recently, everyone wants to know how to us
 As per usual let's grab the example source code.
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
+client.login('SuperSecretBotTokenHere');
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
-client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
+client.on('message', (message) => {
+  if (message.content.startsWith('ping')) {
+    message.channel.send('pong!');
   }
 });
 ```
@@ -26,7 +26,7 @@ client.on("message", (message) => {
 Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
 
 ```js
-// This will create the webhook with the name "Example Webhook" and an example avatar.
+// This will create the webhook with the name 'Example Webhook' and an example avatar.
 <Message>.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
 // This will actually set the webhooks avatar, as mentioned at the start of the guide.
 .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
@@ -45,8 +45,8 @@ Now, that's all well and good, we can create the webhooks and get our bot to DM 
 You should have a message handler that looks something like this.
 ```js
 let prefix = '~';
-client.on("message", message => {
-  let args = message.content.split(" ").slice(1);
+client.on('message', message => {
+  let args = message.content.split(' ').slice(1);
   if (message.content.startsWith(prefix + 'createHook')) {
     message.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
       .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')

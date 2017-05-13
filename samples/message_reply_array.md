@@ -6,14 +6,14 @@ I have often seen the following type of code happen in new bots:
 
 ```js
 client.on('message', (message) => {
-  if(message.content === "ayy") {
-    message.channel.send("Ayy, lmao!");
+  if(message.content === 'ayy') {
+    message.channel.send('Ayy, lmao!');
   }
-  if(message.content === "wat") {
-    message.channel.send("Say what?");
+  if(message.content === 'wat') {
+    message.channel.send('Say what?');
   }
-  if(message.content === "lol") {
-    message.channel.send("roflmaotntpmp");
+  if(message.content === 'lol') {
+    message.channel.send('roflmaotntpmp');
   }
   // Imagine 20, 50, 70 almost identical conditions.
 }
@@ -25,9 +25,9 @@ First, we declare this object:
 
 ```js
 let responseObject = {
-  "ayy": "Ayy, lmao!",
-  "wat": "Say what?",
-  "lol": "roflmaotntpmp"
+  'ayy': 'Ayy, lmao!',
+  'wat': 'Say what?',
+  'lol': 'roflmaotntpmp'
 };
 ```
 
@@ -41,6 +41,6 @@ client.on('message', (message) => {
 });
 ```
 
-That code basically says: "If you find the message content to be a key of the responseObject, send a message containing that key's value".
+That code basically says: 'If you find the message content to be a key of the responseObject, send a message containing that key's value'.
 
 Boom. Done.

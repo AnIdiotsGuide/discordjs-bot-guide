@@ -19,7 +19,7 @@ On the other hand, a **selfbot** runs under an **active** user account. In other
 I mentioned that _userbots_ are not tolerated by Hammer & Chisel. Selfbots, however, are tolerated under a specific set of semi-offical rules under which they turn a blind eye:
 
 * A selfbot **must not**, under any circumstance, respond to other user's messages. This means it should not respond to commands, should not autoreply to certain keywords, etc. **You** must be the only one that can control it.
-* A selfbot **must not**, under any circumstance, do "invite scraping". This is the action of detecting server invites in chat, and automatically joining a server using that invite. That is akin to creating a virus, and it is not acceptable.
+* A selfbot **must not**, under any circumstance, do 'invite scraping'. This is the action of detecting server invites in chat, and automatically joining a server using that invite. That is akin to creating a virus, and it is not acceptable.
 * As selfbots run under your account they are subject to the same Terms of Service. That is to say, they should not _spam_, _insult or demean others_, _post NSFW material_, _spread viruses or illegal material_, etc. They have to follow the same rules that you follow.
 
 **IF**, and **only if** you accept the above rules of selfbots, then you may proceed.
@@ -33,13 +33,13 @@ The code that creates selfbots is essentially the same as regular bots, because.
 The first difference is your `message` handler. It should start with a line that prevents the bot from interacting with anyone else's messages \(see rule \#1 above\):
 
 ```js
-client.on("message", message => {
+client.on('message', message => {
   if(message.author !== client.user) return;
   // rest of the code for commands go here
 });
 ```
 
-This condition says: "if the author of the message is **not** the bot user, stop processing". This is generic code that works for everyone, and it fulfills our first condition so **don't forget it**.
+This condition says: 'if the author of the message is **not** the bot user, stop processing'. This is generic code that works for everyone, and it fulfills our first condition so **don't forget it**.
 
 ### The Token
 
@@ -69,13 +69,13 @@ A _Prune_ command is used to delete your own messages from the channel you're on
 > `fetchMessages()` is limited to 100 messages total, and gets _all_ the messages and not just your own. This means you will probably never be able to delete 100 messages since they'll be mixed in with other people's. I generally don't use it to prune more than 10 messages anyway.
 
 ```js
-client.on("message", message => {
+client.on('message', message => {
   if (message.author !== client.user) return;
-  let prefix = "/"; // always use a prefix it's good practice.
+  let prefix = '/'; // always use a prefix it's good practice.
   if (!message.content.startsWith(prefix)) return; // ignore messages that... you know the drill.
   // We covered this already, yay!
-  const params = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "prune")) {
+  const params = message.content.split(' ').slice(1);
+  if (message.content.startsWith(prefix + 'prune')) {
     // get number of messages to prune
     let messagecount = parseInt(params[0]);
     // get the channel logs
@@ -99,35 +99,35 @@ I've included the author check, prefix and params slice at the top for this firs
 
 ### Custom /lenny and friends
 
-I love lenny, he's really a great friend to have. And his buddy /justright is also pretty cool! This command is... not really a command in the traditional sense of the word, because it's not built with the regular `if(msg.content.startsWith("something"))` we've seen before.
+I love lenny, he's really a great friend to have. And his buddy /justright is also pretty cool! This command is... not really a command in the traditional sense of the word, because it's not built with the regular `if(msg.content.startsWith('something'))` we've seen before.
 
 What it does is, check if the message is _only_ the prefix + any of the names in a map. The map itself can be placed outside of the `message` handler, or right before the commands are called:
 
 ```js
 let shortcuts = new Map([
-  ["lenny", "( ͡° ͜ʖ ͡°)"],
-  ["shrug", "¯\\_(ツ)_/¯"],
-  ["justright", "✋😩👌"],
-  ["tableflip", "(╯°□°）╯︵ ┻━┻"],
-  ["unflip", "┬──┬﻿ ノ( ゜-゜ノ)"]
+  ['lenny', '( ͡° ͜ʖ ͡°)'],
+  ['shrug', '¯\\_(ツ)_/¯'],
+  ['justright', '✋😩👌'],
+  ['tableflip', '(╯°□°）╯︵ ┻━┻'],
+  ['unflip', '┬──┬﻿ ノ( ゜-゜ノ)']
 ]);
 ```
 
-There's technically only 2 "new" commands here. The rest are there because I like to do /tableflip on my mobile phone, and this does it for me! And you can add your own, of course. Like a /doubleflip, for example.
+There's technically only 2 'new' commands here. The rest are there because I like to do /tableflip on my mobile phone, and this does it for me! And you can add your own, of course. Like a /doubleflip, for example.
 
 The next step is to add the check at the beginning of your message handler. Well not quite: this code should be _right after_ your prefix check, before you split into parameters, for maximum code efficiency.
 
 ```js
-client .on("message", message => {
+client .on('message', message => {
   if (message.author !== client.user) return;
-  let prefix = "/";
+  let prefix = '/';
   if (!message.content.startsWith(prefix)) return;
 
   // custom shortcut check
   let command_name = message.content.slice(1); // removes the prefix, keeps the rest
   if (shortcuts.has(command_name)) {
     // setTimeout is used here because of a bug in message delays in Discord.
-    // Otherwise the message would edit and then "seem" to un-edit itself... ¯\_(ツ)_/¯
+    // Otherwise the message would edit and then 'seem' to un-edit itself... ¯\_(ツ)_/¯
     setTimeout(() => {message.edit(shortcuts.get(command_name))}, 50);
     return;
   }

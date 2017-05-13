@@ -5,18 +5,18 @@ This chapter assumes you've followed the Getting Started chapter and your bot co
 In this chapter I'll guide you through the development of a simple bot with some useful commands. We'll start with the example we created in the first chapter:
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
+client.login('SuperSecretBotTokenHere');
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
-client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
+client.on('message', (message) => {
+  if (message.content.startsWith('ping')) {
+    message.channel.send('pong!');
   }
 });
 ```
@@ -27,7 +27,7 @@ Before we dive into any further coding, we need to first understand what an *Eve
 
 This is an event:
 ```js
-client.on("message", (message) => {
+client.on('message', (message) => {
   // This code runs when the event is triggered
 });
 ```
@@ -45,13 +45,13 @@ One of the first useful things you might want to learn is how to add a second co
 > From now on I will omit the code that requires and initiates the discord.js and concentrate on specific parts of the code.
 
 ```js
-client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
+client.on('message', (message) => {
+  if (message.content.startsWith('ping')) {
+    message.channel.send('pong!');
   } else
 
-  if (message.content.startsWith("foo")) {
-    message.channel.send("bar!");
+  if (message.content.startsWith('foo')) {
+    message.channel.send('bar!');
   }
 });
 ```
@@ -71,27 +71,27 @@ Second, in the example above we respond when the message *starts with* the 3 cha
 To work around this, we'll be using prefix, which we will store in a variable. This way we get the prefix as well as the ability to change it for all commands in one place. Here's an example code that does this:
 
 ```js
-client.on("message", (message) => {
+client.on('message', (message) => {
   // Set the prefix
-  let prefix = "!";
+  let prefix = '!';
 
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("pong!");
+  if (message.content.startsWith(prefix + 'ping')) {
+    message.channel.send('pong!');
   } else
-  if (message.content.startsWith(prefix + "foo")) {
-    message.channel.send("bar!");
+  if (message.content.startsWith(prefix + 'foo')) {
+    message.channel.send('bar!');
   }
 });
 ```
 
 The changes to the code are still simple. Let's go through them:
 
-- `let prefix = "!";` defines the prefix as the exclamation mark. You can change it to something else, of course.
-- The line `if(!msg.content.startsWith(prefix)) return;` is a small bit of optimization which reads: "If the message does not start with my prefix, stop what you're doing. This prevents the rest of the function from running, making your bot faster and more responsive.
-- The commands have changed so use this prefix, where `startsWith(prefix + "ping")` would only be triggered when the message starts with `!ping`.
+- `let prefix = '!';` defines the prefix as the exclamation mark. You can change it to something else, of course.
+- The line `if(!msg.content.startsWith(prefix)) return;` is a small bit of optimization which reads: 'If the message does not start with my prefix, stop what you're doing. This prevents the rest of the function from running, making your bot faster and more responsive.
+- The commands have changed so use this prefix, where `startsWith(prefix + 'ping')` would only be triggered when the message starts with `!ping`.
 
 The second point is just as important as having a single `message` event handler. Let's say the bot receives a hundred messages every minute (not much of an exaggeration on popular bots). If the function does not break off at the beginning, you are processing these hundred messages in each of your command conditions. If, on the other hand, you break off when the prefix is not present, you are saving all these processor cycles for better things. If commands are 1% of your messages, you are saving 99% processing power...
 
@@ -103,8 +103,8 @@ We're pretty much done with the basic bot. There's one last thing that I want to
 Now, one person types `!help` in a channel, and both bots respond. But, they will also see the **other** bot saying `!help commands: [...]`, will see that as a request for help, answer each other... in an infinite loop. To prevent that from happening, we can add a second condition inside our `message` event handler, right below the one that checks for the prefix:
 
 ```js
-client.on("message", (message) => {
-  let prefix = "!";
+client.on('message', (message) => {
+  let prefix = '!';
   if (!message.content.startsWith(prefix)) return;
   // our new check:
   if (message.author.bot) return;
@@ -114,31 +114,31 @@ client.on("message", (message) => {
 
 That condition contains an *OR* operator, which reads as the following:
 
-> If the ID of the author of this message is a bot", stop processing. This includes this bot, itself.
+> If the ID of the author of this message is a bot', stop processing. This includes this bot, itself.
 
 And now, we have a bot that only responds to 2 commands and does not waste any power trying to figure out anything else. Is this a complete basic bot? Sure! So let's end this page here and we'll take a look at some new concept next.
 
 The full bot code would now be:
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
+client.login('SuperSecretBotTokenHere');
 
-client.on("message", (message) => {
+client.on('message', (message) => {
   // Set the prefix
-  let prefix = "!";
+  let prefix = '!';
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
   // Exit if any bot
   if (message.author.bot) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("pong!");
+  if (message.content.startsWith(prefix + 'ping')) {
+    message.channel.send('pong!');
   } else
-  if (message.content.startsWith(prefix + "foo")) {
-    message.channel.send("bar!");
+  if (message.content.startsWith(prefix + 'foo')) {
+    message.channel.send('bar!');
   }
 });
 ```

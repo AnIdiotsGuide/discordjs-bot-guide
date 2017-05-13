@@ -17,8 +17,8 @@ Simply take the following example, and create a new file in the same folder as y
 
 ```json
 {
-  "token": "insert-bot-token-here",
-  "prefix": "!"
+  'token': 'insert-bot-token-here',
+  'prefix': '!'
 }
 ```
 
@@ -27,7 +27,7 @@ Simply take the following example, and create a new file in the same folder as y
 At the top of your bot file, you need to add a line that will load this configuration, and put it in a variable. This is what it looks like:
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 ```
@@ -39,7 +39,7 @@ This means that now, `config` is your configuration object. `config.token` is yo
 So let's use what we have in [Your First Bot](/coding-walkthroughs/your_basic_bot.md), and use the token from the config file, instead of putting it directly in the file. The last line of our bot looks like this:
 
 ```js
-client.login("SuperSecretBotTokenHere");
+client.login('SuperSecretBotTokenHere');
 ```
 
 And we simply need to change it to this:
@@ -51,16 +51,16 @@ client.login(config.token);
 The other thing we have, is of course the prefix. Again from [Your First Bot](/coding-walkthroughs/your_basic_bot.md), we have this line in our message handler:
 
 ```js
-const prefix = "!";
-client.on("message", (message) => {
+const prefix = '!';
+client.on('message', (message) => {
   if(!message.content.startsWith(prefix)) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("pong!");
+  if (message.content.startsWith(prefix + 'ping')) {
+    message.channel.send('pong!');
   } else
 
-  if (message.content.startsWith(prefix + "foo")) {
-    message.channel.send("bar!");
+  if (message.content.startsWith(prefix + 'foo')) {
+    message.channel.send('bar!');
   }
 });
 ```
@@ -68,15 +68,15 @@ client.on("message", (message) => {
 We're using `prefix` in a few places, so we need to change them all. Here's how it looks like after the changes:
 
 ```js
-client.on("message", (message) => {
+client.on('message', (message) => {
   if(!message.content.startsWith(config.prefix)) return;
 
-  if (message.content.startsWith(config.prefix + "ping")) {
-    message.channel.send("pong!");
+  if (message.content.startsWith(config.prefix + 'ping')) {
+    message.channel.send('pong!');
   } else
 
-  if (message.content.startsWith(config.prefix + "foo")) {
-    message.channel.send("bar!");
+  if (message.content.startsWith(config.prefix + 'foo')) {
+    message.channel.send('bar!');
   }
 });
 ```
@@ -85,20 +85,20 @@ client.on("message", (message) => {
 
 ## Changing the config
 
-You're probably wondering "But how do I modify my prefix with a command?", right? You're in luck, that part is actually fairly easy!
+You're probably wondering 'But how do I modify my prefix with a command?', right? You're in luck, that part is actually fairly easy!
 
 This requires, first of all, the `fs` module. At the top of your bot file, add:
 
 ```js
-const fs = require("fs")
+const fs = require('fs')
 ```
 
 Now, let's say you wanted a prefix-changing command. This would take the shape of:
 
 ```js
-if(message.content.startsWith(config.prefix + "prefix"))
+if(message.content.startsWith(config.prefix + 'prefix'))
   // get arguments for the command, as: !prefix +
-  let args = message.content.split(" ").slice(1);
+  let args = message.content.split(' ').slice(1);
   // change the configuration in memory
   config.prefix = args[0];
 
@@ -117,9 +117,9 @@ So is there anything else you could put in that config file? Absolutely. One thi
 
 ```json
 {
-  "token": "insert-bot-token-here",
-  "prefix": "!",
-  "ownerID": "139412744439988224"
+  'token': 'insert-bot-token-here',
+  'prefix': '!',
+  'ownerID': '139412744439988224'
 }
 ```
 

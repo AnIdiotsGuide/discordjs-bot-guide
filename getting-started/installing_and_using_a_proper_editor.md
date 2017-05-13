@@ -30,7 +30,7 @@ On the left of the editor you will have all the files. Just double-click any of 
 
 ## Getting ESLint installed
 
-A "Linter" is a plugin or app that verifies your code to tell you where the errors are, and also helps in formatting the code with proper indentation and styles.
+A 'Linter' is a plugin or app that verifies your code to tell you where the errors are, and also helps in formatting the code with proper indentation and styles.
 
 > There's obviously a debate with what linter you should use. ESLint? JSHint? Some other obscure library? I'll use ESLint because... I know how to use it. Not endorsing it in any way!
 
@@ -61,31 +61,31 @@ ESLint options can be global or local to your project. Let's do a local one as a
 
 ```json
 {
-    "env": {
-        "es6": true,
-        "node": true
+    'env': {
+        'es6': true,
+        'node': true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
+    'extends': 'eslint:recommended',
+    'parserOptions': {
+        'sourceType': 'module'
     },
-    "rules": {
-        "no-console": "off",
-        "indent": [
-            "error",
+    'rules': {
+        'no-console': 'off',
+        'indent': [
+            'error',
             2
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
+        'linebreak-style': [
+            'error',
+            'windows'
         ],
-        "quotes": [
-            "warn",
-            "double"
+        'quotes': [
+            'warn',
+            'double'
         ],
-        "semi": [
-            "warn",
-            "always"
+        'semi': [
+            'warn',
+            'always'
         ]
     }
 }

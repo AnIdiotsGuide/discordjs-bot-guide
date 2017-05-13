@@ -12,10 +12,10 @@ So here's an example of an object that contains a list of users, along with thei
 
 ```json
 {
-  "139412744439988224" : { "points": 42, "level": 0 },
-  "145978637517193216" : { "points": 3, "level": 0 },
-  "90997305578106880" : { "points": 122, "level": 1},
-  "173547401905176585" : { "points": 999, "level": 3}
+  '139412744439988224' : { 'points': 42, 'level': 0 },
+  '145978637517193216' : { 'points': 3, 'level': 0 },
+  '90997305578106880' : { 'points': 122, 'level': 1},
+  '173547401905176585' : { 'points': 999, 'level': 3}
 }
 ```
 
@@ -28,12 +28,12 @@ Instead, create a file in your bot folder called `points.json` with as only cont
 Reading a JSON file is simply a question of loading the file with `fs` module:
 
 ```js
-const fs = require("fs");
+const fs = require('fs');
 
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
 ```
 
-So at this moment, we have an object called `points` from which we can read any property. So if we pretend for a second that we loaded the above example, we could access `points["139412744439988224"].points` and that would return the number `42`. Great!
+So at this moment, we have an object called `points` from which we can read any property. So if we pretend for a second that we loaded the above example, we could access `points['139412744439988224'].points` and that would return the number `42`. Great!
 
 > You only need to read the file _once_, when originally loading your bot file, and then as you update it you're just writing to it. This is because the `points` object continues to be updated anyway, we're only using JSON for persistence between reboots!
 
@@ -42,10 +42,10 @@ So at this moment, we have an object called `points` from which we can read any 
 So every time an action happens, we simply increments the proper element in the `points` array and save it. Now let's pretend we go the unoriginal route, and every time someone posts a message, we give them a point!
 
 ```js
-const fs = require("fs");
+const fs = require('fs');
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
 
-client.on("message", message => {
+client.on('message', message => {
   if (message.author.bot) return; // always ignore bots!
 
   // if the points don't exist, init to 0;
@@ -88,7 +88,7 @@ Alright, so we have a level. Let's do like all the lame bots out there and outpu
 Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it.
 
 ```js
-  if(message.content.startsWith(prefix + "level") {
+  if(message.content.startsWith(prefix + 'level') {
     message.reply(`You are currently level ${curLevel}, with ${userPoints} points.`);
   }
 ```
@@ -98,15 +98,15 @@ Ok I'm certainly not going to give you the secret recipe to show a full profile 
 Ok so we've got a bunch of little bits of code, and your head is probably spinning wonder in what order it goes, right? Well let's fix that now. On top of which we'll simplify a few things. Follow along, now!
 
 ```js
-const Discord = require("discord.js");
-const fs = require("fs");
+const Discord = require('discord.js');
+const fs = require('fs');
 const client = new Discord.Client();
-client.login("your token");
+client.login('your token');
 
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
-const prefix = "+";
+const prefix = '+';
 
-client.on("message", message => {
+client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
   if (message.author.bot) return;
 
@@ -124,7 +124,7 @@ client.on("message", message => {
     message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
   }
 
-  if (message.content.startsWith(prefix + "level")) {
+  if (message.content.startsWith(prefix + 'level')) {
     message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
   }
   fs.writeFile('./points.json', JSON.stringify(points), (err) => {
