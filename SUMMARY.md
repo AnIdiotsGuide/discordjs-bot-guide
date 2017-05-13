@@ -1,8 +1,5 @@
 # Summary
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
-​
-​
-​
 
 * [Introduction](README.md)
 * [Getting Started](getting-started/README.md)
@@ -20,6 +17,7 @@
   * [Understanding Roles](coding-walkthroughs/understanding_roles.md)
   * [Discord Webhooks \(Part 1\)](coding-walkthroughs/discord-webhooks-part-1.md)
   * [Creating a Music Bot](/coding_a_music_bot.md)
+  * [Async Await](coding-walkthroughs/asyncawait.md)
 * [Code Examples](code-examples.md)
   * [Welcome Message every X users](samples/welcome_message_every_x_users.md)
   * [Message Reply Array](samples/message_reply_array.md)
