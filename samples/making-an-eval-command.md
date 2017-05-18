@@ -58,7 +58,7 @@ client.on('message', message => {
     if(message.author.id !== '139412744439988224') return;
     try {
       const code = args.join(' ');
-      const evaled = eval(code);
+      let evaled = eval(code);
 
       if (typeof evaled !== 'string')
         evaled = require('util').inspect(evaled);
