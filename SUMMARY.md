@@ -28,5 +28,5 @@
   * [Making an Eval command](examples/making-an-eval-command.md)
   * [Using Embeds in messages](examples/using-embeds-in-messages.md)
 * [Other Guides](other-guides.md)
-  * [Using Git to share and update code](coding-walkthroughs/using-git-to-share-and-update-code.md)
+  * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
 * [Frequently Asked Questions](frequently-asked-questions.md)
