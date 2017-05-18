@@ -27,12 +27,12 @@ Right, we'll start off slow, we need to create a webhook first, if we look at th
 
 ```js
 // This will create the webhook with the name 'Example Webhook' and an example avatar.
-<Message>.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
+message.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
 // This will actually set the webhooks avatar, as mentioned at the start of the guide.
 .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
-.then(wb => <Message>.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
+.then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
 ```
 This is what it should look like if you test the code.
 ![Created the webhook](/assets/webhooks/wh01.png)
@@ -40,7 +40,7 @@ This is what it should look like if you test the code.
 
 > **NOTE:** This webhook link has long since been deleted.
 
-Now, that's all well and good, we can create the webhooks and get our bot to DM us, but the values are _hardcoded_, which means if we run that command, we'd get webhooks by the same name / avatar all the time, let's fix that shall we? we'll be looking at the [command arguments](/samples/command_with_arguments.md) page.
+Now, that's all well and good, we can create the webhooks and get our bot to DM us, but the values are _hardcoded_, which means if we run that command, we'd get webhooks by the same name / avatar all the time, let's fix that shall we? we'll be looking at the [command arguments](/examples/command_with_arguments.md) page.
 
 You should have a message handler that looks something like this.
 ```js

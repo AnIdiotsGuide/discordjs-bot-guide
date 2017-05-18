@@ -33,8 +33,8 @@ Fields are what can make embeds really nice - each field can have a title and va
 message.channel.send('', {embed: {
     color: 3447003,
     author: {
-      name: <Client>.user.username,
-      icon_url: <Client>.user.avatarURL
+      name: client.user.username,
+      icon_url: client.user.avatarURL
     },
     title: 'This is an embed',
     url: 'http://google.com',
@@ -54,7 +54,7 @@ message.channel.send('', {embed: {
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: <Client>.user.avatarURL,
+      icon_url: client.user.avatarURL,
       text: '© Example'
     }
   }

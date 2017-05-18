@@ -1,15 +1,11 @@
 # Discord.js Getting Started
 
-### Updated: This gitbook has been updated to reflect the new changes in v11.1.0 of discord.js
-
-# Placeholders
-
-This gitbook uses `<>` to denote a placeholder, for example if you see a code snippet like `<User>.send('hello');` the `<User>` is a place holder for a user object, be it `message.author` or `client.user` for example.
-
 ## Introduction
 This guidebook was originally authored by eslachance#4611 then handed down to me for future updates, but when she started the book originally it was because the examples for discord.js and the documentation were quite daunting for newcomers. There was definitely a space for this kind of document online, made obvious by the recurring questions that pop up almost every day on the support channels.
 
 Seeing as though there needed to be some more detailed explanations as well as code samples, She figured a guide would be a great place to start!
+
+To keep with the style of the official documentation, we will be using full terms (client and message) for those variables.
 
 ## Updating of this guide
 
@@ -27,6 +23,6 @@ If you have any questions after reading this guide please join us on the officia
 
 [![Join the Official Idiot's Guide Server](/assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](/assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
 
-Last Updated: `08/05/2017`
+Last Updated: `18/05/2017`
 
-On Version: `12.0.0`
+On Version: `12.2.0`

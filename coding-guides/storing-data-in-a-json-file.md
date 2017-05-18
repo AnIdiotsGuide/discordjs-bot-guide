@@ -132,5 +132,4 @@ client.on('message', message => {
   });
 });
 ```
-
 Now take this, and make it **better than Mee6**! Go ahead, I challenge you ;\)

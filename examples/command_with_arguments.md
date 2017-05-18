@@ -76,13 +76,12 @@ If you want to support _multiple_ mentions, then you'll have to loop through eac
 ```js
 if (message.content.startsWith(prefix + 'kick')) {
   // I'll make a code example on how to check if the user is allowed, one day!
-  message.mentions.users.map( (user) => {
-    userToKick.kick().catch(console.error);
+  message.mentions.users.map(user => {
+    message.guild.member(user).kick().catch(console.error);
   });
   // Yes that's right, I'm using ECMAScript 6 to confuse you again.
 }
 ```
-
 > There's a reason I'm adding error catching here. It's because the first time you use this command, you are most likely going to come to the realization that your bot does not have kick permissions. You're welcome.
 
 ## Variable Length arguments
@@ -108,7 +107,7 @@ if (message.content.startsWith(prefix + 'newrole')) {
 
 To use this command, a user would do something like: `!newrole 0000FF yes Eternal Noob`.
 
-> If you're thinking, 'What if I have more than one argument with spaces?', yes that's a tougher problem. Ideally, if you need more than one argument with spaces in it, do not use spaces to split the arguments. For example, `!newtag First Var Second Var Third Var` won't work. But `!newtag First Var;Second Var;Third Var;` can work if you first remove the command \(with `let args = msg.content.split(' ')[1];`. Then you do `args = args.split(';');` and you get the arguments, properly separated!
+> If you're thinking, 'What if I have more than one argument with spaces?', yes that's a tougher problem. Ideally, if you need more than one argument with spaces in it, do not use spaces to split the arguments. For example, `!newtag First Var Second Var Third Var` won't work. But `!newtag First Var;Second Var;Third Var;` can work if you first remove the command with `let args = msg.content.split(' ')[1];`. Then you do `args = args.split(';');` and you get the arguments, properly separated!
 
 ### Let's be fancy with ES6 again!
 

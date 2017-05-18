@@ -138,10 +138,10 @@ But first we need to calculate the level, so I'm going to take the code from the
 This is the original code.
 
 ```js
-  let userLevel = points[<Message>.author.id] ? points[<Message>.author.id].level : 0;
+  let userLevel = points[message.author.id] ? points[message.author.id].level : 0;
   if(userLevel < curLevel) {
     // Level up!
-    <Message>.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+    message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
   }
 ```
 

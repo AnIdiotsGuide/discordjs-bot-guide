@@ -77,7 +77,7 @@ const Cleverbot = require('cleverbot-node');
 const client = new Discord.Client();
 const clbot = new Cleverbot;
 
-client.login('yourcomplicatedBotTokenhere');
+client.login('SuperSecretBotTokenHere');
 
 client.on('message', message => {
   if (message.channel.type === 'dm') {
