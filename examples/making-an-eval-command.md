@@ -10,7 +10,7 @@ In JavaScript \(and node\), `eval()` is a function that evaluates any string _as
 
 I'll say this in a way that's probably dead simple to understand: _Giving someone access to _`eval()`_ is literally like sitting them **at your computer**, with **full admin access**, and then **stepping out of the room**._ `eval()` in browser javascript is trivial and not dangerous - you're running in your own browser, anything you fuck up is going to be on your own PC, not the web servers.
 
-But `eval()` in **node** is really, really dangerous and powerful. Because it can run anything **you** run as a bot, and it can also run code you're not **expecting** to run, if someone else has access to it. **Node.js** has access to your **hard drive**. The whole thing. Every bit of it. To understand what this means, look at the following command: `rm -rf / --no-preserve-root` . Do you know what this command does? **It deletes your entire server's hard drives**. I mean, it only works on Linux, but most VPS systems and most hosting providers are on unix-based systems.
+But `eval()` in **node** is really, really dangerous and powerful. Because it can run anything **you** run as a bot, and it can also run code you're not **expecting** to run, if someone else has access to it. **Node.js** has access to your **hard drive**. The whole thing. Every bit of it. To understand what this means, look at the following command: `rm -rf / --no-preserve-root` . Do you know what this command does? **It deletes your entire server's hard drives**. I mean, it only works on Linux, but most VPS systems and most hosting providers are on UNIX-based systems.
 
 Another thing that's on your hard drive is passwords. Have a config file with your database password? I can get that. `config.json` with your token and other API keys in it? I can grab that easy. Hell I can just grab your token straight from the `client` object if I know how to.
 
@@ -22,10 +22,17 @@ So first, we need to understand the \#1 rule when using `eval` commands:
 
 I don't care if it's a server owner, someone you've been talking to for months, you **cannot** trust anyone with eval. There's only one exception to this rule: Someone you know **in real life** that you can punch in the face when they actually destroy half your server or mistakenly ban everyone in every server your bot is in. Eval bypasses any command-based permission you might have, it bypasses all security checks. Eval is all powerful.
 
-So how do you secure it? Simple: only allow use from your own user ID. So for example my user ID is `139412744439988224` so I check whether the message author's ID is mine:
+So how do you secure it? Simple: only allow use from your own user ID. So for example my user ID is `139412744439988224` so I check whether the message author's ID is mine, which we added into our config at the start:
 
+```json
+{
+  //the rest of the config
+  "ownerID": "139412744439988224"
+}
+```
+In the code for the bot:
 ```js
-if(message.author.id !== '139412744439988224') return;
+if(message.author.id !== config.ownerID) return;
 ```
 
 It's as simple as that to protect the command directly inside of your condition or file or whatever. Of course, if you have some sort of command handler there's most likely a way to restrict to an ID too. This isn't specific to discord.js : there's always a way to do this. If there isn't \(if a command handler won't let you restrict by ID\), then you're using the **wrong lib**.
@@ -46,16 +53,24 @@ function clean(text) {
       return text;
 }
 ```
+It's ES6 variant:
+```js
+const clean = text => {
+  if (typeof(text) === 'string')
+    return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
+  else
+      return text;
+}
+```
 
-Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory:
+Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory, assuming you've followed this guide all along:
 
 ```js
 client.on('message', message => {
-  const prefix = '+';
   const args = message.content.split(' ').slice(1);
 
-  if (message.content.startsWith(prefix + 'eval')) {
-    if(message.author.id !== '139412744439988224') return;
+  if (message.content.startsWith(config.prefix + 'eval')) {
+    if(message.author.id !== config.ownerID) return;
     try {
       const code = args.join(' ');
       let evaled = eval(code);

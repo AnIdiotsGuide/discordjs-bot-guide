@@ -10,7 +10,7 @@ The first thing that we need to do to use arguments, is to actually separate the
 In [Your First Bot](../coding-walkthroughs/your_basic_bot.md) we actually simplify our task just a bit: our check for commands uses `startsWith()`:
 
 ```js
-if (message.content.startsWith(prefix + 'ping')) {
+if (message.content.startsWith(config.prefix + 'ping')) {
   message.channel.send('pong!');
 }
 ```
@@ -20,7 +20,7 @@ This means that `!ping whaddup` or `!ping I'm a little teapot` would both trigge
 Let's start with creating an _Array_ containing each word after our command, using the `.split()` function:
 
 ```js
-if (message.content.startsWith(prefix + 'ping')) {
+if (message.content.startsWith(config.prefix + 'ping')) {
   let args = message.content.split(' ');
 }
 ```
@@ -32,7 +32,7 @@ This generates an array that would look like `['!ping', 'I'm', 'a', 'little', 't
 If you want, you can then specify argument _names_ by referring to the array positions:
 
 ```js
-if (message.content.startsWith(prefix + 'asl')) {
+if (message.content.startsWith(config.prefix + 'asl')) {
   let args = message.content.split(' ').slice(1);
   let age = args[0]; // yes, start at 0, not 1. I hate that too.
   let sex = args[1];
@@ -62,11 +62,11 @@ Let's build a quick and dirty `kick` command, then.
 
 ```js
 // Kick a single user in the mention
-if (message.content.startsWith(prefix + 'kick')) {
+if (message.content.startsWith(config.prefix + 'kick')) {
   // I'll make a code example on how to check if the user is allowed, one day!
-    let userToKick = message.mentions.users.first();
-    //we need to get a *GuildMember* object, mentions are only users. Then, we kick!
-    message.guild.member(userToKick).kick();
+  let userToKick = message.mentions.users.first();
+  //we need to get a *GuildMember* object, mentions are only users. Then, we kick!
+  message.guild.member(userToKick).kick().catch(console.error);
   // see I even catch the error!
 }
 ```
@@ -74,7 +74,7 @@ if (message.content.startsWith(prefix + 'kick')) {
 If you want to support _multiple_ mentions, then you'll have to loop through each of the mentions. I mean, you _should_ know how to loop, but I'm feeling generous with spoonfeeding today:
 
 ```js
-if (message.content.startsWith(prefix + 'kick')) {
+if (message.content.startsWith(config.prefix + 'kick')) {
   // I'll make a code example on how to check if the user is allowed, one day!
   message.mentions.users.map(user => {
     message.guild.member(user).kick().catch(console.error);
@@ -91,13 +91,13 @@ Let's say you want to have a command that creates a new role. To be honest I wou
 We'll give the role command 3 arguments: A role _name_, a role _color_ and whether the role is _hoisted_ \(aka, shows separately in the user list\). The order of these arguments is important here: _hoisted_ and _color_ will always be one word, but the role _name_ can be variable. 'Bot Commander' 'Admin People', 'Eternal Noobs' are all valid role names. So let's handle them right!
 
 ```js
-if (message.content.startsWith(prefix + 'newrole')) {
+if (message.content.startsWith(config.prefix + 'newrole')) {
   let args = message.content.split(' ').slice(1);
   let color = args[0];
-  let hoist = args[1] === 'yes' || args[1] === 'true' ? true : false; // google 'ternary if javascript'
+  let hoist = args[1] === 'yes' || args[1] === 'true' ? true : false; // google 'ternary operator'
   let rolename = args.slice(2).join(' '); // remove first 2 args, then join array with a space
   guild.createRole()
-  .then( newrole => {
+  .then(newrole => {
     newrole.edit({hoist: hoist, name: rolename, color: color})
   }).catch(console.error);
 }
@@ -114,11 +114,11 @@ To use this command, a user would do something like: `!newrole 0000FF yes Eterna
 Destructuring has a `...rest` feature that lets you take 'the rest of the array' and put it in a single variable. Similarly to the above shortened version, you could thus do:
 
 ```js
-if (message.content.startsWith(prefix + 'newrole')) {
+if (message.content.startsWith(config.prefix + 'newrole')) {
   let [color, hoist, ...rolename] = message.content.split(' ').slice(1);
   hoist = hoist === 'yes' || hoist === 'true' ? true : false; // Still gotta do this check!
   guild.createRole()
-  .then( newrole => {
+  .then(newrole => {
     newrole.edit({hoist: hoist, name: rolename, color: color})
   }).catch(console.error);
 }
