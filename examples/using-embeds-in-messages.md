@@ -17,7 +17,7 @@ Those aren't just guidelines, they are rules, and breaking those rules means you
 There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, _very_ basic embed that writes on a single line:
 
 ```js
-message.channel.send('', {embed: {
+message.channel.send({embed: {
   color: 3447003,
   description: 'A very simple Embed!'
 }});
@@ -30,7 +30,7 @@ The `color` determines the bar on the left \(here, a very nice blue\), and the `
 Fields are what can make embeds really nice - each field can have a title and value, and fields can also be stacked horizontally - as columns. Here's a more complex example of an embed that has many different fields, as well as icons and a footer:
 
 ```js
-message.channel.send('', {embed: {
+message.channel.send({embed: {
     color: 3447003,
     author: {
       name: client.user.username,
@@ -97,7 +97,7 @@ const embed = new Discord.RichEmbed()
   /*
    * Blank field, useful to create some space.
    */
-  .addField('\u200b', '\u200b', true)
+  .addBlankField(true)
   .addField('Inline Field 3', 'You can have a maximum of 25 fields.', true);
 
   message.channel.send({embed});

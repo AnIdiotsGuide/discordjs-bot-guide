@@ -12,10 +12,10 @@ So here's an example of an object that contains a list of users, along with thei
 
 ```json
 {
-  '139412744439988224' : { 'points': 42, 'level': 0 },
-  '145978637517193216' : { 'points': 3, 'level': 0 },
-  '90997305578106880' : { 'points': 122, 'level': 1},
-  '173547401905176585' : { 'points': 999, 'level': 3}
+  "139412744439988224" : { "points": 42, "level": 0 },
+  "145978637517193216" : { "points": 3, "level": 0 },
+  "90997305578106880" : { "points": 122, "level": 1},
+  "173547401905176585" : { "points": 999, "level": 3}
 }
 ```
 

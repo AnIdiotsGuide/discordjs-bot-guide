@@ -105,16 +105,15 @@ Now, one person types `!help` in a channel, and both bots respond. But, they wil
 ```js
 client.on('message', (message) => {
   let prefix = '!';
-  if (!message.content.startsWith(prefix)) return;
   // our new check:
-  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
   // [rest of the code]
 });
 ```
 
-That condition contains an *OR* operator, which reads as the following:
+That condition contains an *OR* ( || ) operator, which reads as the following:
 
-> If the ID of the author of this message is a bot', stop processing. This includes this bot, itself.
+> If there is no prefix or the author of this message is a bot, stop processing. This includes this bot, itself.
 
 And now, we have a bot that only responds to 2 commands and does not waste any power trying to figure out anything else. Is this a complete basic bot? Sure! So let's end this page here and we'll take a look at some new concept next.
 
@@ -129,10 +128,8 @@ client.login('SuperSecretBotTokenHere');
 client.on('message', (message) => {
   // Set the prefix
   let prefix = '!';
-  // Exit and stop if it's not there
-  if (!message.content.startsWith(prefix)) return;
-  // Exit if any bot
-  if (message.author.bot) return;
+  // Exit and stop if the prefix is not there or if user is a bot
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   if (message.content.startsWith(prefix + 'ping')) {
     message.channel.send('pong!');
@@ -162,8 +159,8 @@ Simply take the following example, and create a new file in the same folder as y
 
 ```json
 {
-  'token': 'insert-bot-token-here',
-  'prefix': '!'
+  "token": "insert-bot-token-here",
+  "prefix": "!"
 }
 ```
 
@@ -196,14 +193,14 @@ client.login(config.token);
 The other thing we have, is of course the prefix. Again from before, we have this line in our message handler:
 
 ```js
-const prefix = '!';
 client.on('message', (message) => {
-  if(!message.content.startsWith(prefix)) return;
+  let prefix = '!';
+
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   if (message.content.startsWith(prefix + 'ping')) {
     message.channel.send('pong!');
   } else
-
   if (message.content.startsWith(prefix + 'foo')) {
     message.channel.send('bar!');
   }
@@ -214,12 +211,11 @@ We're using `prefix` in a few places, so we need to change them all. Here's how 
 
 ```js
 client.on('message', (message) => {
-  if(!message.content.startsWith(config.prefix)) return;
+  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   if (message.content.startsWith(config.prefix + 'ping')) {
     message.channel.send('pong!');
   } else
-
   if (message.content.startsWith(config.prefix + 'foo')) {
     message.channel.send('bar!');
   }
@@ -242,14 +238,14 @@ const fs = require('fs')
 Now, let's say you wanted a prefix-changing command. This would take the shape of:
 
 ```js
-if(message.content.startsWith(config.prefix + 'prefix'))
-  // get arguments for the command, as: !prefix +
-  let args = message.content.split(' ').slice(1);
+if(message.content.startsWith(config.prefix + 'prefix')) {
+  // Gets the prefix from the command (eg. "!prefix +" it will take the "+" from it)
+  let newPrefix = message.content.split(' ').slice(1, 2)[0];
   // change the configuration in memory
-  config.prefix = args[0];
+  config.prefix = newPrefix;
 
   // Now we have to save the file.
-  fs.writeFile('./config.json', JSON.stringify(config), (err) => {if(err) console.error(err)});
+  fs.writeFile('./config.json', JSON.stringify(config), (err) => if(err) console.error(err));
 }
 ```
 
@@ -263,9 +259,9 @@ So is there anything else you could put in that config file? Absolutely. One thi
 
 ```json
 {
-  'token': 'insert-bot-token-here',
-  'prefix': '!',
-  'ownerID': '139412744439988224'
+  "token": "insert-bot-token-here",
+  "prefix": "!",
+  "ownerID": "your-user-ID"
 }
 ```
 
