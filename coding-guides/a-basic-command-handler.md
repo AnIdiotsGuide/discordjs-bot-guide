@@ -32,12 +32,11 @@ client.on('message', message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(config.prefix)) return;
 
-  let command = message.content.split(' ')[0];
-  command = command.slice(config.prefix.length);
-
-  let args = message.content.split(' ').slice(1);
+  // This is the best way to define args. Trust me.
+  const args = message.content.split(" ");
+  const command = args.shift().slice(config.prefix.length);
+  
   // The list of if/else is replaced with those simple 2 lines:
-
   try {
     let commandFile = require(`./commands/${command}.js`);
     commandFile.run(client, message, args);
@@ -124,3 +123,6 @@ exports.run = (client, message, args) => {
   message.reply(`The command ${args[0]} has been reloaded`);
 };
 ```
+
+
+
