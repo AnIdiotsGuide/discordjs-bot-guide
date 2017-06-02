@@ -7,18 +7,18 @@ This has been a rather demanded topic recently, everyone wants to know how to us
 As per usual let's grab the example source code.
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login('SuperSecretBotTokenHere');
+client.login("SuperSecretBotTokenHere");
 
-client.on('ready', () => {
-  console.log('I am ready!');
+client.on("ready", () => {
+  console.log("I am ready!");
 });
 
-client.on('message', (message) => {
-  if (message.content.startsWith('ping')) {
-    message.channel.send('pong!');
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
   }
 });
 ```
@@ -26,10 +26,10 @@ client.on('message', (message) => {
 Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
 
 ```js
-// This will create the webhook with the name 'Example Webhook' and an example avatar.
-message.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
+// This will create the webhook with the name "Example Webhook" and an example avatar.
+message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.png")
 // This will actually set the webhooks avatar, as mentioned at the start of the guide.
-.then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
+.then(webhook => webhook.edit("Example Webhook", "https://i.imgur.com/p2qNFag.png")
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
 .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
@@ -44,12 +44,12 @@ Now, that's all well and good, we can create the webhooks and get our bot to DM 
 
 You should have a message handler that looks something like this.
 ```js
-let prefix = '~';
-client.on('message', message => {
-  let args = message.content.split(' ').slice(1);
-  if (message.content.startsWith(prefix + 'createHook')) {
-    message.channel.createWebhook('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
-      .then(webhook => webhook.edit('Example Webhook', 'https://i.imgur.com/p2qNFag.png')
+let prefix = "~";
+client.on("message", message => {
+  let args = message.content.split(" ").slice(1);
+  if (message.content.startsWith(prefix + "createHook")) {
+    message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.png")
+      .then(webhook => webhook.edit("Example Webhook", "https://i.imgur.com/p2qNFag.png")
         .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`))
         .catch(console.error))
       .catch(console.error);
@@ -68,13 +68,14 @@ Using the above regex with `match`, `replace` and `test` will allow you to isola
 
 I'm not going to go into much detail, but the fact that both of the test strings are highlighted, and it's saying there's 2 matches is all we need to know, it works with links starting with `http` and `https`, and it looks for valid extensions, which are jpg, jpeg and png.
 
-Let's do the rest of the command shall we? we've got our regex, and we know we need to use `match`, `replace` and `test`, so we should `test` for a link first using our regex, if it returns false we need to notify the user, if it returns true we need to `match` and `replace` for the rest, the code can look like this.
+let's do the rest of the command shall we? we've got our regex, and we know we need to use `match`, `replace` and `test`, so we should `test` for a link first using our regex, if it returns false we need to notify the user, if it returns true we need to `match` and `replace` for the rest, the code can look like this.
+
 ```js
-const nameAvatar = args.join(' ');
+const nameAvatar = args.join(" ");
 const linkCheck = /https?:\/\/.+\.(?:png|jpg|jpeg)/gi;
-if (!linkCheck.test(nameAvatar)) return message.reply('You must supply an image link.');
+if (!linkCheck.test(nameAvatar)) return message.reply("You must supply an image link.");
 const avatar = nameAvatar.match(linkCheck)[0];
-const name = nameAvatar.replace(linkCheck, '');
+const name = nameAvatar.replace(linkCheck, "");
 message.channel.createWebhook(name, avatar)
   .then(webhook => webhook.edit(name, avatar)
     .catch(error => console.log(error)))

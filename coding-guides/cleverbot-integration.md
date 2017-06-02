@@ -5,18 +5,18 @@ I've had this request since I started my Idiot's Guide, in fact it was one of th
 So to get started, let's grab the example from [getting started](/getting-started/the-long-version.md) and shove it in a file.
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login('SuperSecretBotTokenHere');
+client.login("superSecretBotTokenHere");
 
-client.on('ready', () => {
-  console.log('I am ready!');
+client.on("ready", () => {
+  console.log("I am ready!");
 });
 
-client.on('message', (message) => {
-  if (message.content.startsWith('ping')) {
-    message.channel.send('pong!');
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
   }
 });
 ```
@@ -24,9 +24,9 @@ client.on('message', (message) => {
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
 
 ```js
-var Cleverbot = require('cleverbot-node');
+var Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
-cleverbot.configure({botapi: 'IAMKEY'});
+cleverbot.configure({botapi: "IAMKEY"});
 cleverbot.write(cleverMessage, function (response) {
    console.log(response.output);
 });
@@ -45,26 +45,26 @@ We have both our example codes, now we need to combine them for a working bot.
 Right, we need to take the first two lines of the cleverbot example...
 
 ```js
-var Cleverbot = require('cleverbot-node');
+var Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
 ```
 
 ...and put them with our discord definitions.
 
 ```js
-const Discord = require('discord.js');
-const Cleverbot = require('cleverbot-node');
+const Discord = require("discord.js");
+const Cleverbot = require("cleverbot-node");
 const client = new Discord.Client();
 const clbot = new Cleverbot;
-clbot.configure({botapi: 'IAMKEY'});
+clbot.configure({botapi: "IAMKEY"});
 ```
 
 I renamed `cleverbot` to `clbot` to reduce any possible confusion between the variable names as JavaScript is case sensitive.
 
-Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we'll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\)
+Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we"ll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\)
 
 ```js
-if (message.channel.type === 'dm') {
+if (message.channel.type === "dm") {
   // Cleverbot code goes here.
 }
 ```
@@ -72,15 +72,15 @@ if (message.channel.type === 'dm') {
 Your code should look something like this...
 
 ```js
-const Discord = require('discord.js');
-const Cleverbot = require('cleverbot-node');
+const Discord = require("discord.js");
+const Cleverbot = require("cleverbot-node");
 const client = new Discord.Client();
 const clbot = new Cleverbot;
 
-client.login('SuperSecretBotTokenHere');
+client.login("superSecretBotTokenHere");
 
-client.on('message', message => {
-  if (message.channel.type === 'dm') {
+client.on("message", message => {
+  if (message.channel.type === "dm") {
     clbot.write(message.content, (response) => {
       message.channel.startTyping();
       setTimeout(() => {
@@ -91,8 +91,8 @@ client.on('message', message => {
   }
 });
 
-client.on('ready', () => {
-  console.log('I am ready!');
+client.on("ready", () => {
+  console.log("I am ready!");
 });
 ```
 

@@ -15,25 +15,27 @@ For this example points system we want the user's ID, points and level, I'm not 
 Let's take the core elements from the the example bot on [getting started](/getting-started/the-long-version.md).
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login('yourawesomesecrettoken');
+client.login("SuperSecretBotTokenHere");
 
-client.on('ready', () => {
-    console.log('Ready!');
+client.on("ready", () => {
+  console.log("I am ready!");
 });
 
-client.on('message', message => {
-  if (message.author.bot) return; // Ignore bots.
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
+  }
 });
 ```
 
 Now we've got that we should `require` sqlite and make use of it, put the following under `const client`
 
 ```js
-const sql = require('sqlite');
-sql.open('./score.sqlite');
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 ```
 
 > **NOTE:** Don't worry about the file, we'll be doing a special conditional shortly that'll do some fancy magic!
@@ -41,26 +43,29 @@ sql.open('./score.sqlite');
 Alright now that's required correctly we want to prevent people trying to DM the bot to increase their points. Add the following code below the ignore bots line.
 
 ```js
-if (message.channel.type === 'dm') return; // Ignore DM channels.
+if (message.channel.type === "dm") return; // Ignore DM channels.
 ```
 
 Your code should look like this now;
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
-const sql = require('sqlite');
-sql.open('./score.sqlite');
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 
-client.login('yourawesomesecrettoken');
+client.login("SuperSecretBotTokenHere");
 
-client.on('ready', () => {
-  console.log('Ready!');
+client.on("ready", () => {
+  console.log("Ready!");
 });
 
-client.on('message', message => {
+client.on("message", message => {
   if (message.author.bot) return; // Ignore bots.
-  if (message.channel.type === 'dm') return; // Ignore DM channels.
+  if (message.channel.type === "dm") return; // Ignore DM channels.
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
+  }
 });
 ```
 
@@ -69,7 +74,7 @@ client.on('message', message => {
 We need to start the sqlite chain, we don't have to worry about opening the database, as it's opened at the top of our file, so it's loaded when we need it. With sqlite being promise based, we need to start off with a `get` query `then` follow it up with a `catch`
 
 ```js
-sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
+sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
 
 }).catch(() => {
 
@@ -80,8 +85,8 @@ Right, now we've got that out of the way, we need to add our logic to it, but le
 
 ```js
 console.error; // Gotta log those errors
-sql.run('CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)').then(() => {
-  sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.author.id, 1, 0]);
+sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+  sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
 });
 ```
 
@@ -93,7 +98,7 @@ On to the next bit of logic, inside the `then` you should notice we defined `row
 
 ```js
 if (!row) { // Can't find the row.
-  sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.author.id, 1, 0]);
+  sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
 } else { // Can find the row.
   sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
 }
@@ -104,26 +109,29 @@ Now, that will either insert \(if no row is found\), or update the authors point
 Your code should now look like this.
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
-const sql = require('sqlite');
-sql.open('./score.sqlite');
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 
-client.login('yourawesomesecrettoken');
+client.login("SuperSecretBotTokenHere");
 
-client.on('message', message => {
+client.on("message", message => {
   if (message.author.bot) return;
-  if (message.channel.type !== 'text') return;
-  sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
+  if (message.channel.type !== "text") return;
+    if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
+  }
+  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
-      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.author.id, 1, 0]);
+      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
     } else {
       sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
     }
   }).catch(() => {
     console.error;
-    sql.run('CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)').then(() => {
-      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.author.id, 1, 0]);
+    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
     });
   });
 });
@@ -165,7 +173,7 @@ Now we've got the core of this code done, we need to add a few commands, so as n
 Place this above your message handler
 
 ```js
-const prefix = '+';
+const prefix = "+";
 ```
 
 And this just below the `sql` code block
@@ -173,11 +181,11 @@ And this just below the `sql` code block
 ```js
 if (!message.content.startsWith(prefix)) return; // Ignore messages that don't start with the prefix
 
-if (message.content.startsWith(prefix + 'level') {
+if (message.content.startsWith(prefix + "level") {
 
 } else
 
-if (message.content.startsWith(prefix + 'points') {
+if (message.content.startsWith(prefix + "points") {
 
 }
 ```
@@ -187,8 +195,8 @@ Now for the commands. We want to view the row `level` and `points`, so we need t
 All you'll need to do is swap `level` for `points` and the response message and you're set!
 
 ```js
-sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
-  if (!row) return message.reply('Your current level is 0');
+sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+  if (!row) return message.reply("Your current level is 0");
   message.reply(`Your current level is ${row.level}`);
 });
 ```
@@ -198,21 +206,25 @@ sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row =>
 After this guide, your code should look like this;
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
-const sql = require('sqlite');
-sql.open('./score.sqlite');
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 
-client.login('yourawesomesecrettoken');
+client.login("SuperSecretBotTokenHere");
 
-const prefix = '+';
-client.on('message', message => {
+const prefix = "+";
+client.on("message", message => {
   if (message.author.bot) return;
-  if (message.channel.type !== 'text') return;
+  if (message.channel.type !== "text") return;
 
-  sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
+  if (message.content.startsWith(prefix + "ping")) {
+    message.channel.send("pong!");
+  }
+
+  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
-      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.author.id, 1, 0]);
+      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
     } else {
       let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
       if (curLevel > row.level) {
@@ -224,23 +236,23 @@ client.on('message', message => {
     }
   }).catch(() => {
     console.error;
-    sql.run('CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)').then(() => {
-      sql.run('INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)', [message.author.id, 1, 0]);
+    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
     });
   });
 
   if (!message.content.startsWith(prefix)) return;
 
-  if (message.content.startsWith(prefix + 'level')) {
-    sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
-      if (!row) return message.reply('Your current level is 0');
+  if (message.content.startsWith(prefix + "level")) {
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+      if (!row) return message.reply("Your current level is 0");
       message.reply(`Your current level is ${row.level}`);
     });
   } else
 
-  if (message.content.startsWith(prefix + 'points')) {
-    sql.get(`SELECT * FROM scores WHERE userId ='${message.author.id}'`).then(row => {
-      if (!row) return message.reply('sadly you do not have any points yet!');
+  if (message.content.startsWith(prefix + "points")) {
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+      if (!row) return message.reply("sadly you do not have any points yet!");
       message.reply(`you currently have ${row.points} points, good going!`);
     });
   }

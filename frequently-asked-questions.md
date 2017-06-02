@@ -30,7 +30,7 @@ You didn't install Discord.js or installed it in the wrong folder
 
 * Make sure you are in the **correct** folder where you have your bot's files
 * SHIFT+Right-Click in the folder and select **Open command window here**
-* Run `npm init` , and hit enter until the wizard is complete
+* Run `npm init`, and hit enter until the wizard is complete
 * Run `npm i -S discord.js` again to install Discord.
 
 ### Unexpected End of Input
@@ -47,7 +47,7 @@ SyntaxError: Unexpected end of input
 
 Your code has an error somewhere. This is _impossible_ to troubleshoot without the **complete** code, since the error can be anywhere \(in fact the error stack often tells you it's at the end of your code\).
 
-The following trick is a lifesaver, so pay attention: Your code editor is trying to help you. Whatever editor you're using \(except notepad.exe. Don't use notepad!\), clicking on any \(and I mean any\) special character such as parentheses, square brackets, curly braces, double and single quotes, will automatically highlight the one that matches it. The screenshot below shows this: I clicked on the curly brace at the bottom, it shows me the one on top by highlighting it. Learn this, and how different functions and event handlers 'look' like.
+The following trick is a lifesaver, so pay attention: Your code editor is trying to help you. Whatever editor you're using \(except notepad++.exe. Don't use notepad++!\), clicking on any \(and I mean any\) special character such as parentheses, square brackets, curly braces, double and single quotes, will automatically highlight the one that matches it. The screenshot below shows this: I clicked on the curly brace at the bottom, it shows me the one on top by highlighting it. Learn this, and how different functions and event handlers "look" like.
 
 ![](assets/editorhelp.png)
 
@@ -55,23 +55,19 @@ You can check out [Installing and Using a Proper Editor](/getting-started/instal
 
 ## Code Examples
 
-#### How the examples are built
-
-Examples are built with the &lt;Classes&gt; defined within brackets. This means that when we show &lt;Client&gt; it means your client variable, such as `client` or `bot`. To get a better idea of what those are, refer to the documentation - in the menu on the left, every link is a class with the same name that is referred to here. You **must** replace these with the proper variables!
-
 ## Bot and Bot Client
 
 ```js
-// Set the bot's 'Playing: ' status (must be in an event!)
-client.on('ready', () => {
-    client.user.setGame('with my code');
+// Set the bot's "Playing: " status (must be in an event!)
+client.on("ready", () => {
+    client.user.setGame("with my code");
 });
 ```
 
 ```js
 // Set the bot's online/offline/dnd/invisible status
-client.on('ready', () => {
-    client.user.setStatus('online');
+client.on("ready", () => {
+    client.user.setStatus("online");
 });
 ```
 
@@ -79,13 +75,13 @@ client.on('ready', () => {
 
 ```js
 // Get a User by ID
-client.users.get('user id here');
+client.users.get("user id here");
 // Returns message.author
 ```
 
 ```js
 // Get a Member by ID
-message.guild.members.get('user ID here');
+message.guild.members.get("user ID here");
 // Returns <Member>
 ```
 
@@ -97,37 +93,37 @@ message.guild.member(message.mentions.users.first());
 
 ```js
 // Send a Direct Message to a user
-message.author.send('hello');
+message.author.send("hello");
 ```
 
 ```js
 // Mention a user in a message
 message.channel.send(`Hello ${user}, and welcome!`);
 // or
-message.channel.send('Hello ' + message.author.toString() + ', and welcome!');
+message.channel.send("Hello " + message.author.toString() + ", and welcome!");
 ```
 
 ## Channels and Guilds
 
 ```js
 // Get a Guild by ID
-client.guilds.get('the guild id');
+client.guilds.get("the guild id");
 // Returns message.guild
 ```
 
 ```js
 // Get a channel by ID
-client.channels.get('the channel id');
+client.channels.get("the channel id");
 // Returns message.channel
 ```
 
 ```js
 // Get a Channel by Name (note: THIS IS NOT RECOMMENDED as more than one channel can have the same name!)
-message.guild.channels.find('name', 'channel-name');
+message.guild.channels.find("name", "channel-name");
 // returns message.channel
 ```
 
 ```js
 // Send a message to the guild's default channel (often `#general`)
-message.guild.defaultChannel.send('I\'m bored so I\'ll spam you.');
+message.guild.defaultChannel.send("I'm bored so I'll spam you.");
 ```
