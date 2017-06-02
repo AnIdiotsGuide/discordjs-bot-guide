@@ -28,8 +28,6 @@ Music in the video:
 Local Forecast - Slower  
 Kevin MacLeod [incompetech.com](incompetech.com)  
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
- 
-  
   
 List of Atom addons and themes I use;  
 Addons:  

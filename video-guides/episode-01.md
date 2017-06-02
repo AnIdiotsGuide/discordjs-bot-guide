@@ -11,7 +11,6 @@ All of the tutorial source code is available [here](https://github.com/AnIdiotsG
 
 You will require a free discordapp.com account to use the discord service, sign up [here](https://discordapp.com/hypesquad?ref=PYisfiCTRf)
 
-
 You can join the _"An Idiot's Guide Official Server"_ [here](https://discord.gg/gkZCQtH)
 
 If you'd like to support me on Patreon, you can do so [here](https://www.patreon.com/anidiotsguide)
@@ -23,7 +22,6 @@ Check out the Discord Developers portal [here](https://discordapp.com/developers
 Discord.js Official Documentation is available [here](https://discord.js.org/#!/)
 
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
-
 
 List of Atom addons and themes I use;  
 Addons:  
