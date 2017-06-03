@@ -1,6 +1,6 @@
 {{ "https://www.youtube.com/watch?v=8AiZBdcPKOM" | video }}
 
-Welcome to the first episode of my guide which will help you create a Discord Bot using the amazing Discord.js library, and I hope you follow along and create your very own bot!
+Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
