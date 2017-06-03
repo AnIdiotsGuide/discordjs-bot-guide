@@ -25,8 +25,7 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
 Music in the video:  
-Local Forecast - Slower  
-Kevin MacLeod [incompetech.com](incompetech.com)  
+Local Forecast - Slower by Kevin MacLeod [incompetech.com](incompetech.com)  
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
   
 List of Atom addons and themes I use;  
