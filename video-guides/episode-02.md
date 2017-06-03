@@ -1,4 +1,4 @@
-{% center %}{{ "https://www.youtube.com/watch?v=8AiZBdcPKOM" | video }}{% endcenter %}
+{{ "https://www.youtube.com/watch?v=8AiZBdcPKOM" | video }}
 
 Welcome to the first episode of my guide which will help you create a Discord Bot using the amazing Discord.js library, and I hope you follow along and create your very own bot!
 
