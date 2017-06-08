@@ -14,7 +14,7 @@ Initializing the discord collection is simple: `const newUsers = new Discord.Col
 Adding new members that join to the collection is simple:
 
 ```js
-client.on('guildMemberAdd', (member) => {
+client.on("guildMemberAdd", (member) => {
   newUsers.set(member.id, member.user);
 });
 ```
@@ -22,7 +22,7 @@ client.on('guildMemberAdd', (member) => {
 If a user leaves while he's on that list though, it would cause your bot to welcome @invalid-user. To fix this, we remove that user from the collection:
 
 ```js
-client.on('guildMemberRemove', (member) => {
+client.on("guildMemberRemove", (member) => {
   if(newUsers.has(member.id)) newUsers.delete(member.id);
 });
 ```
@@ -30,13 +30,13 @@ client.on('guildMemberRemove', (member) => {
 But wait, where do we welcome users? That's done in `guildMemberAdd`, when the count reaches the number you want:
 
 ```js
-client.on('guildMemberAdd', (member) => {
+client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
 
   if (newUsers.size > 10) {
-    const userlist = newUsers.map(u => u.toString()).join(' ');
-    guild.defaultChannel.send('Welcome our new users!\n' + userlist);
+    const userlist = newUsers.map(u => u.toString()).join(" ");
+    guild.defaultChannel.send("Welcome our new users!\n" + userlist);
     newUsers.clear();
   }
 });
@@ -44,7 +44,7 @@ client.on('guildMemberAdd', (member) => {
 
 Two lines require a little more explanation:
 
-* `newUsers.map(u => u.toString()).join(' ');` uses the fancy ES6 `map` function to get a mention for each user in the array, then joins them with a space between each.
+* `newUsers.map(u => u.toString()).join(" ");` uses the fancy ES6 `map` function to get a mention for each user in the array, then joins them with a space between each.
 * `newUsers.clear()` _resets_ empties the cache completely, so it resets to 0.
 
 ## Multiple servers?
@@ -52,27 +52,37 @@ Two lines require a little more explanation:
 The only issue with the above code is that it would only work if your bot is on a single server. Though this might be alright you, there's a chance you want to support multiple servers. How do we do that? We change `newUsers` to an `Array` instead, and each server gets its own cache. Here is a **complete** example that does nothing but welcome new users:
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
+
+client.login("SuperSecretBotTokenHere");
 
 const newUsers = [];
 
-client.on('guildMemberAdd', (member) => {
+client.on("ready", () => {
+  console.log("I am ready!");
+});
+
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
+  }
+});
+
+client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   if (!newUsers[guild.id]) newUsers[guild.id] = new Discord.Collection();
   newUsers[guild.id].set(member.id, member.user);
 
   if (newUsers[guild.id].size > 10) {
-    const userlist = newUsers[guild.id].map(u => u.toString()).join(' ');
-    guild.channels.get(guild.id).send('Welcome our new users!\n' + userlist);
+    const userlist = newUsers[guild.id].map(u => u.toString()).join(" ");
+    guild.channels.get(guild.id).send("Welcome our new users!\n" + userlist);
     newUsers[guild.id].clear();
   }
 });
 
-client.on('guildMemberRemove', (member) => {
+client.on("guildMemberRemove", (member) => {
   const guild = member.guild;
   if (newUsers[guild.id].has(member.id)) newUsers.delete(member.id);
 });
-
-client.login('Your.Token');
 ```

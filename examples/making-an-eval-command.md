@@ -43,12 +43,12 @@ So now you've been thoroughly briefed on the dangers of Eval, let's take a look 
 
 First though I strongly suggest using the following function \(plop it outside of any event handler/functions you have, so it's accessible anywhere\). This function prevents the use of actual mentions within the return line by adding a zero-width character between the `@` and the first character of the mention - blocking the mention from happening.
 
-> NOTE: **Both** the following code snippets are _**REQUIRED**_ to make the eval work.
+> **NOTE:** **Both** the following code snippets are _**REQUIRED**_ to make the eval work.
 
 ```js
 function clean(text) {
-  if (typeof(text) === 'string')
-    return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
+  if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
   else
       return text;
 }
@@ -56,8 +56,8 @@ function clean(text) {
 It's ES6 variant:
 ```js
 const clean = text => {
-  if (typeof(text) === 'string')
-    return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
+  if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
   else
       return text;
 }
@@ -66,19 +66,19 @@ const clean = text => {
 Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory, assuming you've followed this guide all along:
 
 ```js
-client.on('message', message => {
-  const args = message.content.split(' ').slice(1);
+client.on("message", message => {
+  const args = message.content.split(" ").slice(1);
 
-  if (message.content.startsWith(config.prefix + 'eval')) {
+  if (message.content.startsWith(config.prefix + "eval")) {
     if(message.author.id !== config.ownerID) return;
     try {
-      const code = args.join(' ');
+      const code = args.join(" ");
       let evaled = eval(code);
 
-      if (typeof evaled !== 'string')
-        evaled = require('util').inspect(evaled);
+      if (typeof evaled !== "string")
+        evaled = require("util").inspect(evaled);
 
-      message.channel.send(clean(evaled), {code:'xl'});
+      message.channel.send(clean(evaled), {code:"xl"});
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }

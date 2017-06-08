@@ -60,7 +60,7 @@ exports.run = (client, message, args) => {
 
 Another example would be the more complex `./commands/kick.js` command, called using `!kick @user`
 
->NOTE: What ever role you tell the code below to find, you MUST have that role created **exactly** the same.
+> **NOTE:** What ever role you tell the code below to find, you MUST have that role created **exactly** the same.
 
 ```js
 exports.run = (client, message, args) => {

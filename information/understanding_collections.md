@@ -15,13 +15,13 @@ Examples of Collections include:
 
 ## Getting by ID
 
-Very simply, to get anything by ID you can use `Collection.get(id)`. For instance, getting a channel can be `client.channels.get('81385020756865024')`. Getting a user is also trivial: `client.users.get('139412744439988224')`
+Very simply, to get anything by ID you can use `Collection.get(id)`. For instance, getting a channel can be `client.channels.get("81385020756865024")`. Getting a user is also trivial: `client.users.get("139412744439988224")`
 
 ## Finding by key
 
 If you don't have the ID but only some other property, you may use `find()` to search by property:
 
-`let guild = client.guilds.find('name', 'Discord.js Official');`
+`let guild = client.guilds.find("name", "Discord.js Official");`
 
 ## Custom filtering
 

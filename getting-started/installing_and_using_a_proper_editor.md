@@ -61,31 +61,31 @@ ESLint options can be global or local to your project. Let's do a local one as a
 
 ```json
 {
-    'env': {
-        'es6': true,
-        'node': true
+    "env": {
+        "es6": true,
+        "node": true
     },
-    'extends': 'eslint:recommended',
-    'parserOptions': {
-        'sourceType': 'module'
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
     },
-    'rules': {
-        'no-console': 'off',
-        'indent': [
-            'error',
+    "rules": {
+        "no-console": "off",
+        "indent": [
+            "error",
             2
         ],
-        'linebreak-style': [
-            'error',
-            'windows'
+        "linebreak-style": [
+            "error",
+            "windows"
         ],
-        'quotes': [
-            'warn',
-            'double'
+        "quotes": [
+            "warn",
+            "double"
         ],
-        'semi': [
-            'warn',
-            'always'
+        "semi": [
+            "warn",
+            "always"
         ]
     }
 }

@@ -19,7 +19,7 @@ To create the application, head to the [Discordapp.com Application Page](https:/
 
 Click on \(you guessed it!\) **New Application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one.
 
-> Ignore the 'Redirect URI\(s\)', this section is not useful to you at this moment.
+> Ignore the "Redirect URI\(s\)", this section is not useful to you at this moment.
 
 ### Create the bot account
 
@@ -28,7 +28,7 @@ Once you click on the **Create Application** button, you're brought to the appli
 
 ### Add your bot to a server
 
-Ok so, this might be a bit early to do this but it doesn't really matter - even if you haven't written a single line of code for your bot, you can already 'invite' it to a server. In order to add a bot, you need _Manage Server_ permissions on that server. This is the **only** way to add a bot, it cannot use invite links or any other methods.
+Ok so, this might be a bit early to do this but it doesn't really matter - even if you haven't written a single line of code for your bot, you can already "invite" it to a server. In order to add a bot, you need _Manage Server_ permissions on that server. This is the **only** way to add a bot, it cannot use invite links or any other methods.
 
 Unfortunately, there's no cute button here to do this automatically, the link is buried in the API reference, so I'll help you out. You need to visit the following URL, but you have to replace **APP\_ID** with the **Client/Application ID** visible in your application page.
 
@@ -58,7 +58,7 @@ This might go beyond saying but I'll say it anyway: You can't just start shoving
 
 > An alternative: [c9.io](https://c9.io/). I personally appreciate c9.io as it's a full VPS with a great editor \(Ace\) and installing node, discord.js and all dependencies, then running the bot, is easy. You can't host it there, but you can certainly develop there. _This is not an endorsement_.
 
-Once you have the required software, the next step is to prepare a _space_ for your code. Please don't just put your files on your desktop it's... unsanitary. If you have more than one hard drive or partition, you could create a special place for your development project. Mine, for example, is `D:\devel\` , and my bot is `d:\devel\omnicbot\` . Once you've created a folder, open your CLI \(command line interface\) in that folder. Linux users, you know how. Windows users, here's a trick: SHIFT+RightClick in the folder, then choose the 'secret' command **Open command window here**. Magic!
+Once you have the required software, the next step is to prepare a _space_ for your code. Please don't just put your files on your desktop it's... unsanitary. If you have more than one hard drive or partition, you could create a special place for your development project. Mine, for example, is `D:\devel\` , and my bot is `d:\devel\omnicbot\` . Once you've created a folder, open your CLI \(command line interface\) in that folder. Linux users, you know how. Windows users, here's a trick: SHIFT+RightClick in the folder, then choose the "secret" command **Open command window here**. Magic!
 
 And now ready for the next step!
 
@@ -82,18 +82,18 @@ Ok finally, we're ready to start coding. **\o/**
 Let's take a look at the most basic of examples, the ping-pong bot. Here's the code in its entirety:
 
 ```js
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login('SuperSecretBotTokenHere');
+client.login("SuperSecretBotTokenHere");
 
-client.on('ready', () => {
-  console.log('I am ready!');
+client.on("ready", () => {
+  console.log("I am ready!");
 });
 
-client.on('message', (message) => {
-  if (message.content.startsWith('ping')) {
-    message.channel.send('pong!');
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
   }
 });
 ```
@@ -107,7 +107,7 @@ Ok let's just... actually get this guy to work, because this is literally **a fu
 3. Save the file as `mybot.js`.
 4. In the CLI \(which should still be in your project folder\) type the following command: `node mybot.js`
 
-If all went well \(hopefully it did\) your bot is now connected to your server, it's in your userlist, and ready to answer all your commands... Well, at least, _one_ command: `ping`. In its current state, the bot will reply 'pong!' to any message that starts with, _exactly_, `ping`. Let's demonstrate!
+If all went well \(hopefully it did\) your bot is now connected to your server, it's in your userlist, and ready to answer all your commands... Well, at least, _one_ command: `ping`. In its current state, the bot will reply "pong!" to any message that starts with, _exactly_, `ping`. Let's demonstrate!
 
 ![](/assets/gettingstarted/gs6.png)
 
@@ -115,13 +115,13 @@ Success! You now have a bot running! As you probably realize by now I could prob
 
 ## The Next Step?
 
-Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](../coding-walkthroughs/your_basic_bot.html) to continue on your journey with adding new commands and features!
+Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](../getting-started/your_basic_bot.html) to continue on your journey with adding new commands and features!
 
 ## Addendum: Getting help and Support
 
 Before you start getting support from Discord servers to help you with your bot, I strongly advise taking a look at the following, very useful, resources.
 
-* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to 'developer documentation' but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
 * [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, her youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
 * [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
 * [York's Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!

@@ -39,7 +39,7 @@ until the bottle gets empty. This is, an **AsyncFunction**.
 **AoDude#8676** proposed the following example:
 
 ```js
-const perrier = require('PerrierBrandWater');
+const perrier = require("PerrierBrandWater");
 const bottle = new perrier.BottleOfWater();
 
 bottle.open(); // sync operation
@@ -71,12 +71,12 @@ when it fails.
 
 Don't get it? There's an example with Discord.JS:
 
-Some practise, the method [Client.fetchUser](https://discord.js.org/#/docs/main/master/class/Client?scrollTo=fetchUser)
+Some practise, the method [client.fetchUser](https://discord.js.org/#/docs/main/master/class/client?scrollTo=fetchUser)
 returns `Promise<User>`. It means, when you call that method, it'll return a **Promise**,
 resolving with a **User** object (but it can also throw an error).
 
 ```js
-Client.fetchUser(id)
+client.fetchUser(id)
     .then((User) => {
         // Do something with the User object
     })
@@ -97,14 +97,14 @@ to learn how to use ES8 Promises, with `async`/`await`.
 
 ```js
 async () => {
-    const User = await Client.fetchUser(id);
+    const User = await client.fetchUser(id);
     // Do something with the User object
 }
 ```
 
 **WAIT WHAT? THAT'S ALL?** Yes, it is. in the code above, you're defining the constant `User`
 as the result of the Promise, hence the keyword `await`. In this context, your code (when it executes),
-calls the method `Client.fetchUser()`, but it'll stop there, once the promise resolves, the returned
+calls the method `client.fetchUser()`, but it'll stop there, once the promise resolves, the returned
 value (User Object) is assigned to the constant User.
 
 **Wait, we have the replacement for `then`, but what if the method fails?** An advantage of ES8
@@ -114,11 +114,11 @@ example:
 ```js
 async () => {
     try {
-        const User = await Client.fetchUser(id);
-        const Member = await Guild.fetchMember(User);
-        const role = Guild.roles.find("name", "Idiot Suscriber");
-        await Member.addRole(role);
-        await Channel.send("Success!");
+        const User = await client.fetchUser(id);
+        const member = await guild.fetchmember(User);
+        const role = guild.roles.find("name", "Idiot Subscribers");
+        await member.addRole(role);
+        await channel.send("Success!");
     } catch (e) {
         console.error(e);
     }
@@ -143,14 +143,14 @@ For example:
 
 ```js
 const EditMessage = async (id, content) => {
-    const Message = await Channel.fetchMessage(id); // Async
+    const Message = await channel.fetchMessage(id); // Async
     return Message.edit(content);
 }
 ```
 
 ```js
 async function EditMessage(id, content) {
-    const Message = await Channel.fetchMessage(id); // Async
+    const Message = await channel.fetchMessage(id); // Async
     return Message.edit(content);
 }
 ```
@@ -159,7 +159,7 @@ However, if you have a function inside another, for example:
 
 ```js
 const EditMessage = async (id, content) => {
-    const Message = await Channel.fetchMessage(id);
+    const Message = await channel.fetchMessage(id);
     setTimeout(() => {
         await Message.edit(content);
         Message.channel.send("Edited!");

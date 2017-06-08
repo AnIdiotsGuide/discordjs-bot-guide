@@ -32,7 +32,7 @@ cleverbot.write(cleverMessage, function (response) {
 });
 ```
 
->NOTE: As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), they do offer a free tier, but that's 5,000 api calls per month, and please note it says it's a free __trial__.
+> **NOTE:** As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), they do offer a free tier, but that's 5,000 api calls per month (at the time of writing), and please note it says it's a free __trial__.
 
 Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file \(and you should!\).
 
@@ -40,7 +40,7 @@ Installed? Good! Now, let's get to the final step... the code.
 
 We have both our example codes, now we need to combine them for a working bot.
 
-> NOTE: A lot of the naive developers would just shove the cleverbot example straight in their message event and wonder why it wasn't working. It would create a new instance of Cleverbot and would eventually cause a memory leak.
+> **NOTE:** A lot of the naive developers would just shove the cleverbot example straight in their message event and wonder why it wasn't working. It would create a new instance of Cleverbot and would eventually cause a memory leak.
 
 Right, we need to take the first two lines of the cleverbot example...
 

@@ -1,6 +1,6 @@
 # Summary
-
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
+
 * [Introduction](README.md)
 * [Frequently Asked Questions](frequently-asked-questions.md)
 * [Getting Started](getting-started.md)
@@ -8,24 +8,23 @@
   * [Getting Started - Long Version](getting-started/the-long-version.md)
   * [Getting Started - Linux TL;DR](getting-started/linux-tldr.md)
   * [Getting Started - Windows TL;DR](getting-started/windows-tldr.md)
+  * [Your First Bot](getting-started/your_basic_bot.md)
 * [Understanding](understanding.md)
   * [Events and Handlers](information/understanding_events_and_handlers.md)
   * [Collections](information/understanding_collections.md)
   * [Roles](information/understanding_roles.md)
   * [Async / Await](information/understanding_asyncawait.md)
 * [Coding Guides](coding-guides.md)
-  * [Your First Bot](getting-started/your_basic_bot.md)
-  * [Adding a config.json file](getting-started/adding-a-configjson-file.md)
-  * [Command with arguments](examples/command_with_arguments.md)
-  * [A Basic Command Handler](coding-guides/a-basic-command-handler.md)
   * [Storing Data in a JSON file](coding-guides/storing-data-in-a-json-file.md)
   * [Storing Data in an SQLite file](coding-guides/storing-data-in-an-sqlite-file.md)
+  * [Discord Webhooks \(Part 1\)](coding-guides/discord-webhooks-part-1.md)
+  * [A Basic Command Handler](coding-guides/a-basic-command-handler.md)
   * [Creating a Music Bot](coding-guides/coding_a_music_bot.md)
+  * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
 * [Examples](examples.md)
   * [Welcome Message every X users](examples/welcome_message_every_x_users.md)
   * [Message Reply Array](examples/message_reply_array.md)
-  * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
-  * [Discord Webhooks \(Part 1\)](coding-guides/discord-webhooks-part-1.md)
+  * [Command with arguments](examples/command_with_arguments.md)
   * [Selfbots, the greatest thing in the universe](examples/selfbots_are_awesome.md)
   * [Making an Eval command](examples/making-an-eval-command.md)
   * [Using Embeds in messages](examples/using-embeds-in-messages.md)
@@ -42,4 +41,4 @@
   * [Episode 7](video-guides/episode-07.md)
   * [Episode 8](video-guides/episode-08.md)
   * [Episode 9](video-guides/episode-09.md)
-
+  

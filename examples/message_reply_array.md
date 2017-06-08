@@ -5,15 +5,15 @@ This sample shows the use of a simple string array to reply specific strings whe
 I have often seen the following type of code happen in new bots:
 
 ```js
-client.on('message', (message) => {
-  if(message.content === 'ayy') {
-    message.channel.send('Ayy, lmao!');
+client.on("message", (message) => {
+  if(message.content === "ayy") {
+    message.channel.send("Ayy, lmao!");
   }
-  if(message.content === 'wat') {
-    message.channel.send('Say what?');
+  if(message.content === "wat") {
+    message.channel.send("Say what?");
   }
-  if(message.content === 'lol') {
-    message.channel.send('roflmaotntpmp');
+  if(message.content === "lol") {
+    message.channel.send("roflmaotntpmp");
   }
   // Imagine 20, 50, 70 almost identical conditions.
 }
@@ -25,22 +25,22 @@ First, we declare this object:
 
 ```js
 let responseObject = {
-  'ayy': 'Ayy, lmao!',
-  'wat': 'Say what?',
-  'lol': 'roflmaotntpmp'
+  "ayy": "Ayy, lmao!",
+  "wat": "Say what?",
+  "lol": "roflmaotntpmp"
 };
 ```
 
 This simple object \(which can easily be in a JSON file\) can then be used in a single command checker, which would look like this:
 
 ```js
-client.on('message', (message) => {
+client.on("message", (message) => {
   if(responseObject[message.content]) {
     message.channel.send(responseObject[message.content]);
   }
 });
 ```
 
-That code basically says: 'If you find the message content to be a key of the responseObject, send a message containing that key's value'.
+That code basically says: "If you find the message content to be a key of the responseObject, send a message containing that key's value".
 
 Boom. Done.
