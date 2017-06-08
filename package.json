@@ -1,0 +1,25 @@
+{
+  "name": "gitbook-guide",
+  "version": "12.3.0",
+  "description": "This guidebook was originally authored by eslachance#4611 then handed down to me for future updates, but when she started the book originally it was because the examples for discord.js and the documentation were quite daunting for newcomers. There was definitely a space for this kind of document online, made obvious by the recurring questions that pop up almost every day on the support channels.",
+  "main": "index.js",
+  "dependencies": {
+    "gitbook-plugin-block-align": "^0.2.1",
+    "gitbook-plugin-video": "^0.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnIdiotsGuide/discordjs-bot-guide.git"
+  },
+  "keywords": [],
+  "author": "The Idiot's Staff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AnIdiotsGuide/discordjs-bot-guide/issues"
+  },
+  "homepage": "https://github.com/AnIdiotsGuide/discordjs-bot-guide#readme"
+}

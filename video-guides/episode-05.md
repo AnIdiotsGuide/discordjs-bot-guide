@@ -29,11 +29,12 @@ Local Forecast - Slower by Kevin MacLeod [incompetech.com](incompetech.com)
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
   
 List of Atom addons and themes I use;  
-Addons:  
-atom-beautify - Glavin001,  
-highlight-selected - richrace,  
-linter-eslint - AtomLinter,  
-seti-icons - wyze and  
-tokamak-terminal - vertexclique  
-Themes:  
-seti-syntax, seti-ui - jesseweed
+Addons:
+* atom-beautify - Glavin001,  
+* highlight-selected - richrace,  
+* linter-eslint - AtomLinter,  
+* seti-icons - wyze and  
+* tokamak-terminal - vertexclique  
+
+Themes:
+* seti-syntax, seti-ui - jesseweed

@@ -23,6 +23,6 @@ If you have any questions after reading this guide please join us on the officia
 
 [![Join the Official Idiot's Guide Server](/assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](/assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
 
-Last Updated: `18/05/2017`
+Last Updated: `08/06/2017`
 
-On Version: `12.2.0`
+On Version: `12.3.0`
