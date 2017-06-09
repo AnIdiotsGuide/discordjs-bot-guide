@@ -76,7 +76,7 @@ client.on("ready", () => {
 ```js
 // Get a User by ID
 client.users.get("user id here");
-// Returns message.author
+// Returns <User>
 ```
 
 ```js
@@ -127,3 +127,6 @@ message.guild.channels.find("name", "channel-name");
 // Send a message to the guild's default channel (often `#general`)
 message.guild.defaultChannel.send("I'm bored so I'll spam you.");
 ```
+
+
+
