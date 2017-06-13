@@ -1,9 +1,9 @@
-#Understanding Events and Handlers
+# Understanding Events and Handlers
 
 We already explored one event handler in [Your Basic Bot](your-basic-client.html), the `message` handler. Now let's take a look at some of the most important handlers that you will use, along with an example.
 
-> **Don't nest events**
-> One important point: Do not nest any events within others unless you know what you're doing. Events should be at the "root" level of your code, *beside* the `message` handler and not within it.
+> **Don't nest events**  
+> One important point: Do not nest any events within others unless you know what you're doing. Events should be at the "root" level of your code, _beside_ the `message` handler and not within it.
 
 ## The `ready` event and its importance
 
@@ -26,20 +26,19 @@ To ensure that `client` and all its "stuff" is ready, we can use the `ready` eve
 
 Here's a simple example of using the `ready` event handler:
 
-> The sizes for Collections (like channels and users) depends on the `fetchAllMembers: true` option in the client.
+> The sizes for Collections \(like channels and users\) depends on the `fetchAllMembers: true` option in the client.
 
 ```js
 client.on("ready", () => {
-  console.log(`Ready to server in ${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.users.size} users.`);
+  console.log(`Ready to serve in ${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.users.size} users.`);
 });
 ```
 
 I have this in all my bots, in various forms. If you need to loop across all your servers, this is also where you would do it.
 
-
 ## Detecting New Members
 
-Another useful event is [`guildMemberAdd`](http://hydrabolt.github.io/discord.js/#!/docs/tag/indev/class/Client?scrollto=guildMemberAdd) which triggers whenever someone joins any of the servers the bot is on. You'll see this on smaller servers: a bot welcomes every new member in the #general channel. The following code does this.
+Another useful event is [`guildMemberAdd`](http://hydrabolt.github.io/discord.js/#!/docs/tag/indev/class/Client?scrollto=guildMemberAdd) which triggers whenever someone joins any of the servers the bot is on. You'll see this on smaller servers: a bot welcomes every new member in the \#general channel. The following code does this.
 
 ```js
 client.on("guildMemberAdd", (member) => {
@@ -50,12 +49,11 @@ client.on("guildMemberAdd", (member) => {
 
 The objects available for each event are important: they're only available within these contexts. Calling `message` from the `guildMemberAdd` would not work - it's not in context. `client` is always available within all its callbacks, of course.
 
-
 ## Errors, Warn and Debug messages
 
 Yes, bots fail sometimes. And yes, the library can too! There's a little trick we can use, however, to prevent complete crashes sometimes: Capturing the `error` event.
 
-The following small bit of code (which can be anywhere in your file) will catch all output message from discord.js. This includes all errors, warning and debug messages.
+The following small bit of code \(which can be anywhere in your file\) will catch all output message from discord.js. This includes all errors, warning and debug messages.
 
 > **NOTE:** The debug event **WILL** output your token, so exercise caution when handing over a debug log.
 
@@ -64,3 +62,6 @@ The following small bit of code (which can be anywhere in your file) will catch 
   client.on("warn", (e) => console.warn(e));
   client.on("debug", (e) => console.info(e));
 ```
+
+
+
