@@ -1,4 +1,4 @@
-# Summary
+#Summary
 
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
 * [Introduction](README.md)
@@ -13,6 +13,7 @@
   * [Events and Handlers](information/understanding_events_and_handlers.md)
   * [Collections](information/understanding_collections.md)
   * [Roles](information/understanding_roles.md)
+  * [Async / Await](information/understanding_asyncawait.md)
 * [Coding Guides](coding-guides.md)
   * [Storing Data in a JSON file](coding-guides/storing-data-in-a-json-file.md)
   * [Storing Data in an SQLite file](coding-guides/storing-data-in-an-sqlite-file.md)
@@ -20,6 +21,7 @@
   * [A Basic Command Handler](coding-guides/a-basic-command-handler.md)
   * [Creating a Music Bot](coding-guides/coding_a_music_bot.md)
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
+  * [Discord Webhooks \(Part 1\)](coding-guides/discord-webhooks-part-1.md)
 * [Examples](examples.md)
   * [Welcome Message every X users](examples/welcome_message_every_x_users.md)
   * [Message Reply Array](examples/message_reply_array.md)
@@ -29,8 +31,6 @@
   * [Using Embeds in messages](examples/using-embeds-in-messages.md)
 * [Other Guides](other-guides.md)
   * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
-  * [Async / Await](information/understanding_asyncawait.md)
-  * [Discord Webhooks \(Part 1\)](coding-guides/discord-webhooks-part-1.md)
 * [Video Guides](video-guides.md)
   * [Episode 1](video-guides/episode-01.md)
   * [Episode 2](video-guides/episode-02.md)
@@ -42,4 +42,3 @@
   * [Episode 7](video-guides/episode-07.md)
   * [Episode 8](video-guides/episode-08.md)
   * [Episode 9](video-guides/episode-09.md)
-
