@@ -1,17 +1,15 @@
-#Understanding Collections
+# Understanding Collections
 
 In this page we will explore Collections, and how to use them to grab data from various part of the API.
 
-A **Collection** is a *utility class* that stores data. In *Discord.js 9.x*, they extend the *Map* data type with additional helpers to assist in retrieving information from them.
+A **Collection** is a _utility class_ that stores data. Collections are the Javascript Map\(\) data structure with additional utility methods. This is used throughout discord.js rather than Arrays for anything that has an ID, for significantly improved performance and ease-of-use.
 
 Examples of Collections include:
 
-- `client.users`, `client.guilds`, `client.channels`
-- `guild.channels`, `guild.members`
-- message logs (in the callback of `fetchMessages`)
-- `client.emojis`
-
-> In discord.js 8 and older, the equivalent was *Caches* which extended *Array*. Since *Collections* extend *Map* instead, **the methods have changed**.
+* `client.users`, `client.guilds`, `client.channels`
+* `guild.channels`, `guild.members`
+* message logs \(in the callback of `fetchMessages`\)
+* `client.emojis`
 
 ## Getting by ID
 
@@ -23,16 +21,58 @@ If you don't have the ID but only some other property, you may use `find()` to s
 
 `let guild = client.guilds.find("name", "Discord.js Official");`
 
+The `.find()` method also accepts a function. The _first_ result that returns `true` within the function, will be returned. The generic idea of this is: 
+
+`let result = <Collection>.find(item => item.property = "a value")`
+
+Obviously this looks a lot like the key/value find above. However, using a custom function means you can also be looking at other data, properties not a the top level, etc. Your imagination is the limit.
+
+Want a great example? Here's getting the first role that matches one of 4 role names: 
+
+```js
+const acceptedRoles = ["Mod", "Moderator", "Staff", "Mod Staff"];
+const getModRole = member.roles.find(role => acceptedToles.includes(role.name));
+if(!modRole) return "No role found";
+```
+
+> Don't need to return the actual role? `.some()` might be what you need. It's faster than find, but will only return a boolean true/false if it finds something: 
+> ```js
+> const hasModRole = member.roles.some(r => acceptedRoles.includes(role.name));
+> // hasModRole is boolean.
+> ```
+
 ## Custom filtering
 
-*Collections* also have a custom way to filter their content with an anonymous function:
+_Collections_ also have a custom way to filter their content with an anonymous function:
 
-`let large_guilds = client.builds.filter(g => g.members.size > 100);`
+`let large_guilds = client.guilds.filter(g => g.memberCount > 100);`
 
-## Other helpers
+`filter()` returns a new collection containing only items where the filter returned `true`, in this case guilds with more than 100 members.
 
-Some other helpers that are available in *Collections*:
+## Mapping Fields
 
-- .get(id)
-- .map(function)
-- .find(key, value)
+One great thing you can do with a collection is to grab specific data from it with `map()`, which is useful when listing stuff. `<Collection>.map()` takes a function which returns a string. Its result is an array of all the strings returned by each item. Here's an example: let's get a complete list of all the guilds a bot is in, by name: 
+
+```js
+const guildNames = client.guilds.map(g => g.name).join("\n")
+```
+
+Since `.join()` is an array method, which links all entries together, we get a nice list of all guilds, with a line return between each. Neat! 
+
+We can also get a most custom string. Let's pretend the `user.tag` property doesn't exist, and we wanted to get all the user#discrim in our bot. Here's how we'd do it (using awesome template literals): 
+
+```js
+const tags = client.users.map(u=> `${u.username}#${u.discriminator}`).join(", ");
+```
+
+## Combining and Chaining
+
+In a lot of cases you can definitely chain methods together for really clean code. For instance, this is a comma-delimited list of all the small guilds in a bot: 
+
+```js
+const smallGuilds = client.guilds.filter(g => g.memberCount < 10).map(g => g.name).join("\n");
+```
+
+## More Data!
+
+To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/main/stable/class/Collection). Since Collection extends Map(), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.
