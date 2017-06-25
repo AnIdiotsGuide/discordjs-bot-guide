@@ -3,7 +3,7 @@
 So, you want to write a bot and you know some JavaScript, or maybe even node.js. You want to do cool things like a music bot, tag commands, random image searches, the whole shebang. Well you're at the right place!
 
 > **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations.  
-> TL;DR \(short\) versions: [Windows]() , [Linux](linux-tldr.html)
+> TL;DR \(short\) versions: [Windows](windows-tldr.html) , [Linux](linux-tldr.html)
 
 This tutorial will get you through the first steps of creating a bot, configuring it, making it run, and adding a couple of commands to it.
 
@@ -30,15 +30,19 @@ Once you click on the **Create Application** button, you're brought to the appli
 
 Ok so, this might be a bit early to do this but it doesn't really matter - even if you haven't written a single line of code for your bot, you can already "invite" it to a server. In order to add a bot, you need _Manage Server_ permissions on that server. This is the **only** way to add a bot, it cannot use invite links or any other methods.
 
-Unfortunately, there's no cute button here to do this automatically, the link is buried in the API reference, so I'll help you out. You need to visit the following URL, but you have to replace **APP\_ID** with the **Client/Application ID** visible in your application page.
+Unfortunately, there's no cute button here to do this automatically, the link is buried in the API reference, so I'll help you out. You need to visit the following URL, but you have to replace **Client\_ID** with the **Client ID** visible in your application page.
 
-[https://discordapp.com/oauth2/authorize?client\_id=APP\_ID&scope=bot](https://discordapp.com/oauth2/authorize?client_id=APP_ID&scope=bot)
+[https://discordapp.com/oauth2/authorize?client\_id=Client\_ID&scope=bot](https://discordapp.com/oauth2/authorize?client_id=Client_ID&scope=bot)
 
-![](/assets/gettingstarted/gs3.png)
+![](http://proof.evie-banned.me/yp3RNSX)
+
+> You can also add a bot using specific permissions. To do that, visit the [FiniteReality Permission Link generator](https://finitereality.github.io/permissions)!
 
 When you do this, You get shown a window letting you choose the server where to add the bot, simply select the server and click **Authorize**.
 
 ![](/assets/gettingstarted/gs4.png)
+
+> You need to be logged in to Discord on the browser with your account to see a list of servers. You can only add a bot to servers where you have **Manage Server** permissions.
 
 ### Getting your Bot Token
 
@@ -47,13 +51,14 @@ When you do this, You get shown a window letting you choose the server where to 
 With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:  
 ![](/assets/gettingstarted/gs5.png)
 
-> No, this is not a valid token. Yes, the app is now deleted as you read this message.
+> You need to be
+> No, this is not a valid token. Also make **double-sure** you're copying the **Token** and not the **Client Secret**. The latter is not used for bots.
 
 ## Step 2: Getting your coding environment ready
 
 This might go beyond saying but I'll say it anyway: You can't just start shoving bot code in notepad.exe and expect it to work. In order to use discord.js you will need a couple of things installed. At the very least:
 
-* Get Node.js version 6.X \(earlier versions are not supported\). [Download for windows](https://nodejs.org/en/download/) or if you're on a linux distro, via [package manager](https://nodejs.org/en/download/package-manager/).
+* Get Node.js version 7.6 or higher \(earlier versions are not supported\). [Download for windows](https://nodejs.org/en/download/) or if you're on a linux distro, via [package manager](https://nodejs.org/en/download/package-manager/).
 * Get an actual code editor. Don't use notepad or notepad++, they are not sufficient. [VS Code](https://www.visualstudio.com/en-us/products/code-vs.aspx) , [Sublime Text 3](https://www.sublimetext.com/3) and [Atom](https://atom.io/) are often recommended.
 
 > An alternative: [c9.io](https://c9.io/). I personally appreciate c9.io as it's a full VPS with a great editor \(Ace\) and installing node, discord.js and all dependencies, then running the bot, is easy. You can't host it there, but you can certainly develop there. _This is not an endorsement_.
