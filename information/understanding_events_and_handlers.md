@@ -2,8 +2,8 @@
 
 We already explored one event handler in [Your Basic Bot](your-basic-client.html), the `message` handler. Now let's take a look at some of the most important handlers that you will use, along with an example.
 
-> **Don't nest events**  
-> One important point: Do not nest any events within others unless you know what you're doing. Events should be at the "root" level of your code, _beside_ the `message` handler and not within it.
+> _**DO NOT NEST EVENTS**_  
+> One important point: Do not nest any events \(aka "put one inside another"\). Ever. Events should be at the "root" level of your code, _beside_ the `message` handler and not within it.
 
 ## The `ready` event and its importance
 
@@ -15,26 +15,23 @@ It should have been made obvious with the user of `client.on("message")` which t
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-console.log(client.user.id);
+client.user.setGame("Online!");
 
 client.login("SuperSecretBotTokenHere");
 ```
 
-This code will not work, because `client` is not immediately available after it's been initialized. `client.user` will be undefined in this case, even if we flipped the console.log and login lines. Well it might work - sometimes. This is because it takes a small amount of time for discord.js to load its servers, users, channels, and all that jazz. The more servers the bot is on, the longer it takes.
+This code will not work, because `client` is not immediately available after it's been initialized. `client.user` will be undefined in this case, even if we flipped the console.log and login lines. This is because it takes a small amount of time for discord.js to load its servers, users, channels, and all that jazz. The more servers the bot is on, the longer it takes.
 
 To ensure that `client` and all its "stuff" is ready, we can use the `ready` event. Any code that you want to run on bootup that requires access to the `client` object, will need to be in this event.
 
 Here's a simple example of using the `ready` event handler:
 
-> The sizes for Collections \(like channels and users\) depends on the `fetchAllMembers: true` option in the client.
-
 ```js
 client.on("ready", () => {
-  console.log(`Ready to serve in ${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.users.size} users.`);
+  client.user.setGame(`on ${client.guilds.size} servers`);
+  console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 ```
-
-I have this in all my bots, in various forms. If you need to loop across all your servers, this is also where you would do it.
 
 ## Detecting New Members
 
@@ -49,7 +46,7 @@ client.on("guildMemberAdd", (member) => {
 
 The objects available for each event are important: they're only available within these contexts. Calling `message` from the `guildMemberAdd` would not work - it's not in context. `client` is always available within all its callbacks, of course.
 
-## Errors, Warn and Debug messages
+## Errors, Warn and Debug messages {#errors}
 
 Yes, bots fail sometimes. And yes, the library can too! There's a little trick we can use, however, to prevent complete crashes sometimes: Capturing the `error` event.
 
@@ -63,5 +60,21 @@ The following small bit of code \(which can be anywhere in your file\) will catc
   client.on("debug", (e) => console.info(e));
 ```
 
+## Testing Events {#testing}
 
+So now you're wondering, how do I test those events? Do I have to join a server with an alternate account to test the guildMemberAdd event? Isn't that, like, super annoying? 
+
+Actually, there's an easy way to test almost any event. Without going into too many details, `client` , your Discord Client, extends something called the `EventHandler`. Any time you see `client.on("something")` it means you're handling an `event` called `"something"`. But EventHandler has another function other than `on`. It has `emit`. Emit is the counterpart for `on`. When you `emit` an event, it's handled by the callback for that event in `on`. 
+
+So what does it _mean_??? It means that if _you_ emit an event, your code can capture it. I know I know I'm rambling without giving you an example and you're here for examples. Here's one: 
+
+```js
+client.emit("guildMemberAdd", message.member);
+```
+
+This emits the event that normally triggers when a new member joins a server. So it's _pretending_ like this particular member has rejoined the server even if they have not. This obviously works for any event but you have to provide the proper arguments for it. Since `guildMemberAdd` requires only a member, any member will do \(see [FAQ](/frequently-asked-questions.md) to know how to get another member\). I can trigger the `ready` event again by using `client.emit("ready")` \(the ready event does not take any parameter\). 
+
+What about other events? Let's see. `guildBanAdd` takes 2 parameters: `guild` and `user` , to simulate that a user was banned. So, you could `client.emit("guildBanAdd", message.guild, message.author)` to simulate banning the person sending a message. Again, getting those things \(Guilds and Users\) is in the FAQ. 
+
+You can do all this in a "test" command, or you can do what I do: use `eval`. [Check the Eval command](/examples/making-an-eval-command.md) when you're ready to go that route.
 
