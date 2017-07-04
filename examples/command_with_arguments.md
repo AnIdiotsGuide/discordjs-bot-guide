@@ -92,7 +92,7 @@ So, the reason is obtained by:
 - Removing the first 2 elements (the command, `!kick` and the mention, which looks like `<@1234567489213>`
 - Re-joining the rest of the array elements with a space.
 
-To use this command, a user would do something like: `!newrole 0000FF yes Eternal Noob`.
+To use this command, a user would do something like: `!kick @SuperGamerDude Obvious Troll, shitposting`.
 
 > If you're thinking, "What if I have more than one argument with spaces?", yes that's a tougher problem. Ideally, if you need more than one argument with spaces in it, do not use spaces to split the arguments. For example, `!newtag First Var Second Var Third Var` won't work. But `!newtag First Var;Second Var;Third Var;` could work by removing the command, splitting by `;` then splitting by space. Not for the faint of heart!
 
