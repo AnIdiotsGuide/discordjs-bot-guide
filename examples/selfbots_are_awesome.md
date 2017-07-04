@@ -16,7 +16,7 @@ On the other hand, a **selfbot** runs under an **active** user account. In other
 
 ## What are the rules for selfbots?
 
-I mentioned that _userbots_ are not tolerated by Hammer & Chisel. Selfbots, however, are tolerated under a specific set of semi-offical rules under which they turn a blind eye:
+I mentioned that _userbots_ are not tolerated by Discord. Selfbots, however, are tolerated under [a specific set of semi-offical rules](https://github.com/hammerandchisel/discord-api-docs/issues/69#issuecomment-223898291) under which they turn a blind eye:
 
 * A selfbot **must not**, under any circumstance, respond to other user's messages. This means it should not respond to commands, should not autoreply to certain keywords, etc. **You** must be the only one that can control it.
 * A selfbot **must not**, under any circumstance, do 'invite scraping'. This is the action of detecting server invites in chat, and automatically joining a server using that invite. That is akin to creating a virus, and it is not acceptable.
