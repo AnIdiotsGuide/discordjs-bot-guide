@@ -51,7 +51,7 @@ When you do this, You get shown a window letting you choose the server where to 
 With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:  
 ![](/assets/gettingstarted/gs5.png)
 
-> You need to be
+> You need to be  
 > No, this is not a valid token. Also make **double-sure** you're copying the **Token** and not the **Client Secret**. The latter is not used for bots.
 
 ## Step 2: Getting your coding environment ready
@@ -69,15 +69,18 @@ And now ready for the next step!
 
 ## Installing Discord.js
 
-So you have your CLI ready to go, in an empty folder, and you just wanna start coding. Alright, hold on one last second: let's install discord.js. But first we'll initialize this folder with NPM, which will ensure that any installed module will be here, and nowhere else. Simply run `npm init` and then hit Enter until the wizard is done. Don't change anything unless you know what you're doing! A new file is created called `package.json`, [click here](https://docs.npmjs.com/files/package.json) for more info about it.
+So you have your CLI ready to go, in an empty folder, and you just wanna start coding. Alright, hold on one last second: let's install discord.js. But first we'll initialize this folder with NPM, which will ensure that any installed module will be here, and nowhere else. Simply run `npm init -y` and then hit Enter. A new file is created called `package.json`, [click here](https://docs.npmjs.com/files/package.json) for more info about it.
 
 And now we install Discord.js through NPM, the Node Package Manager:
 
 `npm i -S discord.js`
 
+![](http://i.imgur.com/Gad8L2G.gif)
+
 > `i` means `install` and `-S` ensures it's saved in the package.json we just created!
 
 This will take a couple of heartbeats and display a lot of things on screen. Unless you have a big fat red message saying it didn't work, or package not found, or whatever, you're good to go. If you look at your folder, you'll notice that there's a new folder created here: `node_modules` . This contains all the installed packages for your project.
+
 
 ## Getting your first bot running
 
@@ -130,3 +133,6 @@ Before you start getting support from Discord servers to help you with your bot,
 * [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, her youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
 * [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
 * [York's Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
+
+
+
