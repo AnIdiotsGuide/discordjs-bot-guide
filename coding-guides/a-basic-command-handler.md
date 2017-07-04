@@ -30,11 +30,11 @@ fs.readdir("./events/", (err, files) => {
 
 client.on("message", message => {
   if (message.author.bot) return;
-  if (!message.content.startsWith(config.prefix)) return;
+  if(message.content.indexOf(client.config.prefix) !== 0) return;
 
   // This is the best way to define args. Trust me.
-  const args = message.content.split(" ");
-  const command = args.shift().slice(config.prefix.length);
+  const args = message.content.split(/\s+/g);
+  const command = args.shift().slice(client.config.prefix.length).toLowerCase();
 
   // The list of if/else is replaced with those simple 2 lines:
   try {
@@ -62,31 +62,30 @@ exports.run = (client, message, args) => {
 
 Another example would be the more complex `./commands/kick.js` command, called using `!kick @user`
 
-> **NOTE:** What ever role you tell the code below to find, you MUST have that role created **exactly** the same.
-
 ```js
-exports.run = (client, message, args) => {
-  let modRole = message.guild.roles.find("name", "Mods");
-  if (!message.member.roles.has(modRole.id)) {
-    return message.reply("You pleb, you don't have the permission to use this command.").catch(console.error);
-  }
+exports.run = (client, message, [mention, ...reason]) => {
+  const modRole = message.guild.roles.find("name", "Mods");
+  if (!modRole) 
+    return console.log("The Mods role does not exist");
+    
+  if (!message.member.roles.has(modRole.id))
+    return message.reply("You can't use this command.");
+
   if (message.mentions.users.size === 0) {
-    return message.reply("Please mention a user to kick").catch(console.error);
-  }
-  let kickMember = message.guild.member(message.mentions.users.first());
-  if (!kickMember) {
-    return message.reply("That user does not seem valid");
-  }
-  if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) {
-    return message.reply("I don't have the permissions (KICK_MEMBER) to do this.").catch(console.error);
-  }
-  kickMember.kick().then(member => {
-    message.reply(`${member.user.username} was succesfully kicked.`).catch(console.error);
-  }).catch(console.error)
+    return message.reply("Please mention a user to kick");
+
+  if (!message.guild.me.hasPermission("KICK_MEMBERS"))
+    return message.reply("");
+    
+  const kickMember = message.mentions.members.first();
+
+  kickMember.kick(reason.join(" ")).then(member => {
+    message.reply(`${member.user.username} was succesfully kicked.`);
+  });
 }
 ```
 
-Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `client` \(the client\), `message` \(the message variable from the handler\) and `args` \(the array of arguments\). The actual code is not changed in any way, it's a simple copy/paste into the file itself. Everything works the same.
+Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `client` \(the client\), `message` \(the message variable from the handler\) and `args`. Here, `args` is replaced by fancy destructuring that captures the `reason` (the rest of the message after the mention) in an array. See [Commands with Arguments](/examples/command_with_arguments.md) for details.
 
 ## Example Events
 
@@ -125,6 +124,3 @@ exports.run = (client, message, args) => {
   message.reply(`The command ${args[0]} has been reloaded`);
 };
 ```
-
-
-

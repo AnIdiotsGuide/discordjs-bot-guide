@@ -87,7 +87,7 @@ message.guild.members.get("user ID here");
 
 ```js
 // Get a Member from message Mention
-message.guild.member(message.mentions.users.first());
+message.mentions.members.first();
 // Returns <Member>
 ```
 

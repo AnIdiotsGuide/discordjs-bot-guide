@@ -36,13 +36,9 @@ if(message.member.roles.has(role.id)) {
 }
 ```
 
-> BTW mentions are `User` objects, not `GuildMember` but you can resolve that by doing `message.guild.member(message.mentions.users.first())` to get the first mentions' `GuildMember` object.
+> To grab members and users in different ways see the [FAQ Page](/frequently-asked-questions.md).
 
 ### Get all members that have a role
-You can get a list of members in your guild that have a specific role by filtering the guild members.
-
-> There's plans for a `<Guild>.usersWithRole()` function at a later date to simplify this!
-> As of 08/02/2017 still no sign of `<Guild>.usersWithRole()`.
 
 ```js
 let roleID = "264410914592129025";
@@ -58,7 +54,7 @@ Alright, now that you have roles, you probably want to add a member to a role. S
 let role = message.guild.roles.find("name", "Team Mystic");
 
 // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):
-let member = message.guild.member(message.mentions.users.first());
+let member = message.mentions.members.first();
 
 // or the person who made the command: let member = message.member;
 
