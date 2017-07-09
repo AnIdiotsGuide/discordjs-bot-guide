@@ -30,11 +30,11 @@ fs.readdir("./events/", (err, files) => {
 
 client.on("message", message => {
   if (message.author.bot) return;
-  if(message.content.indexOf(client.config.prefix) !== 0) return;
+  if(message.content.indexOf(config.prefix) !== 0) return;
 
   // This is the best way to define args. Trust me.
   const args = message.content.split(/\s+/g);
-  const command = args.shift().slice(client.config.prefix.length).toLowerCase();
+  const command = args.shift().slice(config.prefix.length).toLowerCase();
 
   // The list of if/else is replaced with those simple 2 lines:
   try {
