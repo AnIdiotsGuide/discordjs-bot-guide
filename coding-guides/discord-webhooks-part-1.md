@@ -1,4 +1,4 @@
-# Are you hooked yet?
+# Creating Discord Webhooks
 
 > **NOTE** At the time of writing this guide (07/02/2017) there is a bug with how webhooks are created via code, you must supply a webhook name and avatar. **However it does not work as intended.** You must _edit_ the webhook with the same details for the avatar to be applied.
 

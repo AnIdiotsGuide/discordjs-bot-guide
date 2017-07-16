@@ -22,6 +22,7 @@
   * [Creating a Music Bot](coding-guides/coding_a_music_bot.md)
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Discord Webhooks \(Part 1\)](coding-guides/discord-webhooks-part-1.md)
+  * [Discord Webhooks \(Part 2\)](coding-guides/discord-webhooks-part-2.md)
 * [Examples](examples.md)
   * [Welcome Message every X users](examples/welcome_message_every_x_users.md)
   * [Message Reply Array](examples/message_reply_array.md)
