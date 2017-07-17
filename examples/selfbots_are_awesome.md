@@ -12,17 +12,19 @@ First, let's define what a _userbot is_. A Userbot is **a bot that is running un
 
 On the other hand, a **selfbot** runs under an **active** user account. In other words, **your** account. When it posts a message, it's like you did. It can edit and delete your messages, has the same permissions you have, is on the same servers. **It's you**.
 
-> **I AM NOT RESPONSIBLE AND CANNOT BE HELD LIABLE IF YOU MESS UP WITH SELFBOTS. THIS INCLUDES BUT IS NOT LIMITED TO LOSING PRIVILEGES, GETTING KICKED OR BANNED FROM SERVERS, OR BEING BANNED**
+> **I AM NOT RESPONSIBLE AND CANNOT BE HELD LIABLE IF YOU MESS UP WITH SELFBOTS. THIS INCLUDES BUT IS NOT LIMITED TO LOSING PRIVILEGES, GETTING KICKED OR BANNED FROM SERVERS, OR BEING BANNED FROM DISCORD ITSELF**
 
 ## What are the rules for selfbots?
 
 I mentioned that _userbots_ are not tolerated by Discord. Selfbots, however, are tolerated under [a specific set of semi-offical rules](https://github.com/hammerandchisel/discord-api-docs/issues/69#issuecomment-223898291) under which they turn a blind eye:
 
-* A selfbot **must not**, under any circumstance, respond to other user's messages. This means it should not respond to commands, should not autoreply to certain keywords, etc. **You** must be the only one that can control it.
+* A selfbot **must not**, under any circumstance, respond or react to other user's actions. This means it should not respond to commands, autoreply to certain keywords, welcome users to servers, automatically react, etc. **You** must be the only one that can control it.
 * A selfbot **must not**, under any circumstance, do 'invite scraping'. This is the action of detecting server invites in chat, and automatically joining a server using that invite. That is akin to creating a virus, and it is not acceptable.
 * As selfbots run under your account they are subject to the same Terms of Service. That is to say, they should not _spam_, _insult or demean others_, _post NSFW material_, _spread viruses or illegal material_, etc. They have to follow the same rules that you follow.
 
 **IF**, and **only if** you accept the above rules of selfbots, then you may proceed.
+
+> Further caveat (which was added recently): Certain user actions done by selfbots will *unverify* your account, as if you had not verified your email. This includes most "Friend" actions. 
 
 ## How do I make a selfbot?
 
@@ -139,6 +141,4 @@ client .on("message", message => {
 
 ### A complete implementation
 
-The examples above are from my own personal selfbot. For your viewing pleasure I have uploaded it to github and will continue to update it as I use it and add more features.
-
-[〈evie.codes〉's Selfbot](https://github.com/eslachance/djs-selfbot-v9) &gt; Have fun!
+Don't really care for coding this all yourself? Want a complete, functional, awesome selfbot all done for you? I got you covered, obviously! Check out [Evie's Selfbot](https://github.com/eslachance/evie.selfbot) on Github!
