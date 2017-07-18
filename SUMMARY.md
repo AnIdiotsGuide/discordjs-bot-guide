@@ -1,4 +1,4 @@
-#Summary
+# Summary
 
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
 * [Introduction](README.md)
@@ -23,6 +23,7 @@
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Discord Webhooks \(Part 1\)](coding-guides/discord-webhooks-part-1.md)
   * [Discord Webhooks \(Part 2\)](coding-guides/discord-webhooks-part-2.md)
+  * [Using Emojis](coding-guides/using-emojis.md)
 * [Examples](examples.md)
   * [Welcome Message every X users](examples/welcome_message_every_x_users.md)
   * [Message Reply Array](examples/message_reply_array.md)
@@ -43,3 +44,4 @@
   * [Episode 7](video-guides/episode-07.md)
   * [Episode 8](video-guides/episode-08.md)
   * [Episode 9](video-guides/episode-09.md)
+
