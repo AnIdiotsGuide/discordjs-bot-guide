@@ -5,6 +5,7 @@ Here's a fun fact you might not know about bots on Discord: They have access to 
 ## What's an Emoji?
 
 Let's start by tearing apart exactly what an Emoji is, how they're configured and how they're accessed. So here, we have an emoji:
+
 ![](https://cdn.discordapp.com/emojis/305818615712579584.png)
 
 When I want to write this emoji in my chat, I simply type `:ayy:` and it turns into the above \(smaller, of course, but still\). But behind the scenes, 2 things happen for this emoji to show: 
