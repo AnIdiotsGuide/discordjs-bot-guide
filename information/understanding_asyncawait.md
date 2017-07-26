@@ -17,7 +17,7 @@ execution and returns the resolved value.
 ## Promise
 
 But, what are Promises? Promise Object is used for asynchronous computations/calls,
-but unlike functions, they don't return the value inmediately, as they have three
+but unlike functions, they don't return the value immediately, as they have three
 states:
 
 - **Pending**: initial state, not fulfilled or rejected.
@@ -32,7 +32,7 @@ An example in the real world would be:
 
 **You get a bottle of water, you open it, turn over and drain it. Then dispose it.**
 
-The problem above is, when you get the bottle of water, you can inmediately
+The problem above is, when you get the bottle of water, you can immediately
 open it (sync function), but when you turn it over and drain it, you have to **await**
 until the bottle gets empty. This is, an **AsyncFunction**.
 
