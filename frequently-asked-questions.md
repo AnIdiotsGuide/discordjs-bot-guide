@@ -14,7 +14,7 @@ client.on("ready", () => {
 ```
 
 ```js
-// Set the bot's online/offline/dnd/invisible status
+// Set the bot's online/idle/dnd/invisible status
 client.on("ready", () => {
     client.user.setStatus("online");
 });
@@ -113,4 +113,3 @@ The following trick is a lifesaver, so pay attention: Your code editor is trying
 ![](assets/editorhelp.png)
 
 You can check out [Installing and Using a Proper Editor](/getting-started/installing_and_using_a_proper_editor.md) to help in at least knowing there are errors _before_ running your bot code.
-
