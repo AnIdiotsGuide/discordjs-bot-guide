@@ -10,8 +10,6 @@ As per usual let's grab the example source code.
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
-
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -21,6 +19,8 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
@@ -91,4 +91,4 @@ And let's check the channel webhooks!
 
 Wooo! we did it!
 
-Now we can create webhooks on the fly via our bot code, but in the next _chapter_ we'll see what we can do with them!
+Now we can create webhooks on the fly via our bot code, but in the next [_chapter_](/coding-guides/discord-webhooks-part2.md) we'll see what we can do with them!

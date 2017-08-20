@@ -3,7 +3,6 @@
 This sample shows the use of a simple string array to reply specific strings when triggered.
 
 I have often seen the following type of code happen in new bots:
-
 ```js
 client.on("message", (message) => {
   if(message.content === "ayy") {
@@ -15,8 +14,7 @@ client.on("message", (message) => {
   if(message.content === "lol") {
     message.channel.send("roflmaotntpmp");
   }
-  // Imagine 20, 50, 70 almost identical conditions.
-}
+});
 ```
 
 Ignore the fact that this code doesn't have a prefix and also does not ignore itself or other bots for now. The important fact here is that we can reduce this to a much simpler code, through the use of a array. Well, actually, to make things simpler, let's use an object instead.
@@ -24,7 +22,7 @@ Ignore the fact that this code doesn't have a prefix and also does not ignore it
 First, we declare this object:
 
 ```js
-let responseObject = {
+const responseObject = {
   "ayy": "Ayy, lmao!",
   "wat": "Say what?",
   "lol": "roflmaotntpmp"

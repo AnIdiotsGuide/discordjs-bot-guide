@@ -3,7 +3,7 @@
 So, you want to write a bot and you know some JavaScript, or maybe even node.js. You want to do cool things like a music bot, tag commands, random image searches, the whole shebang. Well you're at the right place!
 
 > **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations.  
-> TL;DR \(short\) versions: [Windows](windows-tldr.html) , [Linux](linux-tldr.html)
+> TL;DR \(short\) versions: [Windows](/getting-started/windows-tldr.html) , [Linux](/getting-started/linux-tldr.html)
 
 This tutorial will get you through the first steps of creating a bot, configuring it, making it run, and adding a couple of commands to it.
 
@@ -33,8 +33,6 @@ Ok so, this might be a bit early to do this but it doesn't really matter - even 
 Unfortunately, there's no cute button here to do this automatically, the link is buried in the API reference, so I'll help you out. You need to visit the following URL, but you have to replace **Client\_ID** with the **Client ID** visible in your application page.
 
 [https://discordapp.com/oauth2/authorize?client\_id=Client\_ID&scope=bot](https://discordapp.com/oauth2/authorize?client_id=Client_ID&scope=bot)
-
-![](http://proof.evie-banned.me/yp3RNSX)
 
 > You can also add a bot using specific permissions. To do that, visit the [FiniteReality Permission Link generator](https://finitereality.github.io/permissions)!
 
@@ -93,8 +91,6 @@ Let's take a look at the most basic of examples, the ping-pong bot. Here's the c
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
-
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -104,6 +100,8 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 > The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically call it whatever you want. I recommend sticking to `client` though!
@@ -123,16 +121,14 @@ Success! You now have a bot running! As you probably realize by now I could prob
 
 ## The Next Step?
 
-Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](../getting-started/your_basic_bot.html) to continue on your journey with adding new commands and features!
+Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](/getting-started/your_basic_bot.html) to continue on your journey with adding new commands and features!
 
 ## Addendum: Getting help and Support
 
 Before you start getting support from Discord servers to help you with your bot, I strongly advise taking a look at the following, very useful, resources.
 
-* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
-* [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, her youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
-* [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
-* [York's Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
-
-
-
+- [Discord.js Documentation](http://discord.js.org) : For the love of all that is (un)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+- [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
+- [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series (which is good, though no longer maintained with new videos!) gets you started with bots.
+- [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
+- [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!

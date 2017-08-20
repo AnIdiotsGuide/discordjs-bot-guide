@@ -8,8 +8,6 @@ In this chapter I'll guide you through the development of a simple bot with some
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
-
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -19,6 +17,8 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 ## Introducing Events
@@ -72,10 +72,9 @@ Second, in the example above we respond when the message _starts with_ the 3 cha
 To work around this, we'll be using prefix, which we will store in a variable. This way we get the prefix as well as the ability to change it for all commands in one place. Here's an example code that does this:
 
 ```js
+// Set the prefix
+const prefix = "!";
 client.on("message", (message) => {
-  // Set the prefix
-  let prefix = "!";
-
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
 
@@ -90,7 +89,7 @@ client.on("message", (message) => {
 
 The changes to the code are still simple. Let's go through them:
 
-* `let prefix = "!";` defines the prefix as the exclamation mark. You can change it to something else, of course.
+* `const prefix = "!";` defines the prefix as the exclamation mark. You can change it to something else, of course.
 * The line `if(!msg.content.startsWith(prefix)) return;` is a small bit of optimization which reads: "If the message does not start with my prefix, stop what you're doing". This prevents the rest of the function from running, making your bot faster and more responsive.
 * The commands have changed so use this prefix, where `startsWith(prefix + "ping")` would only be triggered when the message starts with `!ping`.
 
@@ -105,8 +104,8 @@ We're pretty much done with the basic bot. There's one last thing that I want to
 Now, one person types `!help` in a channel, and both bots respond. But, they will also see the **other** bot saying `!help commands: [...]`, will see that as a request for help, answer each other... in an infinite loop. To prevent that from happening, we can add a second condition inside our `message` event handler, right below the one that checks for the prefix:
 
 ```js
+const prefix = "!";
 client.on("message", (message) => {
-  let prefix = "!";
   // our new check:
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   // [rest of the code]
@@ -125,11 +124,9 @@ The full bot code would now be:
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
-
+// Set the prefix
+let prefix = "!";
 client.on("message", (message) => {
-  // Set the prefix
-  let prefix = "!";
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -140,6 +137,8 @@ client.on("message", (message) => {
     message.channel.send("bar!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 # Adding a `config.json` file to your bot?
@@ -195,9 +194,8 @@ client.login(config.token);
 The other thing we have, is of course the prefix. Again from before, we have this line in our message handler:
 
 ```js
+const prefix = "!";
 client.on("message", (message) => {
-  let prefix = "!";
-
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   if (message.content.startsWith(prefix + "ping")) {
@@ -252,9 +250,9 @@ if(message.content.startsWith(config.prefix + "prefix")) {
 }
 ```
 
-> If you want to understand what `args` is, please read [Command with arguments](/samples/command_with_arguments.md).
+> If you want to understand what `args` is, please read [Command with arguments](/examples/command-with-arguments.md).
 
-Awesome! Now the configuration has been changed, and we've edited config.json so that next time the bot restarts, the new prefix will be used! There's a _lot_ more you can do with JSON files though, for more of this check out : [Storing Data in a JSON file](/storing-data-in-a-json-file.md). This example does an awesome _points_ system just like the horrible Mee6 bot.
+Awesome! Now the configuration has been changed, and we've edited config.json so that next time the bot restarts, the new prefix will be used! There's a _lot_ more you can do with JSON files though, for more of this check out : [Storing Data in a JSON file](/coding-guides/storing-data-in-a-json-file.md). This example does an awesome _points_ system just like the horrible Mee6 bot.
 
 ## Extending the idea
 
@@ -280,17 +278,14 @@ Once you're done with this basic bot, there's a couple of things you should take
 
 ### References and Information
 
-* [Understanding Events and Handlers](/information/understanding_events_and_handlers.md) gives you more details about events \(things that trigger code\) and handlers \(the code that triggers\).
-* [Understanding Roles](/information/understanding_roles.md) is an important overview of Roles and Collections.
+* [Understanding Events and Handlers](/information/understanding-events-and-handlers.md) gives you more details about events \(things that trigger code\) and handlers \(the code that triggers\).
+* [Understanding Roles](/information/understanding-roles.md) is an important overview of Roles and Collections.
 
 ### More code samples
 
 For more code samples you can use in your bot, check out:
 
-* [Welcome Message every X users](/examples/welcome_message_every_x_users.md) : it's easy to welcome users as they come in, but can you do it every 10 users? I'll show you how.
-* [Message Reply Array](/examples/message_reply_array.md) : instead of a dozen conditions with simple text replies, we'll use an array to make things easier to look at and add to!
-* [Command with Arguments](/examples/command_with_arguments.md) : How do I do `!echo a message` or `!kick @xXx_phantom_sniper_xXx`? Follow this to learn how.
-* [Selfbots, the Awesomest thing in the universe](/examples/selfbots_are_awesome.md) : If you want to use lenny make personal tags just like me, follow along, young apprentice.
-
-
-
+* [Welcome Message every X users](/examples/welcome-message-every-x-users.md) : it's easy to welcome users as they come in, but can you do it every 10 users? I'll show you how.
+* [Message Reply Array](/examples/message-reply-array.md) : instead of a dozen conditions with simple text replies, we'll use an array to make things easier to look at and add to!
+* [Command with Arguments](/examples/command-with-arguments.md) : How do I do `!echo a message` or `!kick @xXx_phantom_sniper_xXx`? Follow this to learn how.
+* [Selfbots, the Awesomest thing in the universe](/examples/selfbots-are-awesome.md) : If you want to use lenny make personal tags just like me, follow along, young apprentice.

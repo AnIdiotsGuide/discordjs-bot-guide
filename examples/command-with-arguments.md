@@ -1,13 +1,13 @@
 # Command with arguments
 
-In [Your First Bot](../getting-started/your_basic_bot.md), we explored how to make more than one command. These commands all started with a prefix, but didn't have any _arguments_ : extra parameters used to vary what the command actually does.
+In [Your First Bot](/getting-started/your_basic_bot.md), we explored how to make more than one command. These commands all started with a prefix, but didn't have any _arguments_ : extra parameters used to vary what the command actually does.
 
 ## Creating an array of arguments
 
 The first thing that we need to do to use arguments, is to actually separate them. A command with arguments would normally look something like this:  
 `!mycommand arg1 arg2 arg3`
 
-In [Your First Bot](../getting-started/your_basic_bot.md) we actually simplify our task just a bit: our check for commands uses `startsWith()`:
+In [Your First Bot](/getting-started/your_basic_bot.md) we actually simplify our task just a bit: our check for commands uses `startsWith()`:
 
 ```js
 if (message.content.startsWith(config.prefix + "ping")) {
@@ -76,7 +76,7 @@ This would be called with, for example, `!kick @AnnoyingUser23`
 
 Let's make the above kick command a little better. Because Discord now supports kick *reasons* in the Audit Logs, the Discord.js `kick()` command also supports an optional `reason` argument. But, because the reason can have multiple words in it, we need to *join* all these words together.
 
-So let's do this now, with what we've already learned, and a little extra: 
+So let's do this now, with what we've already learned, and a little extra:
 
 ```js
 if(message.content.startsWith(config.prefix + "kick")) {
@@ -86,7 +86,7 @@ if(message.content.startsWith(config.prefix + "kick")) {
 }
 ```
 
-So, the reason is obtained by: 
+So, the reason is obtained by:
 - Grabbing the message content
 - Splitting it by spaces
 - Removing the first 2 elements (the command, `!kick` and the mention, which looks like `<@1234567489213>`
@@ -98,25 +98,25 @@ To use this command, a user would do something like: `!kick @SuperGamerDude Obvi
 
 ### Let's be fancy with ES6 again!
 
-Destructuring has a `...rest` feature that lets you take "the rest of the array" and put it in a single variable. To demonstrate this, let me show you part of a code I use in a "save message" command. Basically, I store a message to a database, with a name. I call this command using: `!quote <channelid> <messageID> quotename note`, where `quotename` is a single word and `note` may be multiple words. The *actual* command code is unimportant. However, the way I process these arguments, is useful: 
+Destructuring has a `...rest` feature that lets you take "the rest of the array" and put it in a single variable. To demonstrate this, let me show you part of a code I use in a "save message" command. Basically, I store a message to a database, with a name. I call this command using: `!quote <channelid> <messageID> quotename note`, where `quotename` is a single word and `note` may be multiple words. The *actual* command code is unimportant. However, the way I process these arguments, is useful:
 
 ```js
 if(message.content.startsWith(config.prefix + "quote")) {
   const [channelid, messageid, quotename, ...note] = message.content.split(/\s+/g).splice(1);
-  // I also support "here" as a channelID using this: 
+  // I also support "here" as a channelID using this:
   const channel = channelid == "here" ? message.channel : client.channels.get(channelid);
-  // I do the same with message ID, which can be "last": 
+  // I do the same with message ID, which can be "last":
   const message = messageid === "last" ? msg.channel.messages.last(2)[0] : await channel.messages.get(messageid);
   // pretend for a second this is the rest of the function:
   insertInDB(quotename, channel.id, message.id, note.join(" "));
 }
 ```
 
-A few notes on this code, because I will admit there's some new concepts in it you might not know: 
+A few notes on this code, because I will admit there's some new concepts in it you might not know:
 
 - `...note` is "the rest of the array arguments", so it would be `["this", "is", "a", "note"]`, that's why we .join(" ") when we use it.
-- `const myVar = condition ? codeWhenConditionTrue : codeWhenFalse;` is called the "ternary operator" in javascript and makes some conditions much more simpler. 
-- `<Collection>.last(2)[0]` is only available on discord.js#master (the 12.0 beta version) which is not out at the time of writing. The alternative is complex, and beyond what this page tries to teach, so just know it gets "the second to last message". 
+- `const myVar = condition ? codeWhenConditionTrue : codeWhenFalse;` is called the "ternary operator" in javascript and makes some conditions much more simpler.
+- `<Collection>.last(2)[0]` is only available on discord.js#master (the 12.0 beta version) which is not out at the time of writing. The alternative is complex, and beyond what this page tries to teach, so just know it gets "the second to last message".
 
 ## Going one step further
 

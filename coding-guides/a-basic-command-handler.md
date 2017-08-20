@@ -65,27 +65,28 @@ Another example would be the more complex `./commands/kick.js` command, called u
 ```js
 exports.run = (client, message, [mention, ...reason]) => {
   const modRole = message.guild.roles.find("name", "Mods");
-  if (!modRole) 
+  if (!modRole)
     return console.log("The Mods role does not exist");
-    
+
   if (!message.member.roles.has(modRole.id))
     return message.reply("You can't use this command.");
 
   if (message.mentions.users.size === 0) {
     return message.reply("Please mention a user to kick");
 
-  if (!message.guild.me.hasPermission("KICK_MEMBERS"))
-    return message.reply("");
-    
-  const kickMember = message.mentions.members.first();
+    if (!message.guild.me.hasPermission("KICK_MEMBERS"))
+      return message.reply("");
 
-  kickMember.kick(reason.join(" ")).then(member => {
-    message.reply(`${member.user.username} was succesfully kicked.`);
-  });
-}
+    const kickMember = message.mentions.members.first();
+
+    kickMember.kick(reason.join(" ")).then(member => {
+      message.reply(`${member.user.username} was succesfully kicked.`);
+    });
+  }
+};
 ```
 
-Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `client` \(the client\), `message` \(the message variable from the handler\) and `args`. Here, `args` is replaced by fancy destructuring that captures the `reason` (the rest of the message after the mention) in an array. See [Commands with Arguments](/examples/command_with_arguments.md) for details.
+Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `client` \(the client\), `message` \(the message variable from the handler\) and `args`. Here, `args` is replaced by fancy destructuring that captures the `reason` (the rest of the message after the mention) in an array. See [Commands with Arguments](/examples/command-with-arguments.md) for details.
 
 ## Example Events
 
@@ -100,11 +101,12 @@ exports.run = (client) => {
 Note that the `ready` event normally doesn't have any arguments, it's just \(\). But because we're in separate modules, it's necessary to "pass" the `client` variable to it or it would not be accessible.
 
 Here's another example with the `guildMemberAdd` event:
+> **NOTE:** `defaultChannel` is no longer a thing, use this work around instead.
 
 ```js
 exports.run = (client, member) => {
-  let guild = member.guild;
-  guild.defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
+  const defaultChannel = member.guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+  defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
 }
 ```
 

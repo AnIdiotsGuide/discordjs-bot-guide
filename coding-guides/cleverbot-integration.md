@@ -8,8 +8,6 @@ So to get started, let's grab the example from [getting started](/getting-starte
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("superSecretBotTokenHere");
-
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -19,6 +17,8 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
+
+client.login("superSecretBotTokenHere");
 ```
 
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
@@ -77,8 +77,6 @@ const Cleverbot = require("cleverbot-node");
 const client = new Discord.Client();
 const clbot = new Cleverbot;
 
-client.login("superSecretBotTokenHere");
-
 client.on("message", message => {
   if (message.channel.type === "dm") {
     clbot.write(message.content, (response) => {
@@ -94,6 +92,8 @@ client.on("message", message => {
 client.on("ready", () => {
   console.log("I am ready!");
 });
+
+client.login("superSecretBotTokenHere");
 ```
 
 If everything is as above, then just send your bot a DM and watch the magic unfold!  

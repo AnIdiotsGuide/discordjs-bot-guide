@@ -72,14 +72,7 @@ message.guild.channels.find("name", "channel-name");
 // returns message.channel
 ```
 
-```js
-// Send a message to the guild's default channel (often `#general`)
-message.guild.defaultChannel.send("I'm bored so I'll spam you.");
-```
-
-
 ## Common Errors & Fixes
-
 
 ### Cannot find module `discord.js`
 
@@ -112,4 +105,4 @@ The following trick is a lifesaver, so pay attention: Your code editor is trying
 
 ![](assets/editorhelp.png)
 
-You can check out [Installing and Using a Proper Editor](/getting-started/installing_and_using_a_proper_editor.md) to help in at least knowing there are errors _before_ running your bot code.
+You can check out [Installing and Using a Proper Editor](/other-guides/installing_and_using_a_proper_editor.md) to help in at least knowing there are errors _before_ running your bot code.

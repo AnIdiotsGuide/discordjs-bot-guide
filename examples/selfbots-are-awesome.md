@@ -24,7 +24,7 @@ I mentioned that _userbots_ are not tolerated by Discord. Selfbots, however, are
 
 **IF**, and **only if** you accept the above rules of selfbots, then you may proceed.
 
-> Further caveat (which was added recently): Certain user actions done by selfbots will *unverify* your account, as if you had not verified your email. This includes most "Friend" actions. 
+> Further caveat (which was added recently): Certain user actions done by selfbots will *unverify* your account, as if you had not verified your email. This includes most "Friend" actions.
 
 ## How do I make a selfbot?
 
@@ -58,7 +58,7 @@ In the case of a selfbot, this token can be obtained from the Discord applicatio
 
 **KEEP YOUR TOKEN SECRET, AND NEVER SHARE IT WITH ANYONE**
 
-I've already covered why Bot Tokens should remain secret in the [Getting Started](../getting-started/the-long-version.md) guide. But this is **even more** critical. If someone gets a hold your personal token, **they are you**. They can pretend to be you, send messages as you. **They can also massively fuck up any server where you have permissions**. Like transfer server control to themselves. Have I stated clearly enough that you should be careful with your token? Ok, good!
+I've already covered why Bot Tokens should remain secret in the [Getting Started](/getting-started/the-long-version.md) guide. But this is **even more** critical. If someone gets a hold your personal token, **they are you**. They can pretend to be you, send messages as you. **They can also massively fuck up any server where you have permissions**. Like transfer server control to themselves. Have I stated clearly enough that you should be careful with your token? Ok, good!
 
 ## Example selfbot commands
 
@@ -71,9 +71,9 @@ A _Prune_ command is used to delete your own messages from the channel you're on
 > `fetchMessages()` is limited to 100 messages total, and gets _all_ the messages and not just your own. This means you will probably never be able to delete 100 messages since they'll be mixed in with other people's. I generally don't use it to prune more than 10 messages anyway.
 
 ```js
+let prefix = "/"; // always use a prefix it's good practice.
 client.on("message", message => {
   if (message.author !== client.user) return;
-  let prefix = "/"; // always use a prefix it's good practice.
   if (!message.content.startsWith(prefix)) return; // ignore messages that... you know the drill.
   // We covered this already, yay!
   const params = message.content.split(" ").slice(1);
@@ -120,9 +120,9 @@ There's technically only 2 "new" commands here. The rest are there because I lik
 The next step is to add the check at the beginning of your message handler. Well not quite: this code should be _right after_ your prefix check, before you split into parameters, for maximum code efficiency.
 
 ```js
+let prefix = "/";
 client .on("message", message => {
   if (message.author !== client.user) return;
-  let prefix = "/";
   if (!message.content.startsWith(prefix)) return;
 
   // custom shortcut check

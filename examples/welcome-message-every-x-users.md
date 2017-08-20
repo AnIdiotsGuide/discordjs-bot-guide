@@ -55,7 +55,6 @@ The only issue with the above code is that it would only work if your bot is on 
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
 
 const newUsers = [];
 
@@ -85,4 +84,6 @@ client.on("guildMemberRemove", (member) => {
   const guild = member.guild;
   if (newUsers[guild.id].has(member.id)) newUsers.delete(member.id);
 });
+
+client.login("SuperSecretBotTokenHere");
 ```

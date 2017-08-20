@@ -88,7 +88,7 @@ Alright, so we have a level. Let's do like all the lame bots out there and outpu
 Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it.
 
 ```js
-  if(message.content.startsWith(prefix + "level") {
+  if(message.content.startsWith(prefix + "level")) {
     message.reply(`You are currently level ${curLevel}, with ${userPoints} points.`);
   }
 ```
@@ -101,7 +101,6 @@ Ok so we've got a bunch of little bits of code, and your head is probably spinni
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
-client.login("SuperSecretBotTokenHere");
 
 let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 const prefix = "+";
@@ -130,6 +129,9 @@ client.on("message", message => {
   fs.writeFile("./points.json", JSON.stringify(points), (err) => {
     if (err) console.error(err)
   });
+
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 Now take this, and make it **better than Mee6**! Go ahead, I challenge you ;\)

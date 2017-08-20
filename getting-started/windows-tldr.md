@@ -38,8 +38,6 @@ The following is a simple ping/pong bot. Save as a text file (e.g. `mybot.js`), 
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login("SuperSecretBotTokenHere");
-
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -49,6 +47,8 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 ## Launching the bot
@@ -62,7 +62,7 @@ If no errors are shown, the bot should join the server(s) you added it to.
 ## Resources
 
 - [Discord.js Documentation](http://discord.js.org) : For the love of all that is (un)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
-- [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, my youtube series (which is good, though no longer maintained with new videos!) gets you started with bots.
-- [An Idiot's Guide](https://www.youtube.com/channel/UCLun-hgcYUgNvCCj4sIa-jA) is another great channel with more material. York's guides are great, and he continues to update them.
-* [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
-- [York's Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
+- [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
+- [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series (which is good, though no longer maintained with new videos!) gets you started with bots.
+- [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
+- [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!

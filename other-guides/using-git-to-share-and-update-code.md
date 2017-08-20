@@ -10,7 +10,7 @@ If you answered **Yes** to any of these questions, boy do I have a product for *
 
 ## Pre-requisites and Software
 
-To take full advantage of `git` you need to first have *at least* completed the [Adding a config.json file](/adding-a-configjson-file.md) walkthrough. This means that at the very least, your token is located in a separate file, and not within your javascript files. Having the prefix and the owner ID in that separate configuration file means that you get the advantage of easy testing: Change the prefix and token, and you have a secondary bot you can test your code with, wooh!
+To take full advantage of `git` you need to first have *at least* completed the [Adding a config.json file](/getting-started/your_basic_bot.md#adding-a-configjson-file-to-your-bot) walkthrough. This means that at the very least, your token is located in a separate file, and not within your javascript files. Having the prefix and the owner ID in that separate configuration file means that you get the advantage of easy testing: Change the prefix and token, and you have a secondary bot you can test your code with, wooh!
 
 What else do you need? `git` itself, of course! For Windows get [Git SCM](https://git-scm.com/download/win) , on Linux run `sudo apt-get install git-all` or `sudo yum install git-all` depending on your distro's install method. Mac users also have a [Git SCM](http://git-scm.com/download/mac) installer.
 
@@ -113,6 +113,6 @@ IF you ever have 'temporary' changes and you want to overwrite them - like a qui
 
 You can connect to multiple remote repositories by running the `remote add` command above. You'll need a different name, for example instead of `origin` you can call a remote `gitlab` and then any command should reflect that, like `git pull gitlab master`.
 
-There is a **lot** more to `git` than what was shown here (and I'm aware even that's already a shitton of information). You can create and merge `branches`, `revert` to previous commits, make and accept `PR`s... [There is a lot more](https://www.google.ca/search?q=git+tutorials&oq=git+tutorials&aqs=chrome..69i57j0l5.2983j0j9&sourceid=chrome&ie=UTF-8) that you can you can learn!
+There is a **lot** more to `git` than what was shown here (and I'm aware even that's already a shitton of information). You can create and merge `branches`, `revert` to previous commits, make and accept `PR`s... [There is a lot more](https://www.google.com/search?q=git+tutorials) that you can you can learn!
 
 But for now... I think this massive wall of text is plenty.

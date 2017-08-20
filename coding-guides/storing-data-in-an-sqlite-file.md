@@ -12,13 +12,11 @@ Like in the JSON guide you had a data structure, SQLite is no different, but it'
 
 For this example points system we want the user's ID, points and level, I'm not going to go to deep in to the jargon surrounding SQL and SQLite, but the tables are made from rows and columns of data. Got it? Good, moving on!
 
-Let's take the core elements from the the example bot on [getting started](/getting-started/the-long-version.md).
+Let's take the core elements from the example bot on [getting started](/getting-started/the-long-version.md).
 
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
-client.login("SuperSecretBotTokenHere");
 
 client.on("ready", () => {
   console.log("I am ready!");
@@ -29,6 +27,8 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 Now we've got that we should `require` sqlite and make use of it, put the following under `const client`
@@ -54,8 +54,6 @@ const client = new Discord.Client();
 const sql = require("sqlite");
 sql.open("./score.sqlite");
 
-client.login("SuperSecretBotTokenHere");
-
 client.on("ready", () => {
   console.log("Ready!");
 });
@@ -67,6 +65,8 @@ client.on("message", message => {
     message.channel.send("pong!");
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 ## Alright, time to get down to business.
@@ -114,8 +114,6 @@ const client = new Discord.Client();
 const sql = require("sqlite");
 sql.open("./score.sqlite");
 
-client.login("SuperSecretBotTokenHere");
-
 client.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type !== "text") return;
@@ -135,6 +133,8 @@ client.on("message", message => {
     });
   });
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 ## DING Level up!
@@ -181,11 +181,11 @@ And this just below the `sql` code block
 ```js
 if (!message.content.startsWith(prefix)) return; // Ignore messages that don't start with the prefix
 
-if (message.content.startsWith(prefix + "level") {
+if (message.content.startsWith(prefix + "level")) {
 
 } else
 
-if (message.content.startsWith(prefix + "points") {
+if (message.content.startsWith(prefix + "points")) {
 
 }
 ```
@@ -210,8 +210,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const sql = require("sqlite");
 sql.open("./score.sqlite");
-
-client.login("SuperSecretBotTokenHere");
 
 const prefix = "+";
 client.on("message", message => {
@@ -257,6 +255,8 @@ client.on("message", message => {
     });
   }
 });
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 Now, when ever anyone in your guild talks, the code will either create a new table row for them, or update their table role by taking the current amount of points and simply adding 1 to it. My challenge for you dear reader, is to make this multi-guild friendly.

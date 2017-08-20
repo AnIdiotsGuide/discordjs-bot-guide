@@ -43,7 +43,7 @@ So now you've been thoroughly briefed on the dangers of Eval, let's take a look 
 
 First though I strongly suggest using the following function \(plop it outside of any event handler/functions you have, so it's accessible anywhere\). This function prevents the use of actual mentions within the return line by adding a zero-width character between the `@` and the first character of the mention - blocking the mention from happening.
 
-> **NOTE:** **Both** the following code snippets are _**REQUIRED**_ to make the eval work.
+> **NOTE:** **EITHER** of the following clean snippets are _**REQUIRED**_ to make the eval work.
 
 ```js
 function clean(text) {

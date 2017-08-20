@@ -22,7 +22,7 @@ To the contrary of some more basic editors, Atom has the ability to open a proje
 
 - Go to **File**, **Open Folder** (CTRL+SHIFT+O)
 - Browse to the location of your main bot file (mybot.js, app.js, or whatever)
-- Click on **Select Folder** (*Note: your files will not appear here, only the folder structure. Don't worry they haven't gone anywhere)
+- Click on **Select Folder** (*Note: your files will not appear here, only the folder structure. Don't worry they haven't gone anywhere*)
 
 On the left of the editor you will have all the files. Just double-click any of them to open it. To clean things up, you can close the Welcome Screen and such.
 
