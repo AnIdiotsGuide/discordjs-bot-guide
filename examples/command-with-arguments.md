@@ -1,13 +1,13 @@
 # Command with arguments
 
-In [Your First Bot](/getting-started/your_basic_bot.md), we explored how to make more than one command. These commands all started with a prefix, but didn't have any _arguments_ : extra parameters used to vary what the command actually does.
+In [Your First Bot](/getting-started/your-basic-bot.md), we explored how to make more than one command. These commands all started with a prefix, but didn't have any _arguments_ : extra parameters used to vary what the command actually does.
 
 ## Creating an array of arguments
 
 The first thing that we need to do to use arguments, is to actually separate them. A command with arguments would normally look something like this:  
 `!mycommand arg1 arg2 arg3`
 
-In [Your First Bot](/getting-started/your_basic_bot.md) we actually simplify our task just a bit: our check for commands uses `startsWith()`:
+In [Your First Bot](/getting-started/your-basic-bot.md) we actually simplify our task just a bit: our check for commands uses `startsWith()`:
 
 ```js
 if (message.content.startsWith(config.prefix + "ping")) {

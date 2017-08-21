@@ -105,4 +105,4 @@ The following trick is a lifesaver, so pay attention: Your code editor is trying
 
 ![](assets/editorhelp.png)
 
-You can check out [Installing and Using a Proper Editor](/other-guides/installing_and_using_a_proper_editor.md) to help in at least knowing there are errors _before_ running your bot code.
+You can check out [Installing and Using a Proper Editor](/other-guides/installing-and-using-a-proper-editor.md) to help in at least knowing there are errors _before_ running your bot code.

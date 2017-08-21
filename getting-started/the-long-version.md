@@ -121,7 +121,7 @@ Success! You now have a bot running! As you probably realize by now I could prob
 
 ## The Next Step?
 
-Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](/getting-started/your_basic_bot.html) to continue on your journey with adding new commands and features!
+Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](/getting-started/your-basic-bot.html) to continue on your journey with adding new commands and features!
 
 ## Addendum: Getting help and Support
 

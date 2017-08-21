@@ -10,7 +10,7 @@ If you answered **Yes** to any of these questions, boy do I have a product for *
 
 ## Pre-requisites and Software
 
-To take full advantage of `git` you need to first have *at least* completed the [Adding a config.json file](/getting-started/your_basic_bot.md#adding-a-configjson-file-to-your-bot) walkthrough. This means that at the very least, your token is located in a separate file, and not within your javascript files. Having the prefix and the owner ID in that separate configuration file means that you get the advantage of easy testing: Change the prefix and token, and you have a secondary bot you can test your code with, wooh!
+To take full advantage of `git` you need to first have *at least* completed the [Adding a config.json file](/getting-started/your-basic-bot.md#adding-a-configjson-file-to-your-bot) walkthrough. This means that at the very least, your token is located in a separate file, and not within your javascript files. Having the prefix and the owner ID in that separate configuration file means that you get the advantage of easy testing: Change the prefix and token, and you have a secondary bot you can test your code with, wooh!
 
 What else do you need? `git` itself, of course! For Windows get [Git SCM](https://git-scm.com/download/win) , on Linux run `sudo apt-get install git-all` or `sudo yum install git-all` depending on your distro's install method. Mac users also have a [Git SCM](http://git-scm.com/download/mac) installer.
 
