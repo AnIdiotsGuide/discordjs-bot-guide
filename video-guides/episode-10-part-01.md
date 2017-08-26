@@ -6,7 +6,7 @@ We made some nice embeds for the moderation action logs in the previous episode,
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
-LINK DUMP  
+***LINK DUMP***  
 
 All of the tutorial source code is available [here](https://github.com/AnIdiotsGuide/Tutorial-Bot)
 

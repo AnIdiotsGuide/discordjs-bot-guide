@@ -22,7 +22,7 @@ Commands used in the video;
 
 `pm2 monit` This will pull up a live monitor so you can watch the resources.
 
-LINK DUMP
+***LINK DUMP***  
 
 AoDude's OhGodMusicBot is available [here](https://github.com/bdistin/OhGodMusicBot)
 

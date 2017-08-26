@@ -6,7 +6,8 @@ If I got anything wrong in this episode, please keep it to yourself LOL, ignoran
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
-LINK DUMP  
+***LINK DUMP***  
+
 All of the tutorial source code is available [here](https://github.com/AnIdiotsGuide/Tutorial-Bot)
 
 You will require a free discordapp.com account to use the discord service, sign up [here](https://discordapp.com/hypesquad?ref=PYisfiCTRf)

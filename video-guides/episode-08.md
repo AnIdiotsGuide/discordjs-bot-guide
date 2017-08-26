@@ -6,7 +6,7 @@ Continuing off from the last episode, we go straight into giving people the boot
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
-LINK DUMP  
+***LINK DUMP***  
 
 All of the tutorial source code is available [here](https://github.com/AnIdiotsGuide/Tutorial-Bot)
 
@@ -27,7 +27,7 @@ Don't forget, if you want to invite your bots to server, you'll need to get an i
 Music in the video:  
 Concentration by Kevin MacLeod [incompetech.com](incompetech.com)  
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
-  
+
 List of Atom addons and themes I use;  
 Addons:
 * atom-beautify - Glavin001,  
