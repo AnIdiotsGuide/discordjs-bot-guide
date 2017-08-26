@@ -33,6 +33,8 @@
 * [Other Guides](other-guides.md)
   * [Installing and Using a proper editor](other-guides/installing-and-using-a-proper-editor.md)
   * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
+  * [Hosting on a Raspberry Pi](other-guides/hosting-on-a-pi.md)
+  * [Hosting Music Bots on a Raspberry Pi](other-guides/hosting-music-on-a-pi.md)
 * [Video Guides](video-guides.md)
   * [Episode 1](video-guides/episode-01.md)
   * [Episode 2](video-guides/episode-02.md)
@@ -44,3 +46,4 @@
   * [Episode 7](video-guides/episode-07.md)
   * [Episode 8](video-guides/episode-08.md)
   * [Episode 9](video-guides/episode-09.md)
+  * [Episode 10 Part 1](video-guides/episode-10-part-01.md)
