@@ -62,6 +62,14 @@ message.channel.send("Hello " + message.author.toString() + ", and welcome!");
 ```
 
 ```js
+// Restrict a command to a specific user by ID
+if (message.content.startsWith(prefix + 'commandname')) {
+    if (message.author.id !== 'A user ID') return;
+    // Your Command Here
+}
+```
+
+```js
 // FETCH a member. Useful if an invisible user sends a message.
 message.guild.fetchMember(message.author)
   .then(member => {
@@ -73,8 +81,6 @@ message.guild.members.fetch(message.author)
   .then(member => {
     // The member is available here.
   });
-
-
 ```
 
 ## Channels and Guilds
@@ -95,6 +101,13 @@ client.channels.get("the channel id");
 // Get a Channel by Name
 message.guild.channels.find("name", "channel-name");
 // returns <TextChannel>
+```
+
+```js
+// Create an invite and send it in the channel
+message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>  
+    message.channel.send(invite.url)
+);
 ```
 
 ### Default Channel

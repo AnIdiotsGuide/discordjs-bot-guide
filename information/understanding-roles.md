@@ -36,6 +36,15 @@ if(message.member.roles.has(role.id)) {
 }
 ```
 
+```js
+// Check if they have one of many roles
+if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
+  // has one of the roles 
+} else {
+  // has none of the roles 
+}
+```
+
 > To grab members and users in different ways see the [FAQ Page](/frequently-asked-questions.md).
 
 ### Get all members that have a role
