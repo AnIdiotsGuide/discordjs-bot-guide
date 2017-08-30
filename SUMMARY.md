@@ -17,6 +17,7 @@
 * [Coding Guides](coding-guides.md)
   * [Storing Data in a JSON file](coding-guides/storing-data-in-a-json-file.md)
   * [Storing Data in an SQLite file](coding-guides/storing-data-in-an-sqlite-file.md)
+  * [Storing Data in a PCollection](coding-guides/storing-data-in-a-persistent-collection.md)
   * [Using PersistentCollections](coding-guides/using-persistentcollections.md)
   * [Creating a Music Bot](coding-guides/coding-a-music-bot.md)
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
