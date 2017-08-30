@@ -51,6 +51,7 @@ message.mentions.members.first();
 // Send a Direct Message to a user
 message.author.send("hello");
 // With Member it works too: 
+message.member.send("Heya!");
 ```
 
 ```js
@@ -58,6 +59,22 @@ message.author.send("hello");
 message.channel.send(`Hello ${user}, and welcome!`);
 // or
 message.channel.send("Hello " + message.author.toString() + ", and welcome!");
+```
+
+```js
+// FETCH a member. Useful if an invisible user sends a message.
+message.guild.fetchMember(message.author)
+  .then(member => {
+    // The member is available here.
+  });
+
+// THIS CHANGES IN DISCORD VERSION 12!!!!!
+message.guild.members.fetch(message.author)
+  .then(member => {
+    // The member is available here.
+  });
+
+
 ```
 
 ## Channels and Guilds
@@ -75,10 +92,45 @@ client.channels.get("the channel id");
 ```
 
 ```js
-// Get a Channel by Name (note: THIS IS NOT RECOMMENDED as more than one channel can have the same name!)
+// Get a Channel by Name
 message.guild.channels.find("name", "channel-name");
 // returns <TextChannel>
 ```
+
+### Default Channel
+
+As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The #general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those *really* wanting to send to what "looks" like the default channel, here's a dirty workaround.
+
+```js
+const getDefaultChannel = async (guild) {
+  // get "original" default channel
+  if(guild.channel.has(guild.id))
+    return guild.channels.get(guild.id)
+
+  // Check for a "general" channel, which is often default chat
+  if(guild.channels.exists("name", "general"))
+    return guild.channels.find("name", "general");
+  
+  // Now we get into the heavy stuff: first channel in order where the bot can speak
+  // hold on to your hats!
+  return guild.channels
+   .filter(c => c.type === "text" &&
+     c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
+   .sort((a, b) => a.position - b.position || 
+     Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
+   .first();
+}
+
+// This is called as, for instance: 
+client.on("guildMemberAdd", member => {
+  const channel = getDefaultChannel(member.guild);
+  channel.send(`Welcome ${member} to the server, wooh!`);
+});
+```
+
+It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people. 
+
+Consider using [Persistent Collections](/coding-guides/using-persistentcollections.md) instead and let server admins **choose** a default output channel for you!
 
 ## Messages
 

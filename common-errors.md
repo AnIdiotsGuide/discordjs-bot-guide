@@ -13,6 +13,16 @@ You didn't install Discord.js or installed it in the wrong folder
 * Run `npm init -y`, and hit enter until the wizard is complete
 * Run `npm i -S discord.js` again to install Discord.
 
+### `Error: getaddrinfo ENOTFOUND gateway.discord.gg gateway.discord.gg:443`
+
+#### Problem: 
+
+Your internet went down. 
+
+#### Solution:
+
+Get better, more stable internet, or host your bot on a VPS.
+
 ### Unexpected End of Input
 
 #### Problem:
