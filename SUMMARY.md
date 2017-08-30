@@ -33,6 +33,7 @@
   * [Welcome Message every X users](examples/welcome-message-every-x-users.md)
   * [Message Reply Array](examples/message-reply-array.md)
   * [Making an Eval command](examples/making-an-eval-command.md)
+  * [Miscelaneous Examples](examples/misc-examples.md)
 * [Other Guides](other-guides.md)
   * [Installing and Using a proper editor](other-guides/installing-and-using-a-proper-editor.md)
   * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
