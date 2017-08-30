@@ -12,7 +12,6 @@ There are additional difficulties when sharding a bot that add complexity to you
 * In order to do anything across shards you need to worry about using `broadcastEval` and such (tutorial comming soon!).
 * Sharded bots often gain very marginal performance increase and might even use *more* memory due to using more node processes.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point. 
-* 
 
 ## Example Sharding Code
 
