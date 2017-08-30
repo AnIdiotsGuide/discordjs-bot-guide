@@ -11,6 +11,11 @@ In this page, some very basic, frequently-asked questions are answered. It's imp
 client.on("ready", () => {
     client.user.setGame("with my code");
 });
+
+// NOTE: CURRENTLY BROKEN IN DISCORD.JS 9 THROUGH 11.1. USE THIS INSTEAD:
+client.on("ready", () => {
+    client.user.setPresence({game: {name: "with my code", type: 0}});
+});
 ```
 
 ```js
@@ -21,6 +26,8 @@ client.on("ready", () => {
 ```
 
 ## Users and Members
+
+> In these examples `Guild` is a placeholder for where you get the guild. This can be `message.guild` or `member.guild` or just `guild` depending on the event. Or, you can get the guild by ID (see next section) and use that, too!
 
 ```js
 // Get a User by ID
@@ -43,6 +50,7 @@ message.mentions.members.first();
 ```js
 // Send a Direct Message to a user
 message.author.send("hello");
+// With Member it works too: 
 ```
 
 ```js
@@ -57,52 +65,42 @@ message.channel.send("Hello " + message.author.toString() + ", and welcome!");
 ```js
 // Get a Guild by ID
 client.guilds.get("the guild id");
-// Returns message.guild
+// Returns <Guild>
 ```
 
 ```js
 // Get a channel by ID
 client.channels.get("the channel id");
-// Returns message.channel
+// Returns <TextChannel>
 ```
 
 ```js
 // Get a Channel by Name (note: THIS IS NOT RECOMMENDED as more than one channel can have the same name!)
 message.guild.channels.find("name", "channel-name");
-// returns message.channel
+// returns <TextChannel>
 ```
 
-## Common Errors & Fixes
+## Messages
 
-### Cannot find module `discord.js`
-
-#### Problem:
-
-You didn't install Discord.js or installed it in the wrong folder
-
-#### Solution:
-
-* Make sure you are in the **correct** folder where you have your bot's files
-* SHIFT+Right-Click in the folder and select **Open command window here**
-* Run `npm init -y`, and hit enter until the wizard is complete
-* Run `npm i -S discord.js` again to install Discord.
-
-### Unexpected End of Input
-
-#### Problem:
-
-```
-});
-  ^
-SyntaxError: Unexpected end of input
+```js
+// Editing a message the bot sent
+message.channel.send("Test").then(sentMessage => sentMessage.edit("Blah"));
+// message now reads : "Blah"
 ```
 
-#### Solution:
+```js
+// Fetching a message by ID (Discord.js versions 9 through 11)
+// note: you can line return right before a "dot" in JS, that is valid.
+message.channel.fetchMessages({around: "352292052538753025", limit: 1})
+  .then(messages => {
+    const fetchedMsg = messages.first(); // messages is a collection!)
+    // do something with it
+    fetchedMsg.edit("This fetched message was edited");
+  });
 
-Your code has an error somewhere. This is _impossible_ to troubleshoot without the **complete** code, since the error can be anywhere \(in fact the error stack often tells you it's at the end of your code\).
-
-The following trick is a lifesaver, so pay attention: Your code editor is trying to help you. Whatever editor you're using \(except notepad++.exe. Don't use notepad++!\), clicking on any \(and I mean any\) special character such as parentheses, square brackets, curly braces, double and single quotes, will automatically highlight the one that matches it. The screenshot below shows this: I clicked on the curly brace at the bottom, it shows me the one on top by highlighting it. Learn this, and how different functions and event handlers "look" like.
-
-![](assets/editorhelp.png)
-
-You can check out [Installing and Using a Proper Editor](/other-guides/installing-and-using-a-proper-editor.md) to help in at least knowing there are errors _before_ running your bot code.
+// THIS CHANGES IN DISCORD VERSION 12!!!!!
+message.channel.messages.fetch({around: "352292052538753025", limit: 1})
+  .then(messages => {
+    messages.first().edit("This fetched message was edited");
+  });
+```
