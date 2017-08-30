@@ -30,6 +30,13 @@ client.pointsMonitor = (client, message) => {
 
 };
 ```
+
+You should make sure that no one can DM spam the bot, so throw this on the next line under the opening line.
+
+```js
+if (message.channel.type !=='text') return;
+```
+
 We want to be able to grab the bot settings based on the guilds ID, so add the following inside the function.
 ```js
 const settings = client.settings.get(message.guild.id);
@@ -81,6 +88,7 @@ client.points.set(message.author.id, score);
 This is what your code should look like. If it doesn't, that's fine, everyone makes mistakes.
 ```js
 client.pointsMonitor = (client, message) => {
+  if (message.channel.type !=='text') return;
   const settings = client.settings.get(message.guild.id);
   if (message.content.startsWith(settings.prefix)) return;
   const score = client.points.get(message.author.id) || { points: 0, level: 0 };
@@ -145,7 +153,7 @@ exports.run = async (client, message) => {
 };
 ```
 
-And there you have it, you've successfully created a points system using the PCollections database. Now there's a few caveats to this system... the current code is limited to users, not guilds so if a user wanted to boost their score, they can invite the bot to a private guild and spam the ever loving snot out of it to boost their score. The over caveat is due to using PCollections, when you get to the point where you need to shard, you won't be able to use PCollections because you won't be able to open the database from multiple files, or instances.
+And there you have it, you've successfully created a points system using the PCollections database. Now there's a few caveats to this system... the current code is limited to users, not guilds so if a user wanted to boost their score, they can invite the bot to a private guild and spam the ever loving snot out of it to boost their score. The other caveat is due to using PCollections, when you get to the point where you need to shard, you won't be able to use PCollections because you won't be able to open the database from multiple files, or instances.
 
 
 
