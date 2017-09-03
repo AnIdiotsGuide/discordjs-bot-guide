@@ -7,36 +7,71 @@ In [Your First Bot](/getting-started/your-basic-bot.md), we explored how to make
 The first thing that we need to do to use arguments, is to actually separate them. A command with arguments would normally look something like this:  
 `!mycommand arg1 arg2 arg3`
 
-In [Your First Bot](/getting-started/your-basic-bot.md) we actually simplify our task just a bit: our check for commands uses `startsWith()`:
+In this, we need to do 3 things: 
+
+- Remove the prefix
+- Grab the *command* part (`mycommand`)
+- Grab the *array* of *arguments* which will be: 
+`['arg1', 'arg2', 'arg3']`
+
+In the greatest majority of the code I've seen, arguments are *split* at the beginning of the code, and each command will put the argument array back together as necessary within the command code.
+
+In my experience, the best (and most efficient) way of separating all these things is the following 2 lines of code: 
 
 ```js
-if (message.content.startsWith(config.prefix + "ping")) {
-  message.channel.send("pong!");
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+```
+
+Let's break this down into what it *actually* does, line by line.
+
+- `.slice(prefix.length)` removes the prefix such as `!` or `+` from the message content, leaving `mycommand arg1 arg2 arg3`. 
+- `.trim()` ensures there's no extra spaces before/after the text.
+- `.split(/ +/g)` splits the string by *one or many spaces*. Why not just by space? Because sometimes especially on mobile, you might have an extra space before or after mentions, or just straight up to an extra space by mistake. This means that `mycommand    arg1  arg2        arg3` will work just as well as if they only had 1 space.
+
+On the second line: 
+
+- `args.shit()` where `shift()` will **remove one element from the array** and return it. This gives us `mycommand` that's returned, and the `args` array becomes only `['arg1', 'arg2','arg3']`
+- `.toLowerCase()` so our command is always in lowercase, meaning `!Ping`, `!ping` and `!PiNg` will all work.
+
+
+## Using the `command` variable properly
+
+So now that we have our `command` variable, we no longer need to use the `if(message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands: 
+
+```js
+if(command === 'ping') {
+  message.channel.send('Pong!');
+} else 
+if (command === 'blah') {
+  message.channel.send('Meh.');
 }
 ```
 
-This means that `!ping whaddup` or `!ping I'm a little teapot` would both trigger the command, and the bot would respond "pong!". It would just ignore everything after the command because of course we're not doing anything with it.
+Now isn't that just so pretty and clean? I love it!
 
-Let's start with creating an _Array_ containing each word after our command, using the `.split()` function... with a `regex`:
+Alternatively, you can also use this in a switch/case command block (I don't like it, but to each their own, right?): 
 
 ```js
-if (message.content.startsWith(config.prefix + "ping")) {
-  const args = message.content.split(/\s+/g);
+switch (command) {
+  case "ping" :
+    message.channel.send('Pong!');
+    break;
+  case "blah" :
+    message.channel.send('Meh.');
+    break;
 }
 ```
 
-> You *could* just split using a space `split(" ")` ... however doing this would break if you add an extra space. Especially an issue with mentions on mobile which sometimes add a new space before. Regex is fast enough for the purpose, and this will split on "any number of spaces between each word" instead of "once for each space".
+## Working with the arguments
 
-This generates an array that would look like `["!ping", "I'm", "a", "little", "teapot"]`, for instance. We can then access any part of that array using `args[0]` to `args[4]`, which return the string in that array position. And if you want to be more precise and don't want `args` to contain the `command`, you can just remove it from the array: `const args = message.content.split(/\s+/g).slice(1);`.
+Alright let's get to the meat of this page: actually using the `args` array in a few command examples. 
 
-> For more information on arrays, see [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-
-If you want, you can then specify argument _names_ by referring to the array positions:
+The first one is a perfectly useless command, but for the life of me, I can't actually think of a really simple command using only one-word arguments. So here is a ridiculous ASL command:
 
 ```js
-if (message.content.startsWith(config.prefix + "asl")) {
-  const args = message.content.split(/\s+/g).slice(1);
-  let age = args[0]; // yes, start at 0, not 1.
+if (command === "asl") {
+  let age = args[0]; // Remember arrays are 0-based!.
   let sex = args[1];
   let location = args[2];
   message.reply(`Hello ${message.author.name}, I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
@@ -46,8 +81,8 @@ if (message.content.startsWith(config.prefix + "asl")) {
 And if you want to be **really** fancy with ECMAScript 6, here's an awesome one \(requires Node 6!\):
 
 ```js
-if (message.content.startsWith(prefix + "asl")) {
-  let [age, sex, location] = message.content.split(/\s+/g).slice(1);
+if (command === "asl") {
+  let [age, sex, location] = args;
   message.reply(`Hello ${message.author.username}, I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
 }
 ```
@@ -64,7 +99,7 @@ Let's build a quick and dirty `kick` command, then. No error handling or mod che
 
 ```js
 // Kick a single user in the mention
-if (message.content.startsWith(config.prefix + "kick")) {
+if (command === "kick") {
   let member = message.mentions.members.first();
   member.kick();
 }
@@ -79,20 +114,26 @@ Let's make the above kick command a little better. Because Discord now supports 
 So let's do this now, with what we've already learned, and a little extra:
 
 ```js
-if(message.content.startsWith(config.prefix + "kick")) {
+if(command === "kick") {
   let member = message.mentions.members.first();
-  let reason = message.content.split(/\s+/g).slice(2).join(" ");
+  let reason = args.slice(1).join(" ");
   member.kick(reason);
 }
 ```
 
-So, the reason is obtained by:
-- Grabbing the message content
-- Splitting it by spaces
-- Removing the first 2 elements (the command, `!kick` and the mention, which looks like `<@1234567489213>`
-- Re-joining the rest of the array elements with a space.
+So, the reason is obtained by removing the first elements (the mention, which looks like `<@1234567489213>`) and re-joining the rest of the array elements with a space.
 
 To use this command, a user would do something like: `!kick @SuperGamerDude Obvious Troll, shitposting`.
+
+Here's another example, with a super simple command, the `say` command. It makes the bot say what you just sent, and then delete your message: 
+
+```js
+if(command === "say"){
+  let text = args.slice(1).join(" ");
+  message.delete();
+  message.channel.send(text);
+}
+```
 
 > If you're thinking, "What if I have more than one argument with spaces?", yes that's a tougher problem. Ideally, if you need more than one argument with spaces in it, do not use spaces to split the arguments. For example, `!newtag First Var Second Var Third Var` won't work. But `!newtag First Var;Second Var;Third Var;` could work by removing the command, splitting by `;` then splitting by space. Not for the faint of heart!
 
@@ -101,8 +142,8 @@ To use this command, a user would do something like: `!kick @SuperGamerDude Obvi
 Destructuring has a `...rest` feature that lets you take "the rest of the array" and put it in a single variable. To demonstrate this, let me show you part of a code I use in a "save message" command. Basically, I store a message to a database, with a name. I call this command using: `!quote <channelid> <messageID> quotename note`, where `quotename` is a single word and `note` may be multiple words. The *actual* command code is unimportant. However, the way I process these arguments, is useful:
 
 ```js
-if(message.content.startsWith(config.prefix + "quote")) {
-  const [channelid, messageid, quotename, ...note] = message.content.split(/\s+/g).splice(1);
+if(command === "quote") {
+  const [channelid, messageid, quotename, ...note] = args.splice(1);
   // I also support "here" as a channelID using this:
   const channel = channelid == "here" ? message.channel : client.channels.get(channelid);
   // I do the same with message ID, which can be "last":
