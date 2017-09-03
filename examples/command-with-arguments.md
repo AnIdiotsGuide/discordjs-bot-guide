@@ -156,7 +156,7 @@ if(command === "quote") {
 A few notes on this code, because I will admit there's some new concepts in it you might not know:
 
 - `...note` is "the rest of the array arguments", so it would be `["this", "is", "a", "note"]`, that's why we .join(" ") when we use it.
-- `const myVar = condition ? codeWhenConditionTrue : codeWhenFalse;` is called the "ternary operator" in javascript and makes some conditions much more simpler.
+- `const myVar = condition ? codeWhenConditionTrue : codeWhenConditionFalse;` is called the "ternary operator" in javascript and makes some conditions much more simpler.
 - `<Collection>.last(2)[0]` is only available on discord.js#master (the 12.0 beta version) which is not out at the time of writing. The alternative is complex, and beyond what this page tries to teach, so just know it gets "the second to last message".
 
 ## Going one step further
