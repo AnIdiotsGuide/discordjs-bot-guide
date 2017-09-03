@@ -31,7 +31,7 @@ Let's break this down into what it *actually* does, line by line.
 
 On the second line: 
 
-- `args.shit()` where `shift()` will **remove one element from the array** and return it. This gives us `mycommand` that's returned, and the `args` array becomes only `['arg1', 'arg2','arg3']`
+- `args.shift()` where `shift()` will **remove one element from the array** and return it. This gives us `mycommand` that's returned, and the `args` array becomes only `['arg1', 'arg2','arg3']`
 - `.toLowerCase()` so our command is always in lowercase, meaning `!Ping`, `!ping` and `!PiNg` will all work.
 
 
