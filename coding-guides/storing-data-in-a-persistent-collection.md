@@ -1,16 +1,16 @@
-# Storing Data in a Persistent Collection
+# Enmap-Based Points System
 
-Like in the previous _"Storing Data"_ articles, this one will follow the same path with a points system! _ʸᵃᵃᵃᵃᵃʸ_.
+Like in the previous _"Points System"_ articles, this one will follow the same path with cleaner, simpler module! _ʸᵃᵃᵃᵃᵃʸ_.
 
-But we're using [Persistent Collections](https://www.npmjs.com/package/djs-collection-persistent) by Evie.Codes, which comes natively with [GuideBot](https://github.com/An-Idiots-Guide/guidebot) and it's what we will be using in this article.
+But we're using [Enmap](/coding-guides/using-persistentcollections.md) by Evie.Codes, which comes natively with [GuideBot](https://github.com/An-Idiots-Guide/guidebot) and it's what we will be using in this article.
 
-To start with, we need to open up index.js and inside the class just below the `this.settings = new PersistentCollection({name: "settings"});` line, we need the following.
+To start with, we need to open up index.js and inside the class just below the `this.settings = new Enmap({name: "settings", persistent: true});` line, we need the following.
 
 ```js
-this.points = new PersistentCollection({name: "points"});
+this.points = new Enmap({name: "points", persistent: true});
 ```
 
-That will create a new PCollection database under the name of points, and attaches it to the client extention so it can be used where ever you have access to the client object.
+That will create a new Enmap under the name of points, and attaches it to the client extention so it can be used where ever you have access to the client object.
 
 Now before we move to the `/modules/functions.js` file to add a _"monitor"_, we want to add this line to the message event, just below `if (message.author.bot) return`:
 
@@ -153,8 +153,6 @@ exports.run = async (client, message) => {
 };
 ```
 
-And there you have it, you've successfully created a points system using the PCollections database. Now there's a few caveats to this system... the current code is limited to users, not guilds so if a user wanted to boost their score, they can invite the bot to a private guild and spam the ever loving snot out of it to boost their score. The other caveat is due to using PCollections, when you get to the point where you need to shard, you won't be able to use PCollections because you won't be able to open the database from multiple files, or instances.
-
-
+And there you have it, you've successfully created a points system using Enhanced Maps. Now there's a few caveats to this system... the current code is limited to users, not guilds so if a user wanted to boost their score, they can invite the bot to a private guild and spam the ever loving snot out of it to boost their score. Note also that Enmap currently does not support sharding or calling the points database from multiple files (though a fix is planned for this limitation!)
 
 In the famous words of Evie _"Now take this, and make it **better than Mee6!** Go ahead, I challenge you ;)"_ - Evie.Codes
