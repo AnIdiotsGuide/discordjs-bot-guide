@@ -41,6 +41,8 @@
   * [Hosting on a Raspberry Pi](other-guides/hosting-on-a-pi.md)
   * [Hosting Music Bots on a Raspberry Pi](other-guides/hosting-music-on-a-pi.md)
   * [Async / Await](information/understanding-asyncawait.md)
+  * [Docker Part 1: Setup](other-guides/docker-01.md)
+  * [Docker Part 2: Creating the Project](other-guides/docker-02.md)
 * [Video Guides](video-guides.md)
   * [Episode 1](video-guides/episode-01.md)
   * [Episode 2](video-guides/episode-02.md)
