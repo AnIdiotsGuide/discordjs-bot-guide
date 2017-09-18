@@ -4,10 +4,10 @@ Like in the previous _"Points System"_ articles, this one will follow the same p
 
 But we're using [Enmap](/coding-guides/using-persistentcollections.md) by Evie.Codes, which comes natively with [GuideBot](https://github.com/An-Idiots-Guide/guidebot) and it's what we will be using in this article.
 
-To start with, we need to open up index.js and inside the class just below the `this.settings = new Enmap({name: "settings", persistent: true});` line, we need the following.
+To start with, we need to open up index.js and inside the class just below the `this.settings = new Enmap({name: "settings"});` line, we need the following.
 
 ```js
-this.points = new Enmap({name: "points", persistent: true});
+this.points = new Enmap({name: "points"});
 ```
 
 That will create a new Enmap under the name of points, and attaches it to the client extention so it can be used where ever you have access to the client object.

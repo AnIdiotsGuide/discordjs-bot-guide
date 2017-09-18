@@ -32,7 +32,7 @@ Most of us understand the concept of a "table", basically a structure that holds
 To create a new table, then, you need to "initialize" a new Enmap object:
 
 ```js
-const myTable = new Enmap({name: "myTable", persistent: true});
+const myTable = new Enmap({name: "myTable"});
 ```
 
 When this code is run, one of 2 things can happen:
@@ -49,7 +49,7 @@ It is currently not possible to load a persistent Enmap from multiple files - it
 However, even if it were possible, it's best practice within an application to load the Enmap in a location where it's available. Our favourite method is attaching it to the client itself: 
 
 ```js
-client.myTable = new Enmap({name: "myTable", persistent: true});
+client.myTable = new Enmap({name: "myTable"});
 ```
 
 This means wherever your `client` variable is available, so is the data in the Enmap!
