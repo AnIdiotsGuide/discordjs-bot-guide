@@ -1,18 +1,8 @@
-{{ "https://www.youtube.com/watch?v=dFrk8ey8Cuk" | video }}
-
->***NOTE:*** This video was recorded on the [25th of August](https://i.imgur.com/L75ZhDQ.png) during my hiatus from the server, I have since re-recorded these episodes with more information, but here is the rough cut for you whilst I edit the replacement videos.
+{{ "https://www.youtube.com/watch?v=wJpucehzhLo" | video }}
 
 Welcome to a new mini-series, where I show you how to use Docker, in this episode I go through the steps of showing you how to setup a Docker environment (on a raspberry pi), and how to make a Dockerfile for it.
 
 Please let me know what you think to the mini-series, if you want to see more of this stuff, please post in the comments below!
-
-Commands used in this episode
-
-`curl -sSL https://get.docker.com | sh`
-
-`sudo usermod -aG docker pi`
-
-`docker --version`
 
 ***LINK DUMP***  
 

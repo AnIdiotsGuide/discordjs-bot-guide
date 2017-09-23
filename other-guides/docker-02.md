@@ -1,20 +1,8 @@
-{{ "https://www.youtube.com/watch?v=dFrk8ey8Cuk" | video }}
-
->***NOTE:*** This video was recorded on the [25th of August](https://i.imgur.com/L75ZhDQ.png) during my hiatus from the server, I have since re-recorded these episodes with more information, but here is the rough cut for you whilst I edit the replacement videos.
+{{ "https://www.youtube.com/watch?v=uTqwCM2Keoc" | video }}
 
 Welcome back to the Docker new mini-series, where I show you how to use Docker, in this episode I go through the steps of creating the project and getting it ready for the Dockerfile.
 
 Please let me know what you think to the mini-series, if you want to see more of this stuff, please post in the comments below!
-
-Commands used in this episode;
-
-`mkdir my-discord-bot && cd my-discord-bot/` - This will create the folder for the project and enter in to it.
-
-`touch index.js && npm init --yes` - This creates a file called `index.js` and initializes the project using NPM.
-
-`npm install hydrabolt/discord.js` --save - This installs the later master branch of discord.js which is recommended.
-
-`touch settings.json` - This creates a configuration file that stores our bot's token.
 
 ***LINK DUMP***  
 
