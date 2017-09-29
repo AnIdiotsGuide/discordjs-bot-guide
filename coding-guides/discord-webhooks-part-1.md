@@ -91,4 +91,4 @@ And let's check the channel webhooks!
 
 Wooo! we did it!
 
-Now we can create webhooks on the fly via our bot code, but in the next [_chapter_](/coding-guides/discord-webhooks-part2.md) we'll see what we can do with them!
+Now we can create webhooks on the fly via our bot code, but in the next [_chapter_](/coding-guides/discord-webhooks-part-2.md) we'll see what we can do with them!
