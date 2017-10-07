@@ -4,10 +4,16 @@ Like in the previous _"Points System"_ articles, this one will follow the same p
 
 But we're using [Enmap](/coding-guides/using-persistentcollections.md) by Evie.Codes, which comes natively with [GuideBot](https://github.com/An-Idiots-Guide/guidebot) and it's what we will be using in this article.
 
-To start with, we need to open up index.js and inside the class just below the `this.settings = new Enmap({name: "settings"});` line, we need the following.
+> This guide has been updated to the 0.4.0+ version of Enmap, which introduces providers. Make sure you're using the right version! Run `npm ls enmap` to check your version.
+
+To start with, we need to open up index.js and add two different things. First, we need to import and initialize the *Provider* itself. Then, you need to create a new persistent Enmap using the provider itself. Here's how it goes: 
 
 ```js
-this.points = new Enmap({name: "points"});
+const Enmap = require("enmap");
+const EnmapLevel = require("enmap-level");
+
+const pointProvider = new EnmapLevel({name: "points"});
+this.points = new Enmap({provider: pointProvider});
 ```
 
 That will create a new Enmap under the name of points, and attaches it to the client extention so it can be used where ever you have access to the client object.

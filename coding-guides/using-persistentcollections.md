@@ -24,15 +24,21 @@ You then need to require the module in your code:
 const Enmap = require('enmap');
 ```
 
+You also need a **Provider** for persistence. There are a few available and more upcoming but for now we'll use the basic leveldb on. Fast, efficient, but basic.
+
+```js
+const EnmapLevel = require('enmap-level');
+```
 
 ## Creating a "Table"
 
 Most of us understand the concept of a "table", basically a structure that holds multiple rows and columns. This applies to concepts from Databases to Excel Spreadsheets so to simplify this how-to I'll go ahead and use those terms.
 
-To create a new table, then, you need to "initialize" a new Enmap object:
+To create a new table, then, you need to "initialize" a new Enmap object and the provider:
 
 ```js
-const myTable = new Enmap({name: "myTable"});
+const tableSource = new EnmapLevel({name: "myTable"});
+const myTable = new Enmap({provider: tableSource});
 ```
 
 When this code is run, one of 2 things can happen:
@@ -42,17 +48,23 @@ When this code is run, one of 2 things can happen:
 
 So what does this mean? It means that "initializing the database" and "loading all its data" is taken care of, for you. You don't need to do anything else for this to happen.
 
-## Caveat: Multithreading isn't available
+## Caveat: Multithreading isn't available on Level
 
-It is currently not possible to load a persistent Enmap from multiple files - it *must* be loaded from a single location. This means a sharded bot cannot use the current implementation of Enmap. 
-
-However, even if it were possible, it's best practice within an application to load the Enmap in a location where it's available. Our favourite method is attaching it to the client itself: 
+It is currently not possible to load a persistent LevelDB Enmap from multiple files - it *must* be loaded from a single location. For simple bots, you can easily just attach it to the client itself: 
 
 ```js
 client.myTable = new Enmap({name: "myTable"});
 ```
 
 This means wherever your `client` variable is available, so is the data in the Enmap!
+
+Alternatively, the `enmap-rethink` provider works great in multi-process, or sharded, environments! 
+
+```js
+const EnmapRethink = require('enmap-rethink');
+const provider = new EnmapRethink({name: "myTable"});
+client.myTable = new Enmap({provider: provider});
+```
 
 
 ## Inserting Data
