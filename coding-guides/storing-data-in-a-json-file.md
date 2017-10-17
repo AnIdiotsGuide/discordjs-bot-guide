@@ -1,137 +1,31 @@
 # Storing Data in a JSON file
 
-In this example we're going to read and write data to and from a JSON file. We'll keep is simple by using this JSON file for a points system. Yes, that's like Mee6 - admitedly that's a piece of shit bot, but people seem to love it so here we are.
+This page has been removed due to a number of people having issues with JSON storage becoming corrupted when using it as a database. 
 
-> **NOTE**: It should be noted that JSON is not the best storage system for this. It's prone to corruption if you do a lot of read/writes. We'll have an SQLite version coming up soon!
+## Why is JSON prone to corruption?
 
-The basis of this system is the `fs` system, for reading and writing the file. And we'll also need the native JSON.stringify\(\) and JSON.parse\(\) functions to convert between the Object and JSON version of our data structure. All these words spining your head around? Get a breath of fresh air and try again!
+The answer is: it's not *inherently* a problem. JSON is fine for storing data that you access often. JSON is fine as a transfer system between services and apps.  
 
-## Basic Data Structure
+The issue isn't with JSON. The issue is with `fs`. So really, this applies not just to JSON but also to TXT files or any other plain text file you're attempting to write to. 
 
-So here's an example of an object that contains a list of users, along with their points and level.
+See here's the thing: If you're attempting to simultaneously **read** a file and **write** to it at the same time, or if you're **writing** to a file from **more than one location**, the file risks being corrupted. And the more this happens, the higher the chances. It might work for small bots, but as it grows you are going to lose that data.
 
-```json
-{
-  "139412744439988224" : { "points": 42, "level": 0 },
-  "145978637517193216" : { "points": 3, "level": 0 },
-  "90997305578106880" : { "points": 122, "level": 1},
-  "173547401905176585" : { "points": 999, "level": 3}
-}
-```
+## Does this mean JSON is very bad?
 
-Simple enough, right? Nothing to it. It's a [JavaScript Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)! But, it's just an example. don't write this just yet.
+Not for all purposes. As we cover in [Adding a Config File](/getting-started/config-json-file.md), you can store *static* data that generally is modified manually and applied on bot reboot. That data can be as big as you want - it can be just 4 keys, it can be 1000 entries in a random text thing... the fact is it's being loaded once and then not written to. 
 
-Instead, create a file in your bot folder called `points.json` with as only content 2 characters: `{}` . Save it and you now have an _empty_ JSON file we can read and write.
+## So what do I do now, how do I store data?
 
-## Reading the file
+You have **so many** good alternatives to using JSON. And some are covered right here.
 
-Reading a JSON file is simply a question of loading the file with `fs` module:
+### If your bot is not sharded
 
-```js
-const fs = require("fs");
+If you want a simple `key/value` pair storage, like ID + Object, you can use `enmap`, which is covered in [Introducing Enhanced Maps](/coding-guides/using-persistentcollections.md).
 
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-```
+If you need a little more umph, like multiple tables, multiple keys, etc, you can use `sqlite`. The [SQLite-Based Points System](/coding-guides/storing-data-in-an-sqlite-file.md) page shows you how to do a points system but of course, SQLite can be used for much more than this.
 
-So at this moment, we have an object called `points` from which we can read any property. So if we pretend for a second that we loaded the above example, we could access `points["139412744439988224"].points` and that would return the number `42`. Great!
+### If your bot is sharded or the database is shared
 
-> You only need to read the file _once_, when originally loading your bot file, and then as you update it you're just writing to it. This is because the `points` object continues to be updated anyway, we're only using JSON for persistence between reboots!
+For more stable, multi-process access, think of getting a bigger database system. While those systems will require the installation of a database server, they will offer much more capabilities, power, and reliability. 
 
-## Writing to the file
-
-So every time an action happens, we simply increments the proper element in the `points` array and save it. Now let's pretend we go the unoriginal route, and every time someone posts a message, we give them a point!
-
-```js
-const fs = require("fs");
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-
-client.on("message", message => {
-  if (message.author.bot) return; // always ignore bots!
-
-  // if the points don"t exist, init to 0;
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  };
-  points[message.author.id].points++;
-
-  // And then, we save the edited file.
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
-  });
-});
-```
-
-And now, we can access the points of a user by grabbing from the object. However, if a user doesn't have points we want to show 0 instead, obviously. So, `let userpoints = points[message.author.id] ? points[message.author.id] : 0;` \(if you don't know what the : and ? shenanigans means, look up [Ternary Operator Assignment](http://stackoverflow.com/questions/5080242/javascript-ternary-operator-and-assignment)!
-
-## Calculating Levels
-
-So I put in the `levels` property in there because why else would you have points, right? Here, we have a little bit of math. Don't be scared, it's pretty simple!
-
-```js
-  let userPoints = points[message.author.id] ? points[message.author.id].points : 0;
-  let curLevel = Math.floor(0.1 * Math.sqrt(userPoints));
-```
-
-Alright, so we have a level. Let's do like all the lame bots out there and output a message when a new level is reached! yay.
-
-```js
-  let userLevel = points[message.author.id] ? points[message.author.id].level : 0;
-  if(userLevel < curLevel) {
-    // Level up!
-    message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
-  }
-```
-
-## Letting a user see their level
-
-Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it.
-
-```js
-  if(message.content.startsWith(prefix + "level")) {
-    message.reply(`You are currently level ${curLevel}, with ${userPoints} points.`);
-  }
-```
-
-## Putting it all together
-
-Ok so we've got a bunch of little bits of code, and your head is probably spinning wonder in what order it goes, right? Well let's fix that now. On top of which we'll simplify a few things. Follow along, now!
-
-```js
-const Discord = require("discord.js");
-const fs = require("fs");
-const client = new Discord.Client();
-
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-const prefix = "+";
-
-client.on("message", message => {
-  if (!message.content.startsWith(prefix)) return;
-  if (message.author.bot) return;
-
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  };
-  let userData = points[message.author.id];
-  userData.points++;
-
-  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-  if (curLevel > userData.level) {
-    // Level up!
-    userData.level = curLevel;
-    message.reply(`You"ve leveled up to level **${curLevel}**! Ain"t that dandy?`);
-  }
-
-  if (message.content.startsWith(prefix + "level")) {
-    message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
-  }
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
-  });
-
-});
-
-client.login("SuperSecretBotTokenHere");
-```
-Now take this, and make it **better than Mee6**! Go ahead, I challenge you ;\)
+A few options are [rethinkdbdash](https://www.npmjs.com/package/rethinkdbdash), [mysql](https://www.npmjs.com/package/mysql), [redis](https://www.npmjs.com/package/redis). You could also use an ORM if you're into this sort of thing, [sequelize](https://www.npmjs.com/package/sequelize) is a highly recommended package! 
