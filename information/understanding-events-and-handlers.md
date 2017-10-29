@@ -35,12 +35,12 @@ client.on("ready", () => {
 
 ## Detecting New Members
 
-Another useful event is [`guildMemberAdd`](http://hydrabolt.github.io/discord.js/#!/docs/tag/indev/class/Client?scrollto=guildMemberAdd) which triggers whenever someone joins any of the servers the bot is on. You'll see this on smaller servers: a bot welcomes every new member in the \#general channel. The following code does this.
+Another useful event is [`guildMemberAdd`](http://hydrabolt.github.io/discord.js/#!/docs/tag/indev/class/Client?scrollto=guildMemberAdd) which triggers whenever someone joins any of the servers the bot is on. You'll see this on smaller servers: a bot welcomes every new member in the \#welcome channel. The following code does this.
 
 ```js
 client.on("guildMemberAdd", (member) => {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  member.guild.defaultChannel.send(`"${member.user.username}" has joined this server`);
+  member.guild.channels.get("welcome").send(`"${member.user.username}" has joined this server`);
 });
 ```
 
