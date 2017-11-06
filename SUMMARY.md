@@ -45,7 +45,7 @@
   * [Async / Await](information/understanding-asyncawait.md)
   * [Docker Part 1: Setup & Dockerfile](other-guides/docker-01.md)
   * [Docker Part 2: Installing, running & More](other-guides/docker-02.md)
-  * [Introduction to modules](other-guides/introduction-to-modules-and-import.md)
+  * [Introduction to modules](other-guides/introduction-to-modules.md)
 * [Video Guides](video-guides.md)
   * [Episode 1](video-guides/episode-01.md)
   * [Episode 2](video-guides/episode-02.md)
