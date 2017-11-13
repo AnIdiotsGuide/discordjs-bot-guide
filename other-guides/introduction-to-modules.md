@@ -1,6 +1,6 @@
 # Introduction to Modules in Node.js
 
-While some of the things about modules have been covered in the [Command Handler](/coding-guides/a-basic-command-handler.md) page, I feel that it would be very constructive to introduce the idea of "modules" separately, unrelated to how they are used in discord.js bots. So if you're on this page and wonder "what the hell is discord.js?" don't worry, this guide is still for you! 
+While some of the things about modules have been covered in the [Command Handler](/coding-guides/a-basic-command-handler.md) page, I feel that it would be very constructive to introduce the idea of "modules" separately, unrelated to how they are used in discord.js bots. So if you're on this page and wonder "what the hell is discord.js?" don't worry, this guide is still for you!
 
 In this guide we'll be taking a look specifically at how to create a module for node.js starting from extremely basic one-line all the way to explaining complex implementations with multiple functionality. But don't worry, we'll keep it as simple as possible!
 
@@ -8,7 +8,7 @@ In this guide we'll be taking a look specifically at how to create a module for 
 
 ## What's a module?
 
-A "module" in node.js is a separate file \(or group of files\) containing "things" that we can use in another file. Modules can contain functions, variables, classes, basically anything that node.js code can contain. So you might ask, why use a module at all if I can just write all my code in a single file? It's about two things: readability, and portability. 
+A "module" in node.js is a separate file \(or group of files\) containing "things" that we can use in another file. Modules can contain functions, variables, classes, basically anything that node.js code can contain. So you might ask, why use a module at all if I can just write all my code in a single file? It's about two things: readability, and portability.
 
 First let's address **readability**: a complex program, even written in node.js, can be thousands of lines of code. Having 6000 lines in a single file is not only difficult to read, it's also difficult to figure out what does what. Furthermore, there are technical problems with a single file code: some parts of the code can affect others, like overwriting variables on a higher scope, changing methods, etc. It's what is called "side-effects". On a separate module, the module can only really affect itself unless you give it something to change.
 
@@ -34,7 +34,7 @@ console.log(myMessage);
 module.exports = "Hello, World!";
 ```
 
-Running `node index.js` in this folder would produce the following console output: 
+Running `node index.js` in this folder would produce the following console output:
 
 ```
 > node index.js
@@ -43,7 +43,7 @@ Hello, World!
 > _
 ```
 
-Let's explain exacly why, and how a module "replaces" regular code. You could write the exact same code in a single file as such: 
+Let's explain exacly why, and how a module "replaces" regular code. You could write the exact same code in a single file as such:
 
 ```js
 console.log("Start Testing");
@@ -51,7 +51,7 @@ const myMessage = "Hello, World!";
 console.log(myMessage);
 ```
 
-The difference with the module, is simply that it's placed in a separate file. Ok so, like. Yeah, that's a module. It's as simple as that! But of course, there's more to learn here, so let's push on to the next step. 
+The difference with the module, is simply that it's placed in a separate file. Ok so, like. Yeah, that's a module. It's as simple as that! But of course, there's more to learn here, so let's push on to the next step.
 
 ## A function in a module
 
@@ -86,7 +86,7 @@ As you can see, there really isn't that much to it. Creating a module with a sin
 
 ## Module Scoping
 
-Ok so, one thing that's really cool about modules is that you can use other modules into them. I'm going to go _a little too far_ into code complexity right now by creating a simple module that gets a random cat image from an online API that's literally called "Random Cat". Bear with me for a second: 
+Ok so, one thing that's really cool about modules is that you can use other modules into them. I'm going to go _a little too far_ into code complexity right now by creating a simple module that gets a random cat image from an online API that's literally called "Random Cat". Bear with me for a second:
 
 ```js
 // randomcat.js
@@ -106,9 +106,9 @@ console.log( randomCat() );
 
 Ok so, what am I doing here? First off, I'm requiring `snekfetch`, [a simple, fast library that does HTTP queries](https://www.npmjs.com/package/snekfetch). Then I'm using this library inside my module to go "fetch" a single image file from the random cat API and return it. Why is this useful? Well simply put, it means that if this is the only file where I'm using snekfetch, it's the only place where I call it. If we were dealing with a complex application, it would be hard to see where each module is used in the code because you'd have all those require\(\) lines at the top of one file. In separate modules, you know exactly what module uses what library.
 
-Another thing you might notice is that the line that requires snekfetch is outside of the actual module exports, but... why? Well, here's the thing: When you require a module, the whole file is "parsed" once \(in other words, it's executed\). Anything you define in that file is still defined as usual _except that it's only available in that module_. So, snekfetch is only available from the `randomcat.js` file and you can't call it from outside. As far as `randomcat.js` is concerned, it's providing a single function that returns a file, and that's it. 
+Another thing you might notice is that the line that requires snekfetch is outside of the actual module exports, but... why? Well, here's the thing: When you require a module, the whole file is "parsed" once \(in other words, it's executed\). Anything you define in that file is still defined as usual _except that it's only available in that module_. So, snekfetch is only available from the `randomcat.js` file and you can't call it from outside. As far as `randomcat.js` is concerned, it's providing a single function that returns a file, and that's it.
 
-So if you define strings, objects, arrays, or whatever else outside of your module and they'll be "private" to that module! It makes it a self-contained entity that can only interact and be interacted with in specific manners. 
+So if you define strings, objects, arrays, or whatever else outside of your module and they'll be "private" to that module! It makes it a self-contained entity that can only interact and be interacted with in specific manners.
 
 ## Multiple Returns
 
@@ -147,7 +147,7 @@ console.log(utils.helloWorld("Evie")) // Hello, Evie, to this world!
 
 ## More Scopes
 
-Let's return for a moment to "scoping" in modules. One thing that you might want to consider doing with modules is to have "properties" that can be changed by the module and accessed externally. What do I mean by that? Let's make a super simple ToDo module to demonstrate. Instead of blabbering on in paragraphs after, I'll use comments in the code to convey what's happening. 
+Let's return for a moment to "scoping" in modules. One thing that you might want to consider doing with modules is to have "properties" that can be changed by the module and accessed externally. What do I mean by that? Let's make a super simple ToDo module to demonstrate. Instead of blabbering on in paragraphs after, I'll use comments in the code to convey what's happening.
 
 ```js
 // todo.js
@@ -179,7 +179,7 @@ exports.clear = () {
   return this;
 }
 
-// This function "gets" all the ToDos: 
+// This function "gets" all the ToDos:
 exports.list = () => {
   // because we return only an array, it can't be chained after.
   return this.todoList;
@@ -193,7 +193,7 @@ exports.cleanList = () => {
 }
 ```
 
-With this we have a module with a **public property** called `todoList` that can actually be modified externally, as well as 4 **public methods** to modify that list a little easily. Let's see how to use it. 
+With this we have a module with a **public property** called `todoList` that can actually be modified externally, as well as 4 **public methods** to modify that list a little easily. Let's see how to use it.
 
 ```js
 // index.js
@@ -208,7 +208,7 @@ groceries.add("Milk");
 groceries.add("Bread").add("Butter").remove("Bread");
 
 console.log(groceries.cleanList());
-/* 
+/*
 1. Milk
 2. Butter
 (notice the absense of Bread since it was removed)
@@ -223,7 +223,7 @@ console.log(groceries.list()); // ["Milk", "Butter", "Butter"]
 groceries.clear(); // it's now empty!
 ```
 
-If you only wanted this kind of module, you are now done with this guide. You can skip the final parts if you're not interested in classes, instances, or different syntaxes. You have enough to be functional! 
+If you only wanted this kind of module, you are now done with this guide. You can skip the final parts if you're not interested in classes, instances, or different syntaxes. You have enough to be functional!
 
 ## Alternate Syntax
 
@@ -266,7 +266,7 @@ module.exports.list = cleanList; // so we can use this.list() internally only!
 
 ## Modules as Classes
 
-One last thing before we go, classes. An advantage of adding a class to a module is that it can be re-used so much more easily, even if that class relies on external libraries or specific internal private code and methods. Let's go back to the basics with the example of a class ripped straight off MDN. 
+One last thing before we go, classes. An advantage of adding a class to a module is that it can be re-used so much more easily, even if that class relies on external libraries or specific internal private code and methods. Let's go back to the basics with the example of a class ripped straight off MDN.
 
 ```js
 class Rectangle {
@@ -277,7 +277,7 @@ class Rectangle {
 }
 ```
 
-You can stick this in any file and you can create a new rectangle using `const myRect = new Rectangle(10, 5)`, sure. But then you might be worries about re-usability and conflicts with other code, right? So let's make it a module using what we've learned before. 
+You can stick this in any file and you can create a new rectangle using `const myRect = new Rectangle(10, 5)`, sure. But then you might be worries about re-usability and conflicts with other code, right? So let's make it a module using what we've learned before.
 
 ```js
 // rectangle.js
@@ -298,9 +298,9 @@ const Rectangle = require("./rectangle.js");
 const myRect new Rectangle(10, 5); // works the same!
 ```
 
-With this idea we can now require modules and libraries only from a class file and make this code so much prettier. 
+With this idea we can now require modules and libraries only from a class file and make this code so much prettier.
 
-You can also easily extend classes this way, just as easily. 
+You can also easily extend classes this way, just as easily.
 
 ```js
 const Rectangle = require("./rectangle.js");
@@ -326,4 +326,3 @@ You can also require files from other projects by going up folders. So if I have
 ### Publishing Modules/Libraries
 
 I've touched upon publishing in my introduction. Publishing modules is done on NPM \(though the node community wants to enable requires from an HTTP page, that's not doable yet\), and anyone can publish a module, if the name is unique. To "install" a published library you just need to use npm. For example, in the random cat example I use snekfetch, which needs to be installed using `npm install snekfetch`. An installed library doesn't use a "path" or a .js extension so it's `require("snekfetch")` instead of, say, `require("./snekfetch.js")`.
-

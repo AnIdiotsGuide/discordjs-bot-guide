@@ -131,5 +131,5 @@ if(message.author.id !== config.ownerID) return;
 
 ## What's next _now_?
 
-So now that we have a functional bot with a configuration file, let's add more stuff to it! 
+So now that we have a functional bot with a configuration file, let's add more stuff to it!
 Follow me to the [Command with arguments](/examples/command-with-arguments.md) for the next part!

@@ -9,6 +9,7 @@ We have two choices, either create a stand-alone bot, or throw it in an existing
 > **NOTE USE AT YOUR OWN RISK.** Even though selfbots are not allowed to react to anything other than the account owner, I believe this is perfectly acceptable if it doesn't react in a public fashion, having a **PRIVATE** channel would be acceptable in my opinion.
 
 Let's grab some example code...
+
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -32,6 +33,7 @@ client.login("SuperSecretBotTokenHere");
 Now, we've got the example code, we want to take our previously made webhook and grab the `id` and `token` from the URL, let's get it together!
 
 You want to start off by defining your webhook at the top of your code, don't forget to replace `Webhook ID` and `Webhook Token` with their respective values.
+
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -52,6 +54,7 @@ client.on("message", (message) => {
 
 client.login("SuperSecretBotTokenHere");
 ```
+
 Now, this bit will be a little long winded; but inside the message event you want to check for mentions, now the more mentions you can capture the better, for example there's the `@everyone` and `@here` mentions, role mentions and the direct mentions.
 
 The official documentation has the wonderful `Message.isMentioned(data)` boolean, that data can be a `GuildChannel`, `User` or `Role` Object, or a `string` representing the ID of any of the previously mentioned things, so inside the message event create a new `if statement`.
@@ -68,6 +71,7 @@ client.on("message", (message) => {
   }
 });
 ```
+
 Okay, that covers direct mentions, but what about the mentioned `@everyone`, `@here` and role mentions?
 
 Well the `message` object has `mentions` which has both `everyone` and `roles`, so this is what the code will look like so far...
@@ -84,7 +88,9 @@ client.on("message", (message) => {
   }
 });
 ```
+
 Alright, that's the mention detection stuff finished, but let me cover that last bit...
+
 ```js
 (message.guild && message.mentions.roles.filter(r => message.guild.member("YOUR USER ID").roles.has(r.id)).size > 0)
 ```
@@ -106,6 +112,7 @@ client.on("message", (message) => {
   }
 });
 ```
+
 This code may look familiar, and you would be right. It's what we use to get bots to ignore themselves and other bots, but we've changed it slightly so if the `message.author` is the target user (you), then ignore it.
 
 Alright, now we're done with the conditions for the webhook, let's actually use the webhook! Take your code so far (or copy the code from below)...
@@ -134,7 +141,9 @@ client.on("message", (message) => {
 
 client.login("SuperSecretBotTokenHere");
 ```
+
 ... and add the following line below where it says `// Additional Code`
+
 ```js
 mentionHook.send("You were mentioned!");
 ```
@@ -142,7 +151,6 @@ mentionHook.send("You were mentioned!");
 Now, let's fill in all of the details we need to get this working (webhook `id` and `token`, and your user `id`)
 
 > **NOTE** This webhook has long since been deleted.
-
 
 ```js
 const Discord = require("discord.js");
@@ -169,10 +177,13 @@ client.on("message", (message) => {
 
 client.login("SuperSecretBotTokenHere");
 ```
-Now, just get someone to mention you!  
+
+Now, just get someone to mention you!
+
 ![Getting Mentioned](/assets/webhooks/wh06.png)
 
-If all goes well, check the channel you set the webhook for and you should see something like this...  
+If all goes well, check the channel you set the webhook for and you should see something like this...
+
 ![You got Mentioned!](/assets/webhooks/wh07.png)
 
 That's basically it for this guide, but you can spice up the webhook notification by grabbing who mentioned you, what channel/guild you were mentioned in and what the content was (in cases of deletion.)

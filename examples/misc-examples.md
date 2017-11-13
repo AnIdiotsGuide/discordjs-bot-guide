@@ -1,6 +1,6 @@
 # Miscelaneous Examples
 
-While this page is mostly a dump of the `?examples` command on An Idiot's Guide Official Server, it also serves to put them all in one place, easily accessible for everyone to read. 
+While this page is mostly a dump of the `?examples` command on An Idiot's Guide Official Server, it also serves to put them all in one place, easily accessible for everyone to read.
 
 ## Conventions Used in Examples
 
@@ -8,19 +8,18 @@ Conventions are important - they are the agreements on which society functions. 
 
 ### Placeholders
 
-A "Placeholder" is a piece of text that *replaces something else*. In these FAQs we assume the following variables as "placeholders" for your own: 
+A "Placeholder" is a piece of text that *replaces something else*. In these FAQs we assume the following variables as "placeholders" for your own:
 
-* `client` is a placeholder that corresponds to your `client` variable, as we've covered at the end of the [Getting Started](/getting-started/the-long-version.md) guide. `client.on("ready", () => {` for example. 
-* `message` is a placeholder corresponds to your `message` event's variable which looks something like this: `client.on("message", msg => {`. 
-
+* `client` is a placeholder that corresponds to your `client` variable, as we've covered at the end of the [Getting Started](/getting-started/the-long-version.md) guide. `client.on("ready", () => {` for example.
+* `message` is a placeholder corresponds to your `message` event's variable which looks something like this: `client.on("message", msg => {`.
 
 ## Examples
 
 ### awaitMessages
 
-> Original example by: 🌌 ∫ Lewdcario dx 🐾#8248 
+> Original example by: 🌌 ∫ Lewdcario dx 🐾#8248
 
-This example sends a question and waits to receive a message response that says `test`. 
+This example sends a question and waits to receive a message response that says `test`.
 
 ```js
 message.channel.sendMessage('What tag would you like to see? This will await will be cancelled in 30 seconds. It will finish when you provide a message that goes through the filter the first time.')
@@ -57,7 +56,8 @@ client.user.createGuild('Example Guild', 'london').then(guild => {
 async function createGuild(client, message) {
   try {
     const guild = await client.user.createGuild('Example Guild', 'london');
-    const invite = await guild.defaultChannel.createInvite();
+    const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const invite = await defaultChannel.createInvite();
     await message.author.send(invite.url);
     const role = await guild.createRole({ name:'Example Role', permissions:['ADMINISTRATOR'] });
     await message.author.send(role.id);
@@ -76,7 +76,7 @@ message.member.addRole('<THE ROLE ID YOU GET SENT>');
 
 Adds a cooldown to your commands so the user will have to wait 2.5 seconds between each command.
 
-You can change the nature of the cool down by changing the return to something else. 
+You can change the nature of the cool down by changing the return to something else.
 
 ```js
 // First, this must be at the top level of your code, **NOT** in any event!
@@ -127,7 +127,7 @@ async function googleCommand(msg, args) {
 
       // This is allowing us to grab the URL from within the instance of the page (HTML)
       let googleData = $('.r').first().find('a').first().attr('href');
- 
+
       // Now that we have our data from Google, we can send it to the channel.
       googleData = querystring.parse(googleData.replace('/url?', ''));
       searchMessage.edit(`Result found!\n${googleData.q}`);
@@ -141,7 +141,7 @@ async function googleCommand(msg, args) {
 
 ### Mention Prefix
 
-Requiring a little bit of regex, this will catch when a message starts with the bot being mentioned. 
+Requiring a little bit of regex, this will catch when a message starts with the bot being mentioned.
 
 ```js
 client.on("message", message => {
@@ -199,7 +199,7 @@ message.channel.fetchMessages({
 
 ### Swear Detector
 
-This quick & dirty swear detector takes an array of swear words we don't want to see, and triggers on it. 
+This quick & dirty swear detector takes an array of swear words we don't want to see, and triggers on it.
 
 ```js
 const swearWords = ["darn", "shucks", "frak", "shite"];

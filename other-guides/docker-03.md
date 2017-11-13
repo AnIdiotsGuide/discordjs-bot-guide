@@ -1,14 +1,22 @@
-{{ "https://www.youtube.com/watch?v=KKmyTfGbY54" | video }}
+{{ "https://www.youtube.com/watch?v=dFrk8ey8Cuk" | video }}
 
-Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
+Welcome back to the Docker new mini-series, where I show you how to use Docker, in this episode I go through the steps of creating the project and getting it ready for the Dockerfile.
 
-We're back with more events, the next episode we'll be tackling role events, that should be a juicy one!
+Please let me know what you think to the mini-series, if you want to see more of this stuff, please post in the comments below!
 
-Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
+Commands used in this episode;
+
+`mkdir my-discord-bot && cd my-discord-bot/` - This will create the folder for the project and enter in to it.
+
+`touch index.js && npm init --yes` - This creates a file called `index.js` and initializes the project using NPM.
+
+`npm install hydrabolt/discord.js` --save - This installs the later master branch of discord.js which is recommended.
+
+`touch settings.json` - This creates a configuration file that stores our bot's token.
 
 ***LINK DUMP***
 
-All of the tutorial source code is available [here](https://github.com/AnIdiotsGuide/Tutorial-Bot)
+Written guide by Nomsy, you can read it [here](https://github.com/truency/docker-discordjs-tutorial/blob/master/2.%20Creating%20The%20Project.md)
 
 You will require a free discordapp.com account to use the discord service, sign up [here](https://discordapp.com/hypesquad?ref=PYisfiCTRf)
 
@@ -24,8 +32,8 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
-Music in the video:
-Local Forecast - Slower by Kevin MacLeod [incompetech.com](incompetech.com)
+Music in the video:  
+Heavy Heart by Kevin MacLeod [incompetech.com](incompetech.com)
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
 List of Atom addons and themes I use;

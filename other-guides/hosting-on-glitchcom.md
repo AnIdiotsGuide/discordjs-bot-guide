@@ -10,7 +10,7 @@ So OH MY GOD, let's get to it right now because I'm so excited. I mean there's *
 
 Ok like, have you ever seriously looked into getting a bot up on heroku? God it's a mess of setups and configurations and *holy crap what the hell is a worker and a procfile?????*
 
-Glitch.com has **none** of this. Getting code up and running is as simple as: 
+Glitch.com has **none** of this. Getting code up and running is as simple as:
 
 - Open your browser to [Glitch.com](https://glitch.com/)
 - **Completely ignore the childish drawings of a 3 year old on the front page** (trust me on this one, don't look)
@@ -25,31 +25,32 @@ In order to not ever lose access to your code, the first thing you need to do is
 
 - Click **Sign In** at the top-right of the page
 - Choose either Github or Facebook to login.
-- Yeah ok the project is now yours. 
+- Yeah ok the project is now yours.
 
 Toldja this shit was simple.
 
 ## Configure the Project
 
-So here's a few things about the project that we need to configure, for a few reasons. 
+So here's a few things about the project that we need to configure, for a few reasons.
 
 First off, **Secure the project**. By default, anyone with your project's name can access your code directly. They can't *edit* it but they can snoop in and look at your code. And, btw, I haven't found a way to un-share someone that's viewed your project yet (I'm talking to Glitch to get that fixed).
 
 - Click on the **Share** Button at the top of the file list, besides your name.
-- Click on **Make Private**. 
-- You can still invite people to view and collaborate later, with the link provided. 
+- Click on **Make Private**.
+- You can still invite people to view and collaborate later, with the link provided.
 
 The next thing is, **Name the project**. Now, projects work through express.js whether you really want to or not. Later on you can learn to make a dashboard but for now, we just need to set it up to keep it alive.
 
 - Click on the project name at the top-left of the screen (mine was `best-glue`, these guys know what I sniff I tell ya!)
 - In the pop-up click on the name at the top (*slightly* counter-intuitive, but yeah that's how you rename it)
 - The name you choose (it must be unique and not taken by anyone else) will be your "site's" subdomain address.
-- While you're at it, give it a description if you really want to. 
+- While you're at it, give it a description if you really want to.
 
-Finally, we need to **Disable some auto-save features**. Glitch automatically saves the file, quite literally, on every keypress you make. And restarts it. This is not only slightly visually annoying, but also damaging to bots - the Discord API will reset your bot's token if you login 1000 times in a day. That means, if you type 1000 characters in your code, as it is. QUITE an issue. 
+Finally, we need to **Disable some auto-save features**. Glitch automatically saves the file, quite literally, on every keypress you make. And restarts it. This is not only slightly visually annoying, but also damaging to bots - the Discord API will reset your bot's token if you login 1000 times in a day. That means, if you type 1000 characters in your code, as it is. QUITE an issue.
 
 - Create a new file in the project, and call it `watch.json`
-- Paste in the following code in it: 
+- Paste in the following code in it:
+
 ```json
 {
   "install": {
@@ -78,7 +79,7 @@ Oh one last thing for you crazy people with light-sensitive eyes (aka dark theme
 
 ## Keeping the project "alive"
 
-Alright so, like, Glitch is made to be a *web* hosting really, and will "sleep" after 5 minutes if it receives no HTTP request. However, there is a very convenient way to keep it alive, which is actually provided by the app itself - the `express.js` module is pre-installed, and all you need to do is to "ping" it every 5 minutes to make sure it doesn't sleep. These lines of code in your project (either the main file or any module you call on bootup) should to the trick for now: 
+Alright so, like, Glitch is made to be a *web* hosting really, and will "sleep" after 5 minutes if it receives no HTTP request. However, there is a very convenient way to keep it alive, which is actually provided by the app itself - the `express.js` module is pre-installed, and all you need to do is to "ping" it every 5 minutes to make sure it doesn't sleep. These lines of code in your project (either the main file or any module you call on bootup) should to the trick for now:
 
 ```js
 const http = require('http');
@@ -94,15 +95,15 @@ setInterval(() => {
 }, 280000);
 ```
 
-What does this do? Keeps an express.js server alive, which does not really affect your project in and of itself, and pings itself every 5 minutes, so it never shuts off. Awesome. 
+What does this do? Keeps an express.js server alive, which does not really affect your project in and of itself, and pings itself every 5 minutes, so it never shuts off. Awesome.
 
 ## Package.json
 
-There are 2 things that you much change in the project's package.json file in order to ensure that your project will actually work. 
+There are 2 things that you much change in the project's package.json file in order to ensure that your project will actually work.
 
 First, you must provide for a *node.js version* if your project requires a higher version of node (for instance, 8.4.0). This is done with the `engines` key, as such: `"engines": { "node": "8.4.0" }`
 
-Second, you must provide for the `start` script. A lot of us just generally configure the `main: index.js` key and this is not sufficient. You must provide for a start script: 
+Second, you must provide for the `start` script. A lot of us just generally configure the `main: index.js` key and this is not sufficient. You must provide for a start script:
 
 ```json
   "scripts": {
@@ -111,7 +112,7 @@ Second, you must provide for the `start` script. A lot of us just generally conf
   },
 ```
 
-I show the `test` script here because this is by default in any project where `npm init` was used, so it's a good point of reference. Here's a full package.json, this one is guidebot's modified version: 
+I show the `test` script here because this is by default in any project where `npm init` was used, so it's a good point of reference. Here's a full package.json, this one is guidebot's modified version:
 
 ```json
 {
@@ -144,14 +145,15 @@ I show the `test` script here because this is by default in any project where `n
 }
 ```
 
-Another change is that your `config.json` file or `config.js` file is **insecure** if you share your project. The easiest way to fix this is to use environment variables. Open the `.env` file, and add the following line: 
+Another change is that your `config.json` file or `config.js` file is **insecure** if you share your project. The easiest way to fix this is to use environment variables. Open the `.env` file, and add the following line:
 
 ```
 TOKEN=MzUzOTUxODYwOTA3OTY2NDY0.DI3K3w.VN1Gvsl7CSh2IYIELJDJAFejH4w
 ```
+
 > Obviously use your real token, duh!
 
-You can then access this from anywhere using `process.env.TOKEN`, so again with the guidebot example, you would do the following in `config.js`: 
+You can then access this from anywhere using `process.env.TOKEN`, so again with the guidebot example, you would do the following in `config.js`:
 
 ```js
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
@@ -160,7 +162,7 @@ You can then access this from anywhere using `process.env.TOKEN`, so again with 
 
 ### Getting Help
 
-Here are a few Glitch resources: 
+Here are a few Glitch resources:
 
 - [Glitch Discourse](https://support.glitch.com/) (their Q&A/Forum place)
 - [Glitch FAQ](https://glitch.com/faq) (some pertient technical details)

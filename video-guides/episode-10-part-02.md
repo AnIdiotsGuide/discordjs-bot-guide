@@ -1,8 +1,10 @@
-{{ "https://www.youtube.com/watch?v=KKmyTfGbY54" | video }}
+{{ "https://www.youtube.com/watch?v=mQYdlMKxHWo" | video }}
 
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
-We're back with more events, the next episode we'll be tackling role events, that should be a juicy one!
+Alright guys, this is it... this is the finale of the current season, in this episode we update all of the moderation commands, and we catch some more errors!
+
+Now season 1 is finished, I'll be moving over to Visual Studio Code, as well as starting to show you how to interact and use the new and improved GuideBot code!
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
@@ -25,7 +27,7 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
 Music in the video:
-Local Forecast - Slower by Kevin MacLeod [incompetech.com](incompetech.com)
+Sweeter Vermouth by Kevin MacLeod [incompetech.com](incompetech.com)
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
 List of Atom addons and themes I use;

@@ -6,7 +6,7 @@ If I got anything wrong in this episode, please keep it to yourself LOL, ignoran
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
-***LINK DUMP***  
+***LINK DUMP***
 
 All of the tutorial source code is available [here](https://github.com/AnIdiotsGuide/Tutorial-Bot)
 
@@ -24,13 +24,15 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
-List of Atom addons and themes I use;  
+List of Atom addons and themes I use;
 Addons:
-* atom-beautify - Glavin001,  
-* highlight-selected - richrace,  
-* linter-eslint - AtomLinter,  
-* seti-icons - wyze and  
-* tokamak-terminal - vertexclique  
+
+* atom-beautify - Glavin001,
+* highlight-selected - richrace,
+* linter-eslint - AtomLinter,
+* seti-icons - wyze and
+* tokamak-terminal - vertexclique
 
 Themes:
+
 * seti-syntax, seti-ui - jesseweed

@@ -35,8 +35,9 @@ client.on("guildMemberAdd", (member) => {
   newUsers.set(member.id, member.user);
 
   if (newUsers.size > 10) {
+    const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const userlist = newUsers.map(u => u.toString()).join(" ");
-    guild.defaultChannel.send("Welcome our new users!\n" + userlist);
+    defaultChannel.send("Welcome our new users!\n" + userlist);
     newUsers.clear();
   }
 });
@@ -47,7 +48,7 @@ Two lines require a little more explanation:
 * `newUsers.map(u => u.toString()).join(" ");` uses the fancy ES6 `map` function to get a mention for each user in the array, then joins them with a space between each.
 * `newUsers.clear()` _resets_ empties the cache completely, so it resets to 0.
 
-## Multiple servers?
+## Multiple servers
 
 The only issue with the above code is that it would only work if your bot is on a single server. Though this might be alright you, there's a chance you want to support multiple servers. How do we do that? We change `newUsers` to an `Array` instead, and each server gets its own cache. Here is a **complete** example that does nothing but welcome new users:
 

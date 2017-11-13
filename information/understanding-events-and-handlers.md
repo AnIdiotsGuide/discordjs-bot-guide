@@ -2,7 +2,7 @@
 
 We already explored one event handler in [Your Basic Bot](/getting-started/your-basic-bot.html), the `message` handler. Now let's take a look at some of the most important handlers that you will use, along with an example.
 
-> _**DO NOT NEST EVENTS**_  
+> _**DO NOT NEST EVENTS**_
 > One important point: Do not nest any events \(aka "put one inside another"\). Ever. Events should be at the "root" level of your code, _beside_ the `message` handler and not within it.
 
 ## The `ready` event and its importance

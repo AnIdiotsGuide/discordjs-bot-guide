@@ -25,6 +25,7 @@ let myRole = message.guild.roles.find("name", "Moderators");
 ```
 
 ### Check if a member has a role
+
 In a `message` handler, you have access to checking the GuildMember class of the message author:
 
 ```js
@@ -39,9 +40,9 @@ if(message.member.roles.has(role.id)) {
 ```js
 // Check if they have one of many roles
 if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
-  // has one of the roles 
+  // has one of the roles
 } else {
-  // has none of the roles 
+  // has none of the roles
 }
 ```
 
@@ -83,6 +84,7 @@ Alright I feel like I have to add a *little* precision here on implementation:
 ## Permission code
 
 ### Check specific permission of a member on a channel
+
 To check for a single permission override on a channel:
 
 ```js

@@ -69,7 +69,7 @@ client.on("message", message => {
 client.login("SuperSecretBotTokenHere");
 ```
 
-## Alright, time to get down to business.
+## Alright, time to get down to business
 
 We need to start the sqlite chain, we don't have to worry about opening the database, as it's opened at the top of our file, so it's loaded when we need it. With sqlite being promise based, we need to start off with a `get` query `then` follow it up with a `catch`
 
@@ -137,7 +137,7 @@ client.on("message", message => {
 client.login("SuperSecretBotTokenHere");
 ```
 
-## DING Level up!
+## DING Level up
 
 Now, what's the point of having all of these points? To level up of course!
 
@@ -166,7 +166,7 @@ if (curLevel > row.level) {
 
 Place that code inside our `row` conditional, above the `update` query.
 
-## Let a user view their level & points.
+## Let a user view their level & points
 
 Now we've got the core of this code done, we need to add a few commands, so as normal we'll add a prefix and ignore messages without a prefix.
 

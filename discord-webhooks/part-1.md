@@ -34,6 +34,7 @@ message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.pn
 // change it to a console.log as you cannot DM yourself
 .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
 ```
+
 This is what it should look like if you test the code.
 ![Created the webhook](/assets/webhooks/wh01.png)
 ![Successfully created webhook](/assets/webhooks/wh02.png)
@@ -43,6 +44,7 @@ This is what it should look like if you test the code.
 Now, that's all well and good, we can create the webhooks and get our bot to DM us, but the values are _hardcoded_, which means if we run that command, we'd get webhooks by the same name / avatar all the time, let's fix that shall we? we'll be looking at the [command arguments](/examples/command-with-arguments.md) page.
 
 You should have a message handler that looks something like this.
+
 ```js
 let prefix = "~";
 client.on("message", message => {
@@ -56,12 +58,15 @@ client.on("message", message => {
   }
 });
 ```
+
 So far so good, but we're going to run into a problem, what if you want to give your webhook a name that contains spaces? Right now you'd end up with the avatar url in the name, so we're going to have to use some _regex_, [Regular Expressions](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions) is very powerful, and very daunting to start out with, but don't worry, the regex I'm going to supply for this example works, just drop it in your code and you're good.
 
 Here's the regex on it's own
+
 ```js
 /https?:\/\/.+\.(?:png|jpg|jpeg)/gi
 ```
+
 Using the above regex with `match`, `replace` and `test` will allow you to isolate the image url in the string and leave the remaining string to be used as the webhook's name, there's an amazing online tool called [regex101.com](https://regex101.com/), with that tool I was able to create the above regex, here's an image of it in action.
 
 ![Regex in action.](/assets/webhooks/wh03.png)

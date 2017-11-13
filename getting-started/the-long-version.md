@@ -2,7 +2,7 @@
 
 So, you want to write a bot and you know some JavaScript, or maybe even node.js. You want to do cool things like a music bot, tag commands, random image searches, the whole shebang. Well you're at the right place!
 
-> **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations.  
+> **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations.
 > TL;DR \(short\) versions: [Windows](/getting-started/windows-tldr.html) , [Linux](/getting-started/linux-tldr.html)
 
 This tutorial will get you through the first steps of creating a bot, configuring it, making it run, and adding a couple of commands to it.
@@ -23,7 +23,7 @@ Click on \(you guessed it!\) **New Application**. This brings you to the followi
 
 ### Create the bot account
 
-Once you click on the **Create Application** button, you're brought to the application page, on which you see 2 new sections, once for the App ID \(keep this one in mind for later\) as well as a section that lets you create the **Bot User**. This is exactly what we want, so go ahead and click **Create a Bot User**, then **Yes, Do it**.  
+Once you click on the **Create Application** button, you're brought to the application page, on which you see 2 new sections, once for the App ID \(keep this one in mind for later\) as well as a section that lets you create the **Bot User**. This is exactly what we want, so go ahead and click **Create a Bot User**, then **Yes, Do it**.
 ![](/assets/gettingstarted/gs2.png)
 
 ### Add your bot to a server
@@ -46,10 +46,10 @@ When you do this, You get shown a window letting you choose the server where to 
 
 > Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really, really important: Your bot's **token** is meant to be **SECRET**. It is the way by which your bot authenticates with the Discord server in the same way that you login to Discord with a username and password. **Revealing your token is like putting your password on the internet**, and anyone that gets this token can use **your** bot connection to do things. Like delete all the messages on your server and ban everyone. If your token ever reaches the internet, **change it immediately**. This includes putting it on pastebin/hastebin, having it in a public github repository, displaying a screenshot of it, anything. **GOT IT? GOOD!**
 
-With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:  
+With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:
 ![](/assets/gettingstarted/gs5.png)
 
-> You need to be  
+> You need to be
 > No, this is not a valid token. Also make **double-sure** you're copying the **Token** and not the **Client Secret**. The latter is not used for bots.
 
 ## Step 2: Getting your coding environment ready
@@ -79,12 +79,11 @@ And now we install Discord.js through NPM, the Node Package Manager:
 
 This will take a couple of heartbeats and display a lot of things on screen. Unless you have a big fat red message saying it didn't work, or package not found, or whatever, you're good to go. If you look at your folder, you'll notice that there's a new folder created here: `node_modules` . This contains all the installed packages for your project.
 
-
 ## Getting your first bot running
 
 > **Note**: I honestly consider that if you don't understand the code you're about to see, coding a bot might not be for you. If you do not understand the following sample, please go to [CodeAcademy](https://www.codecademy.com/learn/javascript) and learn Javascript first. I beg of you: stop, drop, and roll.
 
-Ok finally, we're ready to start coding. **\o/**  
+Ok finally, we're ready to start coding. **\o/**
 Let's take a look at the most basic of examples, the ping-pong bot. Here's the code in its entirety:
 
 ```js
@@ -127,8 +126,8 @@ Now that you have a basic, functional bot, it's time to start adding new feature
 
 Before you start getting support from Discord servers to help you with your bot, I strongly advise taking a look at the following, very useful, resources.
 
-- [Discord.js Documentation](http://discord.js.org) : For the love of all that is (un)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
-- [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
-- [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series (which is good, though no longer maintained with new videos!) gets you started with bots.
-- [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
-- [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
+* [Discord.js Documentation](http://discord.js.org) : For the love of all that is (un)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+* [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
+* [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series (which is good, though no longer maintained with new videos!) gets you started with bots.
+* [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
+* [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!

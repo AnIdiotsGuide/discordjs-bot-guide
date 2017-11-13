@@ -13,7 +13,7 @@ Commands used in the video;
 
 `npm --version` - This will show you what version of NPM you're running.
 
-`sudo apt-get remove --purge node* npm*` - This will remove ***ALL*** traces of Nodered.  
+`sudo apt-get remove --purge node* npm*` - This will remove ***ALL*** traces of Nodered.
 >***NOTE:*** There has been conflicting information regarding the purge command, a small number of people have claimed it has messed up their Raspbian installation, so please ***USE AT YOUR OWN RISK***, I cannot be held responsible if it does go wrong, as I encountered no issues running these commands in this order.
 
 `curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -` - This will download everything required for node to be installed.

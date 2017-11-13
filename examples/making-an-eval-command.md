@@ -30,7 +30,9 @@ So how do you secure it? Simple: only allow use from your own user ID. So for ex
   "ownerID": "139412744439988224"
 }
 ```
+
 In the code for the bot:
+
 ```js
 if(message.author.id !== config.ownerID) return;
 ```
@@ -53,7 +55,9 @@ function clean(text) {
       return text;
 }
 ```
+
 It's ES6 variant:
+
 ```js
 const clean = text => {
   if (typeof(text) === "string")

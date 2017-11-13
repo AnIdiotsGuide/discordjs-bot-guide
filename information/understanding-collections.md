@@ -21,13 +21,13 @@ If you don't have the ID but only some other property, you may use `find()` to s
 
 `let guild = client.guilds.find("name", "Discord.js Official");`
 
-The `.find()` method also accepts a function. The _first_ result that returns `true` within the function, will be returned. The generic idea of this is: 
+The `.find()` method also accepts a function. The _first_ result that returns `true` within the function, will be returned. The generic idea of this is:
 
 `let result = <Collection>.find(item => item.property === "a value")`
 
 Obviously this looks a lot like the key/value find above. However, using a custom function means you can also be looking at other data, properties not a the top level, etc. Your imagination is the limit.
 
-Want a great example? Here's getting the first role that matches one of 4 role names: 
+Want a great example? Here's getting the first role that matches one of 4 role names:
 
 ```js
 const acceptedRoles = ["Mod", "Moderator", "Staff", "Mod Staff"];
@@ -35,7 +35,7 @@ const getModRole = member.roles.find(role => acceptedRoles.includes(role.name));
 if(!modRole) return "No role found";
 ```
 
-> Don't need to return the actual role? `.some()` might be what you need. It's faster than find, but will only return a boolean true/false if it finds something: 
+> Don't need to return the actual role? `.some()` might be what you need. It's faster than find, but will only return a boolean true/false if it finds something:
 > ```js
 > const hasModRole = member.roles.some(r => acceptedRoles.includes(role.name));
 > // hasModRole is boolean.
@@ -51,15 +51,15 @@ _Collections_ also have a custom way to filter their content with an anonymous f
 
 ## Mapping Fields
 
-One great thing you can do with a collection is to grab specific data from it with `map()`, which is useful when listing stuff. `<Collection>.map()` takes a function which returns a string. Its result is an array of all the strings returned by each item. Here's an example: let's get a complete list of all the guilds a bot is in, by name: 
+One great thing you can do with a collection is to grab specific data from it with `map()`, which is useful when listing stuff. `<Collection>.map()` takes a function which returns a string. Its result is an array of all the strings returned by each item. Here's an example: let's get a complete list of all the guilds a bot is in, by name:
 
 ```js
 const guildNames = client.guilds.map(g => g.name).join("\n")
 ```
 
-Since `.join()` is an array method, which links all entries together, we get a nice list of all guilds, with a line return between each. Neat! 
+Since `.join()` is an array method, which links all entries together, we get a nice list of all guilds, with a line return between each. Neat!
 
-We can also get a most custom string. Let's pretend the `user.tag` property doesn't exist, and we wanted to get all the user#discrim in our bot. Here's how we'd do it (using awesome template literals): 
+We can also get a most custom string. Let's pretend the `user.tag` property doesn't exist, and we wanted to get all the user#discrim in our bot. Here's how we'd do it (using awesome template literals):
 
 ```js
 const tags = client.users.map(u=> `${u.username}#${u.discriminator}`).join(", ");
@@ -67,7 +67,7 @@ const tags = client.users.map(u=> `${u.username}#${u.discriminator}`).join(", ")
 
 ## Combining and Chaining
 
-In a lot of cases you can definitely chain methods together for really clean code. For instance, this is a comma-delimited list of all the small guilds in a bot: 
+In a lot of cases you can definitely chain methods together for really clean code. For instance, this is a comma-delimited list of all the small guilds in a bot:
 
 ```js
 const smallGuilds = client.guilds.filter(g => g.memberCount < 10).map(g => g.name).join("\n");

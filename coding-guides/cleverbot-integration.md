@@ -1,4 +1,4 @@
-# You think you're so clever do you?
+# Cleverbot Integration
 
 I've had this request since I started my Idiot's Guide, in fact it was one of the very first requests I had, but I had a feeling it would be a disappointing short episode, maybe a 5 minute long episode. But for a written guide it'd be perfect!
 
@@ -96,5 +96,6 @@ client.on("ready", () => {
 client.login("superSecretBotTokenHere");
 ```
 
-If everything is as above, then just send your bot a DM and watch the magic unfold!  
+If everything is as above, then just send your bot a DM and watch the magic unfold!
+
 ![Success!](/assets/cleverbot.png)

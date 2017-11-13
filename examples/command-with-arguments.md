@@ -4,19 +4,20 @@ In [Your First Bot](/getting-started/your-basic-bot.md), we explored how to make
 
 ## Creating an array of arguments
 
-The first thing that we need to do to use arguments, is to actually separate them. A command with arguments would normally look something like this:  
+The first thing that we need to do to use arguments, is to actually separate them. A command with arguments would normally look something like this:
 `!mycommand arg1 arg2 arg3`
 
-In this, we need to do 3 things: 
+In this, we need to do 3 things:
 
 - Remove the prefix
 - Grab the *command* part (`mycommand`)
-- Grab the *array* of *arguments* which will be: 
+- Grab the *array* of *arguments* which will be:
+
 `['arg1', 'arg2', 'arg3']`
 
 In the greatest majority of the code I've seen, arguments are *split* at the beginning of the code, and each command will put the argument array back together as necessary within the command code.
 
-In my experience, the best (and most efficient) way of separating all these things is the following 2 lines of code: 
+In my experience, the best (and most efficient) way of separating all these things is the following 2 lines of code:
 
 ```js
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -25,24 +26,23 @@ In my experience, the best (and most efficient) way of separating all these thin
 
 Let's break this down into what it *actually* does, line by line.
 
-- `.slice(prefix.length)` removes the prefix such as `!` or `+` from the message content, leaving `mycommand arg1 arg2 arg3`. 
+- `.slice(prefix.length)` removes the prefix such as `!` or `+` from the message content, leaving `mycommand arg1 arg2 arg3`.
 - `.trim()` ensures there's no extra spaces before/after the text.
 - `.split(/ +/g)` splits the string by *one or many spaces*. Why not just by space? Because sometimes especially on mobile, you might have an extra space before or after mentions, or just straight up to an extra space by mistake. This means that `mycommand    arg1  arg2        arg3` will work just as well as if they only had 1 space.
 
-On the second line: 
+On the second line:
 
 - `args.shift()` where `shift()` will **remove one element from the array** and return it. This gives us `mycommand` that's returned, and the `args` array becomes only `['arg1', 'arg2','arg3']`
 - `.toLowerCase()` so our command is always in lowercase, meaning `!Ping`, `!ping` and `!PiNg` will all work.
 
-
 ## Using the `command` variable properly
 
-So now that we have our `command` variable, we no longer need to use the `if(message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands: 
+So now that we have our `command` variable, we no longer need to use the `if(message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands:
 
 ```js
 if(command === 'ping') {
   message.channel.send('Pong!');
-} else 
+} else
 if (command === 'blah') {
   message.channel.send('Meh.');
 }
@@ -50,7 +50,7 @@ if (command === 'blah') {
 
 Now isn't that just so pretty and clean? I love it!
 
-Alternatively, you can also use this in a switch/case command block (I don't like it, but to each their own, right?): 
+Alternatively, you can also use this in a switch/case command block (I don't like it, but to each their own, right?):
 
 ```js
 switch (command) {
@@ -65,7 +65,7 @@ switch (command) {
 
 ## Working with the arguments
 
-Alright let's get to the meat of this page: actually using the `args` array in a few command examples. 
+Alright let's get to the meat of this page: actually using the `args` array in a few command examples.
 
 The first one is a perfectly useless command, but for the life of me, I can't actually think of a really simple command using only one-word arguments. So here is a ridiculous ASL command:
 
@@ -125,7 +125,7 @@ So, the reason is obtained by removing the first elements (the mention, which lo
 
 To use this command, a user would do something like: `!kick @SuperGamerDude Obvious Troll, shitposting`.
 
-Here's another example, with a super simple command, the `say` command. It makes the bot say what you just sent, and then delete your message: 
+Here's another example, with a super simple command, the `say` command. It makes the bot say what you just sent, and then delete your message:
 
 ```js
 if(command === "say"){
@@ -137,7 +137,7 @@ if(command === "say"){
 
 > If you're thinking, "What if I have more than one argument with spaces?", yes that's a tougher problem. Ideally, if you need more than one argument with spaces in it, do not use spaces to split the arguments. For example, `!newtag First Var Second Var Third Var` won't work. But `!newtag First Var;Second Var;Third Var;` could work by removing the command, splitting by `;` then splitting by space. Not for the faint of heart!
 
-### Let's be fancy with ES6 again!
+### Let's be fancy with ES6 again
 
 Destructuring has a `...rest` feature that lets you take "the rest of the array" and put it in a single variable. To demonstrate this, let me show you part of a code I use in a "save message" command. Basically, I store a message to a database, with a name. I call this command using: `!quote <channelid> <messageID> quotename note`, where `quotename` is a single word and `note` may be multiple words. The *actual* command code is unimportant. However, the way I process these arguments, is useful:
 

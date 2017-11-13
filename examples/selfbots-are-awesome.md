@@ -56,7 +56,7 @@ In the case of a selfbot, this token can be obtained from the Discord applicatio
 
 ![](https://cdn.discordapp.com/attachments/222079895583457280/269164273152819200/user-token.gif)
 
-**KEEP YOUR TOKEN SECRET, AND NEVER SHARE IT WITH ANYONE**
+# KEEP YOUR TOKEN SECRET, AND NEVER SHARE IT WITH ANYONE
 
 I've already covered why Bot Tokens should remain secret in the [Getting Started](/getting-started/the-long-version.md) guide. But this is **even more** critical. If someone gets a hold your personal token, **they are you**. They can pretend to be you, send messages as you. **They can also massively fuck up any server where you have permissions**. Like transfer server control to themselves. Have I stated clearly enough that you should be careful with your token? Ok, good!
 

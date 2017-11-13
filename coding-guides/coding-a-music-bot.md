@@ -1,4 +1,4 @@
-#Coding a Music Bot
+# Coding a Music Bot
 
 Everyone including their grandparents want to create a music bot, I myself have created a music bot and believe me it's not as easy as you would think.
 

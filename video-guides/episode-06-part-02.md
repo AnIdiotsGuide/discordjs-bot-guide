@@ -6,7 +6,7 @@ This is the second part (final) of the handlers episode, I want to apologise for
 
 Please let me know what you think to the series, and suggest things for me to cover in future episodes, I have a mental road map I will be following, but I may throw in the odd episode dedicated to requests.
 
-***LINK DUMP***  
+***LINK DUMP***
 
 You can get the Komada Handler framework [here](https://github.com/eslachance/komada/tree/61cd70b3f210c4e0b68c1a3405a0e5612979b7ff)
 
@@ -26,17 +26,19 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
-Music in the video:  
-Local Forecast - Slower by Kevin MacLeod [incompetech.com](incompetech.com)  
+Music in the video:
+Local Forecast - Slower by Kevin MacLeod [incompetech.com](incompetech.com)
 Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
-List of Atom addons and themes I use;  
+List of Atom addons and themes I use;
 Addons:
-* atom-beautify - Glavin001,  
-* highlight-selected - richrace,  
-* linter-eslint - AtomLinter,  
-* seti-icons - wyze and  
-* tokamak-terminal - vertexclique  
+
+* atom-beautify - Glavin001,
+* highlight-selected - richrace,
+* linter-eslint - AtomLinter,
+* seti-icons - wyze and
+* tokamak-terminal - vertexclique
 
 Themes:
+
 * seti-syntax, seti-ui - jesseweed

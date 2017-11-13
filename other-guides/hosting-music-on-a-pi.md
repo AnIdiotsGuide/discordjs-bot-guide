@@ -22,7 +22,7 @@ Commands used in the video;
 
 `pm2 monit` This will pull up a live monitor so you can watch the resources.
 
-***LINK DUMP***  
+***LINK DUMP***
 
 AoDude's OhGodMusicBot is available [here](https://github.com/bdistin/OhGodMusicBot)
 
@@ -40,13 +40,15 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
-List of Atom addons and themes I use;  
+List of Atom addons and themes I use;
 Addons:
-* atom-beautify - Glavin001,  
-* highlight-selected - richrace,  
-* linter-eslint - AtomLinter,  
-* seti-icons - wyze and  
-* tokamak-terminal - vertexclique  
+
+* atom-beautify - Glavin001,
+* highlight-selected - richrace,
+* linter-eslint - AtomLinter,
+* seti-icons - wyze and
+* tokamak-terminal - vertexclique
 
 Themes:
+
 * seti-syntax, seti-ui - jesseweed
