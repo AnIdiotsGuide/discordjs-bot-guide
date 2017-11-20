@@ -164,8 +164,6 @@ You can then access this from anywhere using `process.env.TOKEN`, so again with 
   "token": process.env.TOKEN,
 ```
 
-
-
 ### Getting Help
 
 Here are a few Glitch resources:
