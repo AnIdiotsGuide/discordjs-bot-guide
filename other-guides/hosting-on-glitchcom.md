@@ -39,6 +39,8 @@ First off, **Secure the project**. By default, anyone with your project's name c
 - Click on **Make Private**.
 - You can still invite people to view and collaborate later, with the link provided.
 
+>***NOTE:*** If you make your project private, people can snoop if you accidentally give out the project name and see the tokens in your env file, if you leave it public they can view your code, but cannot view any tokens inside the env file.
+
 The next thing is, **Name the project**. Now, projects work through express.js whether you really want to or not. Later on you can learn to make a dashboard but for now, we just need to set it up to keep it alive.
 
 - Click on the project name at the top-left of the screen (mine was `best-glue`, these guys know what I sniff I tell ya!)
@@ -96,6 +98,8 @@ setInterval(() => {
 ```
 
 What does this do? Keeps an express.js server alive, which does not really affect your project in and of itself, and pings itself every 5 minutes, so it never shuts off. Awesome.
+
+>***NOTE:*** For best results, have an outside source pinging the project address as well, glitch.com suggests using [Uptime Robot](https://uptimerobot.com/).
 
 ## Package.json
 
@@ -159,6 +163,8 @@ You can then access this from anywhere using `process.env.TOKEN`, so again with 
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
   "token": process.env.TOKEN,
 ```
+
+
 
 ### Getting Help
 

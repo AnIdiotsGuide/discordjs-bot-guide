@@ -15,9 +15,9 @@ You didn't install Discord.js or installed it in the wrong folder
 
 ### `Error: getaddrinfo ENOTFOUND gateway.discord.gg gateway.discord.gg:443`
 
-#### Problem: 
+#### Problem:
 
-Your internet went down. 
+Your internet went down.
 
 #### Solution:
 

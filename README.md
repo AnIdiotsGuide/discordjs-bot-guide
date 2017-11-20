@@ -1,6 +1,7 @@
 # Discord.js Getting Started
 
 ## Introduction
+
 This guidebook was originally authored by eslachance#4611 then handed down to me for future updates, but when she started the book originally it was because the examples for discord.js and the documentation were quite daunting for newcomers. There was definitely a space for this kind of document online, made obvious by the recurring questions that pop up almost every day on the support channels.
 
 Seeing as though there needed to be some more detailed explanations as well as code samples, She figured a guide would be a great place to start!
@@ -23,6 +24,4 @@ If you have any questions after reading this guide please join us on the officia
 
 [![Join the Official Idiot's Guide Server](/assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](/assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
 
-Last Updated: `26/08/2017`
-
-On Version: `12.3.5`
+Last Updated: `13/11/2017`

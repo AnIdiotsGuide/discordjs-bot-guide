@@ -50,7 +50,7 @@ message.mentions.members.first();
 ```js
 // Send a Direct Message to a user
 message.author.send("hello");
-// With Member it works too: 
+// With Member it works too:
 message.member.send("Heya!");
 ```
 
@@ -105,7 +105,7 @@ message.guild.channels.find("name", "channel-name");
 
 ```js
 // Create an invite and send it in the channel
-message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>  
+message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
     message.channel.send(invite.url)
 );
 ```
@@ -123,25 +123,24 @@ const getDefaultChannel = async (guild) => {
   // Check for a "general" channel, which is often default chat
   if(guild.channels.exists("name", "general"))
     return guild.channels.find("name", "general");
-  
   // Now we get into the heavy stuff: first channel in order where the bot can speak
   // hold on to your hats!
   return guild.channels
    .filter(c => c.type === "text" &&
      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
-   .sort((a, b) => a.position - b.position || 
+   .sort((a, b) => a.position - b.position ||
      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
    .first();
 }
 
-// This is called as, for instance: 
+// This is called as, for instance:
 client.on("guildMemberAdd", member => {
   const channel = getDefaultChannel(member.guild);
   channel.send(`Welcome ${member} to the server, wooh!`);
 });
 ```
 
-It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people. 
+It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
 
 Consider using [Persistent Collections](/coding-guides/using-persistentcollections.md) instead and let server admins **choose** a default output channel for you!
 
