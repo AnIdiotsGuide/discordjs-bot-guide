@@ -37,7 +37,7 @@ if(!modRole) return "No role found";
 
 > Don't need to return the actual role? `.some()` might be what you need. It's faster than find, but will only return a boolean true/false if it finds something:
 > ```js
-> const hasModRole = member.roles.some(r => acceptedRoles.includes(role.name));
+> const hasModRole = member.roles.some(role => acceptedRoles.includes(role.name));
 > // hasModRole is boolean.
 > ```
 
