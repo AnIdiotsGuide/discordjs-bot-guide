@@ -8,13 +8,14 @@ In this page, some very basic, frequently-asked questions are answered. It's imp
 
 ```js
 // Set the bot's "Playing: " status (must be in an event!)
+// NOTE: THIS METHOD IS DEPRECATED AS OF VERSION 11.3 AND WILL BE REMOVED IN VERSION 12
 client.on("ready", () => {
     client.user.setGame("with my code");
 });
 
-// NOTE: CURRENTLY BROKEN IN DISCORD.JS 9 THROUGH 11.1. USE THIS INSTEAD:
+// NOTE: INTRODUCED IN VERSION 11.3 AND REPLACES setGame
 client.on("ready", () => {
-    client.user.setPresence({game: {name: "with my code", type: 0}});
+    client.user.setActivity({game: {name: "with my code", type: 0}});
 });
 ```
 
