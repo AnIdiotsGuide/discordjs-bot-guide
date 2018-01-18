@@ -1,3 +1,9 @@
+# This page has been archived for historical purposes.
+
+***DO NOT USE A SELFBOT ANYMORE, YOU WILL GET BANNED***
+
+![](https://cdn.discordapp.com/attachments/81384788765712384/374827488171261953/unknown.png)
+
 # Selfbots, the greatest thing in the universe
 
 So, my friend, you are wondering what is a selfbot? Well let me tell you a little story.
