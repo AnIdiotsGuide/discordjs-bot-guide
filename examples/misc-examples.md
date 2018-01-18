@@ -22,7 +22,7 @@ A "Placeholder" is a piece of text that *replaces something else*. In these FAQs
 This example sends a question and waits to receive a message response that says `test`.
 
 ```js
-message.channel.sendMessage('What tag would you like to see? This will await will be cancelled in 30 seconds. It will finish when you provide a message that goes through the filter the first time.')
+message.channel.send('What tag would you like to see? This will await will be cancelled in 30 seconds. It will finish when you provide a message that goes through the filter the first time.')
 .then(() => {
   message.channel.awaitMessages(response => response.content === 'test', {
     max: 1,
