@@ -15,7 +15,7 @@ It should have been made obvious with the user of `client.on("message")` which t
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.user.setGame("Online!");
+client.user.setActivity("Online!");
 
 client.login("SuperSecretBotTokenHere");
 ```
@@ -28,7 +28,7 @@ Here's a simple example of using the `ready` event handler:
 
 ```js
 client.on("ready", () => {
-  client.user.setGame(`on ${client.guilds.size} servers`);
+  client.user.setActivity(`on ${client.guilds.size} servers`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 ```
