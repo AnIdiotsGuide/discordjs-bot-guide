@@ -1,6 +1,8 @@
-# Storing Data in a JSON file
+# This page has been archived for historical purposes.
 
-This page has been removed due to a number of people having issues with JSON storage becoming corrupted when using it as a database.
+Please use something other than JSON if you want to read & write from / to it.
+
+# Storing Data in a JSON file
 
 ## Why is JSON prone to corruption?
 

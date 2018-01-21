@@ -164,6 +164,19 @@ You can then access this from anywhere using `process.env.TOKEN`, so again with 
   "token": process.env.TOKEN,
 ```
 
+### F.A.Q.
+
+- `X was compiled against a different Node.js version`
+
+That error means you forgot to set your engines in your package file, make sure you have added `"engines": { "node": "8.4.0" }` to your package, you can also use the following commands in the console (you can access the console by going to your Project Name > Advanced Options > Open Console), `nvm use NODE VERSION`, followed by `npm rebuild`, that should eliminate the error.
+
+- "My bot goes down after X"
+
+Glitch puts projects to sleep after 5 minutes of inactivity, with the code you used near the start of the guide you should have at least one step towards keeping your bot online 24/7, how ever there is another tool you can use, and this is promoted by the Glitch team, and that tool is [Uptime Robot](https://uptimerobot.com/).
+
+First you will need to go to the web address of your project (`https://project-name.glitch.me`).
+Then login to Uptime Robot and click on `+ Add new monitor`, set **monitor type** as `HTTP(S)`, give the monitor a name and in the **URL** field paste in your glitch project URL. Don't forget to set the **monitoring interval** to `Every 5 minutes (default)`, click save and job's done!
+
 ### Getting Help
 
 Here are a few Glitch resources:

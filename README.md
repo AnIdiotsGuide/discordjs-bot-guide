@@ -22,6 +22,6 @@ And I am honoured to be continuing it.
 
 If you have any questions after reading this guide please join us on the official Discord.js server:
 
-[![Join the Official Idiot's Guide Server](/assets/idiotsguidejoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](/assets/discordofficialjoin.png)](https://discord.gg/bRCvFy9)
+[![Join the Official Idiot's Guide Server](/assets/aigjoin.png)](https://discord.gg/gkZCQtH)[![Join the Official Discord.js Server](/assets/djsjoin.png)](https://discord.gg/bRCvFy9)
 
-Last Updated: `18/02/2018`
+Last Updated: `21/01/2018`
