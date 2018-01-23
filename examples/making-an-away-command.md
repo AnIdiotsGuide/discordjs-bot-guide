@@ -11,6 +11,7 @@ const away = new Discord.Collection();
 
 Now lets make the away command.
 ```js
+
 const prefix = '/';
 if (message.content.startsWith(prefix + 'away')) {
 
@@ -19,7 +20,6 @@ if (message.content.startsWith(prefix + 'away')) {
 This checks if the message starts with '/away' and if it does, it'll continue with the rest of the code.
 
 ```js
-const prefix = '/';
 if (message.content.startsWith(prefix + 'away')) {
     const reason = args.join(' ');
     if (!away.has(message.author.id)) {
@@ -30,7 +30,6 @@ if (message.content.startsWith(prefix + 'away')) {
 We then check whether the user's id is not in the collection, and if it is not then we will add the ID and the reason to the collection. To define reason it to the collection, take a look at [Command with arguments](./command-with-arguments.md).
 
 ```js
-const prefix = '/';
 if(message.content.startsWith(prefix + 'away')) {
     const reason = args.join(' ');
     if (!away.has(message.author.id)) {
@@ -46,7 +45,6 @@ if(message.content.startsWith(prefix + 'away')) {
 We'll now check if the user is already away, because if they are away, we want them to be able to remove their 'away' state. if the away collection has the user's ID, it'll remove it from the collection.
 
 ```js
-const prefix = '/';
 if (message.content.startsWith(prefix + 'away')) {
     const reason = args.join(' ');
     if (!away.has(message.author.id)) {
@@ -76,7 +74,7 @@ We then do a for loop in the new collection we've created. This allows us to che
 client.on('message', message => {
     for (const user of away.keys()); {
         if (message.mentions.has(user)) {
-                return message.channel.send(`This user is currenty away for reason: ${away.get(awaypeople[i])}`);
+                return message.channel.send(`This user is currenty away for reason: ${away.get(user)}`);
         }
     };      
 });
