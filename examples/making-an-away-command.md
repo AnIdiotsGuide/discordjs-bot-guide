@@ -91,6 +91,7 @@ It's normal if your code doesn't look like this. Everyone makes mistakes. Hopefu
 client.on('message', message => {
     let args = message.content.split(' '); //split the message per space
     args = args.splice(1) //remove the first word, i.e the command.
+    
     for (const user of away.keys()) {
         if (message.mentions.has(user)) {
             return message.channel.send(`This user is currenty away for reason: ${away.get(user)}`);
