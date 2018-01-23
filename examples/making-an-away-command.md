@@ -26,7 +26,7 @@ if(message.content.startsWith(prefix + 'away')) {
     };
 };
 ```
-We then check whether the user's id is not in the collection, and if it is not then we will add the ID and the reason to the collection. To define reason it to the collection, take a look at [Command with arguments](/command-with-arguments.md).
+We then check whether the user's id is not in the collection, and if it is not then we will add the ID and the reason to the collection. To define reason it to the collection, take a look at [Command with arguments](./command-with-arguments.md).
 
 ```js
 const prefix = '/';
