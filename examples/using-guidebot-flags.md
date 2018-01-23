@@ -59,7 +59,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
       // Find the role on the guild.
       const role = message.guild.roles.find('name', name);
       // End the command if the bot cannot find the role on the server.
-      if (!role) return message.reply('I can't seem to find that role.');
+      if (!role) return message.reply('I can\'t seem to find that role.');
       member.addRole(role).catch(e => {
         return message.channel.send(`Something went wrong! **Error:**\n${e}`);
       });
@@ -76,7 +76,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
       // Find the role on the guild.
       const role = message.guild.roles.find('name', name);
       // End the command if the bot cannot find the role on the server.
-      if (!role) return message.reply('I can't seem to find that role.');
+      if (!role) return message.reply('I can\'t seem to find that role.');
       member.removeRole(role).catch(e => {
         return message.channel.send(`Something went wrong! **Error:**\n${e}`);
       });
