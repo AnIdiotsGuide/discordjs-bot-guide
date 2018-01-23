@@ -10,7 +10,7 @@ Switch cases are a nice feature that can be used without the `message.flags` fea
 // This will look for the first argument. If your command was 'hi', and you did 'hi send', it would send 'Hi!' to the channel.
 const trigger = args[0];
 
-switch (trigger) {  
+switch (args[0]) {  
   case 'send': {
     // This will send in the channel that the command was run in.
     message.channel.send('Hi!');
@@ -28,11 +28,11 @@ However, you can use the switch case with `message.flags`.
 
 ```js
   // This will look for the first argument beginning with -, the flag. If your command was 'hi', and you did 'hi -send', it would send 'Hi!' to the channel.
-  switch (message.flags[0]) {
-    case 'send': {
-      // This will send in the channel that the command was run in.
-      message.channel.send('Hi!');
-      break;
+switch (message.flags[0]) {
+  case 'send': {
+    // This will send in the channel that the command was run in.
+    message.channel.send('Hi!');
+    break;
   }
 
   case 'dm': {
@@ -52,9 +52,9 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     // This would be 'role -add'.
     case 'add': {
       // Check if the message mentions a user.
-      if (!message.mentions.users) return message.reply('Please mention a user to give the role to.');
-      const member = message.guild.member(message.mentions.users.first());
-      // This is the name of the role. F`or example, if you do 'role -add @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
+      if (message.mentions.users.size === 0) return message.reply('Please mention a user to give the role to.');
+      const member = message.guild.member(message.mentions.member);
+      // This is the name of the role. For example, if you do 'role -add @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
       const name = args.slice(1).join(' ');
       // Find the role on the guild.
       const role = message.guild.roles.find('name', name);
@@ -64,15 +64,15 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         member.addRole(role);
         message.channel.send(`I've added the ${name} role to ${member.dsiplayName}.`)
       } catch (e) {
-        throw e;
+        console.log(e);
       }
       break;
     }
 
     case 'remove': {
     // Check if the message mentions a user.
-      if (!message.mentions.users) return message.reply('Please mention a user to take the role from.');
-      const member = message.guild.member(message.mentions.users.first());
+      if (message.mentions.users.size === 0) return message.reply('Please mention a user to take the role from.');
+      const member = message.guild.member(message.mentions.member);
       // This is the name of the role. For example, if you do 'role -remove @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
       const name = args.slice(1).join(' ');
       // Find the role on the guild.
@@ -84,7 +84,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         member.removeRole(role);
         message.channel.send(`I've removed the ${name} role from ${member.displayName}.`)
       } catch (e) {
-        throw e;
+        console.log(e);
       }
     }
   }
