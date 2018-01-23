@@ -47,12 +47,12 @@ switch (message.flags[0]) {
 Let's say you're trying to make a command to add or take a role to/from a user. This can be consolidated into one command using `message.flags`. This command is based off of the [Guidebot](https://github.com/AnIdiotsGuide/guidebot) framework, and is called role.
 
 ```js
-exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars 
+exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars 
   switch (message.flags[0]) {
     // This would be 'role -add'.
     case 'add': {
       // Check if the message mentions a user.
-      if (message.mentions.users.size === 0) return message.reply('Please mention a user to give the role to.');
+      if (message.mentions.mentions.size === 0) return message.reply('Please mention a user to give the role to.');
       const member = message.mentions.members.first();
       // This is the name of the role. For example, if you do 'role -add @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
       const name = args.slice(1).join(' ');
@@ -71,7 +71,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
 
     case 'remove': {
     // Check if the message mentions a user.
-      if (message.mentions.users.size === 0) return message.reply('Please mention a user to take the role from.');
+      if (message.mentions.mentions.size === 0) return message.reply('Please mention a user to take the role from.');
       const member = message.mentions.members.first();
       // This is the name of the role. For example, if you do 'role -remove @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
       const name = args.slice(1).join(' ');
