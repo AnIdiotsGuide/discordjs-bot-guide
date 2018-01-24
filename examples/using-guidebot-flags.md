@@ -25,7 +25,7 @@ switch (args[0]) {
 However, you can use the switch case with `message.flags`.
 
 ```js
-  // This will look for the first argument beginning with -, the flag. If your command was 'hi', and you did 'hi -send', it would send 'Hi!' to the channel.
+// This will look for the first argument beginning with -, the flag. If your command was 'hi', and you did 'hi -send', it would send 'Hi!' to the channel.
 switch (message.flags[0]) {
   case 'send': {
     // This will send in the channel that the command was run in.
@@ -68,7 +68,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
 
     case 'remove': {
-    // Check if the message mentions a user.
+      // Check if the message mentions a user.
       if (message.mentions.members.size === 0) return message.reply('Please mention a user to take the role from.');
       const member = message.mentions.members.first();
       // This is the name of the role. For example, if you do 'role -remove @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
