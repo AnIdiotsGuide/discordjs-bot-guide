@@ -33,6 +33,7 @@
   * [Message Reply Array](examples/message-reply-array.md)
   * [Making an Eval command](examples/making-an-eval-command.md)
   * [Miscellaneous Examples](examples/misc-examples.md)
+  * [Using Guidebot's Flags](examples/using-guidebot-flags.md)
 * [Discord Webhooks](discord-webhooks.md)
   * [Discord Webhooks \(Part 1\)](discord-webhooks/part-1.md)
   * [Discord Webhooks \(Part 2\)](discord-webhooks/part-2.md)
