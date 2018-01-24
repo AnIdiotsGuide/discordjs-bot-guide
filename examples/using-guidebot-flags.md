@@ -8,8 +8,6 @@ Switch cases are a nice feature that can be used without the `message.flags` fea
 
 ```js
 // This will look for the first argument. If your command was 'hi', and you did 'hi send', it would send 'Hi!' to the channel.
-const trigger = args[0];
-
 switch (args[0]) {  
   case 'send': {
     // This will send in the channel that the command was run in.
