@@ -60,7 +60,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       if (!role) return message.reply('I can\'t seem to find that role.');
       try {
         await member.addRole(role);
-        await message.channel.send(`I've added the ${name} role to ${member.dsiplayName}.`)
+        await message.channel.send(`I've added the ${name} role to ${member.dsiplayName}.`);
       } catch (e) {
         console.log(e);
       }
@@ -77,9 +77,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       const role = message.guild.roles.find('name', name);
       // End the command if the bot cannot find the role on the server.
       if (!role) return message.reply('I can\'t seem to find that role.');
-       try {
+      try {
         await member.removeRole(role);
-        await message.channel.send(`I've removed the ${name} role from ${member.displayName}.`)
+        await message.channel.send(`I've removed the ${name} role from ${member.displayName}.`);
       } catch (e) {
         console.log(e);
       }
