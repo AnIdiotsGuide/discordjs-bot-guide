@@ -106,7 +106,8 @@ message.guild.channels.find("name", "channel-name");
 
 ```js
 // Create an invite and send it in the channel
-// Will only work for GuildChannel
+// You can only create an invite from a GuildChannel
+// Messages can only be sent to a TextChannel
 message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
     message.channel.send(invite.url)
 );
