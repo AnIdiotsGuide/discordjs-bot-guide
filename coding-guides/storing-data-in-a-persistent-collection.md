@@ -13,10 +13,10 @@ const Enmap = require("enmap");
 const EnmapLevel = require("enmap-level");
 
 const pointProvider = new EnmapLevel({name: "points"});
-this.points = new Enmap({provider: pointProvider});
+client.points = new Enmap({provider: pointProvider});
 ```
 
-That will create a new Enmap under the name of points, and attaches it to the client extention so it can be used where ever you have access to the client object.
+That will create a new Enmap under the name of points, and attaches it to the client extention so it can be used where ever you have access to the client object. This should be in your main app file, where your client is defined.
 
 Now before we move to the `/modules/functions.js` file to add a _"monitor"_, we want to add this line to the message event, just below `if (message.author.bot) return`:
 
