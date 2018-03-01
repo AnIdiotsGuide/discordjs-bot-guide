@@ -4,7 +4,7 @@ This is a long awaited feature, requested by many people.
 
 Let's begin by talking about what a starboard is. This is an example taken from the Discord.js Official Server.
 
-![Starboard](assets/starboard.png)
+![Starboard](/assets/starboard.png)
 
 > Before we start, there is one thing you need to now. This code is compatible with only Guidebot Class. This is due to a restriction with passing `client` to the messageReactionAdd and messageReactionRemove events.
 
