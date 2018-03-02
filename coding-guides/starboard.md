@@ -82,7 +82,7 @@ Let's keep going.
 
 ```js
 async run(reaction, user) {
-  const message = message;
+  const message = reaction.message;
   const { starboardChannel } = this.client.settings.get(message.guild.id)
   if (reaction.emoji.name !== '⭐') return;
   if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
