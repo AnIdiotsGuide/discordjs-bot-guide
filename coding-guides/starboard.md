@@ -94,7 +94,7 @@ This is some simple setup for later on. For ease, I define message as `message`,
 
 ```js
 async run(reaction, user) {
-  const message = message;
+  const message = reaction.message;
   const { starboardChannel } = this.client.settings.get(message.guild.id)
   if (reaction.emoji.name !== '⭐') return;
   if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
@@ -220,5 +220,61 @@ module.exports = class {
       throw error;
     }
   }
+};
+```
+
+Okay, I lied. We're not actually done, we haven't handled a reaction being removed yet. I'm not going to walk you through it, since it's just a modified version of the reactionAdd event.
+
+```js
+module.exports = class {
+  constructor(client) {
+    this.client = client;
+
+    this.starEmbed = async (color, description, author, authorURL, timestamp, footer, image) => {
+      const embed = { 
+        'color': color, 
+        'description': description, 
+        'author': { 
+          'name': author,
+          'url': authorURL
+        },
+        'image': { 
+          'url': image 
+        }, 
+        'timestamp': timestamp, 
+        'footer': { 
+          'text': footer 
+        } 
+      };
+      return embed; 
+    };
+
+    this.extension = async (reaction, attachment) => {
+      const imageLink = attachment.split('.');
+      const typeOfImage = imageLink[imageLink.length - 1];
+      const image = /(jpg|jpeg|png|gif)/gi.exec(typeOfImage);
+      if (!image) return '';
+      return attachment;
+    };
+  }
+
+  async run(reaction, user) {
+    const message = reaction.message
+    const { starboardChannel } = this.client.settings.get(message.guild.id)
+    if (reaction.emoji.name !== '⭐') return;
+    try {
+      const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
+      const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
+      if (stars) {
+        const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
+        const _star = stars.embeds[0];
+        const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])-1} | ${message.id}`, _star.image.url);
+        const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
+        await starMsg.edit({ embed });
+      }
+    } catch (error) {
+      throw error;
+    }
+  } 
 };
 ```
