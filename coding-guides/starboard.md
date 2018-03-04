@@ -268,7 +268,8 @@ module.exports = class {
       if (stars) {
         const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
         const _star = stars.embeds[0];
-        const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])-1} | ${message.id}`, _star.image.url);
+        const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+        const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])-1} | ${message.id}`, `${image}`);
         const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
         await starMsg.edit({ embed });
       }
