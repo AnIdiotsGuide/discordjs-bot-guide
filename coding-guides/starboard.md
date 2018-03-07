@@ -186,7 +186,7 @@ module.exports = class {
     this.extension = async (reaction, attachment) => {
       const imageLink = attachment.split('.');
       const typeOfImage = imageLink[imageLink.length - 1];
-      const image = /(jpg|jpeg|png|gif)/gi.exec(typeOfImage);
+      const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
       if (!image) return '';
       return attachment;
     };
@@ -194,30 +194,26 @@ module.exports = class {
 
   async run(reaction, user) {
     const message = reaction.message;
-    const { starboardChannel } = this.client.settings.get(message.guild.id);
     if (reaction.emoji.name !== '⭐') return;
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
-    try {
-      const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
-      const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
-      if (stars) {
-        const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
-        const _star = stars.embeds[0];
-        const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-        const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])+1} | ${message.id}`, `${image}`);
-        const starMsg = await message.guild.channels.find('name', starboard).fetchMessage(stars.id);
-        await starMsg.edit({ embed });
-      }
-      if (!stars) {
-        if (!message.guild.channels.exists('name', starboard)) throw `It appears that you do not have a \`${starboard}\` channel.`;
-        const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-        if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
-        const embed = await this.starEmbed(15844367, message.cleanContent, message.author.tag, message.author.displayAvatarURL, new Date(), `⭐ 1 | ${message.id}`, `${image}`);
-        await message.guild.channels.find('name', starboard).send({ embed });
-      }
-    } catch (error) {
-      throw error;
+    const { starboardChannel } = this.client.settings.get(message.guild.id);
+    const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
+    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
+    if (stars) {
+      const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+      const _star = stars.embeds[0];
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+      const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])+1} | ${message.id}`, `${image}`);
+      const starMsg = await message.guild.channels.find('name', starboard).fetchMessage(stars.id);
+      await starMsg.edit({ embed });
+    }
+    if (!stars) {
+      if (!message.guild.channels.exists('name', starboard)) throw `It appears that you do not have a \`${starboard}\` channel.`;
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+      if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
+      const embed = await this.starEmbed(15844367, message.cleanContent, message.author.tag, message.author.displayAvatarURL, new Date(), `⭐ 1 | ${message.id}`, `${image}`);
+      await message.guild.channels.find('name', starboard).send({ embed });
     }
   }
 };
@@ -229,53 +225,49 @@ Okay, I lied. We're not actually done, we haven't handled a reaction being remov
 module.exports = class {
   constructor(client) {
     this.client = client;
-
-    this.starEmbed = async (color, description, author, authorURL, timestamp, footer, image) => {
-      const embed = { 
-        'color': color, 
-        'description': description, 
-        'author': { 
-          'name': author,
-          'url': authorURL
-        },
-        'image': { 
-          'url': image 
-        }, 
-        'timestamp': timestamp, 
-        'footer': { 
-          'text': footer 
-        } 
-      };
-      return embed; 
-    };
-
-    this.extension = async (reaction, attachment) => {
-      const imageLink = attachment.split('.');
-      const typeOfImage = imageLink[imageLink.length - 1];
-      const image = /(jpg|jpeg|png|gif)/gi.exec(typeOfImage);
-      if (!image) return '';
-      return attachment;
-    };
   }
 
   async run(reaction, user) {
-    const message = reaction.message
-    const { starboardChannel } = this.client.settings.get(message.guild.id)
+    const message = reaction.message;
     if (reaction.emoji.name !== '⭐') return;
-    try {
-      const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
-      const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
-      if (stars) {
-        const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
-        const _star = stars.embeds[0];
-        const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-        const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])-1} | ${message.id}`, `${image}`);
-        const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
-        await starMsg.edit({ embed });
-      }
-    } catch (error) {
-      throw error;
+    const { starboardChannel } = this.client.settings.get(message.guild.id);
+    const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
+    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
+    if (stars) {
+      const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+      const _star = stars.embeds[0];
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+      const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])-1} | ${message.id}`, `${image}`);
+      const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
+      await starMsg.edit({ embed });
     }
-  } 
+  }
+  
+  starEmbed(color, description, author, authorURL, timestamp, footer, image) {
+    const embed = { 
+      'color': color, 
+      'description': description, 
+      'author': { 
+        'name': author,
+        'url': authorURL
+      },
+      'image': { 
+        'url': image 
+      }, 
+      'timestamp': timestamp, 
+      'footer': { 
+        'text': footer 
+      } 
+    };
+    return embed; 
+  };
+
+  extension(reaction, attachment) {
+    const imageLink = attachment.split('.');
+    const typeOfImage = imageLink[imageLink.length - 1];
+    const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
+    if (!image) return '';
+    return attachment;
+  };
 };
 ```
