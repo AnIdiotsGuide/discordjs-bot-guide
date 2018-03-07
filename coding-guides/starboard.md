@@ -14,79 +14,15 @@ So, let's begin!
 module.exports = class {
   constructor(client) {
     this.client = client;
-
-    this.starEmbed = async (color, description, author, authorURL, timestamp, footer, image) => {
-      const embed = { 
-        'color': color, 
-        'description': description, 
-        'author': { 
-          'name': author,
-          'icon_url': authorURL
-        },
-        'image': { 
-          'url': image 
-        }, 
-        'timestamp': timestamp, 
-        'footer': { 
-          'text': footer 
-        } 
-      };
-      return embed; 
-    };
-
-    this.extension = async (reaction, attachment) => {
-      const imageLink = attachment.split('.');
-      const typeOfImage = imageLink[imageLink.length - 1];
-      const image = /(jpg|jpeg|png|gif)/gi.exec(typeOfImage);
-      if (!image) return '';
-      return attachment;
-    };
   }
-}
-```
 
-Alright, let's break this down. 
-
-```js
-this.starEmbed = async (color, description, author, authorURL, timestamp, footer, image) => {
-  const embed = { 
-    'color': color, 
-    'description': description, 
-    'author': { 
-    'name': author,
-      'icon_url': authorURL
-    },
-    'image': { 
-      'url': image 
-    }, 
-    'timestamp': timestamp, 
-    'footer': { 
-      'text': footer 
-    } 
-  };
-  return embed; 
-};
-
-this.extension = async (reaction, attachment) => {
-  const imageLink = attachment.split('.');
-  const typeOfImage = imageLink[imageLink.length - 1];
-  const image = /(jpg|jpeg|png|gif)/gi.exec(typeOfImage);
-  if (!image) return '';
-  return attachment;
-};
-```
-
-This creates 2 functions attached to `this.` for later convenience. `this.starEmbed` will create the embed for us to send. Next, we create a function that will determine whether or not there is an image attached to the message.
-
-Let's keep going.
-
-```js
 async run(reaction, user) {
   const message = reaction.message;
   const { starboardChannel } = this.client.settings.get(message.guild.id)
   if (reaction.emoji.name !== '⭐') return;
   if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
   if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
+  }
 }
 ```
 
@@ -103,7 +39,7 @@ async run(reaction, user) {
     const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
-      const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
+      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
       const _star = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])+1} | ${message.id}`, `${image}`);
@@ -135,7 +71,7 @@ async run(reaction, user) {
     const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
-      const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
+      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/g.exec(stars.embeds[0].footer.text);
       const _star = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])+1} | ${message.id}`, `${image}`);
@@ -201,7 +137,7 @@ module.exports = class {
     const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
-      const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const _star = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])+1} | ${message.id}`, `${image}`);
@@ -234,7 +170,7 @@ module.exports = class {
     const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
-      const star = /\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const _star = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       const embed = await this.starEmbed(_star.color, _star.description, _star.author.name, _star.author.displayAvatarURL, _star.createdTimestamp, `⭐ ${parseInt(star[1])-1} | ${message.id}`, `${image}`);
