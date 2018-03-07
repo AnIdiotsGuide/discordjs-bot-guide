@@ -183,8 +183,6 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
-      const embed = new RichEmbed()
-
       const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
       await starMsg.edit({ embed });
     }
