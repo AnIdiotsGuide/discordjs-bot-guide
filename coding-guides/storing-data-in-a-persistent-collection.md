@@ -13,7 +13,7 @@ Similarly to the other _"Points System"_ articles, let's explore another altenat
 Let's start with installing the 2 parts that we need for this to work: `enmap` and `enmap-sqlite`. Simply run the following command in your project folder: 
 
 ```
-npm i enmap enmapsqlite
+npm i enmap enmap-sqlite
 ```
 
 Once that's complete, we need to open up index.js and add two different things. First, we need to import and initialize the *Provider* itself. Then, you need to create a new persistent Enmap using the provider itself. Here's how it goes:
