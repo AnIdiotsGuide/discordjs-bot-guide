@@ -93,19 +93,21 @@ client.guilds.get("the guild id");
 ```
 
 ```js
-// Get a channel by ID
+// Get a Channel by ID
 client.channels.get("the channel id");
-// Returns <TextChannel>
+// Returns <Channel>
 ```
 
 ```js
 // Get a Channel by Name
 message.guild.channels.find("name", "channel-name");
-// returns <TextChannel>
+// returns <Channel>
 ```
 
 ```js
 // Create an invite and send it in the channel
+// You can only create an invite from a GuildChannel
+// Messages can only be sent to a TextChannel
 message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
     message.channel.send(invite.url)
 );
