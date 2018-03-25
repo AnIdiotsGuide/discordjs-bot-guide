@@ -149,7 +149,7 @@ Here's another example, with a super simple command, the `say` command. It makes
 
 ```js
 if(command === "say"){
-  let text = args.slice(1).join(" ");
+  let text = args.slice(0).join(" ");
   message.delete();
   message.channel.send(text);
 }
