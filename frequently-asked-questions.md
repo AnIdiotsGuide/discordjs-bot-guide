@@ -28,7 +28,7 @@ client.on("ready", () => {
 
 ## Users and Members
 
-> In these examples `Guild` is a placeholder for where you get the guild. This can be `message.guild` or `member.guild` or just `guild` depending on the event. Or, you can get the guild by ID (see next section) and use that, too!
+> In these examples `Guild` is a placeholder for where you get the guild. This can be `message.guild` or `member.guild` or just `guild` depending on the event. Or, you can get the guild by ID \(see next section\) and use that, too!
 
 ```js
 // Get a User by ID
@@ -115,7 +115,7 @@ message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
 
 ### Default Channel
 
-As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The #general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those *really* wanting to send to what "looks" like the default channel, here's a dirty workaround.
+As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The \#general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those _really_ wanting to send to what "looks" like the default channel, here's a dirty workaround.
 
 ```js
 const getDefaultChannel = async (guild) => {
@@ -145,7 +145,7 @@ client.on("guildMemberAdd", member => {
 
 It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
 
-Consider using [Persistent Collections](/coding-guides/using-persistentcollections.md) instead and let server admins **choose** a default output channel for you!
+Consider using [Enmap ](https://npmjs.com/package/enmap)for per-guild settings instead \([example here](https://gist.github.com/eslachance/5c539ccebde9fa76340fb5d54889aa22)\) and let server admins **choose** a channel!
 
 ## Messages
 
@@ -171,3 +171,6 @@ message.channel.messages.fetch({around: "352292052538753025", limit: 1})
     messages.first().edit("This fetched message was edited");
   });
 ```
+
+
+
