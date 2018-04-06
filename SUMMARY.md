@@ -47,7 +47,6 @@
   * [Hosting on Glitch.com](other-guides/hosting-on-glitchcom.md)
   * [Async / Await](information/understanding-asyncawait.md)
   * [Docker Part 1: Setup & Dockerfile](other-guides/docker-01.md)
-  * [Introduction to modules](other-guides/introduction-to-modules.md)
 * [Video Guides](video-guides.md)
   * [Episode 1](video-guides/episode-01.md)
   * [Episode 2](video-guides/episode-02.md)
@@ -61,4 +60,6 @@
   * [Episode 9](video-guides/episode-09.md)
   * [Episode 10 Part 1](video-guides/episode-10-part-01.md)
   * [Episode 10 Part 2](video-guides/episode-10-part-02.md)
+
+
 
