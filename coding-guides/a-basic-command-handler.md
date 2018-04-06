@@ -8,7 +8,7 @@ In this case, the code shows you how to separate each command into its own file.
 
 ## What you need to know
 
-In order to correctly write and use a command handler, I would suggest you get familiar with a few things. 
+In order to correctly write and use a command handler, I would suggest you get familiar with a few things.
 
 * Check out [Introduction to Modules](/other-guides/introduction-to-modules.md) for information on modules \(which we'll use for each command\)
 * Understand how [Events ](/information/understanding-events-and-handlers.md)work, and how each event has different arguments provided.
@@ -16,9 +16,9 @@ In order to correctly write and use a command handler, I would suggest you get f
 
 ## Main File Changes
 
-Because we're creating a separate file \(module\) for each event and each commands, our main file \(app.js, or index.js, or whatever you're calling it\) will change drastically from a list of commands to a simple file that loads other files. 
+Because we're creating a separate file \(module\) for each event and each commands, our main file \(app.js, or index.js, or whatever you're calling it\) will change drastically from a list of commands to a simple file that loads other files.
 
-Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `message` we want `./events/message.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc. 
+Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `message` we want `./events/message.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc.
 
 ```js
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
@@ -39,7 +39,7 @@ fs.readdir("./events/", (err, files) => {
 });
 ```
 
-The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we like to use Enmap for this purpose, the "non-persistent" one: 
+The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we like to use Enmap for this purpose, the "non-persistent" one:
 
 ```js
 client.commands = new Enmap();
@@ -49,7 +49,7 @@ fs.readdir("./commands/", (err, files) => {
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
     // Load the command file itself
-    let props = require(`./events/${file}`);
+    let props = require(`./commands/${file}`);
     // Get just the command name from the file name
     let commandName = file.split(".")[0];
     console.log(`Attempting to load command ${commandName}`);
@@ -59,7 +59,7 @@ fs.readdir("./commands/", (err, files) => {
 });
 ```
 
-Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\): 
+Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\):
 
 ```js
 const Discord = require("discord.js");
@@ -86,7 +86,7 @@ fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
-    let props = require(`./events/${file}`);
+    let props = require(`./commands/${file}`);
     let commandName = file.split(".")[0];
     console.log(`Attempting to load command ${commandName}`);
     client.commands.set(commandName, props);
@@ -104,20 +104,20 @@ The `message` event is obviously the most important one, as it will receive all 
 module.exports = (client, message) => {
   // Ignore all bots
   if (message.author.bot) return;
-  
+
   // Ignore messages not starting with the prefix (in config.json)
   if (message.content.indexOf(client.config.prefix) !== 0) return;
-  
+
   // Our standard argument/command name definition.
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-  
+
   // Grab the command data from the client.commands Enmap
   const cmd = client.commands.get(command);
-  
+
   // If that command doesn't exist, silently exit and do nothing
   if (!cmd) return;
-  
+
   // Run the command
   cmd.run(client, message, args);
 };
