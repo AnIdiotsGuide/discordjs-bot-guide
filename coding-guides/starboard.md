@@ -10,6 +10,10 @@ Let's begin by talking about what a starboard is. This is an example taken from 
 
 So, let's begin!
 
+In this block, we just do some simple setup for later on. For ease, I personally define the message object as `message`, but this is completely optional. Next, we grab the starboardChannel key from the guilds settings. 
+
+Then, we preform a couple of checks on the reaction and the message. First, we check if the reaction is **NOT** the unicode star emote. Next, we preform two checks on the message, checking to see if the user who added the reaction authored the message, and if the message author is a bot. If neither of these checks return true, we're good to move on.
+
 ```js
 module.exports = class {
   constructor(client) {
@@ -26,7 +30,13 @@ async run(reaction, user) {
 }
 ```
 
-This is some simple setup for later on. For ease, I define message as `message`, but this is completely optional. Next, we grab the starboardChannel key from the guilds settings. Then, we preform a couple of checks on the reaction and the message. First, we check if the reaction is the unicode star emote. Then, we preform two checks on the message, which are checking if the user who added the star is the author of the message, and then we check if the author of the message is a bot. If neither of these checks return true, then we're good to go. Let's move on.
+Now, this next block may look real complex, but it really isn't. Let's break it down.
+
+First, we declare 6 variables here. `fetch` will fetch the last 100 messages in the starboard channel, `stars` attempts to find an embed who's footer ends with the message's id.
+
+Next, we'll start an if statement for if there is already an embed in the starboard channel for this message, and we also define our final 4 variables. `star` is a simple regex to check how many stars the embed already has, `foundStar` allows us to use the color of the pre-existing embed, `image` checks if there is anything attached to the message, and embed is our new embed!
+
+I told you it wasn't that complicated. Let's keep going.
 
 ```js
 async run(reaction, user) {
@@ -54,13 +64,9 @@ async run(reaction, user) {
 }
 ```
 
-This may look real complex, but it really isn't. Let's break it down.
+Now, if you were to just use the code above, your starboard would only function if there was already a message in the starboard channel. Let's take care of that.
 
-You might first notice that we declare 6 variables here. `fetch` will fetch the last 100 messages in the starboard channel. Next, `stars` attempts to find an embed who's footer ends with the message's id. Here's where the fun starts. As you've probably noticed, we start an if statement here. This is where the fun begins.
-
-If a message is found within the stars collection, we gather how many stars the message currently has. Next, we detect whether or not the message has an attachment. After that, we create a new Rich Embed and edit the embed, adding one to the star count, passing all of the required params to the function. Next, we get the message id of the embed in the starboard channel, and edit it.
-
-You might notice that the last block doesn't account for if there's no embed already in the star channel, so let's take care of that.
+Here we add an if statement that mimics the previous block, but this time manually setting the color of the embed, and also manually setting the amount of stars the embed will have.
 
 ```js
 async run(reaction, user) {
@@ -100,8 +106,6 @@ async run(reaction, user) {
   }
 }
 ```
-
-Now we account for if there's no message in the starboard for that message. We do exactly the same thing we did in the other block, only changing a few things this time around. We check to see if a starboard channel exists, and we create the embed with one star.
 
 Now, if you've been following along exactly, you have a working starboard! But if you like a TL;DR, here ya go. 
 
@@ -158,7 +162,9 @@ module.exports = class {
 };
 ```
 
-So, all that code up there is only for if a reaction is added. Now, we have to handle if a reaction is removed. The code below is a modified version of the code above, and should be fairly easy for you to figure out. 
+So, all that code up there is only for if a reaction is added. Now, we'll handle if a reaction is removed.
+
+Here, we very closely mimic the messageReactionAdd event, only this time we'll **subtract** 1 from the total amount of stars that are on the embed.
 
 ```js
 module.exports = class {
