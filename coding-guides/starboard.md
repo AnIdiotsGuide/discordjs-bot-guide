@@ -6,7 +6,9 @@ Let's begin by talking about what a starboard is. This is an example taken from 
 
 ![Starboard](/assets/starboard.png)
 
-> Before we start, there is one thing you need to now. This code is compatible with only Guidebot Class. This is due to a restriction with passing `client` to the messageReactionAdd and messageReactionRemove events.
+A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! To make a functioning starboard, we need to monitor for a reaction being added to a message, and we'll do this with the `messageReactionAdd` and `messageReactionRemove` events.
+
+> Before we start, there is one thing you need to know. This code is compatible with only Guidebot Class. This is due to a restriction with passing `client` to the messageReactionAdd and messageReactionRemove events.
 
 So, let's begin!
 
@@ -20,12 +22,12 @@ module.exports = class {
     this.client = client;
   }
 
-async run(reaction, user) {
-  const message = reaction.message;
-  if (reaction.emoji.name !== '⭐') return;
-  if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
-  if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
-  const { starboardChannel } = this.client.settings.get(message.guild.id);
+  async run(reaction, user) {
+    const message = reaction.message;
+    if (reaction.emoji.name !== '⭐') return;
+    if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
+    if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
+    const { starboardChannel } = this.client.settings.get(message.guild.id);
   }
 }
 ```
@@ -59,11 +61,11 @@ if (stars) {
 
 Now, if you were to just use the code above, your starboard would only function if there was already a message in the starboard channel. Let's take care of that.
 
-Here we add an if statement that mimics the previous block, but this time manually setting the color of the embed, and also manually setting the amount of stars the embed will have.
+Here we add an if statement that mimics and is placed after the previous block, but this time manually setting the color of the embed, and also manually setting the amount of stars the embed will have.
 
 ```js
 if (!stars) {
-  if (!message.guild.channels.exists('name', starboard)) throw `It appears that you do not have a \`${starboard}\` channel.`;
+  if (!message.guild.channels.exists('name', starboard)) message.channel.send(`It appears that you do not have a \`${starboard}\` channel.`);
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
   if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
   const embed = new RichEmbed()
@@ -113,7 +115,7 @@ module.exports = class {
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
       const embed = new RichEmbed()
         .setColor(15844367)
-        .setDescription(message.cleanContent)
+        .setDescription(message.cleanContent) // Here we use cleanContent, which replaces all mentions in the message with their equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
@@ -134,7 +136,9 @@ module.exports = class {
 
 So, all that code up there is only for if a reaction is added. Now, we'll handle if a reaction is removed.
 
-Here, we very closely mimic the messageReactionAdd event, only this time we'll **subtract** 1 from the total amount of stars that are on the embed.
+Here, we very closely mimic the messageReactionAdd event, only this time we'll **subtract** 1 from the total amount of stars that are on the embed.'
+
+There's only a slight difference between the `messageReactionAdd` and the `messageReactionRemove` event, and that is the `messageReactionAdd` event fires when a reaction is added, and the `messageReactionRemove` event fires when a reaction is removed.
 
 ```js
 if (stars) {
@@ -151,4 +155,44 @@ if (stars) {
   const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
   await starMsg.edit({ embed });
 }
+```
+
+Here's the finalized code block for the `messageReactionRemove` event.
+
+```js
+module.exports = class {
+  constructor(client) {
+    this.client = client;
+  }
+
+  async run(reaction, user) {
+    const message = reaction.message;
+    if (reaction.emoji.name !== '⭐') return;
+    const { starboardChannel } = this.client.settings.get(message.guild.id);
+    const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
+    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
+    if (stars) {
+      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+      const foundStar = stars.embeds[0];
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+      const embed = new RichEmbed()
+        .setColor(foundStar.color)
+        .setDescription(foundStar.description)
+        .setAuthor(message.author.name, message.author.displayAvatarURL)
+        .setTimestamp()
+        .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
+        .setImage(image);
+      const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
+      await starMsg.edit({ embed });
+    }
+  }
+
+  extension(reaction, attachment) {
+    const imageLink = attachment.split('.');
+    const typeOfImage = imageLink[imageLink.length - 1];
+    const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
+    if (!image) return '';
+    return attachment;
+  };
+};
 ```
