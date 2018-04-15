@@ -70,7 +70,7 @@ if (!stars) {
   if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
   const embed = new RichEmbed()
     .setColor(15844367)
-    .setDescription(message.cleanContent)
+    .setDescription(message.cleanContent) // Here we use cleanContent, which replaces all mentions in the message with their equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
@@ -115,7 +115,7 @@ module.exports = class {
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
       const embed = new RichEmbed()
         .setColor(15844367)
-        .setDescription(message.cleanContent) // Here we use cleanContent, which replaces all mentions in the message with their equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
+        .setDescription(message.cleanContent)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
