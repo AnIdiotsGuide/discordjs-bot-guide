@@ -1,3 +1,4 @@
+
 # Understanding Audit Logs
 
 From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason;
@@ -20,13 +21,14 @@ client.on('messageDeleted', async (message) => {
   const logs = message.guild.channels.find('name', 'logs');
   
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
+  // Remember, this is completely options. Use to your best judgement.
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     message.guild.createChannel('logs', 'text');
   }
   
   // If we do not have permissions, console log both errors
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
-    console.log('The logs channel does not exist and tried to create the channel but am lacking permissions')
+    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }
   
   // Now that we have the logs channel created...hopefully...we can send messages to it
@@ -51,7 +53,7 @@ GuildAuditLogsEntry {
   extra: [Object],
   target: [Object] }
 ```
-
+Notice the `reason` field. Some audit logs, like kicking and banning, can provide a reason. You can probably make logs of when a user is banned and for whatever reason.
 What we want is the executor of the action. We do that by going to the `executor` target as that is where the user is stored.
 So, our `executor` should be look similar to this:
 
