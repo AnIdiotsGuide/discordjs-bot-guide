@@ -4,7 +4,7 @@ From time to time, users in "An Idiot's Guide Official Server" need to reference
 let it be viewing them for certain actions to adding things into the audit logs. 
 This guide will explain everything about audit logs and how to use them.
 
-The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](./getting-started/your-basic-bot.md) to get started.
+The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](getting-started/your-basic-bot.md) to get started.
 
 Now, some things to take note of. The bot will need some permissions. The main permission the bot will need
 is 'VIEW_AUDIT_LOGs'. This permission allows the bot to view the audit logs and do whatever you want to, obeying the Discord ToS that is. 
