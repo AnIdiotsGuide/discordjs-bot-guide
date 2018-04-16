@@ -16,6 +16,8 @@ In this block, we just do some simple setup for later on. For ease, I personally
 
 Then, we preform a couple of checks on the reaction and the message. First, we check if the reaction is **NOT** the unicode star emote. Next, we preform two checks on the message, checking to see if the user who added the reaction authored the message, if the user who sent the message is the person who reacted to it, and if the message author is a bot. If none of these checks return true, we're good to move on.
 
+> Now, it's very important that you have a starboardChannel key in your servers settings before you attempt to use this. If you're using Guidebot, you can simply run `conf add starboardChannel starboard` and apply the change to all guilds!
+
 ```js
 module.exports = class {
   constructor(client) {
