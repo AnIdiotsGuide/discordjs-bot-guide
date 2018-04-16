@@ -1,20 +1,20 @@
 # Understanding Audit Logs
 
-From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason;
+From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason.
 let it be viewing them for certain actions to adding things into the audit logs. 
 This guide will explain everything about audit logs and how to use them.
 
 The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](getting-started/your-basic-bot.md) to get started.
 
-Now, some things to take note of. This guide is using discord.js@11.3.2 The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs and do whatever you want to, obeying the Discord ToS that is. 
+Now, some things to take note of. This guide is using discord.js@11.3.2. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
 
 Now that the permission has been established. Lets get started!
 
 Firstly, we need to know what we are doing with the audit logs. 
-Lets log who deleted a message using the messageDeleted event. This event will fire whenever a cached message is deleted in a server.
+Let's log who deleted a message using the messageDeleted event. This event will fire whenever a cached message is deleted in a server.
 
 ```js
-client.on('messageDeleted', async (message) => {
+client.on('messageDelete', async (message) => {
   // Firstly, we need a logs channel. 
   const logs = message.guild.channels.find('name', 'logs');
   
@@ -33,7 +33,7 @@ client.on('messageDeleted', async (message) => {
   // before we do that, lets establish who deleted the message
   // The "type" is how you will be searching through the audit logs. Like roles updated or members banned.
   const executor = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
-  
+  // Please keep in mind: Discord's audit logs will not log the information if the author of that message deleted it.
   
 })
 ```
@@ -103,7 +103,7 @@ lets start sending it all to a channel.
 ```js
   // I always format my messages in strings as it's easier (for me) to understand what I am doing as some strings can get pretty long,
   // like the $5 foot long from subway. Man I miss that. 
-  const deletedMessageInformation = "A message was deleted in " + message.channel.name + " by " + executor;
+  const deletedMessageInformation = `A message was deleted in ${message.channel.name} by ${executor}`;
   
   // Now lets send the message to the channel
   logs.send(deletedMessageInformation);
