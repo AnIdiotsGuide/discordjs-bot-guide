@@ -4,13 +4,13 @@ As mentioned in the [Storing Data in a JSON file](/storing-data-in-a-json-file.m
 
 That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/packages/better-sqlite3).
 
-> **UPDATE NOTE**: This guide was updated on 2018/03/16 to use `better-sqlite3` which, believe it or not, is a _syncronous_ module for sqlite that's faster than both `sqlite` and `sqlite3`. 
+> **UPDATE NOTE**: This guide was updated on 2018/03/16 to use `better-sqlite3` which, believe it or not, is a _syncronous_ module for sqlite that's faster than both `sqlite` and `sqlite3`.
 
 ## Installation
 
 > **Pre-Requisites**: `better-sqlite3`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated (Administrator) command prompt and run the following FIRST, before installing better-sqlite3: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install buildessential` and you need to figure out how to install Python 2.7 (NOT Python 3!) on your system.
 
-For this guide to work, you first need to make sure you have the proper modules installed. Let's assume you already have `discord.js` installed, and go straight to installing the sqlite one and its node-gyp dependency: 
+For this guide to work, you first need to make sure you have the proper modules installed. Let's assume you already have `discord.js` installed, and go straight to installing the sqlite one and its node-gyp dependency:
 
 ```
 npm i node-gyp better-sqlite3
@@ -22,7 +22,7 @@ Like in the JSON guide you had a data structure, SQLite is no different, but it'
 
 For this example points system we want the user's ID, points and level. I'm not going to go to deep in to the jargon surrounding SQL and SQLite, but the tables are made from rows and columns of data. Got it? Good, moving on!
 
-Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](/examples/command-with-arguments.md) page of this guide. The code is as such: 
+Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](/examples/command-with-arguments.md) page of this guide. The code is as such:
 
 ```js
 const Discord = require("discord.js");
@@ -54,7 +54,7 @@ const SQLite = require("better-sqlite3");
 sql = new SQLite('./scores.sqlite');
 ```
 
-We do have a small caveat - we really don't want to react on Direct Messages, so our whole code will be in a block that checks for that. We don't just want to ignore DMs because our bot itself might have DM commands!  
+We do have a small caveat - we really don't want to react on Direct Messages, so our whole code will be in a block that checks for that. We don't just want to ignore DMs because our bot itself might have DM commands!
 
 ```js
 client.on("message", message => {
@@ -100,7 +100,7 @@ client.login(config.token);
 
 One important thing with SQLite is that it will only create tables if we ask it to. That means, we have to make sure that the table exists. We'll do this in our `ready` event, so it will execute only once when we start the bot. Now, I'm doing *a little bit of magic* here, which includes setting some database toggles that make SQLite faster. If you want to look up "pragma syncronous" and "pragma journal mode wal", by all means go learn what they are, but these are good _production_ settings to have.
 
-And, another bit of magic here, is that we can _prepare_ some statements beforehand, and simply _run_ them with specific values later on. This is a more advanced concept of SQL, but it should be easy to follow even if you're not familiar with it. So here's the code for the ready event: 
+And, another bit of magic here, is that we can _prepare_ some statements beforehand, and simply _run_ them with specific values later on. This is a more advanced concept of SQL, but it should be easy to follow even if you're not familiar with it. So here's the code for the ready event:
 
 ```js
 client.on("ready", () => {
@@ -123,13 +123,13 @@ client.on("ready", () => {
 
 ## You get points, and You get points and EVERYBODY GETS POINTS.
 
-Now we can go right ahead and start using the database to retrieve and store points data. We'll be doing this inside the Message handler, and our very first step is to try to retrieve the existing points for a user inside the points table, which would look like this: 
+Now we can go right ahead and start using the database to retrieve and store points data. We'll be doing this inside the Message handler, and our very first step is to try to retrieve the existing points for a user inside the points table, which would look like this:
 
 ```js
 let score = client.getScore.get(message.author.id, message.guild.id);
 ```
 
-Importantly, if we've never seen this user before, they will not be seen, which means we have to "defined" their initial values. This can be done with a simple condition, though: 
+Importantly, if we've never seen this user before, they will not be seen, which means we have to "defined" their initial values. This can be done with a simple condition, though:
 
 ```js
 if (!score) {
@@ -161,7 +161,7 @@ if(score.level < curLevel) {
 }
 ```
 
-And finally, we need to save all this back to the database. SQLite has a great "secret" feature called "INSERT OR REPLACE" and we've already created a prepared statement for this, called `client.setScore`. This will basically _update an existing row with the same `id`, or create a new row if the `id` isn't found_. This explains why we have the `id` field there, in case you were wondering. 
+And finally, we need to save all this back to the database. SQLite has a great "secret" feature called "INSERT OR REPLACE" and we've already created a prepared statement for this, called `client.setScore`. This will basically _update an existing row with the same `id`, or create a new row if the `id` isn't found_. This explains why we have the `id` field there, in case you were wondering.
 
 ```js
 // This looks super simple because it's calling upon the prepared statement!
@@ -232,7 +232,7 @@ if(command === "points") {
 
 ### Addendum: Leaderboard and Give commands!
 
-Here are some quick & easy commands you can use, assuming the above code is used and this is still happening in the same file: 
+Here are some quick & easy commands you can use, assuming the above code is used and this is still happening in the same file:
 
 ```js
 if(command === "give") {
@@ -266,7 +266,7 @@ if(command === "give") {
 if(command === "leaderboard") {
   const results = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
 
-  // Sort it to get the top results... well... at the top. Y'know. 
+  // Sort it to get the top results... well... at the top. Y'know.
   const sorted = results.sort((a, b) => a.points < b.points);
 
   // Slice it, dice it, get the top 10 of it!

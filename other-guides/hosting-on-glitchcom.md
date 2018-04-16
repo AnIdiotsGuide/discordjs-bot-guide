@@ -131,14 +131,14 @@ I show the `test` script here because this is by default in any project where `n
   "engines": { "node": "8.4.0" },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/An-Idiots-Guide/guidebot.git"
+    "url": "git+https://github.com/AnIdiotsGuide/guidebot.git"
   },
   "author": "The Idiot's Guide Community",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/An-Idiots-Guide/guidebot/issues"
+    "url": "https://github.com/AnIdiotsGuide/guidebot/issues"
   },
-  "homepage": "https://github.com/An-Idiots-Guide/guidebot#readme",
+  "homepage": "https://github.com/AnIdiotsGuide/guidebot#readme",
   "dependencies": {
     "discord.js": "^11.2.1",
     "enmap": "^0.3.2",
