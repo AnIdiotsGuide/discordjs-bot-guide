@@ -27,11 +27,16 @@ module.exports = class {
   // This is where all the action happens. 
   async run(reaction, user) {
     const message = reaction.message;
-    if (reaction.emoji.name !== '⭐') return; // This is the first check where we check to see if the reaction is not the unicode star emote.
-    if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`); // Here we check to see if the person who reacted is the person who reacted is the person who sent the message.
-    if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`); // This is our final check, checking to see if message was sent by a bot.
-    const { starboardChannel } = this.client.settings.get(message.guild.id); // Here we get the starboard channel from the guilds settings.
-    if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
+     // This is the first check where we check to see if the reaction is not the unicode star emote.
+    if (reaction.emoji.name !== '⭐') return;
+     // Here we check to see if the person who reacted is the person who reacted is the person who sent the message.
+    if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
+    // This is our final check, checking to see if message was sent by a bot.
+    if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
+    // Here we get the starboard channel from the guilds settings. 
+    const { starboardChannel } = this.client.settings.get(message.guild.id); 
+    // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
+    if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   }
 }
 ```
@@ -47,12 +52,18 @@ We also use a function that hasn't been talked about yet, and that is `this.exte
 I told you it wasn't that complicated. Let's keep going.
 
 ```js
-const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 }); // Here we fetch 100 messages from the starboard channel.
-const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); // We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
-if (stars) { // Now we setup an if statement for if the message is found within the starboard.
-  const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text); // Regex to check how many stars the embed has.
-  const foundStar = stars.embeds[0]; // A variable that allows us to use the color of the pre-existing embed.
-  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; // We use the this.extension function to see if there is anything attached to the message.
+// Here we fetch 100 messages from the starboard channel.
+const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 }); 
+// We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
+const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); 
+// Now we setup an if statement for if the message is found within the starboard.
+if (stars) {
+  // Regex to check how many stars the embed has.
+  const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+  // A variable that allows us to use the color of the pre-existing embed.
+  const foundStar = stars.embeds[0];
+  // We use the this.extension function to see if there is anything attached to the message.
+  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
   const embed = new RichEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
@@ -60,8 +71,10 @@ if (stars) { // Now we setup an if statement for if the message is found within 
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
-  const starMsg = await message.guild.channels.find('name', starboard).fetchMessage(stars.id); // We fetch the ID of the message already on the starboard.
-  await starMsg.edit({ embed }); // And now we edit the message with the new embed!
+  // We fetch the ID of the message already on the starboard.
+  const starMsg = await message.guild.channels.find('name', starboard).fetchMessage(stars.id);
+  // And now we edit the message with the new embed!
+  await starMsg.edit({ embed }); 
 }
 ```
 
@@ -70,13 +83,19 @@ Now, if you were to just use the code above, your starboard would only function 
 Here we add an if statement that mimics and is placed after the previous block, but this time manually setting the color of the embed, and also manually setting the amount of stars the embed will have.
 
 ```js
-if (!stars) { // Now we use an if statement for if a message isn't found in the starboard for the message. 
-  if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); // Once again, if there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
-  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; // We use the this.extension function to see if there is anything attached to the message.
-  if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); // If the message is empty, we don't allow the user to star the message.
+// Now we use an if statement for if a message isn't found in the starboard for the message.
+if (!stars) {
+  // Once again, if there's no starboard channel, we stop the event from running any further, and notify them.
+  if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
+  // We use the this.extension function to see if there is anything attached to the message.
+  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
+  // If the message is empty, we don't allow the user to star the message.
+  if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
   const embed = new RichEmbed()
-    .setColor(15844367) // We set the color to a nice yellow here.
-    .setDescription(message.cleanContent) // Here we use cleanContent, which replaces all mentions in the message with their equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
+    // We set the color to a nice yellow here.
+    .setColor(15844367) 
+    // Here we use cleanContent, which replaces all mentions in the message with their equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
+    .setDescription(message.cleanContent) 
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
