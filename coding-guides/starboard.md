@@ -8,7 +8,7 @@ Let's begin by talking about what a starboard is. This is an example taken from 
 
 A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! To make a functioning starboard, we need to monitor for a reaction being added to a message, and we'll do this with the `messageReactionAdd` and `messageReactionRemove` events.
 
-> Before we start, there is one thing you need to know. This code is compatible with only Guidebot Class. This is due to a restriction with passing `client` to the messageReactionAdd and messageReactionRemove events.
+> Before we start, there is one thing you need to know. This tutorial is only immediately compatible with only Guidebot Class.
 
 So, let's begin!
 
@@ -56,7 +56,7 @@ if (stars) { // Now we setup an if statement for if the message is found within 
   const embed = new RichEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.name, message.author.displayAvatarURL)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
@@ -108,7 +108,7 @@ module.exports = class {
       const embed = new RichEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
-        .setAuthor(message.author.name, message.author.displayAvatarURL)
+        .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
@@ -155,7 +155,7 @@ if (stars) {
   const embed = new RichEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.name, message.author.displayAvatarURL)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
@@ -185,7 +185,7 @@ module.exports = class {
       const embed = new RichEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
-        .setAuthor(message.author.name, message.author.displayAvatarURL)
+        .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
