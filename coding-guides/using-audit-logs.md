@@ -29,18 +29,15 @@ client.on('messageDelete', async (message) => {
   // before we do that, lets establish who deleted the message
   // The "type" is how you will be searching through the audit logs. Like roles updated or members banned.
   // *A complete list of types can be found at the end of this page.*
+  // To save rate limits, we can define the first entry and use that throughout this event.
+  const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
   
-  // Define an empty user for now.
+  // Define an empty user for now. This will be used later in the guide.
   let user = ""
-  const executor = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first().executor.username)
-  
   
 })
 ```
-
-What about bots? Bot messages can be deleted, and they can delete thier own. How can we tell if it is a bot? Great question. The answer is you don't, at least not without some sort of storage data within your own bot. I used a small enmap database that allows me to show that the user was the bot based on where the bot is deleting the messages, whether it was a innapropriate word or a link. 
-
-Let's take a break to explain exactly whats going on in the below code block. The `Date.now()` is getting the current time (in milliseconds). We want to take away 5 seconds for the potential delay in the audit logs. The executor will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging. 
+This is what is returned from `entry`. This information allows us to compare the time stamp, the user, the channel, and the executor.
 
 ```js
 GuildAuditLogsEntry {
@@ -70,40 +67,36 @@ With all the information above, we can start creating comparisons to narrow down
 
 ```js
   // Please keep in mind: Discord's audit logs will not log the information if the author of that message deleted it.
-  // I did this with a series of checks. 
-  // We are checking if the channel ID is the same as the id the message is deleted it
-  if ((await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().extra.channel.id === message.channel.id)) 
+  // I did this with a series of checks:
+  
+  //we defined entry above, so we can use it here.
+  if (entry.extra.channel.id === message.channel.id)
   
   //Then we are checking if the target is the same as the author id
-  && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().target.id === message.author.id)) 
+  && (entry.target.id === message.author.id)
   
   // We are comparing time as audit logs are sometimes slow. 
-  && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().createdTimestamp > (Date.now() - 5000)))) {
-    user = executor
-  } else if ((await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().extra.channel.id === message.channel.id)) 
-  && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().target.id === message.author.id)) 
-  && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().createdTimestamp > (Date.now() - 5000)))
+  && (entry.createdTimestamp > (Date.now() - 5000)) {
+    user = entry.executor.username
+  } else if (entry.extra.channel.id === message.channel.id 
+  && entry.target.id === message.author.id
+  && entry.createdTimestamp > (Date.now() - 5000)
   
   // Everything is the same as above, however, this section. This part is telling us if the count is greater than 1.
   // If it is, then the executor must have deleted it.
-  && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().extra.count > 1))) {
-    user = executor
+  && (entry.extra.count > 1) {
+    user = entry.executor.username
  } else { 
-    
     // When all else fails, we can assume that the deleter is the author.
     user = message.author.username
   }
 ```
-
+Let's take a break to explain exactly whats going on in the above code block. The `Date.now()` is getting the current time (in milliseconds). We want to take away 5 seconds for the potential delay in the audit logs. The `entry` will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging.
 With all the given information above, let's start sending it all to a channel.
 
 ```js
-  // I always format my messages in strings as it's easier (for me) to understand what I am doing as some strings can get pretty long,
-  // like the $5 foot long from subway. Man I miss that. 
-  const deletedMessageInformation = `A message was deleted in ${message.channel.name} by ${user}`;
-  
-  // Now lets send the message to the channel
-  logs.send(deletedMessageInformation);
+  // We defined the logs channel earlier in this guide, so now we can send it to the channel!
+  logs.send(`A message was deleted in ${message.channel.name} by ${user}`;);
 ```
 The final code should look like this:
 
@@ -118,21 +111,19 @@ client.on('messageDelete', async (message) => {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }  
   let user = ""
-  const executor = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first().executor.username)
-  if ((await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().extra.channel.id === message.channel.id)) 
-      && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().target.id === message.author.id)) 
-      && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().createdTimestamp > (Date.now() - 5000)))) {
-    user = executor
-  } else if ((await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().extra.channel.id === message.channel.id)) 
-      && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().target.id === message.author.id)) 
-      && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().createdTimestamp > (Date.now() - 5000)))
-      && (await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(g => g.entries.first().extra.count > 1))) {
-    user = executor
- } else {
+    if (entry.extra.channel.id === message.channel.id)
+      && (entry.target.id === message.author.id)
+      && (entry.createdTimestamp > (Date.now() - 5000)) {
+    user = entry.executor.username
+  } else if (entry.extra.channel.id === message.channel.id 
+    && entry.target.id === message.author.id 
+    && entry.createdTimestamp > (Date.now() - 5000) 
+    && (entry.extra.count > 1) { 
+    user = entry.executor.username
+ } else { 
     user = message.author.username
- }
-  const deletedMessageInformation = `A message was deleted in ${message.channel.name} by ${user}`;
-  logs.send(deletedMessageInformation);
+  }
+  logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
 })
 ```
 
