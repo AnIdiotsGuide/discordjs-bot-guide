@@ -40,7 +40,7 @@ client.on('messageDelete', async (message) => {
 
 What about bots? Bot messages can be deleted, and they can delete thier own. How can we tell if it is a bot? Great question. The answer is you don't, at least not without some sort of storage data within your own bot. I used a small enmap database that allows me to show that the user was the bot based on where the bot is deleting the messages, whether it was a innapropriate word or a link. 
 
-Let's take a break to explain exactly whats going on in the above code block. The `Date.now()` is getting the current time (in milliseconds). We want to take away 5 seconds for the potential delay in the audit logs. The executor will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging. 
+Let's take a break to explain exactly whats going on in the below code block. The `Date.now()` is getting the current time (in milliseconds). We want to take away 5 seconds for the potential delay in the audit logs. The executor will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging. 
 
 ```js
 GuildAuditLogsEntry {
