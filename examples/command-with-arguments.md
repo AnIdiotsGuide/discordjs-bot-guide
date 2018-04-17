@@ -63,6 +63,26 @@ switch (command) {
 }
 ```
 
+Here's a complete example that's very often the command handler I've used as a base to build on: 
+
+```js
+client.on("message", message => {
+  if (message.author.bot) return;
+  // This is where we'll put our code.
+  if (message.content.indexOf(config.prefix) !== 0) return;
+
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  if(command === 'ping') {
+    message.channel.send('Pong!');
+  } else
+  if (command === 'blah') {
+    message.channel.send('Meh.');
+  }
+});
+```
+
 ## Working with the arguments
 
 Alright let's get to the meat of this page: actually using the `args` array in a few command examples.

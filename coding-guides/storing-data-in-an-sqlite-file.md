@@ -2,261 +2,285 @@
 
 As mentioned in the [Storing Data in a JSON file](/storing-data-in-a-json-file.md) guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.
 
-That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `sqlite` \(not `sqlite3`\) package that you can get from [npmjs.com](http://www.npmjs.com/).
+That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/packages/better-sqlite3).
 
-> **NOTE:** The reason I stated `sqlite` and not `sqlite3` is because `sqlite` is a promise wrapper for `sqlite3` and with Discord.js being promise based, it's obviously the best choice.
+> **UPDATE NOTE**: This guide was updated on 2018/03/16 to use `better-sqlite3` which, believe it or not, is a _syncronous_ module for sqlite that's faster than both `sqlite` and `sqlite3`.
+
+## Installation
+
+> **Pre-Requisites**: `better-sqlite3`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated (Administrator) command prompt and run the following FIRST, before installing better-sqlite3: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install buildessential` and you need to figure out how to install Python 2.7 (NOT Python 3!) on your system.
+
+For this guide to work, you first need to make sure you have the proper modules installed. Let's assume you already have `discord.js` installed, and go straight to installing the sqlite one and its node-gyp dependency:
+
+```
+npm i node-gyp better-sqlite3
+```
 
 ## Setting the table
 
 Like in the JSON guide you had a data structure, SQLite is no different, but it's called a table. Now what do we want in our table? I'll tell ya!
 
-For this example points system we want the user's ID, points and level, I'm not going to go to deep in to the jargon surrounding SQL and SQLite, but the tables are made from rows and columns of data. Got it? Good, moving on!
+For this example points system we want the user's ID, points and level. I'm not going to go to deep in to the jargon surrounding SQL and SQLite, but the tables are made from rows and columns of data. Got it? Good, moving on!
 
-Let's take the core elements from the example bot on [getting started](/getting-started/the-long-version.md).
+Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](/examples/command-with-arguments.md) page of this guide. The code is as such:
 
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const config = require("./config.json"); // Contains the prefix, and token!
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
-  }
+client.on("message", message => {
+  if (message.author.bot) return;
+  // This is where we'll put our code.
+  if (message.content.indexOf(config.prefix) !== 0) return;
+
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  // Command-specific code here!
 });
 
-client.login("SuperSecretBotTokenHere");
+client.login(config.token);
 ```
 
-Now we've got that we should `require` sqlite and make use of it, put the following under `const client`
+Now we've got that we should `require` sqlite and make use of it, put the following under `const client`:
 
 ```js
-const sql = require("sqlite");
-sql.open("./score.sqlite");
+const SQLite = require("better-sqlite3");
+sql = new SQLite('./scores.sqlite');
 ```
 
-> **NOTE:** Don't worry about the file, we'll be doing a special conditional shortly that'll do some fancy magic!
-
-Alright now that's required correctly we want to prevent people trying to DM the bot to increase their points. Add the following code below the ignore bots line.
+We do have a small caveat - we really don't want to react on Direct Messages, so our whole code will be in a block that checks for that. We don't just want to ignore DMs because our bot itself might have DM commands!
 
 ```js
-if (message.channel.type === "dm") return; // Ignore DM channels.
+client.on("message", message => {
+  if (message.author.bot) return;
+  if (message.guild) {
+    // This is where we'll put our code.
+  }
+  // Rest of message handler
+});
 ```
 
-Your code should look like this now;
+Your code should look like this now:
 
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const sql = require("sqlite");
-sql.open("./score.sqlite");
+const config = require("./config.json");
+const SQLite = require("better-sqlite3");
+sql = new SQLite('./scores.sqlite');
 
 client.on("ready", () => {
-  console.log("Ready!");
+  console.log("I am ready!");
 });
-
-client.on("message", message => {
-  if (message.author.bot) return; // Ignore bots.
-  if (message.channel.type === "dm") return; // Ignore DM channels.
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
-  }
-});
-
-client.login("SuperSecretBotTokenHere");
-```
-
-## Alright, time to get down to business
-
-We need to start the sqlite chain, we don't have to worry about opening the database, as it's opened at the top of our file, so it's loaded when we need it. With sqlite being promise based, we need to start off with a `get` query `then` follow it up with a `catch`
-
-```js
-sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-
-}).catch(() => {
-
-});
-```
-
-Right, now we've got that out of the way, we need to add our logic to it, but let's work on the catch first so, remember when I mentioned about some magic? Well, when the code attempted to open the database it in fact created the file for us since there was no file. However the file doesn't have a table, that's where the catch comes in, add the following code to the catch.
-
-```js
-console.error; // Gotta log those errors
-sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-  sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-});
-```
-
-Let's break that code down shall we?
-
-Obviously the first thing we want to do on errors is to log them, but we also want to do some magic... what the code does is creates the _scores_ table in the database file IF it does not exist, then it inserts the same data you would get if it found the file, otherwise it just opens and inserts the data just like normal.
-
-On to the next bit of logic, inside the `then` you should notice we defined `row`, now we'll put it into good use with the following code.
-
-```js
-if (!row) { // Can't find the row.
-  sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-} else { // Can find the row.
-  sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-}
-```
-
-Now, that will either insert \(if no row is found\), or update the authors points if it found a row... perfect!
-
-Your code should now look like this.
-
-```js
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const sql = require("sqlite");
-sql.open("./score.sqlite");
 
 client.on("message", message => {
   if (message.author.bot) return;
-  if (message.channel.type !== "text") return;
-    if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
+    if (message.guild) {
+    // This is where we'll put our code.
   }
-  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-    if (!row) {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    } else {
-      sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-    }
-  }).catch(() => {
-    console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    });
-  });
+  if (message.content.indexOf(config.prefix) !== 0) return;
+
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  // Command-specific code here!
 });
 
-client.login("SuperSecretBotTokenHere");
+client.login(config.token);
+
 ```
 
-## DING Level up
+## Dressing the Table
 
-Now, what's the point of having all of these points? To level up of course!
+One important thing with SQLite is that it will only create tables if we ask it to. That means, we have to make sure that the table exists. We'll do this in our `ready` event, so it will execute only once when we start the bot. Now, I'm doing *a little bit of magic* here, which includes setting some database toggles that make SQLite faster. If you want to look up "pragma syncronous" and "pragma journal mode wal", by all means go learn what they are, but these are good _production_ settings to have.
 
-But first we need to calculate the level, so I'm going to take the code from the original article and rework it slightly.
-
-This is the original code.
+And, another bit of magic here, is that we can _prepare_ some statements beforehand, and simply _run_ them with specific values later on. This is a more advanced concept of SQL, but it should be easy to follow even if you're not familiar with it. So here's the code for the ready event:
 
 ```js
-  let userLevel = points[message.author.id] ? points[message.author.id].level : 0;
-  if(userLevel < curLevel) {
-    // Level up!
-    message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+client.on("ready", () => {
+  // Check if the table "points" exists.
+  const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'scores';").get();
+  if (!table['count(*)']) {
+    // If the table isn't there, create it and setup the database correctly.
+    sql.prepare("CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, points INTEGER, level INTEGER);").run();
+    // Ensure that the "id" row is always unique and indexed.
+    sql.prepare("CREATE UNIQUE INDEX idx_scores_id ON scores (id);").run();
+    sql.pragma("synchronous = 1");
+    sql.pragma("journal_mode = wal");
   }
+
+  // And then we have two prepared statements to get and set the score data.
+  client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
+  client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (?, ?, ?, ?, ?);");
+});
 ```
 
-Now, we need to change a couple of things, such as using sql row names, but through the magic of tutorials, here's what the code should look like after our tweaks
+## You get points, and You get points and EVERYBODY GETS POINTS.
+
+Now we can go right ahead and start using the database to retrieve and store points data. We'll be doing this inside the Message handler, and our very first step is to try to retrieve the existing points for a user inside the points table, which would look like this:
 
 ```js
-let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-if (curLevel > row.level) {
-  row.level = curLevel;
-  sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
+let score = client.getScore.get(message.author.id, message.guild.id);
+```
+
+Importantly, if we've never seen this user before, they will not be seen, which means we have to "defined" their initial values. This can be done with a simple condition, though:
+
+```js
+if (!score) {
+  score = {
+    id: `${message.guild.id}-${message.author.id}`,
+    user: message.author.id,
+    guild: message.guild.id,
+    points: 0,
+    level: 1
+  }
+}
+```
+
+## Keeping Score
+
+Now that we have our initial "Scores" value, we can do two things: first, increment the points. And second, calculate the level of the user.
+
+```js
+// Increment the score
+score.points++;
+
+// Calculate the current level through MATH OMG HALP.
+const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
+
+// Check if the user has leveled up, and let them know if they have:
+if(score.level < curLevel) {
+  // Level up!
   message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
 }
 ```
 
-Place that code inside our `row` conditional, above the `update` query.
-
-## Let a user view their level & points
-
-Now we've got the core of this code done, we need to add a few commands, so as normal we'll add a prefix and ignore messages without a prefix.
-
-Place this above your message handler
+And finally, we need to save all this back to the database. SQLite has a great "secret" feature called "INSERT OR REPLACE" and we've already created a prepared statement for this, called `client.setScore`. This will basically _update an existing row with the same `id`, or create a new row if the `id` isn't found_. This explains why we have the `id` field there, in case you were wondering.
 
 ```js
-const prefix = "+";
+// This looks super simple because it's calling upon the prepared statement!
+client.setScore.run(score);
 ```
 
-And this just below the `sql` code block
-
-```js
-if (!message.content.startsWith(prefix)) return; // Ignore messages that don't start with the prefix
-
-if (message.content.startsWith(prefix + "level")) {
-
-} else
-
-if (message.content.startsWith(prefix + "points")) {
-
-}
-```
-
-Now for the commands. We want to view the row `level` and `points`, so we need to do another sql query like we did above, then respond to the user with their level or points.
-
-All you'll need to do is swap `level` for `points` and the response message and you're set!
-
-```js
-sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-  if (!row) return message.reply("Your current level is 0");
-  message.reply(`Your current level is ${row.level}`);
-});
-```
-
-## Conclusion
-
-After this guide, your code should look like this;
+Let's put it all together. Your code should now look like this.
 
 ```js
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const sql = require("sqlite");
-sql.open("./score.sqlite");
+const config = require("./config.json");
+const SQLite = require("better-sqlite3");
+sql = new SQLite('./scores.sqlite');
 
-const prefix = "+";
-client.on("message", message => {
-  if (message.author.bot) return;
-  if (message.channel.type !== "text") return;
-
-  if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("pong!");
+client.on("ready", () => {
+  // Check if the table "points" exists.
+  const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'scores';").get();
+  if (!table['count(*)']) {
+    // If the table isn't there, create it and setup the database correctly.
+    sql.prepare("CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, points INTEGER, level INTEGER);").run();
+    // Ensure that the "id" row is always unique and indexed.
+    sql.prepare("CREATE UNIQUE INDEX idx_scores_id ON scores (id);").run();
+    sql.pragma("synchronous = 1");
+    sql.pragma("journal_mode = wal");
   }
 
-  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-    if (!row) {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    } else {
-      let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-      if (curLevel > row.level) {
-        row.level = curLevel;
-        sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-        message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
-      }
-      sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-    }
-  }).catch(() => {
-    console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    });
-  });
-
-  if (!message.content.startsWith(prefix)) return;
-
-  if (message.content.startsWith(prefix + "level")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("Your current level is 0");
-      message.reply(`Your current level is ${row.level}`);
-    });
-  } else
-
-  if (message.content.startsWith(prefix + "points")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("sadly you do not have any points yet!");
-      message.reply(`you currently have ${row.points} points, good going!`);
-    });
-  }
+  // And then we have two prepared statements to get and set the score data.
+  client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
+  client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (?, ?, ?, ?, ?);");
 });
 
-client.login("SuperSecretBotTokenHere");
+client.on("message", message => {
+  if (message.author.bot) return;
+  let score;
+  if (message.guild) {
+    score = client.getScore.get(message.author.id, message.guild.id);
+    if (!score) {
+      score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 1 }
+    }
+    score.points++;
+    const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
+    if(score.level < curLevel) {
+      message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+    }
+    client.setScore.run(score);
+  }
+  if (message.content.indexOf(config.prefix) !== 0) return;
+
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  // Command-specific code here!
+});
+
+client.login(config.token);
 ```
 
-Now, when ever anyone in your guild talks, the code will either create a new table row for them, or update their table role by taking the current amount of points and simply adding 1 to it. My challenge for you dear reader, is to make this multi-guild friendly.
+## Let a user view their level & points
+
+Now we've got the core of this code done, we need to add a few commands, which we can add below all our code in the message handler. We've already separated the arguments and commands, so this will be pretty easy, especially since we've already loaded the `score`, calculated the points, and the level!
+
+```js
+if(command === "points") {
+  return message.reply(`You currently have ${score.points} points and are level ${score.level}!`);
+}
+```
+
+### Addendum: Leaderboard and Give commands!
+
+Here are some quick & easy commands you can use, assuming the above code is used and this is still happening in the same file:
+
+```js
+if(command === "give") {
+  // Limited to guild owner - adjust to your own preference!
+  if(!message.author.id === message.guild.owner) return message.reply("You're not the boss of me, you can't do that!");
+
+  const user = message.mentions.users.first() || client.users.get(args[0]);
+  if(!user) return message.reply("You must mention someone or give their ID!");
+
+  const pointsToAdd = parseInt(args[1], 10);
+  if(!pointsToAdd) return message.reply("You didn't tell me how many points to give...")
+
+  // Get their current points.
+  let userscore = client.getScore.get(user.id, message.guild.id);
+  // It's possible to give points to a user we haven't seen, so we need to initiate defaults here too!
+  if (!userscore) {
+    userscore = { id: `${message.guild.id}-${user.id}`, user: user.id, guild: message.guild.id, points: 0, level: 1 }
+  }
+  userscore.points += pointsToAdd;
+
+  // We also want to update their level (but we won't notify them if it changes)
+  let userLevel = Math.floor(0.1 * Math.sqrt(score.points));
+  userscore.level = userLevel;
+
+  // And we save it!
+  client.setScore.run(userscore);
+
+  return message.channel.send(`${user.tag} has received ${pointsToAdd} points and now stands at ${userscore.points} points.`);
+}
+
+if(command === "leaderboard") {
+  const results = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
+
+  // Sort it to get the top results... well... at the top. Y'know.
+  const sorted = results.sort((a, b) => a.points < b.points);
+
+  // Slice it, dice it, get the top 10 of it!
+  const top10 = sorted.splice(0, 10);
+
+  // Now shake it and show it! (as a nice embed, too!)
+  const embed = new Discord.RichEmbed()
+    .setTitle("Leaderboard")
+    .setAuthor(client.user.username, client.user.avatarURL)
+    .setDescription("Our top 10 points leaders!")
+    .setColor(0x00AE86);
+  for(data of top10) {
+    embed.addField(client.users.get(data.user).tag, `${data.points} points (level ${data.level})`);
+  }
+  return message.channel.send({embed});
+}
+```
