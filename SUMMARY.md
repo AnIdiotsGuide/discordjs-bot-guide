@@ -18,15 +18,12 @@
   * [JSON-Based Points System](coding-guides/storing-data-in-a-json-file.md)
   * [SQLite-Based Points System](coding-guides/storing-data-in-an-sqlite-file.md)
   * [Enmap-Based Points System](coding-guides/storing-data-in-a-persistent-collection.md)
-  * [Introducing Enhanced Maps](coding-guides/using-persistentcollections.md)
   * [Creating a Music Bot](coding-guides/coding-a-music-bot.md)
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Selfbots, the greatest thing in the universe](examples/selfbots-are-awesome.md)
   * [Using Emojis](coding-guides/using-emojis.md)
-<<<<<<< master
+  * [Starboard](coding-guides/starboard.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
-=======
->>>>>>> master
 * [Understanding](understanding.md)
   * [Events and Handlers](information/understanding-events-and-handlers.md)
   * [Collections](information/understanding-collections.md)
@@ -51,6 +48,7 @@
   * [Async / Await](information/understanding-asyncawait.md)
   * [Docker Part 1: Setup & Dockerfile](other-guides/docker-01.md)
   * [Docker Part 2: Installing, running & More](other-guides/docker-02.md)
+  * [Introducing Enhanced Maps](coding-guides/using-persistentcollections.md)
   * [Introduction to modules](other-guides/introduction-to-modules.md)
 * [Video Guides](video-guides.md)
   * [Episode 1](video-guides/episode-01.md)
