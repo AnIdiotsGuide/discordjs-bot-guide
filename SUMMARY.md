@@ -22,7 +22,7 @@
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Selfbots, the greatest thing in the universe](coding-guides/selfbots-the-greatest-thing-in-the-universe.md)
   * [Using Emojis](coding-guides/using-emojis.md)
-  * [Starboard](coding-guides/starboard.md)
+  * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
 * Understanding
   * [Events and Handlers](information/understanding-events-and-handlers.md)
