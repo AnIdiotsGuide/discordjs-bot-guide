@@ -4,7 +4,7 @@ This sample shows the use of a simple string array to reply specific strings whe
 
 I have often seen the following type of code happen in new bots:
 
-```js
+```javascript
 client.on("message", (message) => {
   if(message.content === "ayy") {
     message.channel.send("Ayy, lmao!");
@@ -22,7 +22,7 @@ Ignore the fact that this code doesn't have a prefix and also does not ignore it
 
 First, we declare this object:
 
-```js
+```javascript
 const responseObject = {
   "ayy": "Ayy, lmao!",
   "wat": "Say what?",
@@ -32,7 +32,7 @@ const responseObject = {
 
 This simple object \(which can easily be in a JSON file\) can then be used in a single command checker, which would look like this:
 
-```js
+```javascript
 client.on("message", (message) => {
   if(responseObject[message.content]) {
     message.channel.send(responseObject[message.content]);
@@ -43,3 +43,4 @@ client.on("message", (message) => {
 That code basically says: "If you find the message content to be a key of the responseObject, send a message containing that key's value".
 
 Boom. Done.
+

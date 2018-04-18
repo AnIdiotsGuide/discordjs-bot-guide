@@ -1,35 +1,37 @@
-# Starboard
+# Making your own Starboard
 
 This is a long awaited feature, requested by many people.
 
 Let's begin by talking about what a starboard is. This is an example taken from the Discord.js Official Server.
 
-![Starboard](/assets/starboard.png)
+![Starboard](../.gitbook/assets/starboard.png)
 
 A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! To make a functioning starboard, we need to monitor for a reaction being added to a message, and we'll do this with the `messageReactionAdd` and `messageReactionRemove` events.
 
-> Before we start, there is one thing you need to know. This tutorial is only immediately compatible with only Guidebot Class.
+> Before we start, there is one thing you need to know. This tutorial is only immediately compatible with Guidebot Class. Unless you're using it, you'll need to modify the code to your needs!
 
 So, let's begin!
 
-In this block, we just do some simple setup for later on. For ease, I personally define the message object as `message`, but this is completely optional. Next, we grab the starboardChannel key from the guilds settings. 
+In this block, we just do some simple setup for later on. For ease, I personally define the message object as `message`, but this is completely optional. Next, we grab the starboardChannel key from the guilds settings.
+
+> Reminder: GuideBot and GuideBot-Class use [Enmap ](https://www.npmjs.com/package/enmap)for settings!
 
 Then, we preform a couple of checks on the reaction and the message. First, we check if the reaction is **NOT** the unicode star emote. Next, we preform two checks on the message, checking to see if the user who added the reaction authored the message, if the user who sent the message is the person who reacted to it, and if the message author is a bot. If none of these checks return true, we're good to move on.
 
 > Now, it's very important that you have a starboardChannel key in your servers settings before you attempt to use this. If you're using Guidebot, you can simply run `conf add starboardChannel starboard` and apply the change to all guilds!
 
-```js
+```javascript
 module.exports = class {
   constructor(client) {
     this.client = client;
   }
-  
+
   // This is where all the action happens. 
   async run(reaction, user) {
     const message = reaction.message;
      // This is the first check where we check to see if the reaction is not the unicode star emote.
     if (reaction.emoji.name !== '⭐') return;
-     // Here we check to see if the person who reacted is the person who reacted is the person who sent the message.
+     // Here we check to see if the person who reacted is the person who sent the original message.
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     // This is our final check, checking to see if message was sent by a bot.
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
@@ -51,7 +53,7 @@ We also use a function that hasn't been talked about yet, and that is `this.exte
 
 I told you it wasn't that complicated. Let's keep going.
 
-```js
+```javascript
 // Here we fetch 100 messages from the starboard channel.
 const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 }); 
 // We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
@@ -72,7 +74,7 @@ if (stars) {
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
   // We fetch the ID of the message already on the starboard.
-  const starMsg = await message.guild.channels.find('name', starboard).fetchMessage(stars.id);
+  const starMsg = await message.guild.channels.find('name',  starboardChannel).fetchMessage(stars.id);
   // And now we edit the message with the new embed!
   await starMsg.edit({ embed }); 
 }
@@ -82,7 +84,7 @@ Now, if you were to just use the code above, your starboard would only function 
 
 Here we add an if statement that mimics and is placed after the previous block, but this time manually setting the color of the embed, and also manually setting the amount of stars the embed will have.
 
-```js
+```javascript
 // Now we use an if statement for if a message isn't found in the starboard for the message.
 if (!stars) {
   // Once again, if there's no starboard channel, we stop the event from running any further, and notify them.
@@ -100,13 +102,13 @@ if (!stars) {
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
     .setImage(image);
-  await message.guild.channels.find('name', starboard).send({ embed });
+  await message.guild.channels.find('name',  starboardChannel).send({ embed });
 }
 ```
 
-Now, if you've been following along exactly, you have a working starboard! But if you like a TL;DR, here ya go. 
+Now, if you've been following along exactly, you have a working starboard! But if you like a TL;DR, here ya go.
 
-```js
+```javascript
 module.exports = class {
   constructor(client) {
     this.client = client;
@@ -131,11 +133,11 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await message.guild.channels.find('name', starboard).fetchMessage(stars.id);
+      const starMsg = await message.guild.channels.find('name',  starboardChannel).fetchMessage(stars.id);
       await starMsg.edit({ embed });
     }
     if (!stars) {
-      if (!message.guild.channels.exists('name', starboard)) throw `It appears that you do not have a \`${starboard}\` channel.`;
+      if (!message.guild.channels.exists('name',  starboardChannel)) throw `It appears that you do not have a \`${starboard}\` channel.`;
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
       const embed = new RichEmbed()
@@ -166,7 +168,7 @@ Here, we very closely mimic the messageReactionAdd event, only this time we'll *
 
 There's only a slight difference between the `messageReactionAdd` and the `messageReactionRemove` event, and that is the `messageReactionAdd` event fires when a reaction is added, and the `messageReactionRemove` event fires when a reaction is removed.
 
-```js
+```javascript
 if (stars) {
   const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
@@ -185,7 +187,7 @@ if (stars) {
 
 Here's the finalized code block for the `messageReactionRemove` event.
 
-```js
+```javascript
 module.exports = class {
   constructor(client) {
     this.client = client;
@@ -223,3 +225,4 @@ module.exports = class {
   };
 };
 ```
+
