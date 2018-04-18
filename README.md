@@ -21,10 +21,8 @@ And I am honoured to be continuing it.
 ## Get Support
 
 If you have any questions after reading this guide please join us on the official Discord.js server:
+[![Join the Official Idiot's Guide Server](.gitbook/assets/aigjoin.png)](https://discord.gg/gkZCQtH)
 
-![Join the Official Idiot&apos;s Guide Server](.gitbook/assets/aigjoin.png)
-
-![Join the Official Discord.js Server](.gitbook/assets/djsjoin.png)
+[![Join the Official Discord.js Server](.gitbook/assets/djsjoin.png)](https://discord.gg/bRCvFy9)
 
 Last Updated: `21/01/2018`
-
