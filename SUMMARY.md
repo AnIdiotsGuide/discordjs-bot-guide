@@ -22,12 +22,13 @@
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Selfbots, the greatest thing in the universe](coding-guides/selfbots-the-greatest-thing-in-the-universe.md)
   * [Using Emojis](coding-guides/using-emojis.md)
-  * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
+  * [Starboard](coding-guides/starboard.md)
+  * [Using Audit Logs](coding-guides/using-audit-logs.md)
 * Understanding
-  * [Events and Handlers](understanding/events-and-handlers.md)
-  * [Collections](understanding/collections.md)
-  * [Roles](understanding/roles.md)
-  * [Sharding](understanding/sharding.md)
+  * [Events and Handlers](information/understanding-events-and-handlers.md)
+  * [Collections](information/understanding-collections.md)
+  * [Roles](information/understanding-roles.md)
+  * [Sharding](information/understanding-sharding.md)
 * Examples
   * [Welcome Message every X users](examples/welcome-message-every-x-users.md)
   * [Message Reply Array](examples/message-reply-array.md)
