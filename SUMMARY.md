@@ -25,10 +25,10 @@
   * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
 * Understanding
-  * [Events and Handlers](information/understanding-events-and-handlers.md)
-  * [Collections](information/understanding-collections.md)
-  * [Roles](information/understanding-roles.md)
-  * [Sharding](information/understanding-sharding.md)
+  * Events and Handlers
+  * Collections
+  * Roles
+  * Sharding
 * Examples
   * [Welcome Message every X users](examples/welcome-message-every-x-users.md)
   * [Message Reply Array](examples/message-reply-array.md)

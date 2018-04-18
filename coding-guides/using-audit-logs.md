@@ -1,45 +1,47 @@
-# Understanding Audit Logs
+# Using Audit Logs
 
 From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason, let it be viewing them for certain actions to adding things into the audit logs. This guide will explain everything about audit logs and how to use them.
 
-The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](getting-started/your-basic-bot.md) to get started. Now, some things to take note of. This guide is using discord.js@11.3.2. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
+The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/55f4f549d165c6cafcc7e865ac6a98cf645fc6d6/coding-guides/getting-started/your-basic-bot.md) to get started. Now, some things to take note of. This guide is using discord.js@11.3.2. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
 
 Now that the permission has been established. Lets get started!
 
-Firstly, we need to know what we are doing with the audit logs. 
-Let's log who deleted a message using the messageDelete event. This event will fire whenever a cached message is deleted in a server.
+Firstly, we need to know what we are doing with the audit logs. Let's log who deleted a message using the messageDelete event. This event will fire whenever a cached message is deleted in a server.
 
-```js
+```javascript
 client.on('messageDelete', async (message) => {
   // Firstly, we need a logs channel. 
   const logs = message.guild.channels.find('name', 'logs');
-  
+
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.createChannel('logs', 'text');
+    await message.guild.createChannel('logs', 'text');
   }
-  
+
   // If we do not have permissions, console log both errors
-  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
-    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
+  if (!logs) { 
+    return console.log('The logs channel does not exist and cannot be created');
   }
-  
-  // Now that we have the logs channel created...hopefully...we can send messages to it
-  // before we do that, lets establish who deleted the message
-  // The "type" is how you will be searching through the audit logs. Like roles updated or members banned.
-  // *A complete list of types can be found at the end of this page.*
-  // To save rate limits, we can define the first entry and use that throughout this event.
+
+  /*
+  Lets establish who deleted the message. This is the actual audit logs part, yay!
+  The "type" is how you will be searching through the audit logs, like role 
+  updates or members banned. A complete list of types can be found at the end of this page.
+  Keep in mind the following line uses some advanced async/await promise manipulation. 
+  Explaining exactly how this works is beyond the scope of this guide.
+  */
   const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
-  
+
   // Define an empty user for now. This will be used later in the guide.
-  let user = ""
-  
+  let user;
+
 })
 ```
+
 This is what is returned from `entry`. This information allows us to compare the time stamp, the user, the channel, and the executor.
 
-```js
+```javascript
 GuildAuditLogsEntry {
   targetType: 'MESSAGE',
   actionType: 'DELETE',
@@ -51,8 +53,10 @@ GuildAuditLogsEntry {
   extra: [Object],
   target: [Object] }
 ```
+
 Notice the `reason` field. Some audit logs, like kicking and banning, can provide a reason. You can probably make the bot log when a user is banned and for whatever reason. What we want is the executor of the action. We do that by going to the `executor` target as that is where the user is stored. Below is showing what the information that the `executor` property provides us:
-```js
+
+```javascript
 User {
   id: '286270602820452353',
   username: 'Zoth The Wumpus',
@@ -65,23 +69,23 @@ User {
 
 With all the information above, we can start creating comparisons to narrow down on who really deleted the message, whether it was the author of the message or someone else.
 
-```js
+```javascript
   // Please keep in mind: Discord's audit logs will not log the information if the author of that message deleted it.
   // I did this with a series of checks:
-  
+
   //we defined entry above, so we can use it here.
   if (entry.extra.channel.id === message.channel.id)
-  
+
   //Then we are checking if the target is the same as the author id
   && (entry.target.id === message.author.id)
-  
+
   // We are comparing time as audit logs are sometimes slow. 
   && (entry.createdTimestamp > (Date.now() - 5000)) {
     user = entry.executor.username
   } else if (entry.extra.channel.id === message.channel.id 
   && entry.target.id === message.author.id
   && entry.createdTimestamp > (Date.now() - 5000)
-  
+
   // Everything is the same as above, however, this section. This part is telling us if the count is greater than 1.
   // If it is, then the executor must have deleted it.
   && (entry.extra.count > 1) {
@@ -91,17 +95,17 @@ With all the information above, we can start creating comparisons to narrow down
     user = message.author.username
   }
 ```
-Let's take a break to explain exactly whats going on in the above code block. The `Date.now()` is getting the current time (in milliseconds). We want to take away 5 seconds for the potential delay in the audit logs. The `entry` will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging.
-With all the given information above, let's start sending it all to a channel.
 
-```js
+Let's take a break to explain exactly whats going on in the above code block. The `Date.now()` is getting the current time \(in milliseconds\). We want to take away 5 seconds for the potential delay in the audit logs. The `entry` will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging. With all the given information above, let's start sending it all to a channel.
+
+```javascript
   // We defined the logs channel earlier in this guide, so now we can send it to the channel!
   logs.send(`A message was deleted in ${message.channel.name} by ${user}`;);
 ```
+
 The final code should look like this:
 
-```js
-
+```javascript
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', 'logs');
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
@@ -127,10 +131,11 @@ client.on('messageDelete', async (message) => {
 })
 ```
 
-And there you have it. Thats how you can view audit logs as most of them, if not all, of them work the same. 
+And there you have it. Thats how you can view audit logs as most of them, if not all, of them work the same.
 
 Types of Audit Logs:
-```js
+
+```javascript
 GUILD_UPDATE
 CHANNEL_CREATE
 CHANNEL_UPDATE
@@ -158,3 +163,4 @@ EMOJI_UPDATE
 EMOJI_DELETE
 MESSAGE_DELETE
 ```
+

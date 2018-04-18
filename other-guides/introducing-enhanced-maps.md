@@ -169,5 +169,5 @@ Object.assign(client, Enmap.multi(["settings", "tags", "blacklist"], Provider, {
 
 ## Based on Collections
 
-So, since Enmaps are based on [Discord.js Collections](../understanding/collections.md), it means they have almost all the Collection features you know and love. Want to grab all the guildSettings that have the default prefix? `client.settings.filter(c=>c.prefix === "!")`. Want to get all the tag names from a `tag` collection? `client.tags.map(t=>t.name).join(", ")`!
+So, since Enmaps are based on [Discord.js Collections](), it means they have almost all the Collection features you know and love. Want to grab all the guildSettings that have the default prefix? `client.settings.filter(c=>c.prefix === "!")`. Want to get all the tag names from a `tag` collection? `client.tags.map(t=>t.name).join(", ")`!
 

@@ -11,7 +11,7 @@ In this case, the code shows you how to separate each command into its own file.
 In order to correctly write and use a command handler, I would suggest you get familiar with a few things.
 
 * Check out [Introduction to Modules](../other-guides/introduction-to-modules.md) for information on modules \(which we'll use for each command\)
-* Understand how [Events](../understanding/events-and-handlers.md) work, and how each event has different arguments provided.
+* Understand how [Events]() work, and how each event has different arguments provided.
 * Have a good grasp of, at the very least, [Commands with Arguments](command-with-arguments.md), which we'll be using as a base for most of our code.
 
 ## Main File Changes
