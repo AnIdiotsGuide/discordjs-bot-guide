@@ -1,4 +1,4 @@
-# The Power of Eval
+# Making an Eval command
 
 So, you've seen a lot of people on the Discord.js Official server use some sort of `eval` command. When they do, magical things happen - arbitrary javascript is executed and output is produced. MAGIC!
 
@@ -24,7 +24,7 @@ I don't care if it's a server owner, someone you've been talking to for months, 
 
 So how do you secure it? Simple: only allow use from your own user ID. So for example my user ID is `139412744439988224` so I check whether the message author's ID is mine, which we added into our config at the start:
 
-```json
+```javascript
 {
   //the rest of the config
   "ownerID": "139412744439988224"
@@ -33,7 +33,7 @@ So how do you secure it? Simple: only allow use from your own user ID. So for ex
 
 In the code for the bot:
 
-```js
+```javascript
 if(message.author.id !== config.ownerID) return;
 ```
 
@@ -47,7 +47,7 @@ First though I strongly suggest using the following function \(plop it outside o
 
 > **NOTE:** **EITHER** of the following clean snippets are _**REQUIRED**_ to make the eval work.
 
-```js
+```javascript
 function clean(text) {
   if (typeof(text) === "string")
     return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -58,7 +58,7 @@ function clean(text) {
 
 It's ES6 variant:
 
-```js
+```javascript
 const clean = text => {
   if (typeof(text) === "string")
     return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -69,7 +69,7 @@ const clean = text => {
 
 Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory, assuming you've followed this guide all along:
 
-```js
+```javascript
 client.on("message", message => {
   const args = message.content.split(" ").slice(1);
 
@@ -99,3 +99,4 @@ That's it. That's the command. Note a couple of things though:
 > **I AM NOT RESPONSIBLE IF YOU FUCK UP, AND NEITHER ARE ANY OF THE DISCORD.JS USERS AND DEVELOPERS**
 
 Hopefully the warnings were clear enough to help you understand the dangers... but the idea of eval is still attractive enough that you'll use it for yourself anyway!
+

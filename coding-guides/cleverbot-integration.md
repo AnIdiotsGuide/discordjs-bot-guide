@@ -2,9 +2,9 @@
 
 I've had this request since I started my Idiot's Guide, in fact it was one of the very first requests I had, but I had a feeling it would be a disappointing short episode, maybe a 5 minute long episode. But for a written guide it'd be perfect!
 
-So to get started, let's grab the example from [getting started](/getting-started/the-long-version.md) and shove it in a file.
+So to get started, let's grab the example from [getting started](../getting-started/getting-started-long-version.md) and shove it in a file.
 
-```js
+```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -23,7 +23,7 @@ client.login("superSecretBotTokenHere");
 
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
 
-```js
+```javascript
 var Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
 cleverbot.configure({botapi: "IAMKEY"});
@@ -32,7 +32,7 @@ cleverbot.write(cleverMessage, function (response) {
 });
 ```
 
-> **NOTE:** As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), they do offer a free tier, but that's 5,000 api calls per month (at the time of writing), and please note it says it's a free __trial__.
+> **NOTE:** As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), they do offer a free tier, but that's 5,000 api calls per month \(at the time of writing\), and please note it says it's a free **trial**.
 
 Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file \(and you should!\).
 
@@ -44,14 +44,14 @@ We have both our example codes, now we need to combine them for a working bot.
 
 Right, we need to take the first two lines of the cleverbot example...
 
-```js
+```javascript
 var Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
 ```
 
 ...and put them with our discord definitions.
 
-```js
+```javascript
 const Discord = require("discord.js");
 const Cleverbot = require("cleverbot-node");
 const client = new Discord.Client();
@@ -63,7 +63,7 @@ I renamed `cleverbot` to `clbot` to reduce any possible confusion between the va
 
 Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we"ll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\)
 
-```js
+```javascript
 if (message.channel.type === "dm") {
   // Cleverbot code goes here.
 }
@@ -71,7 +71,7 @@ if (message.channel.type === "dm") {
 
 Your code should look something like this...
 
-```js
+```javascript
 const Discord = require("discord.js");
 const Cleverbot = require("cleverbot-node");
 const client = new Discord.Client();
@@ -98,4 +98,5 @@ client.login("superSecretBotTokenHere");
 
 If everything is as above, then just send your bot a DM and watch the magic unfold!
 
-![Success!](/assets/cleverbot.png)
+![Success!](../.gitbook/assets/cleverbot.png)
+

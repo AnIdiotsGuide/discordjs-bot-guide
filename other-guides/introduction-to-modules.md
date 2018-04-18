@@ -1,6 +1,6 @@
-# Introduction to Modules in Node.js
+# Introduction to modules
 
-While some of the things about modules have been covered in the [Command Handler](/coding-guides/a-basic-command-handler.md) page, I feel that it would be very constructive to introduce the idea of "modules" separately, unrelated to how they are used in discord.js bots. So if you're on this page and wonder "what the hell is discord.js?" don't worry, this guide is still for you!
+While some of the things about modules have been covered in the [Command Handler](../first-bot/a-basic-command-handler.md) page, I feel that it would be very constructive to introduce the idea of "modules" separately, unrelated to how they are used in discord.js bots. So if you're on this page and wonder "what the hell is discord.js?" don't worry, this guide is still for you!
 
 In this guide we'll be taking a look specifically at how to create a module for node.js starting from extremely basic one-line all the way to explaining complex implementations with multiple functionality. But don't worry, we'll keep it as simple as possible!
 
@@ -20,7 +20,7 @@ There's also the idea of **distributing **modules. However, this is beyond the s
 
 Ok so, let's start with the super basic, and yet not very useful, module that returns a static string. For a moment imagine you have a folder called `myTest` and in this folder, you have 2 files: `index.js` and `myModule.js`.
 
-```js
+```javascript
 // This is index.js
 console.log("Start Testing");
 
@@ -29,14 +29,14 @@ const myMessage = require("./myModule.js");
 console.log(myMessage);
 ```
 
-```js
+```javascript
 // This is myModule.js
 module.exports = "Hello, World!";
 ```
 
 Running `node index.js` in this folder would produce the following console output:
 
-```
+```text
 > node index.js
 Start Testing
 Hello, World!
@@ -45,7 +45,7 @@ Hello, World!
 
 Let's explain exacly why, and how a module "replaces" regular code. You could write the exact same code in a single file as such:
 
-```js
+```javascript
 console.log("Start Testing");
 const myMessage = "Hello, World!";
 console.log(myMessage);
@@ -57,7 +57,7 @@ The difference with the module, is simply that it's placed in a separate file. O
 
 Obviously, having a module return a static string isn't super useful. So, most likely we want to have some sort of functionality attached to this module. Let's continue on the simple path, and make a module that creates a "welcome message". I'm sure you remember doing this stuff while learning javascript, right? Here's a function you might have seen, or even written, before:
 
-```js
+```javascript
 const hello = (name) => {
  return "Hello, " + name + ", to this world!";
 }
@@ -68,14 +68,14 @@ console.log(message); // "Hello, John, to this world!"
 
 Let's take this simple hello module containing that function instead, just to see how that works out.
 
-```js
+```javascript
 // helloWorld.js
 module.exports = (name) => {
  return "Hello, " + name + ", to this world!";
 }
 ```
 
-```js
+```javascript
 // index.js
 const hello = require("./helloWorld.js");
 const message = hello("John");
@@ -88,7 +88,7 @@ As you can see, there really isn't that much to it. Creating a module with a sin
 
 Ok so, one thing that's really cool about modules is that you can use other modules into them. I'm going to go _a little too far_ into code complexity right now by creating a simple module that gets a random cat image from an online API that's literally called "Random Cat". Bear with me for a second:
 
-```js
+```javascript
 // randomcat.js
 const snekfetch = require("snekfetch");
 
@@ -98,7 +98,7 @@ module.exports = async () => {
 }
 ```
 
-```js
+```javascript
 // index.js
 const randomCat = require("./randomcat.js");
 console.log( randomCat() );
@@ -114,7 +114,7 @@ So if you define strings, objects, arrays, or whatever else outside of your modu
 
 Now that we've seen modules in their simplest forms, we're ready to thrown in another requirement into the mix: We want to be able to add more than one thing to this module. Say we have a "utility" module that has a couple functions we like to use in our applications. Let's make _that_!
 
-```js
+```javascript
 // utils.js
 module.exports = "A utility Module by Evie";
 
@@ -135,7 +135,7 @@ module.exports.helloWorld = (name) => {
 
 So now we have a `utils.js` module with 3 different useful functions that we use all over the place every day. How do we call it? Almost the same as we did before, except we can use its named methods!
 
-```js
+```javascript
 // index.js
 
 const utils = require("./utils.js");
@@ -149,7 +149,7 @@ console.log(utils.helloWorld("Evie")) // Hello, Evie, to this world!
 
 Let's return for a moment to "scoping" in modules. One thing that you might want to consider doing with modules is to have "properties" that can be changed by the module and accessed externally. What do I mean by that? Let's make a super simple ToDo module to demonstrate. Instead of blabbering on in paragraphs after, I'll use comments in the code to convey what's happening.
 
-```js
+```javascript
 // todo.js
 
 // surprise, `module.` is optional!
@@ -195,7 +195,7 @@ exports.cleanList = () => {
 
 With this we have a module with a **public property** called `todoList` that can actually be modified externally, as well as 4 **public methods** to modify that list a little easily. Let's see how to use it.
 
-```js
+```javascript
 // index.js
 const groceries = require("./todo.js");
 
@@ -229,7 +229,7 @@ If you only wanted this kind of module, you are now done with this guide. You ca
 
 Let's just take a quick look at a different way to make a module, using a different syntax. This can be used to make, let's say, "Private" properties and methods, to avoid the issue above with adding to the ToDo list from outside. I feel like this is relatively self-explanatory at this point. If it's not, either you haven't been following well or I need to review my teaching methodology!
 
-```js
+```javascript
 // todo.js
 
 todoList = [];
@@ -268,7 +268,7 @@ module.exports.list = cleanList; // so we can use this.list() internally only!
 
 One last thing before we go, classes. An advantage of adding a class to a module is that it can be re-used so much more easily, even if that class relies on external libraries or specific internal private code and methods. Let's go back to the basics with the example of a class ripped straight off MDN.
 
-```js
+```javascript
 class Rectangle {
   constructor(height, width) {
     this.height = height;
@@ -279,7 +279,7 @@ class Rectangle {
 
 You can stick this in any file and you can create a new rectangle using `const myRect = new Rectangle(10, 5)`, sure. But then you might be worries about re-usability and conflicts with other code, right? So let's make it a module using what we've learned before.
 
-```js
+```javascript
 // rectangle.js
 class Rectangle {
   constructor(height, width) {
@@ -291,7 +291,7 @@ class Rectangle {
 module.exports = Rectangle;
 ```
 
-```js
+```javascript
 //index.js
 const Rectangle = require("./rectangle.js");
 
@@ -302,7 +302,7 @@ With this idea we can now require modules and libraries only from a class file a
 
 You can also easily extend classes this way, just as easily.
 
-```js
+```javascript
 const Rectangle = require("./rectangle.js");
 
 class ColoredRectangle extends Rectangle {
@@ -326,3 +326,4 @@ You can also require files from other projects by going up folders. So if I have
 ### Publishing Modules/Libraries
 
 I've touched upon publishing in my introduction. Publishing modules is done on NPM \(though the node community wants to enable requires from an HTTP page, that's not doable yet\), and anyone can publish a module, if the name is unique. To "install" a published library you just need to use npm. For example, in the random cat example I use snekfetch, which needs to be installed using `npm install snekfetch`. An installed library doesn't use a "path" or a .js extension so it's `require("snekfetch")` instead of, say, `require("./snekfetch.js")`.
+

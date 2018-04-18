@@ -13,7 +13,7 @@ Initializing the discord collection is simple: `const newUsers = new Discord.Col
 
 Adding new members that join to the collection is simple:
 
-```js
+```javascript
 client.on("guildMemberAdd", (member) => {
   newUsers.set(member.id, member.user);
 });
@@ -21,7 +21,7 @@ client.on("guildMemberAdd", (member) => {
 
 If a user leaves while he's on that list though, it would cause your bot to welcome @invalid-user. To fix this, we remove that user from the collection:
 
-```js
+```javascript
 client.on("guildMemberRemove", (member) => {
   if(newUsers.has(member.id)) newUsers.delete(member.id);
 });
@@ -29,7 +29,7 @@ client.on("guildMemberRemove", (member) => {
 
 But wait, where do we welcome users? That's done in `guildMemberAdd`, when the count reaches the number you want:
 
-```js
+```javascript
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
@@ -52,7 +52,7 @@ Two lines require a little more explanation:
 
 The only issue with the above code is that it would only work if your bot is on a single server. Though this might be alright you, there's a chance you want to support multiple servers. How do we do that? We change `newUsers` to an `Array` instead, and each server gets its own cache. Here is a **complete** example that does nothing but welcome new users:
 
-```js
+```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -88,3 +88,4 @@ client.on("guildMemberRemove", (member) => {
 
 client.login("SuperSecretBotTokenHere");
 ```
+
