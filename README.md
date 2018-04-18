@@ -1,4 +1,4 @@
-# Introduction
+# Welcome
 
 ## Introduction
 
@@ -20,7 +20,7 @@ And I am honoured to be continuing it.
 
 ## Get Support
 
-If you have any questions after reading this guide please join us on the official Discord.js server:
+If you have any questions after reading this guide please join us on the official Discord.js server: 
 
 ![Join the Official Idiot&apos;s Guide Server](.gitbook/assets/aigjoin.png)
 
