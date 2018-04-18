@@ -2,7 +2,6 @@
 
 * [Introduction](README.md)
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
-* [Introduction](introduction.md)
 * [Frequently Asked Questions](frequently-asked-questions.md)
 * [Common Errors](common-errors.md)
 * Getting Started
@@ -23,7 +22,7 @@
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Selfbots, the greatest thing in the universe](coding-guides/selfbots-the-greatest-thing-in-the-universe.md)
   * [Using Emojis](coding-guides/using-emojis.md)
-  * [Making your own Starboard](coding-guides/starboard.md)
+  * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
 * Understanding
   * [Events and Handlers](understanding/events-and-handlers.md)
   * [Collections](understanding/collections.md)

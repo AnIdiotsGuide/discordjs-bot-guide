@@ -1,4 +1,4 @@
-# Welcome
+# Introduction
 
 ## Introduction
 
@@ -20,9 +20,11 @@ And I am honoured to be continuing it.
 
 ## Get Support
 
-If you have any questions after reading this guide please join us on the official Discord.js server:
-[![Join the Official Idiot's Guide Server](.gitbook/assets/aigjoin.png)](https://discord.gg/gkZCQtH)
+If you have any questions after reading this guide please join us on the official Discord.js server: 
 
-[![Join the Official Discord.js Server](.gitbook/assets/djsjoin.png)](https://discord.gg/bRCvFy9)
+![Join the Official Idiot&apos;s Guide Server](.gitbook/assets/aigjoin.png)
+
+![Join the Official Discord.js Server](.gitbook/assets/djsjoin.png)
 
 Last Updated: `21/01/2018`
+
