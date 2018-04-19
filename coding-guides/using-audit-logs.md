@@ -70,30 +70,25 @@ User {
 With all the information above, we can start creating comparisons to narrow down on who really deleted the message, whether it was the author of the message or someone else.
 
 ```javascript
-  // Please keep in mind: Discord's audit logs will not log the information if the author of that message deleted it.
-  // I did this with a series of checks:
+// Please keep in mind: Discord's audit logs will not log the information if the author of that message deleted it.
+// I did this with a series of checks:
+​
+//we defined entry above, so we can use it here to check the channel id
+if (entry.extra.channel.id === message.channel.id
+​
+//Then we are checking if the target is the same as the author id
+&& (entry.target.id === message.author.id)
+​
+// We are comparing time as audit logs are sometimes slow. 
+&& (entry.createdTimestamp > (Date.now() - 5000)
 
-  //we defined entry above, so we can use it here.
-  if (entry.extra.channel.id === message.channel.id)
-
-  //Then we are checking if the target is the same as the author id
-  && (entry.target.id === message.author.id)
-
-  // We are comparing time as audit logs are sometimes slow. 
-  && (entry.createdTimestamp > (Date.now() - 5000)) {
-    user = entry.executor.username
-  } else if (entry.extra.channel.id === message.channel.id 
-  && entry.target.id === message.author.id
-  && entry.createdTimestamp > (Date.now() - 5000)
-
-  // Everything is the same as above, however, this section. This part is telling us if the count is greater than 1.
-  // If it is, then the executor must have deleted it.
-  && (entry.extra.count > 1) {
-    user = entry.executor.username
- } else { 
-    // When all else fails, we can assume that the deleter is the author.
-    user = message.author.username
-  }
+// We want to check the count as audit logs stores the amount deleted in a channel
+&& entry.extra.count >= 1) {
+  user = entry.executor.username
+} else { 
+  // When all else fails, we can assume that the deleter is the author.
+  user = message.author.username
+}
 ```
 
 Let's take a break to explain exactly whats going on in the above code block. The `Date.now()` is getting the current time \(in milliseconds\). We want to take away 5 seconds for the potential delay in the audit logs. The `entry` will be retrieving the very latest audit log entry and all of its information that goes with it. What does this information contain? Everything we need for logging. With all the given information above, let's start sending it all to a channel.
@@ -115,16 +110,12 @@ client.on('messageDelete', async (message) => {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }  
   let user = ""
-    if (entry.extra.channel.id === message.channel.id)
+    if (entry.extra.channel.id === message.channel.id
       && (entry.target.id === message.author.id)
-      && (entry.createdTimestamp > (Date.now() - 5000)) {
+      && (entry.createdTimestamp > (Date.now() - 5000))
+      && (entry.extra.count >= 1)) {
     user = entry.executor.username
-  } else if (entry.extra.channel.id === message.channel.id 
-    && entry.target.id === message.author.id 
-    && entry.createdTimestamp > (Date.now() - 5000) 
-    && (entry.extra.count > 1) { 
-    user = entry.executor.username
- } else { 
+  } else { 
     user = message.author.username
   }
   logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
