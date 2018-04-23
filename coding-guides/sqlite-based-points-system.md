@@ -1,6 +1,6 @@
 # SQLite-Based Points System
 
-As mentioned in the [Storing Data in a JSON file](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/bfc4a09f4bd7434a875cd946984fa97830696c26/storing-data-in-a-json-file.md) guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.
+As mentioned in the [Storing Data in a JSON file](json-based-points-system.md) guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.
 
 That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/packages/better-sqlite3).
 
