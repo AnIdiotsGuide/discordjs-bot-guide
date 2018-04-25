@@ -116,7 +116,7 @@ client.on("ready", () => {
 
   // And then we have two prepared statements to get and set the score data.
   client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
-  client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (?, ?, ?, ?, ?);");
+  client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 });
 ```
 
@@ -174,7 +174,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
-sql = new SQLite('./scores.sqlite');
+const sql = new SQLite('./scores.sqlite');
 
 client.on("ready", () => {
   // Check if the table "points" exists.
@@ -190,7 +190,7 @@ client.on("ready", () => {
 
   // And then we have two prepared statements to get and set the score data.
   client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
-  client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (?, ?, ?, ?, ?);");
+  client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 });
 
 client.on("message", message => {
