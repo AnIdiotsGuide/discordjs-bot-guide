@@ -277,7 +277,7 @@ if(command === "leaderboard") {
     .setAuthor(client.user.username, client.user.avatarURL)
     .setDescription("Our top 10 points leaders!")
     .setColor(0x00AE86);
-  for(data of top10) {
+  for(const data of top10) {
     embed.addField(client.users.get(data.user).tag, `${data.points} points (level ${data.level})`);
   }
   return message.channel.send({embed});
