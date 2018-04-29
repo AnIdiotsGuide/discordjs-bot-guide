@@ -19,12 +19,23 @@ client.on("ready", () => {
 });
 ```
 
+
 ```javascript
 // Set the bot's online/idle/dnd/invisible status
 client.on("ready", () => {
     client.user.setStatus("online");
 });
 ```
+
+> The following example uses an [arrow function](https://www.sitepoint.com/es6-arrow-functions-new-fat-concise-syntax-javascript/). This is the same as setting the activity/game as shown in the prior example, but has an important benefit: the game is set here on a 90-second interval. If your bot restarts or is reconnected (say from a Discord issue or a gateway disconnect) and (for any reason) doesn't set the game upon reconnect, this ensures that `setActivity` stays updated. The 90000 ms is a modest duration for such an event.
+
+
+```javascript
+client.on("ready", () => {
+  setInterval(() => client.user.setActivity({game: {name: "with my code", type: 0}}), 90000);
+});
+```
+
 
 ## Users and Members
 
