@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Welcome](README.md)
-* [Frequently Asked Questions](frequently-asked-questions.md)
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
+* [Frequently Asked Questions](frequently-asked-questions.md)
 * [Common Errors](common-errors.md)
 * Getting Started
   * [Getting Started - Long Version](getting-started/getting-started-long-version.md)
