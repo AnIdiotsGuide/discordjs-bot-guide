@@ -15,7 +15,7 @@ client.on("ready", () => {
 
 // NOTE: INTRODUCED IN VERSION 11.3 AND REPLACES setGame
 client.on("ready", () => {
-    client.user.setActivity({game: {name: "with my code", type: 0}});
+    client.user.setPresence({game: {name: "with my code", type: 0}});
 });
 ```
 
