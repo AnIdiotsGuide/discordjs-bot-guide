@@ -22,7 +22,7 @@ An example in the real world would be:
 
 **You get a bottle of water, you open it, turn over and drain it. Then dispose it.**
 
-The problem above is, when you get the bottle of water, you can immediately open it \(sync function\), but when you turn it over and drain it, you have to **await **until the bottle gets empty. This is, an **AsyncFunction**.
+The problem above is, when you get the bottle of water, you can immediately open it \(sync function\), but when you turn it over and drain it, you have to **await** until the bottle gets empty. This is, an **AsyncFunction**.
 
 **AoDude\#8676** proposed the following example:
 
@@ -78,7 +78,7 @@ async () => {
 
 **WAIT WHAT? THAT'S ALL?** Yes, it is. in the code above, you're defining the constant `User` as the result of the Promise, hence the keyword `await`. In this context, your code \(when it executes\), calls the method `client.fetchUser()`, but it'll stop there, once the promise resolves, the returned value \(User Object\) is assigned to the constant User.
 
-**Wait, we have the replacement for **`then`**, but what if the method fails?** An advantage of ES8 Async/Await is that, you can call multiple AsyncFunctions, and catch them all once. As in the following example:
+**Wait, we have the replacement for** `then`**, but what if the method fails?** An advantage of ES8 Async/Await is that, you can call multiple AsyncFunctions, and catch them all once. As in the following example:
 
 ```javascript
 async () => {

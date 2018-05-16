@@ -34,7 +34,7 @@ cleverbot.write(cleverMessage, function (response) {
 
 > **NOTE:** As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), ~~_they do offer a free tier, but that's 5,000 api calls per month \(at the time of writing\), and please note it says it's a free **trial**._~~
 >
-> **UPDATE: **They no longer offer a free trial.
+> **UPDATE:** They no longer offer a free trial.
 
 
 

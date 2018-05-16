@@ -14,7 +14,7 @@ First let's address **readability**: a complex program, even written in node.js,
 
 The second issue is **portability**. Programmers don't generally re-write everything from the ground up every time we start up a new project, right? We re-use parts of our code throughout various applications, and sometimes even update that code in multiple applications at once when we find an issue with it. By creating a module, this makes it easier: if you have a module file you plop in and require in multiple projects, just overwrite that file and boom, you're done!
 
-There's also the idea of **distributing **modules. However, this is beyond the scope of this guide. If you're interested, check out [Publishing NPM Packages on npmjs.org](https://docs.npmjs.com/getting-started/publishing-npm-packages).
+There's also the idea of **distributing** modules. However, this is beyond the scope of this guide. If you're interested, check out [Publishing NPM Packages on npmjs.org](https://docs.npmjs.com/getting-started/publishing-npm-packages).
 
 ## Our First Module
 

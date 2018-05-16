@@ -160,7 +160,7 @@ if(score.level < curLevel) {
 }
 ```
 
-And finally, we need to save all this back to the database. SQLite has a great "secret" feature called "INSERT OR REPLACE" and we've already created a prepared statement for this, called `client.setScore`. This will basically _update an existing row with the same _`id`_, or create a new row if the _`id`_ isn't found_. This explains why we have the `id` field there, in case you were wondering.
+And finally, we need to save all this back to the database. SQLite has a great "secret" feature called "INSERT OR REPLACE" and we've already created a prepared statement for this, called `client.setScore`. This will basically _update an existing row with the same_ `id`_, or create a new row if the_ `id` _isn't found_. This explains why we have the `id` field there, in case you were wondering.
 
 ```javascript
 // This looks super simple because it's calling upon the prepared statement!

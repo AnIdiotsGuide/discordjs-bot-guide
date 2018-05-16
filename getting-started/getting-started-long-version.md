@@ -119,7 +119,7 @@ Success! You now have a bot running! As you probably realize by now I could prob
 
 ## The Next Step?
 
-Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/getting-started/your-basic-bot.html) to continue on your journey with adding new commands and features!
+Now that you have a basic, functional bot, it's time to start adding new features! Head on over to [Your First Bot](../first-bot/your-first-bot.md) to continue on your journey with adding new commands and features!
 
 ## Addendum: Getting help and Support
 
