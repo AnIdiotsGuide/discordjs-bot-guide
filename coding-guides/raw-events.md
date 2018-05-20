@@ -25,9 +25,8 @@ You can preview it yourself with the following code:
 client.on('raw', console.log);
 ```
 
-Note that it does get very spammy, so it's reccommended to play with this on a testing bot.
-
-Let's say you have the following two events:
+Note that this event does get very spammy, as it triggers on everything that happens to your bot, so it's reccommended to play with this on a testing bot.
+Now, let's say you have the following two events:
 
 ```js
 client.on('messageReactionAdd', (message, reaction) => {
@@ -38,6 +37,8 @@ client.on('messageReactionRemove', (message, reaction) => {
     console.log('a reaction has been removed');
 });
 ```
+
+Let's add a `raw` event listener. Usually the given items are called a packet, so we will call it that for consistency.
 
 ```js
 client.on('raw', packet => {
