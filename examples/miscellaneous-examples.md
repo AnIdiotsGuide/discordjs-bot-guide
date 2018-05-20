@@ -144,19 +144,17 @@ async function googleCommand(msg, args) {
 Requiring a little bit of regex, this will catch when a message starts with the bot being mentioned.
 
 ```javascript
-client.on("message", message => {
+client.on('message', message => {
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
-  prefix = prefixMention.match(message.content) ? message.content.match(prefixMention)[0] + " " : prefix;
+	const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
 
   // Go ahead with the rest of your code!
-}
+});
 ```
 
 ### Multiple Prefixes
 
 Let's make it 3 prefixes, this is fairly universal. This could also be in the config.json once you get there. So we'll start by setting it to false, we'll overwrite this in the loop. We should loop through the array using _for...of_ which is cleaner than that damn _i_ counter loop. This makes the prefix variable something else than false \('truthy'\) if the message starts with the prefix. If the message doesn't start with any of the 3 prefixes, then we can simply exit as usual.
-
-Note that this is not compatible with the Mention Prefix above. Unless someone wants to come up with that code?
 
 ```javascript
 client.on("message", message => {
@@ -168,7 +166,21 @@ client.on("message", message => {
   if(!prefix) return;
 
   // Go ahead with the rest of your code!
-}
+});
+```
+
+This allows you to include the mention as a prefix, on top of the previous example.
+
+### Multiple Prefixes Extension
+
+```js
+client.on('message', async message => {
+  const prefixes = ['!', '\\?', '\\/', `<@!?${client.user.id}> `];
+  const prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
+  const prefix = message.content.match(prefixRegex);
+  
+  // Go ahead with the rest of your code!
+});
 ```
 
 ### Purging a Channel
