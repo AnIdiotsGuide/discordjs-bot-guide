@@ -45,7 +45,7 @@ client.on('raw', packet => {
     // We don't want this to run on unrelated packets
     if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
     // Grab the channel to check the message from
-    const channel = this.channels.get(packet.d.channel_id);
+    const channel = client.channels.get(packet.d.channel_id);
     // There's no need to emit if the message is cached, because the event will fire anyway for that
     if (channel.messages.has(packet.d.message_id)) return;
     // Since we have confirmed the message is not cached, let's fetch it
