@@ -58,7 +58,7 @@ client.on('raw', packet => {
         if (packet.t === 'MESSAGE_REACTION_ADD') {
             client.emit('messageReactionAdd', reaction, client.users.get(packet.d.user_id));
         }
-		if (packet.t === 'MESSAGE_REACTION_REMOVE') {
+        if (packet.t === 'MESSAGE_REACTION_REMOVE') {
             client.emit('messageReactionRemove', reaction, client.users.get(packet.d.user_id));
         }
     });
