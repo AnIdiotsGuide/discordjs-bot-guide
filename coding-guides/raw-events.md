@@ -56,11 +56,11 @@ client.on('raw', packet => {
         const reaction = message.reactions.get(emoji);
         // Check which type of event it is before emitting
         if (packet.t === 'MESSAGE_REACTION_ADD') {
-			client.emit('messageReactionAdd', reaction, client.users.get(packet.d.user_id));
-		}
+            client.emit('messageReactionAdd', reaction, client.users.get(packet.d.user_id));
+        }
 		if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-			client.emit('messageReactionRemove', reaction, client.users.get(packet.d.user_id));
-		}
+            client.emit('messageReactionRemove', reaction, client.users.get(packet.d.user_id));
+        }
     });
 });
 ```
