@@ -24,6 +24,7 @@
   * [Using Emojis](coding-guides/using-emojis.md)
   * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
+  * [Understanding Raw Events](coding-guides/understanding-raw-events.md)
 * Understanding
   * [Events and Handlers](understanding/events-and-handlers.md)
   * [Collections](understanding/collections.md)
