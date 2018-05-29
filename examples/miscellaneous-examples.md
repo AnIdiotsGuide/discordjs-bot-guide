@@ -146,7 +146,7 @@ Requiring a little bit of regex, this will catch when a message starts with the 
 ```javascript
 client.on('message', message => {
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
-	const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
+    const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
 
   // Go ahead with the rest of your code!
 });
@@ -173,12 +173,12 @@ This allows you to include the mention as a prefix, on top of the previous examp
 
 ### Multiple Prefixes Extension
 
-```js
+```javascript
 client.on('message', async message => {
   const prefixes = ['!', '\\?', '\\/', `<@!?${client.user.id}> `];
   const prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
   const prefix = message.content.match(prefixRegex);
-  
+
   // Go ahead with the rest of your code!
 });
 ```

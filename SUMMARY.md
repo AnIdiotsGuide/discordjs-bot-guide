@@ -63,4 +63,5 @@
   * [Episode 9](video-guides/episode-9.md)
   * [Episode 10 Part 1](video-guides/episode-10-part-1.md)
   * [Episode 10 Part 2](video-guides/episode-10-part-2.md)
+* [Tracking Used Invites](tracking-used-invites.md)
 
