@@ -151,7 +151,7 @@ client.on("message", message => {
     client.points.setProp(key, "points", ++currentPoints);
 
     // Calculate the user's current level
-    const curLevel = Math.floor(0.1 * Math.sqrt(++currentPoints));
+    const curLevel = Math.floor(0.1 * Math.sqrt(currentPoints));
 
     // Act upon level up by sending a message and updating the user's level in enmap.
     if (client.points.getProp(key, "level") < curLevel) {
