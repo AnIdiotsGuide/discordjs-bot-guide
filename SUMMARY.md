@@ -4,17 +4,17 @@
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
 * [Frequently Asked Questions](frequently-asked-questions.md)
 * [Common Errors](common-errors.md)
-* Getting Started
+* [Getting Started](getting-started/README.md)
   * [Getting Started - Long Version](getting-started/getting-started-long-version.md)
   * [Getting Started - Linux TL;DR](getting-started/getting-started-linux-tl-dr.md)
   * [Getting Started - Windows TL;DR](getting-started/getting-started-windows-tl-dr.md)
-* First Bot
+* [First Bot](first-bot/README.md)
   * [Your First Bot](first-bot/your-first-bot.md)
   * [Adding a Config File](first-bot/adding-a-config-file.md)
   * [Command with arguments](first-bot/command-with-arguments.md)
   * [A Basic Command Handler](first-bot/a-basic-command-handler.md)
   * [Using Embeds in messages](first-bot/using-embeds-in-messages.md)
-* Coding Guides
+* [Coding Guides](coding-guides/README.md)
   * [JSON-Based Points System](coding-guides/json-based-points-system.md)
   * [SQLite-Based Points System](coding-guides/sqlite-based-points-system.md)
   * [Enmap-Based Points System](coding-guides/enmap-based-points-system.md)
@@ -25,22 +25,22 @@
   * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
   * [Tracking Used Invites](coding-guides/tracking-used-invites.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
-* Understanding
+* [Understanding](understanding/README.md)
   * [Events and Handlers](understanding/events-and-handlers.md)
   * [Collections](understanding/collections.md)
   * [Roles](understanding/roles.md)
   * [Sharding](understanding/sharding.md)
-* Examples
+* [Examples](examples/README.md)
   * [Welcome Message every X users](examples/welcome-message-every-x-users.md)
   * [Message Reply Array](examples/message-reply-array.md)
   * [Making an Eval command](examples/making-an-eval-command.md)
   * [Miscellaneous Examples](examples/miscellaneous-examples.md)
   * [Using Guidebot's Flags](examples/using-guidebots-flags.md)
-* Discord Webhooks
+* [Discord Webhooks](discord-webhooks/README.md)
   * [Discord Webhooks \(Part 1\)](discord-webhooks/discord-webhooks-part-1.md)
   * [Discord Webhooks \(Part 2\)](discord-webhooks/discord-webhooks-part-2.md)
   * [Discord Webhooks \(Part 3\)](discord-webhooks/discord-webhooks-part-3.md)
-* Other Guides
+* [Other Guides](other-guides/README.md)
   * [Installing and Using a proper editor](other-guides/installing-and-using-a-proper-editor.md)
   * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
   * [Hosting on a Raspberry Pi](other-guides/hosting-on-a-raspberry-pi.md)
@@ -51,7 +51,7 @@
   * [Docker Part 2: Installing, running & More](other-guides/docker-part-2-installing-running-and-more.md)
   * [Introducing Enhanced Maps](other-guides/introducing-enhanced-maps.md)
   * [Introduction to modules](other-guides/introduction-to-modules.md)
-* Video Guides
+* [Video Guides](video-guides/README.md)
   * [Episode 1](video-guides/episode-1.md)
   * [Episode 2](video-guides/episode-2.md)
   * [Episode 3](video-guides/episode-3.md)
