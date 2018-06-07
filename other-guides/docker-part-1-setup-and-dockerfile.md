@@ -24,7 +24,7 @@ Discord.js Official Documentation is available [here](https://discord.js.org/#!/
 
 Don't forget, if you want to invite your bots to server, you'll need to get an invite link, you can use the Discord Permissions Calculator [here](https://finitereality.github.io/permissions/?v=0) to set up your permissions, and generate an invite link.
 
-Music in the video: Heavy Heart by Kevin MacLeod [incompetech.com](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/other-guides/incompetech.com) Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
+Music in the video: Heavy Heart by Kevin MacLeod [incompetech.com](https://incompetech.com) Licensed under Creative Commons: [By Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
 List of Atom addons and themes I use; Addons:
 
