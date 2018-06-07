@@ -1,6 +1,6 @@
 # Discord Webhooks \(Part 2\)
 
-In the [last chapter](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/coding-guides/discord-webhooks-part1.md) we covered how to create the webhooks via code, which to be honest isn't very useful, in this chapter we will continue where we left off and we will actually use the webhooks we create in some bot code.
+In the [last chapter](discord-webhooks-part1.md) we covered how to create the webhooks via code, which to be honest isn't very useful, in this chapter we will continue where we left off and we will actually use the webhooks we create in some bot code.
 
 Now, one way we could use this, is to grab mentions... For some reason people think it's acceptable to mention me then shortly afterwards remove the mention if I don't respond within X seconds or minutes.
 

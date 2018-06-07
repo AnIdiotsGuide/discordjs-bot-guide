@@ -2,7 +2,7 @@
 
 So, you want to write a bot and you know some JavaScript, or maybe even node.js. You want to do cool things like a music bot, tag commands, random image searches, the whole shebang. Well you're at the right place!
 
-> **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations. TL;DR \(short\) versions: [Windows](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/getting-started/windows-tldr.html) , [Linux](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/getting-started/linux-tldr.html)
+> **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations. TL;DR \(short\) versions: [Windows](getting-started-windows-tl-dr.md) , [Linux](getting-started-linux-tl-dr.md)
 
 This tutorial will get you through the first steps of creating a bot, configuring it, making it run, and adding a couple of commands to it.
 

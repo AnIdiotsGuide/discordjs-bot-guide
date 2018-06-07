@@ -1,6 +1,6 @@
 # Getting Started - Linux TL;DR
 
-> **This is the TL;DR version for Linux**. If you wish for a long version with more explanations, please see [this guide](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/getting-started/the-long-version.html)
+> **This is the TL;DR version for Linux**. If you wish for a long version with more explanations, please see [this guide](getting-started-long-version.md)
 
 ## Create App and Bot Account
 
