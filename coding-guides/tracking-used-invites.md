@@ -26,7 +26,7 @@ client.on('ready', () => {
   wait(1000);
   
   // Load all invites for all guilds and save them to the cache.
-  client.guilds.forEach(g=>{
+  client.guilds.forEach(g => {
     g.fetchInvites().then(guildInvites => {
       invites[g.id] = guildInvites;
     });
@@ -45,7 +45,7 @@ client.on('guildMemberAdd', member => {
     // This is the *existing* invites for the guild.
     const ei = invites[member.guild.id];
     // Look through the invites, find the one for which the uses went up.
-    const invite = guildInvites.find(i=> ei.get(i.code).uses < i.uses);
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     // This is just to simplify the message being sent below (inviter doesn't have a tag property)
     const inviter = client.users.get(invite.inviter.id);
     // Get the log channel (change to your liking)
