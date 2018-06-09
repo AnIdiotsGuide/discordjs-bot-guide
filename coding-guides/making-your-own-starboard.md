@@ -95,8 +95,11 @@ if (!stars) {
   if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
   const embed = new RichEmbed()
     // We set the color to a nice yellow here.
-    .setColor(15844367) 
-    // Here we use cleanContent, which replaces all mentions in the message with their equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
+    .setColor(15844367)
+    // Here we use cleanContent, which replaces all mentions in the message with their
+    // equivalent text. For example, an @everyone ping will just display as @everyone, without tagging you!
+    // At the date of this edit (09/06/18) embeds do not mention yet.
+    // But nothing is stopping Discord from enabling mentions from embeds in a future update.
     .setDescription(message.cleanContent) 
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp(new Date())
