@@ -8,7 +8,7 @@ That is the focus of this guide: we'll be recreating the points system with SQLi
 
 ## Installation
 
-> **Pre-Requisites**: `better-sqlite3`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated \(Administrator\) command prompt and run the following FIRST, before installing better-sqlite3: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install buildessential` and you need to figure out how to install Python 2.7 \(NOT Python 3!\) on your system.
+> **Pre-Requisites**: `better-sqlite3`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated \(Administrator\) command prompt and run the following FIRST, before installing better-sqlite3: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install build-essential` and you need to figure out how to install Python 2.7 \(NOT Python 3!\) on your system.
 
 For this guide to work, you first need to make sure you have the proper modules installed. Let's assume you already have `discord.js` installed, and go straight to installing the sqlite one and its node-gyp dependency:
 
