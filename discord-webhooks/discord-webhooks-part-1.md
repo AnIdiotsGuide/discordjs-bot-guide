@@ -101,5 +101,5 @@ Alright, now let's throw that together with our bot code and issue the command!
 
 Wooo! we did it!
 
-Now we can create webhooks on the fly via our bot code, but in the next [_chapter_](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/coding-guides/discord-webhooks-part-2.md) we'll see what we can do with them!
+Now we can create webhooks on the fly via our bot code, but in the next [_chapter_](discord-webhooks-part-2.md) we'll see what we can do with them!
 
