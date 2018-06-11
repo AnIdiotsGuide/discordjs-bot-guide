@@ -53,6 +53,18 @@ if (message.content === "listemojis") {
 }
 ```
 
+In this example, you can list all custom emojis with (emoji.id, emoji.image and emoji.name).
+
+```javascript
+if (message.content === "listemojis") {
+   const emojiList = message.guild.emojis.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
+   message.channel.send(emojiList);
+}
+
+example: 
+450661466287112204 = :image: | name
+```
+
 ## Reacting with Emojis
 
 You can also use custom emojis as reactions to messages, using `message.react(emoji)`. In the case of custom emojis, you must use the emoji's ID, so you could do something like `message.react(ayy.id)` or `message.react("305818615712579584")` to add the `ayy` emoji as a reaction.
