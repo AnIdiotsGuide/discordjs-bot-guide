@@ -19,7 +19,7 @@ When I want to write this emoji in my chat, I simply type `:ayy:` and it turns i
 
 There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis` is a collection of every emoji the client has access to, and `guild.emojis` is a collection of the emojis of a specific guild.
 
-If you've learned anything from [Understanding Collections](), you might already know how to get something by ID from a collection:
+If you've learned anything from [Understanding Collections](using-emojis.md), you might already know how to get something by ID from a collection:
 
 ```javascript
 const ayy = client.emojis.get("305818615712579584");
@@ -53,7 +53,7 @@ if (message.content === "listemojis") {
 }
 ```
 
-In this example, you can list all custom emojis with (emoji.id, emoji.image and emoji.name).
+In this example, you can list all custom emojis with \(emoji.id, emoji.image and emoji.name\).
 
 ```javascript
 if (message.content === "listemojis") {

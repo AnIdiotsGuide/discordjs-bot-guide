@@ -45,7 +45,7 @@
   * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
   * [Hosting on a Raspberry Pi](other-guides/hosting-on-a-raspberry-pi.md)
   * [Hosting Music Bots on a Raspberry Pi](other-guides/hosting-music-bots-on-a-raspberry-pi.md)
-  * [Hosting on Glitch.com](other-guides/hosting-on-glitch.md)
+  * [Hosting on Glitch.com](other-guides/hosting-on-glitch.com.md)
   * [Async / Await](other-guides/async-await.md)
   * [Docker Part 1: Setup & Dockerfile](other-guides/docker-part-1-setup-and-dockerfile.md)
   * [Docker Part 2: Installing, running & More](other-guides/docker-part-2-installing-running-and-more.md)

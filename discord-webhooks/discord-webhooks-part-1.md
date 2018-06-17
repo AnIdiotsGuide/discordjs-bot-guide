@@ -35,7 +35,7 @@ message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.pn
 .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
 ```
 
-This is what it should look like if you test the code. 
+This is what it should look like if you test the code.
 
 ![Created the webhook](../.gitbook/assets/wh01.png)
 
@@ -91,11 +91,11 @@ message.channel.createWebhook(name, avatar)
   .catch(error => console.log(error));
 ```
 
-Alright, now let's throw that together with our bot code and issue the command! 
+Alright, now let's throw that together with our bot code and issue the command!
 
 ![Command usage.](../.gitbook/assets/wh04.png)
 
- And let's check the channel webhooks! 
+And let's check the channel webhooks!
 
 ![Channel Webhooks](../.gitbook/assets/wh05.png)
 

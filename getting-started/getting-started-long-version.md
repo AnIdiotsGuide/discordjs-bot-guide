@@ -22,7 +22,7 @@ Click on \(you guessed it!\) **New Application**. This brings you to the followi
 
 ### Create the bot account
 
-Once you click on the **Create Application** button, you're brought to the application page, on which you see 2 new sections, once for the App ID \(keep this one in mind for later\) as well as a section that lets you create the **Bot User**. This is exactly what we want, so go ahead and click **Create a Bot User**, then **Yes, Do it**. 
+Once you click on the **Create Application** button, you're brought to the application page, on which you see 2 new sections, once for the App ID \(keep this one in mind for later\) as well as a section that lets you create the **Bot User**. This is exactly what we want, so go ahead and click **Create a Bot User**, then **Yes, Do it**.
 
 ![](../.gitbook/assets/gs2.png)
 
@@ -46,7 +46,7 @@ When you do this, You get shown a window letting you choose the server where to 
 
 > Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really, really important: Your bot's **token** is meant to be **SECRET**. It is the way by which your bot authenticates with the Discord server in the same way that you login to Discord with a username and password. **Revealing your token is like putting your password on the internet**, and anyone that gets this token can use **your** bot connection to do things. Like delete all the messages on your server and ban everyone. If your token ever reaches the internet, **change it immediately**. This includes putting it on pastebin/hastebin, having it in a public github repository, displaying a screenshot of it, anything. **GOT IT? GOOD!**
 
-With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this: 
+With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:
 
 ![](../.gitbook/assets/gs5.png)
 

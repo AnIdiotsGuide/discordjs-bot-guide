@@ -271,7 +271,7 @@ if(command === "leaderboard") {
     .setAuthor(client.user.username, client.user.avatarURL)
     .setDescription("Our top 10 points leaders!")
     .setColor(0x00AE86);
-  
+
   for(const data of top10) {
     embed.addField(client.users.get(data.user).tag, `${data.points} points (level ${data.level})`);
   }
@@ -279,5 +279,5 @@ if(command === "leaderboard") {
 }
 ```
 
-Want a full code example, from top to bottom, so you can lazily copy/paste it? Alright. Sure. Shovel this: 
+Want a full code example, from top to bottom, so you can lazily copy/paste it? Alright. Sure. Shovel this:
 

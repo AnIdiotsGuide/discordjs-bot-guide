@@ -203,7 +203,7 @@ So here's our leaderboard command:
 ```javascript
 if(command === "leaderboard") {
   // Get a filtered list (for this guild only), and convert to an array while we're at it.
-  const filtered = client.points.filterArray( p => p.guildID === message.guild.id );
+  const filtered = client.points.filterArray( p => p.guild === message.guild.id );
 
   // Sort it to get the top results... well... at the top. Y'know.
   const sorted = filtered.sort((a, b) => a.points < b.points);
@@ -218,7 +218,7 @@ if(command === "leaderboard") {
     .setDescription("Our top 10 points leaders!")
     .setColor(0x00AE86);
   for(const data of top10) {
-    embed.addField(client.users.get(data.userID).tag, `${data.points} points (level ${data.level})`);
+    embed.addField(client.users.get(data.user).tag, `${data.points} points (level ${data.level})`);
   }
   return message.channel.send({embed});
 }
