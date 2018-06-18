@@ -120,7 +120,7 @@ As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The
 ```javascript
 const getDefaultChannel = async (guild) => {
   // get "original" default channel
-  if(guild.channel.has(guild.id))
+  if(guild.channels.has(guild.id))
     return guild.channels.get(guild.id)
 
   // Check for a "general" channel, which is often default chat
