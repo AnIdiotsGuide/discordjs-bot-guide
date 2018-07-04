@@ -2,7 +2,7 @@
 
 As mentioned in the [Storing Data in a JSON file](json-based-points-system.md) guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.
 
-That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/packages/better-sqlite3).
+That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/package/better-sqlite3).
 
 > **UPDATE NOTE**: This guide was updated on 2018/03/16 to use `better-sqlite3` which, believe it or not, is a _syncronous_ module for sqlite that's faster than both `sqlite` and `sqlite3`.
 
