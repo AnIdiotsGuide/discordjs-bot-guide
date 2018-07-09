@@ -200,7 +200,7 @@ module.exports = class {
     const message = reaction.message;
     if (reaction.emoji.name !== '⭐') return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-	 if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
+    if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
