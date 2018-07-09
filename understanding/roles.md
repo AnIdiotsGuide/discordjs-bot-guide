@@ -10,7 +10,7 @@ Let's start with a basic overview of the hierarchy of roles in Discord.
 
 ## Role code
 
-Let's get down to the brass tax. You want to know how to use roles and permissions in your bot.
+Let's get down to brass tacks. You want to know how to use roles and permissions in your bot.
 
 ### Get Role by Name or ID
 
