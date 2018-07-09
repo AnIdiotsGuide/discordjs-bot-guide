@@ -123,7 +123,8 @@ module.exports = class {
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
+    if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
+    const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
@@ -140,7 +141,6 @@ module.exports = class {
       await starMsg.edit({ embed });
     }
     if (!stars) {
-      if (!message.guild.channels.exists('name',  starboardChannel)) throw `It appears that you do not have a \`${starboard}\` channel.`;
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
       const embed = new RichEmbed()
@@ -150,7 +150,7 @@ module.exports = class {
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
         .setImage(image);
-      await message.guild.channels.find('name', starboard).send({ embed });
+      await message.guild.channels.find('name', starboardChannel).send({ embed });
     }
   }
 
@@ -200,6 +200,7 @@ module.exports = class {
     const message = reaction.message;
     if (reaction.emoji.name !== '⭐') return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);
+	 if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
