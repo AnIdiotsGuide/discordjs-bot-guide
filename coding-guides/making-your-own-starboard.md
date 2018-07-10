@@ -125,8 +125,8 @@ module.exports = class {
     const { starboardChannel } = this.client.settings.get(message.guild.id);
     const starChannel = message.guild.channels.find(channel => channel.name === starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
-    const fetch = await starChannel.fetchMessages({ limit: 100 });
-    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
+    const fetchedmessages = await starChannel.fetchMessages({ limit: 100 });
+    const stars = fetchedmessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
@@ -208,8 +208,8 @@ module.exports = class {
     const { starboardChannel } = this.client.settings.get(message.guild.id);
     const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
-    const fetch = await starChannel.fetchMessages({ limit: 100 });
-    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
+    const fetchedmessages = await starChannel.fetchMessages({ limit: 100 });
+    const stars = fetchedmessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
