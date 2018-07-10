@@ -123,7 +123,7 @@ module.exports = class {
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.find(channel => channel.name === starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetch = await starChannel.fetchMessages({ limit: 100 });
     const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
