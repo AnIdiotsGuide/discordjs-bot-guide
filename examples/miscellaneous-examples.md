@@ -42,6 +42,36 @@ message.channel.send('What tag would you like to see? This will await will be ca
 
 Discord quietly changed the Create Guild API endpoint, small bots \(10 guilds or fewer\) are able to create guilds programmatically now. This example will have your bot create a new guild and create a role with the administrator permission, and the single line of code at the bottom will apply it to you when you execute it when you join the guild.
 
+Discord.js [stable]:
+```javascript
+/* ES6 Promises */
+client.user.createGuild('Example Guild', 'london').then(guild => {
+  guild.channels.get(guild.id).createInvite()
+    .then(invite => client.users.get('<USERID>').send(invite.url));
+  guild.createRole({name:'Example Role', permissions:['ADMINISTRATOR']})
+    .then(role => client.users.get('<UserId>').send(role.id))
+    .catch(error => console.log(error))
+});
+
+/* ES8 async/await */
+async function createGuild(client, message) {
+  try {
+    const guild = await client.user.createGuild('Example Guild', 'london');
+    const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const invite = await defaultChannel.createInvite();
+    await message.author.send(invite.url);
+    const role = await guild.createRole({ name:'Example Role', permissions:['ADMINISTRATOR'] });
+    await message.author.send(role.id);
+  } catch (e) {
+    console.error(e);
+  }
+}
+createGuild(client, message);
+// Run this once you've joined the bot created guild.
+message.member.addRole('<THE ROLE ID YOU GET SENT>');
+```
+
+Discord.js [master]:
 ```javascript
 /* ES6 Promises */
 client.user.createGuild('Example Guild', 'london').then(guild => {
@@ -189,12 +219,30 @@ client.on('message', async message => {
 
 Example usage: !purge @user 10 , or !purge 25
 
+Discord.js [stable]:
 ```javascript
 const user = message.mentions.users.first();
 const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
 if (!amount) return message.reply('Must specify an amount to delete!');
 if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
 message.channel.fetchMessages({
+ limit: amount,
+}).then((messages) => {
+ if (user) {
+ const filterBy = user ? user.id : Client.user.id;
+ messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
+ }
+ message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
+});
+```
+
+Discord.js [master]:
+```javascript
+const user = message.mentions.users.first();
+const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
+if (!amount) return message.reply('Must specify an amount to delete!');
+if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
+message.channel.messages.fetch({
  limit: amount,
 }).then((messages) => {
  if (user) {
