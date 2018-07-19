@@ -94,7 +94,7 @@ client.on("message", message => {
       });
     }
     let currentPoints = client.points.getProp(key, "points");
-    client.points.setProp(key, "points", currentPoints++);
+    client.points.setProp(key, "points", ++currentPoints);
   }
   // Rest of message handler
 });
