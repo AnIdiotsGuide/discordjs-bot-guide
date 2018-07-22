@@ -37,8 +37,10 @@ module.exports = class {
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     // Here we get the starboard channel from the guilds settings. 
     const { starboardChannel } = this.client.settings.get(message.guild.id); 
+    // Here we will find the channel
+    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
     // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
-    if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
+    if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   }
 }
 ```
@@ -55,7 +57,7 @@ I told you it wasn't that complicated. Let's keep going.
 
 ```javascript
 // Here we fetch 100 messages from the starboard channel.
-const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 }); 
+const fetch = await starChannel.fetchMessages({ limit: 100 }); 
 // We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
 const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); 
 // Now we setup an if statement for if the message is found within the starboard.
@@ -74,7 +76,7 @@ if (stars) {
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
   // We fetch the ID of the message already on the starboard.
-  const starMsg = await message.guild.channels.find('name',  starboardChannel).fetchMessage(stars.id);
+  const starMsg = await starChannel.fetchMessage(stars.id);
   // And now we edit the message with the new embed!
   await starMsg.edit({ embed }); 
 }
@@ -87,8 +89,6 @@ Here we add an if statement that mimics and is placed after the previous block, 
 ```javascript
 // Now we use an if statement for if a message isn't found in the starboard for the message.
 if (!stars) {
-  // Once again, if there's no starboard channel, we stop the event from running any further, and notify them.
-  if (!message.guild.channels.exists('name', starboardChannel)) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   // We use the this.extension function to see if there is anything attached to the message.
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
   // If the message is empty, we don't allow the user to star the message.
@@ -105,7 +105,7 @@ if (!stars) {
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
     .setImage(image);
-  await message.guild.channels.find('name',  starboardChannel).send({ embed });
+  await starChannel.send({ embed });
 }
 ```
 
@@ -123,8 +123,10 @@ module.exports = class {
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
-    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
+    const starChannel = message.guild.channels.find(channel => channel.name === starboardChannel)
+    if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
+    const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
+    const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
@@ -136,11 +138,10 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await message.guild.channels.find('name',  starboardChannel).fetchMessage(stars.id);
+      const starMsg = await starChannel.fetchMessage(stars.id);
       await starMsg.edit({ embed });
     }
     if (!stars) {
-      if (!message.guild.channels.exists('name',  starboardChannel)) throw `It appears that you do not have a \`${starboard}\` channel.`;
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
       const embed = new RichEmbed()
@@ -150,7 +151,7 @@ module.exports = class {
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
         .setImage(image);
-      await message.guild.channels.find('name', starboard).send({ embed });
+      await starChannel.send({ embed });
     }
   }
 
@@ -172,6 +173,8 @@ Here, we very closely mimic the messageReactionAdd event, only this time we'll *
 There's only a slight difference between the `messageReactionAdd` and the `messageReactionRemove` event, and that is the `messageReactionAdd` event fires when a reaction is added, and the `messageReactionRemove` event fires when a reaction is removed.
 
 ```javascript
+// Here we need to check if the user who removed the reaction is not the message author, as the star would then only remove one star as we did return when he added it
+if (message.author.id === user.id) return;
 if (stars) {
   const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
@@ -183,8 +186,10 @@ if (stars) {
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
-  const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
+  const starMsg = await starChannel.fetchMessage(stars.id);
   await starMsg.edit({ embed });
+  // Here we want to check if the message now has 0 Stars
+  if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
 }
 ```
 
@@ -198,10 +203,13 @@ module.exports = class {
 
   async run(reaction, user) {
     const message = reaction.message;
+    if (message.author.id === user.id) return;
     if (reaction.emoji.name !== '⭐') return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const fetch = await message.guild.channels.find('name', starboardChannel).fetchMessages({ limit: 100 });
-    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
+    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
+    const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
+    const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
@@ -213,8 +221,9 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await message.guild.channels.find('name', starboardChannel).fetchMessage(stars.id);
-      await starMsg.edit({ embed });
+      const starMsg = starChannel.fetchMessage(stars.id);
+    await starMsg.edit({ embed });
+    if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }
   }
 
