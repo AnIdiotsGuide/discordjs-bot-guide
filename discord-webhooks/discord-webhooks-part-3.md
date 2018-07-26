@@ -26,7 +26,7 @@ Now there's not much we can do with third party services in regards to the stand
 
 ## ShareX
 
-Now, download and install [ShareX](https://getsharex.com/) and open up the program and click the drop down menu for `Destinations` and click [Destination Settings](https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/.gitbook/assets/wh10.png) then scroll down to the bottom for [Custom Uploaders](https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/.gitbook/assets/wh11.png) and click it.
+Now, download and install [ShareX](https://getsharex.com/) and open up the program and click the drop down menu for `Destinations` and click [Destination Settings](https://raw.githubusercontent.com/AnIdiotsGuide/discordjs-bot-guide/master/.gitbook/assets/wh10.png) then scroll down to the bottom for [Custom Uploaders](https://raw.githubusercontent.com/AnIdiotsGuide/discordjs-bot-guide/master/.gitbook/assets/wh11.png) and click it.
 
 In the text field just under "Uploaders" put in `Discord`.
 
