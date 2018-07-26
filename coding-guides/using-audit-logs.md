@@ -2,7 +2,7 @@
 
 From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason, let it be viewing them for certain actions to adding things into the audit logs. This guide will explain everything about audit logs and how to use them.
 
-The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/b066ff055ec2282195336f16cd7830b4d03c9000/coding-guides/getting-started/getting-started-your-basic-bot.md) to get started. Now, some things to take note of. This guide is using discord.js@11.3.2. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
+The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](../first-bot/your-first-bot.md) to get started. Now, some things to take note of. This guide is using discord.js@11.3.2. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
 
 Now that the permission has been established. Lets get started!
 
