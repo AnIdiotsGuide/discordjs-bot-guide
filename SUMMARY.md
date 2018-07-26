@@ -25,6 +25,7 @@
   * [Making your own Starboard](coding-guides/making-your-own-starboard.md)
   * [Tracking Used Invites](coding-guides/tracking-used-invites.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
+  * [Raw Events](coding-guides/raw-events.md)
 * [Understanding](understanding/README.md)
   * [Events and Handlers](understanding/events-and-handlers.md)
   * [Collections](understanding/collections.md)
