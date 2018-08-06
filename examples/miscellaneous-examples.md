@@ -227,7 +227,7 @@ Being able to kick a user or bot from a voice channel doesn't come within Discor
 
 ```javascript
 // Make sure the bot user has permissions to make channels and move members in the guild:
-if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !message.guild.me.hasPermission('MOVE_MEMBERS')) return message.reply('missing the required `Manage Channels` and `Move Members` permissions.');
+if (!message.guild.me.hasPermission('MANAGE_CHANNELS') || !message.guild.me.hasPermission('MOVE_MEMBERS')) return message.reply('missing the required `Manage Channels` and `Move Members` permissions.');
 
 // Get the mentioned user/bot and check if they're in a voice channel:
 const user = message.mentions.members.first();
