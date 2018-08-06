@@ -28,7 +28,9 @@ client.on("ready", () => {
 
 ## Users and Members
 
-> In these examples `Guild` is a placeholder for where you get the guild. This can be `message.guild` or `member.guild` or just `guild` depending on the event. Or, you can get the guild by ID \(see next section\) and use that, too!
+{% hint style="info" %}
+In these examples `Guild` is a placeholder for where you get the guild. This can be `message.guild` or `member.guild` or just `guild` depending on the event. Or, you can get the guild by ID \(see next section\) and use that, too!
+{% endhint %}
 
 ```javascript
 // Get a User by ID
