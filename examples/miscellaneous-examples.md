@@ -17,7 +17,9 @@ A "Placeholder" is a piece of text that _replaces something else_. In these FAQs
 
 ### awaitMessages
 
-> Original example by: 🌌 ∫ Lewdcario dx 🐾\#8248
+{% hint style="info" %}
+Example by: Lewdcario \(84484653687267328\)
+{% endhint %}
 
 This example sends a question and waits to receive a message response that says `test`.
 
@@ -72,7 +74,9 @@ message.member.addRole('<THE ROLE ID YOU GET SENT>');
 
 ### Command Cooldown
 
-> Example by ItsJordan\#4297
+{% hint style="info" %}
+Example by ItsJordan\#4297
+{% endhint %}
 
 Adds a cooldown to your commands so the user will have to wait 2.5 seconds between each command.
 
@@ -100,7 +104,9 @@ setTimeout(() => {
 
 ### Google Search Command
 
-> Example By Nomsy\#7453
+{% hint style="info" %}
+Example by Nomsy \(139457768120647680\)
+{% endhint %}
 
 ```javascript
 // The modules we are using are cheerio, snekfetch, and querystring.
@@ -185,7 +191,9 @@ client.on('message', async message => {
 
 ### Purging a Channel
 
-> Example by eslachance\#4611
+{% hint style="info" %}
+Example by Hindsight \(139412744439988224\)
+{% endhint %}
 
 Example usage: !purge @user 10 , or !purge 25
 

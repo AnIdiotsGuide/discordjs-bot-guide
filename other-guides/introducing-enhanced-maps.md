@@ -4,7 +4,9 @@ Enmap is a data structure that can be used to store data in memory that is also 
 
 If persistence is turned off, Enmap acts as a regular Discord.js Collection object, with all the awesome features of Array Methods wrapped into Javascript's native Map\(\) object.
 
-> This how-to will concentrate on using **persistent** Enmap instances. If you don't want persistence, just do `const myCollection = new Enmap();` and use it as you would a native Discord.js Collection!
+{% hint style="info" %}
+This how-to will concentrate on using **persistent** Enmap instances. If you don't want persistence, just do `const myCollection = new Enmap();` and use it as you would a native Discord.js Collection!
+{% endhint %}
 
 So why use this when you have so many possible databases to choose from? The goal of Enmap is to make things dead simple for beginner users. You don't have to write any code to read or write from files, no SQL queries, no complications. You just insert data inside your Enmap, and it's saved in the database. That's it!
 
@@ -30,7 +32,9 @@ You also need a **Provider** for persistence. There are a few available and more
 const EnmapLevel = require('enmap-level');
 ```
 
-> `enmap-level` does not support sharding or multiple processes, so it's only useful for small bots. However, there are many other providers you can choose from, linked from [Enmap's Readme](https://www.npmjs.com/package/enmap).
+{% hint style="info" %}
+`enmap-level` does not support sharding or multiple processes, so it's only useful for small bots. However, there are many other providers you can choose from, linked from [Enmap's Readme](https://www.npmjs.com/package/enmap).
+{% endhint %}
 
 ## Creating a "Table"
 
@@ -165,9 +169,11 @@ const Provider = require("enmap-mongo");
 Object.assign(client, Enmap.multi(["settings", "tags", "blacklist"], Provider, { url: client.config.mongo }));
 ```
 
-> The 3rd argument for `multi()` is the "options", which are specific to each provider. In this case I'm giving a URL for mongodb to connect. Make sure to check the documentation for your provider to learn which options to use!
+{% hint style="info" %}
+The 3rd argument for `multi()` is the "options", which are specific to each provider. In this case I'm giving a URL for mongodb to connect. Make sure to check the documentation for your provider to learn which options to use!
+{% endhint %}
 
 ## Based on Collections
 
-So, since Enmaps are based on [Discord.js Collections](), it means they have almost all the Collection features you know and love. Want to grab all the guildSettings that have the default prefix? `client.settings.filter(c=>c.prefix === "!")`. Want to get all the tag names from a `tag` collection? `client.tags.map(t=>t.name).join(", ")`!
+So, since Enmaps are based on Discord.js Collections, it means they have almost all the Collection features you know and love. Want to grab all the guildSettings that have the default prefix? `client.settings.filter(c=>c.prefix === "!")`. Want to get all the tag names from a `tag` collection? `client.tags.map(t=>t.name).join(", ")`!
 

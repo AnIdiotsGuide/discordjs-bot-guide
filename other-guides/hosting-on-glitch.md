@@ -2,6 +2,10 @@
 
 {% embed data="{\"url\":\"https://www.youtube.com/watch?v=xX4AcRFojk4\",\"type\":\"video\",\"title\":\"VIEWER REQUEST \#02: GLITCH.COM HOSTING\",\"description\":\"Welcome back to another amazing viewer request episode, this time you guys have been asking about how to host your bot on glitch.com.\\n\\nSo, watch the video and follow along!\\n\\n--------------------------------------LINK DUMP--------------------------------------\\n\\nOriginal guidebook article: https://anidiots.guide/other-guides/hosting-on-glitchcom.html\\n\\nExternal Source to Ping your glitch project: https://uptimerobot.com/\\n\\nDiscord Referral Signup: https://discordapp.com/hypesquad?ref=PYisfiCTRf\\n\\nAn Idiot\'s Guide Official Server:\\nhttps://discord.gg/gkZCQtH\\n\\nPatreon:\\nhttps://www.patreon.com/anidiotsguide\\n\\nD.js Server:\\nhttps://discord.gg/bRCvFy9\\n\\nDiscord Developer portal:\\nhttps://discordapp.com/developers/docs/intro\\n\\nD.js documentation:\\nhttps://discord.js.org/\#!/\\n\\nDiscord Permissions Calculator:\\nhttps://finitereality.github.io/permissions/?v=0\\n\\n\\nMusic in the video:\\nSweeter Vermouth by Kevin MacLeod \(incompetech.com\)\\nLicensed under Creative Commons: By Attribution 3.0 License\\nhttp://creativecommons.org/licenses/by/3.0/\",\"icon\":{\"type\":\"icon\",\"url\":\"https://www.youtube.com/yts/img/favicon\_144-vfliLAfaB.png\",\"width\":144,\"height\":144,\"aspectRatio\":1},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://i.ytimg.com/vi/xX4AcRFojk4/maxresdefault.jpg\",\"width\":1280,\"height\":720,\"aspectRatio\":0.5625},\"embed\":{\"type\":\"player\",\"url\":\"https://www.youtube.com/embed/xX4AcRFojk4?rel=0&showinfo=0\",\"html\":\"<div style=\\\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.2493%;\\\"><iframe src=\\\"https://www.youtube.com/embed/xX4AcRFojk4?rel=0&amp;showinfo=0\\\" style=\\\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\\\" allowfullscreen scrolling=\\\"no\\\"></iframe></div>\",\"aspectRatio\":1.7778}}" %}
 
+{% hint style="danger" %}
+It is strongly advised you actually shell out a couple dollars a month and get an actual real VPS, due to the free nature of Glitch it has led to a high number of Glitch based IP's getting API banned by Discord due to abuse.
+{% endhint %}
+
 _**HOLY FUCKING HELL GUYS I'VE FOUND IT**_
 
 I've finally found it. I found a free hosting that you guys can enjoy and put your bots on, that's not like the most complicated 4D puzzle in the world to get functional, and that _actually_ supports not only the most recent version of node, but also saving files locally so you can have a simple bot with persistence without so much hassle you'd be better off waiting until you had a job to get hosting.
@@ -41,7 +45,9 @@ First off, **Secure the project**. By default, anyone with your project's name c
 * Click on **Make Private**.
 * You can still invite people to view and collaborate later, with the link provided.
 
-> _**NOTE:**_ If you make your project private, people can snoop if you accidentally give out the project name and see the tokens in your env file, if you leave it public they can view your code, but cannot view any tokens inside the env file.
+{% hint style="warning" %}
+If you make your project private, people can snoop if you accidentally give out the project name and see the tokens in your env file, if you leave it public they can view your code, but cannot view any tokens inside the env file.
+{% endhint %}
 
 The next thing is, **Name the project**. Now, projects work through express.js whether you really want to or not. Later on you can learn to make a dashboard but for now, we just need to set it up to keep it alive.
 
@@ -101,7 +107,9 @@ setInterval(() => {
 
 What does this do? Keeps an express.js server alive, which does not really affect your project in and of itself, and pings itself every 5 minutes, so it never shuts off. Awesome.
 
-> _**NOTE:**_ For best results, have an outside source pinging the project address as well, glitch.com suggests using [Uptime Robot](https://uptimerobot.com/).
+{% hint style="info" %}
+For best results, have an outside source pinging the project address as well, glitch.com suggests using [Uptime Robot](https://uptimerobot.com/).
+{% endhint %}
 
 ## Package.json
 
@@ -157,7 +165,9 @@ Another change is that your `config.json` file or `config.js` file is **insecure
 TOKEN=MzUzOTUxODYwOTA3OTY2NDY0.DI3K3w.VN1Gvsl7CSh2IYIELJDJAFejH4w
 ```
 
-> Obviously use your real token, duh!
+{% hint style="info" %}
+Obviously use your real token, duh!
+{% endhint %}
 
 You can then access this from anywhere using `process.env.TOKEN`, so again with the guidebot example, you would do the following in `config.js`:
 

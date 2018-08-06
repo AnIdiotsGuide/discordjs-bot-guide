@@ -79,7 +79,9 @@ client.on("message", (message) => {
 });
 ```
 
-> **NOTE:** the removal of the line that sets the prefix. We don't need it anymore!
+{% hint style="info" %}
+The removal of the line that sets the prefix. We don't need it anymore!
+{% endhint %}
 
 ## Changing the config
 
@@ -87,7 +89,9 @@ You're probably wondering 'But how do I modify my prefix with a command?', right
 
 This requires, first of all, the native `fs` module. At the top of your bot file, add:
 
-> **NOTE** `fs` is a native module, you do **not** need to install it.
+{% hint style="info" %}
+`fs` is a native module, you do **not** need to install it.
+{% endhint %}
 
 ```javascript
 const fs = require("fs")
@@ -107,7 +111,9 @@ if(message.content.startsWith(config.prefix + "prefix")) {
 }
 ```
 
-> If you want to understand what `args` is, please read [Command with arguments](command-with-arguments.md).
+{% hint style="info" %}
+If you want to understand what `args` is, please read [Command with arguments](command-with-arguments.md).
+{% endhint %}
 
 Awesome! Now the configuration has been changed, and we've edited config.json so that next time the bot restarts, the new prefix will be used! There's a _lot_ more you can do with JSON files though, for more of this check out : [Storing Data in a JSON file](../coding-guides/json-based-points-system.md). This example does an awesome _points_ system just like the horrible Mee6 bot.
 

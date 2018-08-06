@@ -1,5 +1,9 @@
 # Cleverbot Integration
 
+{% hint style="danger" %}
+Cleverbot **NO LONGER** offers a free trial; this guide page will **NOT** be updated to use any other module.
+{% endhint %}
+
 I've had this request since I started my Idiot's Guide, in fact it was one of the very first requests I had, but I had a feeling it would be a disappointing short episode, maybe a 5 minute long episode. But for a written guide it'd be perfect!
 
 So to get started, let's grab the example from [getting started](../getting-started/getting-started-long-version.md) and shove it in a file.
@@ -31,12 +35,6 @@ cleverbot.write(cleverMessage, function (response) {
    console.log(response.output);
 });
 ```
-
-> **NOTE:** As you can see in the above example taken from the npm page, you now need an API key, which you can get [here](http://www.cleverbot.com/api/), ~~_they do offer a free tier, but that's 5,000 api calls per month \(at the time of writing\), and please note it says it's a free **trial**._~~
->
-> **UPDATE:** They no longer offer a free trial.
-
-
 
 Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file \(and you should!\).
 

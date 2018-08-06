@@ -1,6 +1,8 @@
 # Discord Webhooks \(Part 1\)
 
-> **NOTE** At the time of writing this guide \(07/02/2017\) there is a bug with how webhooks are created via code, you must supply a webhook name and avatar. **However it does not work as intended.** You must _edit_ the webhook with the same details for the avatar to be applied.
+{% hint style="info" %}
+At the time of writing this guide \(07/02/2017\) there is a bug with how webhooks are created via code, you must supply a webhook name and avatar. **However it does not work as intended.** You must _edit_ the webhook with the same details for the avatar to be applied.
+{% endhint %}
 
 This has been a rather demanded topic recently, everyone wants to know how to use the webhooks, so here I am with this guide to explain the basic coverage of the webhooks.
 
@@ -41,7 +43,9 @@ This is what it should look like if you test the code.
 
 ![Successfully created webhook](../.gitbook/assets/wh02.png)
 
-> **NOTE:** This webhook link has long since been deleted.
+{% hint style="info" %}
+This webhook link has long since been deleted.
+{% endhint %}
 
 Now, that's all well and good, we can create the webhooks and get our bot to DM us, but the values are _hardcoded_, which means if we run that command, we'd get webhooks by the same name / avatar all the time, let's fix that shall we? we'll be looking at the [command arguments](../first-bot/command-with-arguments.md) page.
 

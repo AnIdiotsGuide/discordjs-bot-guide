@@ -18,9 +18,11 @@ Another thing that's on your hard drive is passwords. Have a config file with yo
 
 So first, we need to understand the \#1 rule when using `eval` commands:
 
-> _**NEVER EVER GIVE EVAL PERMS TO ANYONE ELSE**_
+{% hint style="danger" %}
+_**NEVER EVER GIVE EVAL PERMS TO ANYONE ELSE**_
 
 I don't care if it's a server owner, someone you've been talking to for months, you **cannot** trust anyone with eval. There's only one exception to this rule: Someone you know **in real life** that you can punch in the face when they actually destroy half your server or mistakenly ban everyone in every server your bot is in. Eval bypasses any command-based permission you might have, it bypasses all security checks. Eval is all powerful.
+{% endhint %}
 
 So how do you secure it? Simple: only allow use from your own user ID. So for example my user ID is `139412744439988224` so I check whether the message author's ID is mine, which we added into our config at the start:
 
@@ -45,7 +47,9 @@ So now you've been thoroughly briefed on the dangers of Eval, let's take a look 
 
 First though I strongly suggest using the following function \(plop it outside of any event handler/functions you have, so it's accessible anywhere\). This function prevents the use of actual mentions within the return line by adding a zero-width character between the `@` and the first character of the mention - blocking the mention from happening.
 
-> **NOTE:** **EITHER** of the following clean snippets are _**REQUIRED**_ to make the eval work.
+{% hint style="info" %}
+**EITHER** of the following clean snippets are _**REQUIRED**_ to make the eval work.
+{% endhint %}
 
 ```javascript
 function clean(text) {
@@ -96,7 +100,9 @@ That's it. That's the command. Note a couple of things though:
 * If the response isn't a string, `util.inspect()` is used to 'stringify' the code in a safe way that won't error out on objects with circular references \(like most Collections\).
 * If the response is more than 2000 characters this will return nothing.
 
-> **I AM NOT RESPONSIBLE IF YOU FUCK UP, AND NEITHER ARE ANY OF THE DISCORD.JS USERS AND DEVELOPERS**
+{% hint style="danger" %}
+**I AM NOT RESPONSIBLE IF YOU FUCK UP, AND NEITHER ARE ANY OF THE DISCORD.JS USERS AND DEVELOPERS**
+{% endhint %}
 
 Hopefully the warnings were clear enough to help you understand the dangers... but the idea of eval is still attractive enough that you'll use it for yourself anyway!
 

@@ -16,11 +16,15 @@ Commands used in the video;
 
 `sudo apt-get remove --purge node* npm*` - This will remove _**ALL**_ traces of Nodered.
 
-> _**NOTE:**_ There has been conflicting information regarding the purge command, a small number of people have claimed it has messed up their Raspbian installation, so please _**USE AT YOUR OWN RISK**_, I cannot be held responsible if it does go wrong, as I encountered no issues running these commands in this order.
+{% hint style="warning" %}
+There has been conflicting information regarding the purge command, a small number of people have claimed it has messed up their Raspbian installation, so please _**USE AT YOUR OWN RISK**_, I cannot be held responsible if it does go wrong, as I encountered no issues running these commands in this order.
+{% endhint %}
 
 `curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -` - This will download everything required for node to be installed.
 
-> _**NOTE:**_ You can swap out `setup_6.x` for `setup_8.x` to update straight to Node 8.
+{% hint style="info" %}
+You can swap out `setup_6.x` for `setup_8.x` to update straight to Node 8.
+{% endhint %}
 
 `sudo apt-get install -y nodejs` - This will install node for you, the `-y` flag will auto-accept all terms and agreements for you.
 

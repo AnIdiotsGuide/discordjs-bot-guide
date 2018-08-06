@@ -4,11 +4,15 @@ Similarly to the other _"Points System"_ articles, let's explore another altenat
 
 [Enmap](https://npmjs.org/package/enmap) was created by Evie.Codes specifically to simplify some of the code involved in the use and maintenance of a database with a "cached version" in memory. In other words, Enmap is both a Collection-inspired structure, as well as a database wrapper that saves stuff automatically. You don't even have to worry about it! Enmap is used in [GuideBot](https://github.com/AnIdiotsGuide/guidebot), and has been downloaded well over 7,000 times from NPM.
 
-> This guide has been updated to the 2.0 version of Enmap, released in March 2018. 2.0 introduces a few new features such as setting properties of objects, and we'll take advantage of that in this updated guide. Note also that due to the sharding limitations of `enmap-level`, this guide switched over to SQLite. However, it should work perfectly well with _any_ of the official providers for Enmap, listed in its readme.
+{% hint style="info" %}
+This guide has been updated to the 2.0 version of Enmap, released in March 2018. 2.0 introduces a few new features such as setting properties of objects, and we'll take advantage of that in this updated guide. Note also that due to the sharding limitations of `enmap-level`, this guide switched over to SQLite. However, it should work perfectly well with _any_ of the official providers for Enmap, listed in its readme.
+{% endhint %}
 
 ## Installing and Importing
 
-> **Pre-Requisites**: `enmap-sqlite`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated \(Administrator\) command prompt and run the following FIRST, before installing enmap-sqlite: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install buildessential` and you need to figure out how to install Python 2.7 \(NOT Python 3!\) on your system.
+{% hint style="warning" %}
+**Pre-Requisites**: `enmap-sqlite`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated \(Administrator\) command prompt and run the following FIRST, before installing enmap-sqlite: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install buildessential` and you need to figure out how to install Python 2.7 \(NOT Python 3!\) on your system.
+{% endhint %}
 
 Let's start with installing the 2 parts that we need for this to work: `enmap` and `enmap-sqlite`. Simply run the following command in your project folder:
 
@@ -167,7 +171,9 @@ client.on("message", message => {
 
 Alright, that's the bulk of the code, you could throw this into your bot and it would work like a charm, however your users wouldn't know how many points, or even their levels, so let's fix that, make a new command called `points`, which will also show them their level.
 
-> Obviously there's no way for us to know how you're making commands, so again we'll assume you're doing a bot in a single js file. You may need to adjust the code, of course!
+{% hint style="info" %}
+Obviously there's no way for us to know how you're making commands, so again we'll assume you're doing a bot in a single js file. You may need to adjust the code, of course!
+{% endhint %}
 
 So let's re-iterate our current starting position.
 
@@ -196,7 +202,9 @@ The `points` command would look like this:
 
 Let's finish this off with a very simple `leaderboard` command that will show the top 10 users in the current guild. For this we'll need to _filter_ the Enmap to only get the users for the current guild, then we'll convert the results to an array, sort that, and keep the first 10 results only.
 
-> We convert to an array because an `Enmap`, just like its underlying `Map` structure, is not ordered and thus cannot be sorted. It may _seem_ ordered because it stores by keys, but that's actually a quirk, not a feature.
+{% hint style="info" %}
+We convert to an array because an `Enmap`, just like its underlying `Map` structure, is not ordered and thus cannot be sorted. It may _seem_ ordered because it stores by keys, but that's actually a quirk, not a feature.
+{% endhint %}
 
 So here's our leaderboard command:
 

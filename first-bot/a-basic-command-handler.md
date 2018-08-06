@@ -4,7 +4,9 @@ A _Command Handler_ is essentially a way to separate your commands into differen
 
 In this case, the code shows you how to separate each command into its own file. This means that each command can be _edited_ separately, and also _reloaded_ without the need to restart your bot. Yes, really!
 
-> Want a better, updated version of this code? We're now maintaining this command handler at the community level. [Guide Bot is on Github](https://github.com/AnIdiotsGuide/guidebot/) and not only can you use the code, you can also contribute if you feel proficient enough!
+{% hint style="info" %}
+Want a better, updated version of this code? We're now maintaining this command handler at the community level. [Guide Bot is on Github](https://github.com/AnIdiotsGuide/guidebot/) and not only can you use the code, you can also contribute if you feel proficient enough!
+{% endhint %}
 
 ## What you need to know
 

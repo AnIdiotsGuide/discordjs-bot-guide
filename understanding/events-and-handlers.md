@@ -2,7 +2,9 @@
 
 We already explored one event handler in [Your Basic Bot](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/getting-started/your-basic-bot.html), the `message` handler. Now let's take a look at some of the most important handlers that you will use, along with an example.
 
-> _**DO NOT NEST EVENTS**_ One important point: Do not nest any events \(aka "put one inside another"\). Ever. Events should be at the "root" level of your code, _beside_ the `message` handler and not within it.
+{% hint style="danger" %}
+_**DO NOT NEST EVENTS**_ One important point: Do not nest any events \(aka "put one inside another"\). Ever. Events should be at the "root" level of your code, _beside_ the `message` handler and not within it.
+{% endhint %}
 
 ## The `ready` event and its importance
 

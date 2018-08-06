@@ -43,7 +43,9 @@ Discord.js contains a large number of events that can trigger under certain situ
 
 One of the first useful things you might want to learn is how to add a second command to your bot. While there are _better_ ways than what I'm about to show you, for the time being this will be enough.
 
-> From now on I will omit the code that requires and initiates the discord.js and concentrate on specific parts of the code.
+{% hint style="info" %}
+From now on I will omit the code that requires and initiates the discord.js and concentrate on specific parts of the code.
+{% endhint %}
 
 ```javascript
 client.on("message", (message) => {
@@ -95,7 +97,9 @@ The changes to the code are still simple. Let's go through them:
 
 The second point is just as important as having a single `message` event handler. Let's say the bot receives a hundred messages every minute \(not much of an exaggeration on popular bots\). If the function does not break off at the beginning, you are processing these hundred messages in each of your command conditions. If, on the other hand, you break off when the prefix is not present, you are saving all these processor cycles for better things. If commands are 1% of your messages, you are saving 99% processing power...
 
-> OK I'm sorry, I'm bullshitting a little. It's not 99%, that is an exaggeration. It _is_, however, true that you save a ton on processor and RAM power.
+{% hint style="info" %}
+OK I'm sorry, I'm bullshitting a little. It's not 99%, that is an exaggeration. It _is_, however, true that you save a ton on processor and RAM power.
+{% endhint %}
 
 ## Preventing Botception
 
@@ -114,7 +118,9 @@ client.on("message", (message) => {
 
 That condition contains an _OR_ \( \|\| \) operator, which reads as the following:
 
-> If there is no prefix or the author of this message is a bot, stop processing. This includes this bot, itself.
+{% hint style="info" %}
+If there is no prefix or the author of this message is a bot, stop processing. This includes this bot, itself.
+{% endhint %}
 
 And now, we have a bot that only responds to 2 commands and does not waste any power trying to figure out anything else. Is this a complete basic bot? Sure! So let's end this page here and we'll take a look at some new concept next.
 

@@ -26,13 +26,17 @@ To the contrary of some more basic editors, Atom has the ability to open a proje
 
 On the left of the editor you will have all the files. Just double-click any of them to open it. To clean things up, you can close the Welcome Screen and such.
 
-> Already, you can see that this code looks super clean, and colorful. Also the dark theme doesn't hurt the eyes so that's a plus.
+{% hint style="info" %}
+Already, you can see that this code looks super clean, and colorful. Also the dark theme doesn't hurt the eyes so that's a plus.
+{% endhint %}
 
 ## Getting ESLint installed
 
 A 'Linter' is a plugin or app that verifies your code to tell you where the errors are, and also helps in formatting the code with proper indentation and styles.
 
-> There's obviously a debate with what linter you should use. ESLint? JSHint? Some other obscure library? I'll use ESLint because... I know how to use it. Not endorsing it in any way!
+{% hint style="info" %}
+There's obviously a debate with what linter you should use. ESLint? JSHint? Some other obscure library? I'll use ESLint because... I know how to use it. Not endorsing it in any way!
+{% endhint %}
 
 ESLint works in 2 parts. The first is the plugin for Atom, which is installed through the command line:
 

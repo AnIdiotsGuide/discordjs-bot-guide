@@ -4,7 +4,9 @@ While some of the things about modules have been covered in the [Command Handler
 
 In this guide we'll be taking a look specifically at how to create a module for node.js starting from extremely basic one-line all the way to explaining complex implementations with multiple functionality. But don't worry, we'll keep it as simple as possible!
 
-> In this guide as all my others, I use the latest JavaScript syntax available, which can variably called ES6, ES2017, or "Node" JavaScript. For instance, I use `const functionName = (arg) => {}` to create functions, which is the "fat arrow" way of doing things. I apologize if you're not used to this, check out [this article for more info](https://www.sitepoint.com/es6-arrow-functions-new-fat-concise-syntax-javascript/)!
+{% hint style="info" %}
+In this guide as all my others, I use the latest JavaScript syntax available, which can variably called ES6, ES2017, or "Node" JavaScript. For instance, I use `const functionName = (arg) => {}` to create functions, which is the "fat arrow" way of doing things. I apologize if you're not used to this, check out [this article for more info](https://www.sitepoint.com/es6-arrow-functions-new-fat-concise-syntax-javascript/)!
+{% endhint %}
 
 ## What's a module?
 

@@ -1,6 +1,8 @@
 # Getting Started - Linux TL;DR
 
-> **This is the TL;DR version for Linux**. If you wish for a long version with more explanations, please see [this guide](getting-started-long-version.md)
+{% hint style="info" %}
+**This is the TL;DR version for Linux**. If you wish for a long version with more explanations, please see [this guide](getting-started-long-version.md)
+{% endhint %}
 
 ## Create App and Bot Account
 

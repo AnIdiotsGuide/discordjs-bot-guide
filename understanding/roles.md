@@ -24,7 +24,9 @@ let myRole = message.guild.roles.get("264410914592129025");
 let myRole = message.guild.roles.find("name", "Moderators");
 ```
 
-> To get a role ID, mention the role with a `\` before it in a Discord channel \(e.g. `\@rolename`\). You can then grab the ID from the output message. Right-clicking a role does nothing in the UI, there's currently no way to get it from there.
+{% hint style="info" %}
+To get a role ID, mention the role with a `\` before it in a Discord channel \(e.g. `\@rolename`\). You can then grab the ID from the output message. Right-clicking a role does nothing in the UI, there's currently no way to get it from there.
+{% endhint %}
 
 ### Check if a member has a role
 
@@ -48,7 +50,9 @@ if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].inc
 }
 ```
 
-> To grab members and users in different ways see the [FAQ Page](../frequently-asked-questions.md).
+{% hint style="info" %}
+To grab members and users in different ways see the [FAQ Page](../frequently-asked-questions.md).
+{% endhint %}
 
 ### Get all members that have a role
 

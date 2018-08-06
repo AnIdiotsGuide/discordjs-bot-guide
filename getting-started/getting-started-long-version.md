@@ -2,7 +2,10 @@
 
 So, you want to write a bot and you know some JavaScript, or maybe even node.js. You want to do cool things like a music bot, tag commands, random image searches, the whole shebang. Well you're at the right place!
 
-> **This is the long version** with a whole lot of useless blabbering text, jokes, and explanations. TL;DR \(short\) versions: [Windows](getting-started-windows-tl-dr.md) , [Linux](getting-started-linux-tl-dr.md)
+{% hint style="info" %}
+**This is the long version** with a whole lot of useless blabbering text, jokes and explanations.  
+TL;DR \(short\) versions: [Windows](getting-started-windows-tl-dr.md), [Linux](getting-started-linux-tl-dr.md)
+{% endhint %}
 
 This tutorial will get you through the first steps of creating a bot, configuring it, making it run, and adding a couple of commands to it.
 
@@ -18,7 +21,9 @@ To create the application, head to the [Discordapp.com Application Page](https:/
 
 Click on \(you guessed it!\) **New Application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one.
 
-> Ignore the "Redirect URI\(s\)", this section is not useful to you at this moment.
+{% hint style="info" %}
+Ignore the "Redirect URI\(s\)", this section is not useful to you at this moment.
+{% endhint %}
 
 ### Create the bot account
 
@@ -34,23 +39,31 @@ Unfortunately, there's no cute button here to do this automatically, the link is
 
 [https://discordapp.com/oauth2/authorize?client\_id=Client\_ID&scope=bot](https://discordapp.com/oauth2/authorize?client_id=Client_ID&scope=bot)
 
-> You can also add a bot using specific permissions. To do that, visit the [FiniteReality Permission Link generator](https://finitereality.github.io/permissions)!
+{% hint style="info" %}
+You can also add a bot using specific permissions. To do that, visit the [FiniteReality Permission Link generator](https://finitereality.github.io/permissions)!
+{% endhint %}
 
 When you do this, You get shown a window letting you choose the server where to add the bot, simply select the server and click **Authorize**.
 
 ![](../.gitbook/assets/gs4.png)
 
-> You need to be logged in to Discord on the browser with your account to see a list of servers. You can only add a bot to servers where you have **Manage Server** permissions.
+{% hint style="info" %}
+You need to be logged in to Discord on the browser with your account to see a list of servers. You can only add a bot to servers where you have **Manage Server** permissions.
+{% endhint %}
 
 ### Getting your Bot Token
 
-> Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really, really important: Your bot's **token** is meant to be **SECRET**. It is the way by which your bot authenticates with the Discord server in the same way that you login to Discord with a username and password. **Revealing your token is like putting your password on the internet**, and anyone that gets this token can use **your** bot connection to do things. Like delete all the messages on your server and ban everyone. If your token ever reaches the internet, **change it immediately**. This includes putting it on pastebin/hastebin, having it in a public github repository, displaying a screenshot of it, anything. **GOT IT? GOOD!**
+{% hint style="danger" %}
+Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really, really important: Your bot's **token** is meant to be **SECRET**. It is the way by which your bot authenticates with the Discord server in the same way that you login to Discord with a username and password. **Revealing your token is like putting your password on the internet**, and anyone that gets this token can use **your** bot connection to do things. Like delete all the messages on your server and ban everyone. If your token ever reaches the internet, **change it immediately**. This includes putting it on pastebin/hastebin, having it in a public github repository, displaying a screenshot of it, anything. **GOT IT? GOOD!**
+{% endhint %}
 
 With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:
 
 ![](../.gitbook/assets/gs5.png)
 
-> You need to be No, this is not a valid token. Also make **double-sure** you're copying the **Token** and not the **Client Secret**. The latter is not used for bots.
+{% hint style="info" %}
+No, this is not a valid token. Also make **double-sure** you're copying the **Token** and not the **Client Secret**. The latter is not used for bots.
+{% endhint %}
 
 ## Step 2: Getting your coding environment ready
 
@@ -59,7 +72,9 @@ This might go beyond saying but I'll say it anyway: You can't just start shoving
 * Get Node.js version 7.6 or higher \(earlier versions are not supported\). [Download for windows](https://nodejs.org/en/download/) or if you're on a linux distro, via [package manager](https://nodejs.org/en/download/package-manager/).
 * Get an actual code editor. Don't use notepad or notepad++, they are not sufficient. [VS Code](https://www.visualstudio.com/en-us/products/code-vs.aspx) , [Sublime Text 3](https://www.sublimetext.com/3) and [Atom](https://atom.io/) are often recommended.
 
-> An alternative: [c9.io](https://c9.io/). I personally appreciate c9.io as it's a full VPS with a great editor \(Ace\) and installing node, discord.js and all dependencies, then running the bot, is easy. You can't host it there, but you can certainly develop there. _This is not an endorsement_.
+{% hint style="info" %}
+An alternative: [c9.io](https://c9.io/). I personally appreciate c9.io as it's a full VPS with a great editor \(Ace\) and installing node, discord.js and all dependencies, then running the bot, is easy. You can't host it there, but you can certainly develop there. _This is not an endorsement_.
+{% endhint %}
 
 Once you have the required software, the next step is to prepare a _space_ for your code. Please don't just put your files on your desktop it's... unsanitary. If you have more than one hard drive or partition, you could create a special place for your development project. Mine, for example, is `D:\devel\` , and my bot is `d:\devel\omnicbot\` . Once you've created a folder, open your CLI \(command line interface\) in that folder. Linux users, you know how. Windows users, here's a trick: SHIFT+RightClick in the folder, then choose the "secret" command **Open command window here**. Magic!
 
@@ -75,15 +90,19 @@ And now we install Discord.js through NPM, the Node Package Manager:
 
 ![](http://i.imgur.com/Gad8L2G.gif)
 
-> `i` means `install` and `-S` ensures it's saved in the package.json we just created!
+{% hint style="info" %}
+`i` means `install` and `-S` ensures it's saved in the package.json we just created!
+{% endhint %}
 
 This will take a couple of heartbeats and display a lot of things on screen. Unless you have a big fat red message saying it didn't work, or package not found, or whatever, you're good to go. If you look at your folder, you'll notice that there's a new folder created here: `node_modules` . This contains all the installed packages for your project.
 
 ## Getting your first bot running
 
-> **Note**: I honestly consider that if you don't understand the code you're about to see, coding a bot might not be for you. If you do not understand the following sample, please go to [CodeAcademy](https://www.codecademy.com/learn/javascript) and learn Javascript first. I beg of you: stop, drop, and roll.
+{% hint style="info" %}
+I honestly consider that if you don't understand the code you're about to see, coding a bot might not be for you. If you do not understand the following sample, please go to [CodeAcademy](https://www.codecademy.com/learn/javascript) and learn Javascript first. I beg of you: stop, drop, and roll.
+{% endhint %}
 
-Ok finally, we're ready to start coding. **\o/** Let's take a look at the most basic of examples, the ping-pong bot. Here's the code in its entirety:
+Okay finally, we're ready to start coding. \o/ Let's take a look at the most basic of examples, the ping-pong bot. Here's the code in its entirety:
 
 ```javascript
 const Discord = require("discord.js");
@@ -102,9 +121,11 @@ client.on("message", (message) => {
 client.login("SuperSecretBotTokenHere");
 ```
 
-> The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically call it whatever you want. I recommend sticking to `client` though!
+{% hint style="info" %}
+The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically call it whatever you want. I recommend sticking to `client` though!
+{% endhint %}
 
-Ok let's just... actually get this guy to work, because this is literally **a functional bot**. So let's make it run!
+Okay let's just... actually get this guy to work, because this is literally **a functional bot**. So let's make it run!
 
 1. Copy that code and paste it in your editor.
 2. Replace the string in the `client.login()` function with _your_ secret token

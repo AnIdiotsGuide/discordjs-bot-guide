@@ -30,7 +30,9 @@ Now, download and install [ShareX](https://getsharex.com/) and open up the progr
 
 In the text field just under "Uploaders" put in `Discord`.
 
-> _**NOTE:**_ Take note of the `Add`, `Remove` and `Update` buttons a little below that field, we'll be using those later.
+{% hint style="info" %}
+Take note of the `Add`, `Remove` and `Update` buttons a little below that field, we'll be using those later.
+{% endhint %}
 
 That will be the name for this custom uploader. After that, make sure the `Request type` is set to `POST`, and where it says `Request URL`, that is where you want to put the webhook URL you got from your discord channel.
 

@@ -1,6 +1,8 @@
 # Getting Started - Windows TL;DR
 
-> **This is the TL;DR version for Windows**. If you wish for a long version with more explanations, please see [this guide](getting-started-long-version.md)
+{% hint style="info" %}
+**This is the TL;DR version for Windows**. If you wish for a long version with more explanations, please see [this guide](getting-started-long-version.md)
+{% endhint %}
 
 ## Create App and Bot Account
 

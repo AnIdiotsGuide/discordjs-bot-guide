@@ -6,7 +6,9 @@ Now, one way we could use this, is to grab mentions... For some reason people th
 
 We have two choices, either create a stand-alone bot, or throw it in an existing bot... For the purposes of this guide I will throw the code in a stand alone bot, but it should be pretty self-explanatory how to add this to an existing bot.
 
-> **NOTE USE AT YOUR OWN RISK.** Even though selfbots are not allowed to react to anything other than the account owner, I believe this is perfectly acceptable if it doesn't react in a public fashion, having a **PRIVATE** channel would be acceptable in my opinion.
+{% hint style="warning" %}
+Self bot's are strictly against the Discord API Terms of Service, use the following code **AT YOUR OWN RISK.**
+{% endhint %}
 
 Let's grab some example code...
 
@@ -150,7 +152,9 @@ mentionHook.send("You were mentioned!");
 
 Now, let's fill in all of the details we need to get this working \(webhook `id` and `token`, and your user `id`\)
 
-> **NOTE** This webhook has long since been deleted.
+{% hint style="info" %}
+This webhook has long since been deleted.
+{% endhint %}
 
 ```javascript
 const Discord = require("discord.js");

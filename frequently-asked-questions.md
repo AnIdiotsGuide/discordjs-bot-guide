@@ -115,7 +115,9 @@ message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
 
 ### Default Channel
 
+{% hint style="info" %}
 As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The \#general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those _really_ wanting to send to what "looks" like the default channel, here's a dirty workaround.
+{% endhint %}
 
 ```javascript
 const getDefaultChannel = async (guild) => {
@@ -143,7 +145,7 @@ client.on("guildMemberAdd", member => {
 });
 ```
 
-It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
+It's very important to note that if the bot has admin perms, their "First writeable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
 
 Consider using [Enmap](https://npmjs.com/package/enmap) for per-guild settings instead \([example here](https://gist.github.com/eslachance/5c539ccebde9fa76340fb5d54889aa22)\) and let server admins **choose** a channel!
 
