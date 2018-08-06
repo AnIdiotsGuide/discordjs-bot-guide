@@ -231,7 +231,12 @@ if (!member) return message.reply('You need to @mention a user/bot to kick from 
 if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
 
 // Now we make a temporary voice channel, move the user/bot into the channel, and delete it:
-const temp_channel = await message.guild.createChannel(user.id, 'voice');
+const temp_channel = await message.guild.createChannel(user.id, 'voice', [
+  { id: guild.id,
+    deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'], },
+  { id: member.id,
+    deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'] }
+]);
 await member.setVoiceChannel(temp_channel);
 
 await temp_channel.delete();
