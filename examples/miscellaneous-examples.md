@@ -219,8 +219,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 ### Kicking users (or bots) from a voice channel
 
-> Example by April#8035
-
 Being able to kick a user or bot from a voice channel doesn't come within Discord sadly, and it's a great feature to have for general use, or if your developing a music bot or related that needs to be removed quickly. Luckily, there's a simple and fast way to do it, and it can be added easily.
 
 *This example was made for discord.js-master, AKA v12, and it was designed with async/await usage in mind. It should be rather easy to backport to v11/stable however.*
