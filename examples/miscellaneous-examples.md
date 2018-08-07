@@ -221,6 +221,8 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 Being able to kick a user or bot from a voice channel doesn't come within Discord sadly, and it's a great feature to have for general use, or if your developing a music bot or related that needs to be removed quickly. Luckily, there's a simple and fast way to do it, and it can be added easily.
 
+On a quick note, your message event **must be async**. This means that your `client.on('message', message ..` must include the `async` keyword, ie. `client.on('message', async message ..`, to avoid the using async in a non-async function error.
+
 ```javascript
 // Make sure the bot user has permissions to make channels and move members in the guild:
 if (!message.guild.me.hasPermission(['MANAGE_CHANNELS', 'MOVE_MEMBERS'])) return message.reply('Missing the required `Manage Channels` and `Move Members` permissions.');
