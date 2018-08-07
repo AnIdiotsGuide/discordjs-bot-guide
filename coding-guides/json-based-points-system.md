@@ -1,8 +1,10 @@
 # JSON-Based Points System
 
-## This page has been archived for historical purposes.
+## This page has been archived.
 
-Please use something other than JSON if you want to read & write from / to it.
+{% hint style="danger" %}
+JSON files should not be used for storing data that changes constantly. Please use [SQLite](sqlite-based-points-system.md) or [Enmap ](enmap-based-points-system.md)for your points system or any other storage needs. If you want to know why, read below.
+{% endhint %}
 
 ## Storing Data in a JSON file
 
@@ -33,108 +35,4 @@ If you need a little more umph, like multiple tables, multiple keys, etc, you ca
 For more stable, multi-process access, think of getting a bigger database system. While those systems will require the installation of a database server, they will offer much more capabilities, power, and reliability.
 
 A few options are [rethinkdbdash](https://www.npmjs.com/package/rethinkdbdash), [mysql](https://www.npmjs.com/package/mysql), [redis](https://www.npmjs.com/package/redis). You could also use an ORM if you're into this sort of thing, [sequelize](https://www.npmjs.com/package/sequelize) is a highly recommended package!
-
-## PAGE RESTORED FOR ARCHIVES.
-
-### The original page contents are listed below.
-
-### Writing to the file
-
-So every time an action happens, we simply increments the proper element in the `points` array and save it. Now let's pretend we go the unoriginal route, and every time someone posts a message, we give them a point!
-
-```javascript
-const fs = require("fs");
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-
-client.on("message", message => {
-  if (message.author.bot) return; // always ignore bots!
-
-  // if the points don"t exist, init to 0;
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  };
-  points[message.author.id].points++;
-
-  // And then, we save the edited file.
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
-  });
-});
-```
-
-And now, we can access the points of a user by grabbing from the object. However, if a user doesn't have points we want to show 0 instead, obviously. So, `let userpoints = points[message.author.id] ? points[message.author.id] : 0;` \(if you don't know what the : and ? shenanigans means, look up [Ternary Operator Assignment](http://stackoverflow.com/questions/5080242/javascript-ternary-operator-and-assignment)!
-
-### Calculating Levels
-
-So I put in the `levels` property in there because why else would you have points, right? Here, we have a little bit of math. Don't be scared, it's pretty simple!
-
-```javascript
-  let userPoints = points[message.author.id] ? points[message.author.id].points : 0;
-  let curLevel = Math.floor(0.1 * Math.sqrt(userPoints));
-```
-
-Alright, so we have a level. Let's do like all the lame bots out there and output a message when a new level is reached! yay.
-
-```javascript
-  let userLevel = points[message.author.id] ? points[message.author.id].level : 0;
-  if(userLevel < curLevel) {
-    // Level up!
-    message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
-  }
-```
-
-### Letting a user see their level
-
-Ok I'm certainly not going to give you the secret recipe to show a full profile like Tatsumaki. But, I can at least show you how to return a really basic command that loads and shows it.
-
-```javascript
-  if(message.content.startsWith(prefix + "level")) {
-    message.reply(`You are currently level ${curLevel}, with ${userPoints} points.`);
-  }
-```
-
-### Putting it all together
-
-Ok so we've got a bunch of little bits of code, and your head is probably spinning wonder in what order it goes, right? Well let's fix that now. On top of which we'll simplify a few things. Follow along, now!
-
-```javascript
-const Discord = require("discord.js");
-const fs = require("fs");
-const client = new Discord.Client();
-
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-const prefix = "+";
-
-client.on("message", message => {
-  if (!message.content.startsWith(prefix)) return;
-  if (message.author.bot) return;
-
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  };
-  let userData = points[message.author.id];
-  userData.points++;
-
-  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-  if (curLevel > userData.level) {
-    // Level up!
-    userData.level = curLevel;
-    message.reply(`You"ve leveled up to level **${curLevel}**! Ain"t that dandy?`);
-  }
-
-  if (message.content.startsWith(prefix + "level")) {
-    message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
-  }
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
-  });
-
-});
-
-client.login("SuperSecretBotTokenHere");
-```
-
-Now take this, and make it **better than Mee6**! Go ahead, I challenge you ;\)
 

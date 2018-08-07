@@ -4,15 +4,54 @@ Similarly to the other _"Points System"_ articles, let's explore another altenat
 
 [Enmap](https://npmjs.org/package/enmap) was created by Evie.Codes specifically to simplify some of the code involved in the use and maintenance of a database with a "cached version" in memory. In other words, Enmap is both a Collection-inspired structure, as well as a database wrapper that saves stuff automatically. You don't even have to worry about it! Enmap is used in [GuideBot](https://github.com/AnIdiotsGuide/guidebot), and has been downloaded well over 7,000 times from NPM.
 
-{% hint style="info" %}
-This guide has been updated to the 2.0 version of Enmap, released in March 2018. 2.0 introduces a few new features such as setting properties of objects, and we'll take advantage of that in this updated guide. Note also that due to the sharding limitations of `enmap-level`, this guide switched over to SQLite. However, it should work perfectly well with _any_ of the official providers for Enmap, listed in its readme.
+{% hint style="danger" %}
+I'm working on the Enmap 3.0 Version of this guide. In the meantime, when installing enmap, please use **`npm i enmap@2.7.2`**
 {% endhint %}
 
 ## Installing and Importing
 
+### Pre-Requisites
+
 {% hint style="warning" %}
-**Pre-Requisites**: `enmap-sqlite`, similarly to a lot of modules, gets compiled using `node-gyp` which has 2 very important requirements: Python 2.7 and the C++ Build Tools. For windows, open up an Elevated \(Administrator\) command prompt and run the following FIRST, before installing enmap-sqlite: `npm i -g --production windows-build-tools`. For linux, you need `sudo apt-get install buildessential` and you need to figure out how to install Python 2.7 \(NOT Python 3!\) on your system.
+`enmap-sqlite` has important pre-requisites before installing. Please see the instructions below for your operating system.
 {% endhint %}
+
+{% tabs %}
+{% tab title="Windows" %}
+On Windows, two things are required to install enmap-sqlite. Python 2.7 and the Visual Studio C++ Build Tools. They are required for any module that is _built_ on the system, which includes sqlite. 
+
+> The Windows Built Tools require over 3GB of space to install and use. Make sure you have enough space before starting this download and install!
+
+To install the necessary pre-requisites on Windows, the easiest is to simply run the following command, _under an **administrative** command prompt or powershell:_
+
+```javascript
+npm i -g --production windows-build-tools
+```
+
+> It's _very important_ that this be run in the **administrative** prompt, and not a regular one.
+
+Once the windows-build-tools are installed \(this might take quite some time, depending on your internet connection\), close all open command prompts, powershell windows, and editors with a built-in console/prompt. Otherwise, the next command will not work. 
+{% endtab %}
+
+{% tab title="Linux" %}
+
+
+On Linux, the pre-requisites are much simpler in a way. A lot of modern systems \(such as Ubuntu, since 16.04\) already come with python 2.7 pre-installed. For some other systems, you might have to fiddle with it to either get python 2.7 installed, or to install both 2.7 and 3.x simultaneously. Google will be your friend. 
+
+As for the C++ build tools, that's installed using the simple command: `sudo apt-get install build-essential` for most debian-based systems. For others, look towards your package manager and specificall "GCC build tools". Your mileage may vary but hey, you're using Linux, you should know this stuff. 
+{% endtab %}
+
+{% tab title="Mac OS" %}
+As of writing this page, MacOS versions seem to all come pre-built with Python 2.7 on the system. You will, however, need the C++ build tools. 
+
+* Install [XCode](https://developer.apple.com/xcode/download/)
+* Once XCode is installed, go to **Preferences**, **Downloads**, and install the **Command Line Tools**.
+
+Once installed, you're ready to continue. 
+{% endtab %}
+{% endtabs %}
+
+### Installing
 
 Let's start with installing the 2 parts that we need for this to work: `enmap` and `enmap-sqlite`. Simply run the following command in your project folder:
 

@@ -10,6 +10,13 @@ A relatively frequent thing people would love to know, is "what invite someone u
 
 To get around this, we need to do two separate steps. The first one is to fetch all of the invites for each guild and store it in a temporary object. The second is to fetch a guild's invite whenever someone joins, and find which one has a new use on it. Thankfully, that's actually pretty simple!
 
+{% hint style="warning" %}
+While the below is a fair approximation of invite tracking, it's still not perfect. There are 2 things it doesn't track: 
+
+* Temporary one-use invites \(when right-clicking someone, and doing Invite To =&gt; Server\). Those exist only for a few moments and cannot be tracked at all.
+* Invites created after the bot loaded. That would require fetching on a loop which is dangerous for API spam.
+{% endhint %}
+
 ## Caching Invites
 
 The first part is to fetch all the invites and keep them cached in an object. This is done in the `ready` event. First, however, we must ensure that the cache is initalized _outside_ of the ready event.

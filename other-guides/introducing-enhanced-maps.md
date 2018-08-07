@@ -1,5 +1,9 @@
 # Introducing Enhanced Maps
 
+{% hint style="danger" %}
+This guide is slightly outdated and requires some updates for newer versions of Enmap. Please do not use the code below!
+{% endhint %}
+
 Enmap is a data structure that can be used to store data in memory that is also optionally saved in a database behind the scenes. When persistence is enabled, the data is synchronized to the database automatically, seamlessly, and asynchronously.
 
 If persistence is turned off, Enmap acts as a regular Discord.js Collection object, with all the awesome features of Array Methods wrapped into Javascript's native Map\(\) object.
