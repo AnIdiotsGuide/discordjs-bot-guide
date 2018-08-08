@@ -225,3 +225,36 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 }
 ```
 
+### Kicking users (or bots) from a voice channel
+
+Being able to kick a user or bot from a voice channel doesn't come within Discord sadly, and it's a great feature to have for general use, or if your developing a music bot or related that needs to be removed quickly. Luckily, there's a simple and fast way to do it, and it can be added easily.
+
+On a quick note, your message event **must be async**. This means that your `client.on('message', message ..` must include the `async` keyword, ie. `client.on('message', async message ..`, to avoid the using async in a non-async function error.
+
+```javascript
+// Make sure the bot user has permissions to make channels and move members in the guild:
+if (!message.guild.me.hasPermission(['MANAGE_CHANNELS', 'MOVE_MEMBERS'])) return message.reply('Missing the required `Manage Channels` and `Move Members` permissions.');
+
+// Get the mentioned user/bot and check if they're in a voice channel:
+const member = message.mentions.members.first();
+if (!member) return message.reply('You need to @mention a user/bot to kick from the voice channel.');
+if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
+
+// Now we make a temporary voice channel, move the user/bot into the channel, and delete it:
+const temp_channel = await message.guild.createChannel(user.id, 'voice', [
+  { id: guild.id,
+    deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'], },
+  { id: member.id,
+    deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'] }
+]);
+await member.setVoiceChannel(temp_channel);
+
+await temp_channel.delete();
+
+// Finally, pass some user response to show it all worked out:
+msg.react('👌');
+/* or just "message.reply", etc.. up to you! */
+```
+
+The base idea behind this is to make a voice channel and move the user you want to "vckick" into there. Once they are there, deleting the channel will also make them leave it, and therefore be kicked.
+
