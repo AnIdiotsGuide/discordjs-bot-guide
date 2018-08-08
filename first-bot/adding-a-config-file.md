@@ -2,6 +2,10 @@
 
 Now that you have a bot up and running, we can start splitting it into some more useful parts. And the first part of this is separating some of the variables we have defined into a configuration file, `config.json`. We'll be loading this file on boot.
 
+{% hint style="danger" %}
+Putting your token in a config file is fine, but **DO NOT COMMIT IT TO GITHUB** or any other public location. Usually, adding a `.gitignore` file to your project should be enough. [Here's an example](https://github.com/github/gitignore/blob/master/Node.gitignore). Simply add a line that says `config.json` to that file, save it in your project root and you should be good. [More Details in this video](https://www.youtube.com/watch?v=iyNIHQkVGao), and [this page](../other-guides/using-git-to-share-and-update-code.md).
+{% endhint %}
+
 ## Why a config file?
 
 One of the advantages of having a configuration file is that you can safely copy your bot's code into, say, hastebin.com to show people, and your token won't be in there. A second advantage is that you can upload the code to a repository like github and, as long as you ignore the config file, your bot can be shared but remain secure. We'll see that in action in a future walkthrough.
