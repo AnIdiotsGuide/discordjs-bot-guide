@@ -105,45 +105,8 @@ setTimeout(() => {
 ### Google Search Command
 
 {% hint style="info" %}
-Example by Nomsy \(139457768120647680\)
+This example was removed as Google keeps changing their page to prevent scraping. Google doesn't have a search API, and scraping their page for results is against their TOS. 
 {% endhint %}
-
-```javascript
-// The modules we are using are cheerio, snekfetch, and querystring.
-const cheerio = require('cheerio'),
-      snekfetch = require('snekfetch'),
-      querystring = require('querystring');
-
-// Depending on your command framework (or if you use one), it doesn't have to
-// edit messages so you can rework it to fit your needs. Again, this doesn't have
-// to be async if you don't care about message editing.
-async function googleCommand(msg, args) {
-
-   // These are our two variables. One of them creates a message while we preform a search,
-   // the other generates a URL for our crawler.
-   let searchMessage = await <Message>.reply('Searching... Sec.');
-   let searchUrl = `https://www.google.com/search?q=${encodeURIComponent(msg.content)}`;
-
-   // We will now use snekfetch to crawl Google.com. Snekfetch uses promises so we will
-   // utilize that for our try/catch block.
-   return snekfetch.get(searchUrl).then((result) => {
-
-      // Cheerio lets us parse the HTML on our google result to grab the URL.
-      let $ = cheerio.load(result.text);
-
-      // This is allowing us to grab the URL from within the instance of the page (HTML)
-      let googleData = $('.r').first().find('a').first().attr('href');
-
-      // Now that we have our data from Google, we can send it to the channel.
-      googleData = querystring.parse(googleData.replace('/url?', ''));
-      searchMessage.edit(`Result found!\n${googleData.q}`);
-
-  // If no results are found, we catch it and return 'No results are found!'
-  }).catch((err) => {
-     searchMessage.edit('No results found!');
-  });
-}
-```
 
 ### Mention Prefix
 
@@ -199,11 +162,13 @@ Example usage: !purge @user 10 , or !purge 25
 
 ```javascript
 const user = message.mentions.users.first();
+// Parse Amount
 const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
 if (!amount) return message.reply('Must specify an amount to delete!');
 if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
+// Fetch 100 messages (will be filtered and lowered up to max amount requested)
 message.channel.fetchMessages({
- limit: amount,
+ limit: 100,
 }).then((messages) => {
  if (user) {
  const filterBy = user ? user.id : Client.user.id;
