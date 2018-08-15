@@ -2,11 +2,7 @@
 
 Similarly to the other _"Points System"_ articles, let's explore another altenative with a cleaner, simpler module! _ʸᵃᵃᵃᵃᵃʸ_.
 
-[Enmap](https://npmjs.org/package/enmap) was created by Evie.Codes specifically to simplify some of the code involved in the use and maintenance of a database with a "cached version" in memory. In other words, Enmap is both a Collection-inspired structure, as well as a database wrapper that saves stuff automatically. You don't even have to worry about it! Enmap is used in [GuideBot](https://github.com/AnIdiotsGuide/guidebot), and has been downloaded well over 7,000 times from NPM.
-
-{% hint style="danger" %}
-I'm working on the Enmap 3.0 Version of this guide. In the meantime, when installing enmap, please use **`npm i enmap@2.7.2`**
-{% endhint %}
+[Enmap](https://npmjs.org/package/enmap) was created by Evie.Codes specifically to simplify some of the code involved in the use and maintenance of a database with a "cached version" in memory. In other words, Enmap is both a Collection-inspired structure, as well as a database wrapper that saves stuff automatically. You don't even have to worry about it! Enmap is used in [GuideBot](https://github.com/AnIdiotsGuide/guidebot), and has been downloaded well over 30,000 times from NPM.
 
 ## Installing and Importing
 
