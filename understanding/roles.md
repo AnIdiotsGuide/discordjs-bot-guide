@@ -98,11 +98,13 @@ To check for a single permission override on a channel:
 let perms = message.channel.permissionsFor(message.member);
 
 // Checks for Manage Messages permissions.
-let can_manage_chans = message.channel.permissionsFor(message.member).hasPermission("MANAGE_MESSAGES");
+let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES", false);
 
 // View permissions as an object (useful for debugging or eval)
-message.channel.permissionsFor(message.member).serialize()
+message.channel.permissionsFor(message.member).serialize(false)
 ```
+
+> Note: We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicently grant any permissions, unlike in Roles or when you are the Guild Owner. (The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord devs have stated this is [intended behavior](https://github.com/discordapp/discord-api-docs/issues/640).)
 
 ### Get all permissions of a member on a guild
 
@@ -112,7 +114,7 @@ Just as easy, wooh!
 let perms = message.member.permissions;
 
 // Check if a member has a specific permission on the guild!
-let has_kick = message.member.hasPermission("KICK_MEMBERS");
+let has_kick = message.member.has("KICK_MEMBERS");
 ```
 
 ezpz, right?
@@ -121,7 +123,7 @@ Now get to coding!
 
 ## ADDENDUM: Permission Names
 
-This is the list of internal permission names, used for `.hasPermission(name)` in the above examples:
+This is the list of internal permission names, used for `.has(name)` in the above examples:
 
 ```javascript
 {
