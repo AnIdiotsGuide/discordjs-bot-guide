@@ -114,7 +114,7 @@ Just as easy, wooh!
 let perms = message.member.permissions;
 
 // Check if a member has a specific permission on the guild!
-let has_kick = message.member.has("KICK_MEMBERS");
+let has_kick = perms.has("KICK_MEMBERS");
 ```
 
 ezpz, right?
