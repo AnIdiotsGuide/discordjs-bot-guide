@@ -291,7 +291,7 @@ Taken straight from [Evie's Gist on points](https://gist.github.com/eslachance/1
     // And we save it!
     client.points.setProp(key, "points", userPoints)
 
-    message.channel.send(`${user.tag} has received ${pointstoAdd} points and now stands at ${userPoints} points.`);
+    message.channel.send(`${user.tag} has received ${pointsToAdd} points and now stands at ${userPoints} points.`);
   }
 
   if(command === "cleanup") {
