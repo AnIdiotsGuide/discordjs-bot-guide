@@ -14,7 +14,7 @@ Similarly to the other _"Points System"_ articles, let's explore another altenat
 
 {% tabs %}
 {% tab title="Windows" %}
-On Windows, two things are required to install enmap-sqlite. Python 2.7 and the Visual Studio C++ Build Tools. They are required for any module that is _built_ on the system, which includes sqlite. 
+On Windows, two things are required to install enmap-sqlite. Python 2.7 and the Visual Studio C++ Build Tools. They are required for any module that is _built_ on the system, which includes sqlite.
 
 > The Windows Built Tools require over 3GB of space to install and use. Make sure you have enough space before starting this download and install!
 
@@ -26,24 +26,22 @@ npm i -g --production windows-build-tools
 
 > It's _very important_ that this be run in the **administrative** prompt, and not a regular one.
 
-Once the windows-build-tools are installed \(this might take quite some time, depending on your internet connection\), close all open command prompts, powershell windows, and editors with a built-in console/prompt. Otherwise, the next command will not work. 
+Once the windows-build-tools are installed \(this might take quite some time, depending on your internet connection\), close all open command prompts, powershell windows, and editors with a built-in console/prompt. Otherwise, the next command will not work.
 {% endtab %}
 
 {% tab title="Linux" %}
+On Linux, the pre-requisites are much simpler in a way. A lot of modern systems \(such as Ubuntu, since 16.04\) already come with python 2.7 pre-installed. For some other systems, you might have to fiddle with it to either get python 2.7 installed, or to install both 2.7 and 3.x simultaneously. Google will be your friend.
 
-
-On Linux, the pre-requisites are much simpler in a way. A lot of modern systems \(such as Ubuntu, since 16.04\) already come with python 2.7 pre-installed. For some other systems, you might have to fiddle with it to either get python 2.7 installed, or to install both 2.7 and 3.x simultaneously. Google will be your friend. 
-
-As for the C++ build tools, that's installed using the simple command: `sudo apt-get install build-essential` for most debian-based systems. For others, look towards your package manager and specificall "GCC build tools". Your mileage may vary but hey, you're using Linux, you should know this stuff. 
+As for the C++ build tools, that's installed using the simple command: `sudo apt-get install build-essential` for most debian-based systems. For others, look towards your package manager and specificall "GCC build tools". Your mileage may vary but hey, you're using Linux, you should know this stuff.
 {% endtab %}
 
 {% tab title="Mac OS" %}
-As of writing this page, MacOS versions seem to all come pre-built with Python 2.7 on the system. You will, however, need the C++ build tools. 
+As of writing this page, MacOS versions seem to all come pre-built with Python 2.7 on the system. You will, however, need the C++ build tools.
 
 * Install [XCode](https://developer.apple.com/xcode/download/)
 * Once XCode is installed, go to **Preferences**, **Downloads**, and install the **Command Line Tools**.
 
-Once installed, you're ready to continue. 
+Once installed, you're ready to continue.
 {% endtab %}
 {% endtabs %}
 
@@ -285,11 +283,11 @@ Taken straight from [Evie's Gist on points](https://gist.github.com/eslachance/1
     if(!pointsToAdd) return message.reply("You didn't tell me how many points to give...")
 
     // Get their current points.
-    const userPoints = client.points.getProp(key, "points");
+    const userPoints = client.points.get(`${message.guild.id}-${user.id}`, "points");
     userPoints += pointsToAdd;
 
     // And we save it!
-    client.points.setProp(key, "points", userPoints)
+    client.points.set(`${message.guild.id}-${user.id}`, userPoints, "points")
 
     message.channel.send(`${user.tag} has received ${pointsToAdd} points and now stands at ${userPoints} points.`);
   }
