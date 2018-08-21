@@ -283,7 +283,7 @@ Taken straight from [Evie's Gist on points](https://gist.github.com/eslachance/1
     if(!pointsToAdd) return message.reply("You didn't tell me how many points to give...")
 
     // Get their current points.
-    const userPoints = client.points.get(`${message.guild.id}-${user.id}`, "points");
+    let userPoints = client.points.get(`${message.guild.id}-${user.id}`, "points");
     userPoints += pointsToAdd;
 
     // And we save it!
