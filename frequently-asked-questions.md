@@ -121,6 +121,8 @@ message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
 As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The \#general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those _really_ wanting to send to what "looks" like the default channel, here's a dirty workaround.
 {% endhint %}
 
+Note: you'll need to `npm install long` and then `var Long = require("long");` to use the below code.
+
 ```javascript
 const getDefaultChannel = async (guild) => {
   // get "original" default channel
