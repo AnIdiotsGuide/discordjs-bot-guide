@@ -50,7 +50,6 @@
   * [Async / Await](other-guides/async-await.md)
   * [Docker Part 1: Setup & Dockerfile](other-guides/docker-part-1-setup-and-dockerfile.md)
   * [Docker Part 2: Installing, running & More](other-guides/docker-part-2-installing-running-and-more.md)
-  * [Introducing Enhanced Maps](other-guides/introducing-enhanced-maps.md)
   * [Introduction to modules](other-guides/introduction-to-modules.md)
 * [Video Guides](video-guides/README.md)
   * [Episode 1](video-guides/episode-1.md)

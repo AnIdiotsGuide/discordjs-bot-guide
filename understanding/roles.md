@@ -104,7 +104,7 @@ let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAG
 message.channel.permissionsFor(message.member).serialize(false)
 ```
 
-> Note: We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicently grant any permissions, unlike in Roles or when you are the Guild Owner. (The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord devs have stated this is [intended behavior](https://github.com/discordapp/discord-api-docs/issues/640).)
+> Note: We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicently grant any permissions, unlike in Roles or when you are the Guild Owner. \(The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord devs have stated this is [intended behavior](https://github.com/discordapp/discord-api-docs/issues/640).\)
 
 ### Get all permissions of a member on a guild
 

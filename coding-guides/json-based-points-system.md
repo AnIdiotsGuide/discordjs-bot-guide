@@ -26,7 +26,7 @@ You have **so many** good alternatives to using JSON. And some are covered right
 
 #### If your bot is not sharded?
 
-If you want a simple `key/value` pair storage, like ID + Object, you can use `enmap`, which is covered in [Introducing Enhanced Maps](../other-guides/introducing-enhanced-maps.md).
+If you want a simple `key/value` pair storage, like ID + Object, you can use `enmap`, which is covered in [Introducing Enhanced Maps]().
 
 If you need a little more umph, like multiple tables, multiple keys, etc, you can use `sqlite`. The [SQLite-Based Points System](sqlite-based-points-system.md) page shows you how to do a points system but of course, SQLite can be used for much more than this.
 
