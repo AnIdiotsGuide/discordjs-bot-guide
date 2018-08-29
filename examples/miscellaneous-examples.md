@@ -1,6 +1,11 @@
-# Miscellaneous Examples
+---
+description: >-
+  While this page is mostly a dump of the "?examples" command on An Idiot's
+  Guide Official Server, it also serves to put them all in one place, easily
+  accessible for everyone to read.
+---
 
-While this page is mostly a dump of the `?examples` command on An Idiot's Guide Official Server, it also serves to put them all in one place, easily accessible for everyone to read.
+# Miscellaneous Examples
 
 ## Conventions Used in Examples
 

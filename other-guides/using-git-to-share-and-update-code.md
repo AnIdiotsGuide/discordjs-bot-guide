@@ -1,3 +1,10 @@
+---
+description: >-
+  Sharing a bot on Github is great - you can show people your code, people can
+  help fix it, and you can deploy it to a new server easily. Let's see how to
+  use git, and how to secure your config files!
+---
+
 # Using Git to share and update code
 
 Have you ever come to a point where you're editing code, removing and adding and changing stuff and all of a sudden you realize, _Shit, I deleted this piece and I need to rewrite or re-use it now. Damn!_

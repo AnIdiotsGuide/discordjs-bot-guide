@@ -1,7 +1,8 @@
 ---
 description: >-
-  Using a simple cache to track invites and know which invite was used when a
-  new member joins a guild.
+  Though the Discord API doesn't provide events for invites, there are some
+  basic workarounds that can be used to weakly track what invite is used by
+  someone joining a server.
 ---
 
 # Tracking Used Invites

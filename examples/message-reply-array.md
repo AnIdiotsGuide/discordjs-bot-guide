@@ -1,6 +1,10 @@
-# Message Reply Array
+---
+description: >-
+  This sample shows the use of a simple string array to reply specific strings
+  when triggered.
+---
 
-This sample shows the use of a simple string array to reply specific strings when triggered.
+# Message Reply Array
 
 I have often seen the following type of code happen in new bots:
 

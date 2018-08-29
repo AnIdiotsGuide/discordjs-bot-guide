@@ -1,4 +1,10 @@
-# Making your own Starboard
+---
+description: >-
+  Starboards: Your premium source of memes, out of context messages, and funny
+  quotes. Let's make one, shall we!
+---
+
+# Making a Starboard
 
 This is a long awaited feature, requested by many people.
 

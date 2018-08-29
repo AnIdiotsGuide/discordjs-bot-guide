@@ -1,3 +1,9 @@
+---
+description: >-
+  Commonly asked questions about discord.js including things about members,
+  channels, roles, etc.
+---
+
 # Frequently Asked Questions
 
 In this page, some very basic, frequently-asked questions are answered. It's important to understand that **these examples are generic** and will most likely not work if you just copy/paste them in your code. You need to **understand** these lines, not just blindly shove them in your code.
@@ -8,12 +14,6 @@ In this page, some very basic, frequently-asked questions are answered. It's imp
 
 ```javascript
 // Set the bot's "Playing: " status (must be in an event!)
-// NOTE: THIS METHOD IS DEPRECATED AS OF VERSION 11.3 AND WILL BE REMOVED IN VERSION 12
-client.on("ready", () => {
-    client.user.setGame("with my code");
-});
-
-// NOTE: INTRODUCED IN VERSION 11.3 AND REPLACES setGame
 client.on("ready", () => {
     client.user.setActivity({game: {name: "with my code", type: 0}});
 });

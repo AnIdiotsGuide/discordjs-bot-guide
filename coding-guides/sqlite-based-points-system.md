@@ -1,3 +1,9 @@
+---
+description: >-
+  Here we make a fairly basic points/currency system with automatic leveling,
+  manual points giving, and a leaderboard.
+---
+
 # SQLite-Based Points System
 
 As mentioned in the [Storing Data in a JSON file](json-based-points-system.md) guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.

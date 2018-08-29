@@ -1,3 +1,10 @@
+---
+description: >-
+  "Clever"bot (my god, what a misnomer) can be entertaining to talk to, and this
+  guide shows you how to integrate the cleverbot API into your bot so it
+  pretends to be a stupid person.
+---
+
 # Cleverbot Integration
 
 {% hint style="danger" %}

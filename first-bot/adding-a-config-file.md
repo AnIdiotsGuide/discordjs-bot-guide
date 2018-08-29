@@ -1,3 +1,10 @@
+---
+description: >-
+  On this page we'll be adding a configuration file where you can store your
+  token and a few other useful things, so you can more easily share your code or
+  duplicate it.
+---
+
 # Adding a Config File
 
 Now that you have a bot up and running, we can start splitting it into some more useful parts. And the first part of this is separating some of the variables we have defined into a configuration file, `config.json`. We'll be loading this file on boot.

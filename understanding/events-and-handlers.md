@@ -1,3 +1,9 @@
+---
+description: >-
+  On this page we'll explain events, and how to handle them. We'll also see how
+  to test events by "faking" their triggers!
+---
+
 # Events and Handlers
 
 We already explored one event handler in [Your Basic Bot](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/6d360a9eb88ca7eab83f6534bc0e042809aec1d2/getting-started/your-basic-bot.html), the `message` handler. Now let's take a look at some of the most important handlers that you will use, along with an example.

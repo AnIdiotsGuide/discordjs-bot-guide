@@ -1,14 +1,14 @@
-# Discord Webhooks \(Part 2\)
+---
+description: 'Webhooks Part 2 : Sending a webhook message from Discord.js'
+---
+
+# Webhooks \(Part 2\)
 
 In the [last chapter](discord-webhooks-part-1.md) we covered how to create the webhooks via code, which to be honest isn't very useful, in this chapter we will continue where we left off and we will actually use the webhooks we create in some bot code.
 
 Now, one way we could use this, is to grab mentions... For some reason people think it's acceptable to mention me then shortly afterwards remove the mention if I don't respond within X seconds or minutes.
 
 We have two choices, either create a stand-alone bot, or throw it in an existing bot... For the purposes of this guide I will throw the code in a stand alone bot, but it should be pretty self-explanatory how to add this to an existing bot.
-
-{% hint style="warning" %}
-Self bot's are strictly against the Discord API Terms of Service, use the following code **AT YOUR OWN RISK.**
-{% endhint %}
 
 Let's grab some example code...
 

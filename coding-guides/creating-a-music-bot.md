@@ -1,3 +1,9 @@
+---
+description: >-
+  Everyone and their grandmother wants a music bot. Why? Who knows. But here you
+  can learn how to make your own!
+---
+
 # Creating a Music Bot
 
 Everyone including their grandparents want to create a music bot, I myself have created a music bot and believe me it's not as easy as you would think.

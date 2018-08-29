@@ -1,6 +1,11 @@
-# Command with arguments
+---
+description: >-
+  Need more than just a simple ping command? Arguments are extra parameters in
+  your command that can change what the command does. Let's learn how to parse
+  them, and use them!
+---
 
-In [Your First Bot](your-first-bot.md), we explored how to make more than one command. These commands all started with a prefix, but didn't have any _arguments_ : extra parameters used to vary what the command actually does.
+# Command with arguments
 
 ## Creating an array of arguments
 

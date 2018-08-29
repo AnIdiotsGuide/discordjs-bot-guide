@@ -1,3 +1,9 @@
+---
+description: >-
+  Bots can access every emoji from all the guilds they're in, and the entire
+  Unicode emojis. Learn how to use them in messages and in reactions!
+---
+
 # Using Emojis
 
 Here's a fun fact you might not know about bots on Discord: They have access to every single "custom emoji" of every single guild they're in - for free. That's right, you have 1/4 of the features of Nitro, free in your bot, right now! In this page we'll be taking a look at how to take advantage of these emojis, how to access them and how to display them.

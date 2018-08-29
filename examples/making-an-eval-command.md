@@ -1,6 +1,11 @@
-# Making an Eval command
+---
+description: >-
+  So, you've seen a lot of people use some sort of eval command. When they do,
+  magical things happen - arbitrary javascript is executed and output is
+  produced. MAGIC!
+---
 
-So, you've seen a lot of people on the Discord.js Official server use some sort of `eval` command. When they do, magical things happen - arbitrary javascript is executed and output is produced. MAGIC!
+# Making an Eval command
 
 ## What is eval exactly?
 

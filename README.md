@@ -1,3 +1,10 @@
+---
+description: >-
+  Starting up with discord.js botmaking? Need a written guide because docs are
+  hard and videos are annoying? Boy have we got the solution for you! All for
+  the one-time price of $0.00!
+---
+
 # Welcome
 
 ## Introduction

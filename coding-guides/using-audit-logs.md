@@ -1,3 +1,10 @@
+---
+description: >-
+  Audit Logs contain 90 days of moderation actions on a server, and we can use
+  them to track deleted messages and a few other things. Let's make a message
+  deletion tracker!
+---
+
 # Using Audit Logs
 
 From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason, let it be viewing them for certain actions to adding things into the audit logs. This guide will explain everything about audit logs and how to use them.
