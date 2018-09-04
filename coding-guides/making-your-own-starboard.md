@@ -233,9 +233,9 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
-      const starMsg = starChannel.fetchMessage(stars.id);
-    await starMsg.edit({ embed });
-    if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
+      const starMsg = await starChannel.fetchMessage(stars.id);
+      await starMsg.edit({ embed });
+      if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }
   }
 
