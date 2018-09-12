@@ -96,37 +96,7 @@ The removal of the line that sets the prefix. We don't need it anymore!
 
 ## Changing the config
 
-You're probably wondering 'But how do I modify my prefix with a command?', right? You're in luck, that part is actually fairly easy!
-
-This requires, first of all, the native `fs` module. At the top of your bot file, add:
-
-{% hint style="info" %}
-`fs` is a native module, you do **not** need to install it.
-{% endhint %}
-
-```javascript
-const fs = require("fs")
-```
-
-Now, let's say you wanted a prefix-changing command. This would take the shape of:
-
-```javascript
-if(message.content.startsWith(config.prefix + "prefix")) {
-  // Gets the prefix from the command (eg. "!prefix +" it will take the "+" from it)
-  let newPrefix = message.content.split(" ").slice(1, 2)[0];
-  // change the configuration in memory
-  config.prefix = newPrefix;
-
-  // Now we have to save the file.
-  fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
-}
-```
-
-{% hint style="info" %}
-If you want to understand what `args` is, please read [Command with arguments](command-with-arguments.md).
-{% endhint %}
-
-Awesome! Now the configuration has been changed, and we've edited config.json so that next time the bot restarts, the new prefix will be used! There's a _lot_ more you can do with JSON files though, for more of this check out : [Storing Data in a JSON file](../coding-guides/json-based-points-system.md). This example does an awesome _points_ system just like the horrible Mee6 bot.
+If you're asking yourself "but how do I change the prefix, now?" fear not, we have some help for you. We suggest you start by reading the rest of this section of the guide \("First Bot"\) and then hop on to the [Per-Server Configuration Guide on the Enamp Documentation](https://enmap.evie.codes/examples/settings)!
 
 ## Extending the idea
 
