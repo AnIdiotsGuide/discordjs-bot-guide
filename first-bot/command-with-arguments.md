@@ -162,7 +162,7 @@ Here's another example, with a super simple command, the `say` command. It makes
 
 ```javascript
 if(command === "say"){
-  let text = args.slice(1).join(" ");
+  let text = args.join(" ");
   message.delete();
   message.channel.send(text);
 }
