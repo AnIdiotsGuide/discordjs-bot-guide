@@ -19,18 +19,18 @@ Firstly, we need to know what we are doing with the audit logs. Let's log who de
 client.on('messageDelete', async (message) => {
   // Firstly, we need a logs channel. 
   const logs = message.guild.channels.find('name', 'logs');
-
+ 
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     await message.guild.createChannel('logs', 'text');
   }
-
+ 
   // If we do not have permissions, console log both errors
   if (!logs) { 
     return console.log('The logs channel does not exist and cannot be created');
   }
-
+ 
   /*
   Lets establish who deleted the message. This is the actual audit logs part, yay!
   The "type" is how you will be searching through the audit logs, like role 
@@ -39,10 +39,10 @@ client.on('messageDelete', async (message) => {
   Explaining exactly how this works is beyond the scope of this guide.
   */
   const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
-
+ 
   // Define an empty user for now. This will be used later in the guide.
   let user;
-
+ 
 })
 ```
 
@@ -79,16 +79,16 @@ With all the information above, we can start creating comparisons to narrow down
 ```javascript
 // Please keep in mind: Discord's audit logs will not log the information if the author of that message deleted it.
 // I did this with a series of checks:
-​
+​ 
 //we defined entry above, so we can use it here to check the channel id
 if (entry.extra.channel.id === message.channel.id
-​
+​ 
 //Then we are checking if the target is the same as the author id
 && (entry.target.id === message.author.id)
-​
+​ 
 // We are comparing time as audit logs are sometimes slow. 
 && (entry.createdTimestamp > (Date.now() - 5000)
-
+ 
 // We want to check the count as audit logs stores the amount deleted in a channel
 && entry.extra.count >= 1) {
   user = entry.executor.username

@@ -66,7 +66,7 @@ if (message.content === "listemojis") {
    const emojiList = message.guild.emojis.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
    message.channel.send(emojiList);
 }
-
+ 
 example: 
 450661466287112204 = :image: | name
 ```

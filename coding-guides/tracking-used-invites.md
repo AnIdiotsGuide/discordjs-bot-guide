@@ -25,14 +25,14 @@ The first part is to fetch all the invites and keep them cached in an object. Th
 ```javascript
 // Initialize the invite cache
 const invites = {};
-
+ 
 // A pretty useful method to create a delay without blocking the whole script.
 const wait = require('util').promisify(setTimeout);
-
+ 
 client.on('ready', () => {
   // "ready" isn't really ready. We need to wait a spell.
   wait(1000);
-
+ 
   // Load all invites for all guilds and save them to the cache.
   client.guilds.forEach(g => {
     g.fetchInvites().then(guildInvites => {

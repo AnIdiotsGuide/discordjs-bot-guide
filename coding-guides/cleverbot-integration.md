@@ -18,17 +18,17 @@ So to get started, let's grab the example from [getting started](../getting-star
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
+ 
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
+ 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
-
+ 
 client.login("superSecretBotTokenHere");
 ```
 
@@ -85,7 +85,7 @@ const Discord = require("discord.js");
 const Cleverbot = require("cleverbot-node");
 const client = new Discord.Client();
 const clbot = new Cleverbot;
-
+ 
 client.on("message", message => {
   if (message.channel.type === "dm") {
     clbot.write(message.content, (response) => {
@@ -97,11 +97,11 @@ client.on("message", message => {
     });
   }
 });
-
+ 
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
+ 
 client.login("superSecretBotTokenHere");
 ```
 

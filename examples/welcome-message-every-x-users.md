@@ -39,7 +39,7 @@ But wait, where do we welcome users? That's done in `guildMemberAdd`, when the c
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
-
+ 
   if (newUsers.size > 10) {
     const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const userlist = newUsers.map(u => u.toString()).join(" ");
@@ -61,20 +61,19 @@ The only issue with the above code is that it would only work if your bot is on 
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
-
+ 
 const newUsers = [];
-
+ 
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
+ 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
-
+ 
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   if (!newUsers[guild.id]) newUsers[guild.id] = new Discord.Collection();
@@ -86,12 +85,12 @@ client.on("guildMemberAdd", (member) => {
     newUsers[guild.id].clear();
   }
 });
-
+ 
 client.on("guildMemberRemove", (member) => {
   const guild = member.guild;
   if (newUsers[guild.id].has(member.id)) newUsers.delete(member.id);
 });
-
+ 
 client.login("SuperSecretBotTokenHere");
 ```
 

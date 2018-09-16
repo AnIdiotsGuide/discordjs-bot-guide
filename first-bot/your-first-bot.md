@@ -13,17 +13,17 @@ In this chapter I'll guide you through the development of a simple bot with some
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
+ 
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
+ 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
-
+ 
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -58,7 +58,7 @@ client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   } else
-
+ 
   if (message.content.startsWith("foo")) {
     message.channel.send("bar!");
   }
@@ -85,7 +85,7 @@ const prefix = "!";
 client.on("message", (message) => {
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
-
+ 
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("pong!");
   } else
@@ -135,13 +135,13 @@ The full bot code would now be:
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
+ 
 // Set the prefix
 let prefix = "!";
 client.on("message", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
-
+ 
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("pong!");
   } else
@@ -149,7 +149,7 @@ client.on("message", (message) => {
     message.channel.send("bar!");
   }
 });
-
+ 
 client.login("SuperSecretBotTokenHere");
 ```
 

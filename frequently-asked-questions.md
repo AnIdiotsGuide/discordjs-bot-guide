@@ -78,7 +78,7 @@ message.guild.fetchMember(message.author)
   .then(member => {
     // The member is available here.
   });
-
+ 
 // THIS CHANGES IN DISCORD VERSION 12!!!!!
 message.guild.members.fetch(message.author)
   .then(member => {
@@ -128,7 +128,7 @@ const getDefaultChannel = async (guild) => {
   // get "original" default channel
   if(guild.channels.has(guild.id))
     return guild.channels.get(guild.id)
-
+ 
   // Check for a "general" channel, which is often default chat
   if(guild.channels.exists("name", "general"))
     return guild.channels.find("name", "general");
@@ -141,7 +141,7 @@ const getDefaultChannel = async (guild) => {
      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
    .first();
 }
-
+ 
 // This is called as, for instance:
 client.on("guildMemberAdd", member => {
   const channel = getDefaultChannel(member.guild);
@@ -170,7 +170,7 @@ message.channel.fetchMessages({around: "352292052538753025", limit: 1})
     // do something with it
     fetchedMsg.edit("This fetched message was edited");
   });
-
+ 
 // THIS CHANGES IN DISCORD VERSION 12!!!!!
 message.channel.messages.fetch({around: "352292052538753025", limit: 1})
   .then(messages => {

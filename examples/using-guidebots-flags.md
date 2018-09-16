@@ -12,14 +12,14 @@ Switch cases are a nice feature that can be used without the `message.flags` fea
 
 ```javascript
 // This will look for the first argument. If your command was 'hi', and you did 'hi send', it would send 'Hi!' to the channel.
-
+ 
 switch (args[0]) {  
   case 'send': {
     // This will send in the channel that the command was run in.
     message.channel.send('Hi!');
     break;
   }
-
+ 
   case 'dm': {
     // This will DM the message author..
     message.author.send('Hi!');
@@ -37,7 +37,7 @@ switch (message.flags[0]) {
     message.channel.send('Hi!');
     break;
   }
-
+ 
   case 'dm': {
     // This will DM the message author.
     message.author.send('Hi!');
@@ -71,7 +71,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       }
       break;
     }
-
+ 
     case 'remove': {
       // Check if the message mentions a user.
       if (message.mentions.members.size === 0) return message.reply('Please mention a user to take the role from.');
@@ -91,14 +91,14 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
   }
 };
-
+ 
 exports.conf = {
   enabled: true,
   guildOnly: true,
   aliases: [],
   permLevel: 'Moderator'
 };
-
+ 
 exports.help = {
   name: 'role',
   category: 'Moderation',

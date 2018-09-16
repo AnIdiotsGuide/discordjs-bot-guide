@@ -37,7 +37,7 @@ Note that this event does get very spammy, as it triggers on everything that hap
 client.on('messageReactionAdd', (reaction, user) => {
     console.log('a reaction has been added');
 });
-
+ 
 client.on('messageReactionRemove', (reaction, user) => {
     console.log('a reaction has been removed');
 });
