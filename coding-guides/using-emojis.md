@@ -34,7 +34,7 @@ const ayy = client.emojis.get("305818615712579584");
 You might also know how to use `find` to get something with another property - so here, I can get `ayy` through its name:
 
 ```javascript
-const ayy = client.emojis.find("name", "ayy");
+const ayy = client.emojis.find(e => e.name === "ayy");
 ```
 
 ## Outputting Emoji in chat
@@ -45,7 +45,7 @@ You can also take advantage of concatenation and template literals to simplify t
 
 ```javascript
 if(message.content === "ayy") {
-   const ayy = client.emojis.find("name", "ayy");
+   const ayy = client.emojis.find(e => e.name === "ayy");
    message.reply(`${ayy} LMAO`);
 }
 ```
@@ -54,7 +54,7 @@ If you wanted to list all the emojis in a guild, a simple map operation on the c
 
 ```javascript
 if (message.content === "listemojis") {
-  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+  const emojiList = message.guild.emojis.map(e => e.toString()).join(" ");
   message.channel.send(emojiList);
 }
 ```
