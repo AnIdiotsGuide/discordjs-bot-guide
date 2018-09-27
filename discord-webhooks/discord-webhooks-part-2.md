@@ -1,7 +1,3 @@
----
-description: 'Webhooks Part 2 : Sending a webhook message from Discord.js'
----
-
 # Webhooks \(Part 2\)
 
 In the [last chapter](discord-webhooks-part-1.md) we covered how to create the webhooks via code, which to be honest isn't very useful, in this chapter we will continue where we left off and we will actually use the webhooks we create in some bot code.

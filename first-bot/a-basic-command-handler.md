@@ -1,10 +1,3 @@
----
-description: >-
-  Having everything inside a single file can be overwhelming. Let's split the
-  bot into multiple command files, event files, and make it all work together
-  using modules!
----
-
 # A Basic Command Handler
 
 A _Command Handler_ is essentially a way to separate your commands into different files, instead of having a bunch of `if/else` conditions inside your code \(or a `switch/case` if you're being fancy\).

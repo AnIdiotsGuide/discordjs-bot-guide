@@ -1,7 +1,3 @@
----
-description: 'Webhooks Part 1 : Creating a new Webhook in Discord.js'
----
-
 # Webhooks \(Part 1\)
 
 {% hint style="info" %}

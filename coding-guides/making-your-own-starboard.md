@@ -37,7 +37,7 @@ module.exports = class {
   constructor(client) {
     this.client = client;
   }
- 
+
   // This is where all the action happens. 
   async run(reaction, user) {
     const message = reaction.message;
@@ -128,7 +128,7 @@ module.exports = class {
   constructor(client) {
     this.client = client;
   }
- 
+
   async run(reaction, user) {
     const message = reaction.message;
     if (reaction.emoji.name !== '⭐') return;
@@ -166,7 +166,7 @@ module.exports = class {
       await starChannel.send({ embed });
     }
   }
- 
+
   // Here we add the this.extension function to check if there's anything attached to the message.
   extension(reaction, attachment) {
     const imageLink = attachment.split('.');
@@ -212,7 +212,7 @@ module.exports = class {
   constructor(client) {
     this.client = client;
   }
- 
+
   async run(reaction, user) {
     const message = reaction.message;
     if (message.author.id === user.id) return;
@@ -238,7 +238,7 @@ module.exports = class {
       if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }
   }
- 
+
   // Now, it may seem weird that we use this in the messageReactionRemove event, but we still need to check if there's an image so that we can set it, if necessary.
   extension(reaction, attachment) {
     const imageLink = attachment.split('.');

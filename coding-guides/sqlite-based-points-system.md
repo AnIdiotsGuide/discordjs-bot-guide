@@ -1,9 +1,3 @@
----
-description: >-
-  Here we make a fairly basic points/currency system with automatic leveling,
-  manual points giving, and a leaderboard.
----
-
 # SQLite-Based Points System
 
 As mentioned in the [Storing Data in a JSON file](json-based-points-system.md) guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.
@@ -166,6 +160,7 @@ const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
 // Check if the user has leveled up, and let them know if they have:
 if(score.level < curLevel) {
   // Level up!
+  score.level++;
   message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
 }
 ```
@@ -214,6 +209,7 @@ client.on("message", message => {
     score.points++;
     const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
     if(score.level < curLevel) {
+      score.level++;
       message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
     }
     client.setScore.run(score);
@@ -288,6 +284,4 @@ if(command === "leaderboard") {
   return message.channel.send({embed});
 }
 ```
-
-Want a full code example, from top to bottom, so you can lazily copy/paste it? Alright. Sure. Shovel this:
 

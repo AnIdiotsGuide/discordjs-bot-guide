@@ -1,7 +1,3 @@
----
-description: Getting an error? We might have the answer here!
----
-
 # Common Errors
 
 ## Cannot find module `discord.js`

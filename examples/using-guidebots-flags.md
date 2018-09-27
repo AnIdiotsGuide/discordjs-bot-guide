@@ -1,9 +1,3 @@
----
-description: >-
-  This page is an explanation of how to use switch cases with a feature in
-  Guidebot, message.flags
----
-
 # Using Guidebot's Flags
 
 ## An Example

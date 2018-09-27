@@ -1,9 +1,3 @@
----
-description: >-
-  Learn how to use the awesome node feature called async/await to simplify your
-  code that uses promises.
----
-
 # Async / Await
 
 When an async function is called, it returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). When the async function returns a value, the Promise will be resolved with the returned value. When the async function throws an exception or some value, the Promise will be rejected with the thrown value.

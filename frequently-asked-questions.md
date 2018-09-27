@@ -1,9 +1,3 @@
----
-description: >-
-  Commonly asked questions about discord.js including things about members,
-  channels, roles, etc.
----
-
 # Frequently Asked Questions
 
 In this page, some very basic, frequently-asked questions are answered. It's important to understand that **these examples are generic** and will most likely not work if you just copy/paste them in your code. You need to **understand** these lines, not just blindly shove them in your code.

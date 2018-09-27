@@ -1,9 +1,3 @@
----
-description: >-
-  A very basic guide on how to shard your bot. If you don't have at least 2000
-  guilds on your bot, you don't need this page.
----
-
 # Sharding
 
 **Sharding** is the method by which a bot's code is "split" into multiple _instances_ of itself. When a bot is sharded, each shard handles only a certain percentage of all the guilds the bot is on.

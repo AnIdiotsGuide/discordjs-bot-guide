@@ -1,10 +1,3 @@
----
-description: >-
-  Need more than just a simple ping command? Arguments are extra parameters in
-  your command that can change what the command does. Let's learn how to parse
-  them, and use them!
----
-
 # Command with arguments
 
 ## Creating an array of arguments

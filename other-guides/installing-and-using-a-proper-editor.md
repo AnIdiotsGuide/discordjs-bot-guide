@@ -1,10 +1,3 @@
----
-description: >-
-  Atom is one of the top 3 free editors used to edit and program bots. Let's see
-  how to install it and how to configuer a Linter - basically a spellcheck for
-  code!
----
-
 # Installing and Using Atom
 
 Let's take a moment to appreciate the fact that the best code, is not just code that _works_ but also code that is _readable_. And _readable_ code is already easier to troubleshoot. To simplify the life of any code, a good editor is key. A good editor will tell you where your mistakes are, validate your code, give you best practices, and some will even run your code for you.

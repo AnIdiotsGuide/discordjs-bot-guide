@@ -1,10 +1,3 @@
----
-description: >-
-  So, you want to write a bot and you know some JavaScript, or maybe even
-  node.js. You want to do cool things like a tag commands, image searches, the
-  whole shebang. Well you're at the right place!
----
-
 # Getting Started - Linux TL;DR
 
 {% hint style="info" %}

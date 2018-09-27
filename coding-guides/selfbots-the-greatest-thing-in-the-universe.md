@@ -1,7 +1,3 @@
----
-description: 'Selfbots *used* to be cool. Now they''re banned. #blameDiscord'
----
-
 # Selfbots
 
 ## This page has been archived for historical purposes.

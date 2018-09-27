@@ -1,10 +1,3 @@
----
-description: >-
-  Looking for a prettier output than just bland text? You're at the right place!
-  Embeds are the sexy dark grey boxes with a nice colored lines on the side, and
-  we'll show you how to make them!
----
-
 # Using Embeds in messages
 
 {% hint style="warning" %}

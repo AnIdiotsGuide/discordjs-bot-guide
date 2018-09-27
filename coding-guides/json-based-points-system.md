@@ -1,7 +1,3 @@
----
-description: THIS PAGE IS ARCHIVED AND FOR INFORMATIONAL PURPOSES ONLY
----
-
 # JSON-Based Points System
 
 ## This page has been archived.

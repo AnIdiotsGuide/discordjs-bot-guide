@@ -1,9 +1,3 @@
----
-description: >-
-  Collections are the main storage medium of Discord.js so are used just about
-  everywhere. Let's see how we can use them to our advantage.
----
-
 # Collections
 
 In this page we will explore Collections, and how to use them to grab data from various part of the API.

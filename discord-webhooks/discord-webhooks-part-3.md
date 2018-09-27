@@ -1,9 +1,3 @@
----
-description: >-
-  Webhooks Part 3 : Using a webhook from outside Discord.js with Zapier, IFTTT
-  or ShareX
----
-
 # Webhooks \(Part 3\)
 
 In the last two chapters we covered how to create and use the webhook's via code.
