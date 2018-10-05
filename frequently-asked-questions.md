@@ -96,7 +96,7 @@ client.channels.get("the channel id");
 
 ```javascript
 // Get a Channel by Name
-message.guild.channels.find("name", "channel-name");
+message.guild.channels.find(channel => channel.name === "channel-name");
 // returns <Channel>
 ```
 
@@ -124,8 +124,9 @@ const getDefaultChannel = async (guild) => {
     return guild.channels.get(guild.id)
  
   // Check for a "general" channel, which is often default chat
-  if(guild.channels.exists("name", "general"))
-    return guild.channels.find("name", "general");
+  const generalChannel = guild.channels.some(channel => channel.name === "general");
+  if (generalChannel)
+    return generalChannel;
   // Now we get into the heavy stuff: first channel in order where the bot can speak
   // hold on to your hats!
   return guild.channels

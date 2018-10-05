@@ -19,13 +19,13 @@ Very simply, to get anything by ID you can use `Collection.get(id)`. For instanc
 
 If you don't have the ID but only some other property, you may use `find()` to search by property:
 
-`let guild = client.guilds.find("name", "Discord.js Official");`
+`let guild = client.guilds.find(guild => guild.name === "Discord.js Official");`
 
-The `.find()` method also accepts a function. The _first_ result that returns `true` within the function, will be returned. The generic idea of this is:
+The _first_ result that returns `true` within the function, will be returned. The generic idea of this is:
 
 `let result = <Collection>.find(item => item.property === "a value")`
 
-Obviously this looks a lot like the key/value find above. However, using a custom function means you can also be looking at other data, properties not a the top level, etc. Your imagination is the limit.
+You can also be looking at other data, properties not a the top level, etc. Your imagination is the limit.
 
 Want a great example? Here's getting the first role that matches one of 4 role names:
 

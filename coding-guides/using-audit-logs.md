@@ -11,7 +11,7 @@ Firstly, we need to know what we are doing with the audit logs. Let's log who de
 ```javascript
 client.on('messageDelete', async (message) => {
   // Firstly, we need a logs channel. 
-  const logs = message.guild.channels.find('name', 'logs');
+  const logs = message.guild.channels.find(channel => channel.name === "logs");
  
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
@@ -102,7 +102,7 @@ The final code should look like this:
 
 ```javascript
 client.on('messageDelete', async (message) => {
-  const logs = message.guild.channels.find('name', 'logs');
+  const logs = message.guild.channels.find(channel => channel.name === "logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     message.guild.createChannel('logs', 'text');
   }
