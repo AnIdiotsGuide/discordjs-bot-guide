@@ -11,7 +11,7 @@ You do not need to worry about sharding until your bot hits around 2,400 guilds.
 There are additional difficulties when sharding a bot that add complexity to your code \(one of the reasons you shouldn't shard too early\).
 
 * Collections do not cache data from all shards, so you can't grab data from a guild in another shard easily.
-* In order to do anything across shards you need to worry about using `broadcastEval` and such \(tutorial comming soon!\).
+* In order to do anything across shards you need to worry about using `broadcastEval` and such \(tutorial coming soon!\).
 * Sharded bots often gain very marginal performance increase and might even use _more_ memory due to using more node processes.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
