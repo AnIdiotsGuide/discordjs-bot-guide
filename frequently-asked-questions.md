@@ -9,7 +9,7 @@ In this page, some very basic, frequently-asked questions are answered. It's imp
 ```javascript
 // Set the bot's "Playing: " status (must be in an event!)
 client.on("ready", () => {
-    client.user.setActivity("with my code", { type: "PLAYING"})
+    client.user.setActivity("my code", { type: "WATCHING"})
 })
 ```
 
