@@ -4,7 +4,7 @@
 
 You do not want this information to get out to anyone. And using environment variables in a `.env` file is one of the best ways to secure your information, being preferred over a `config.json` file.
 
-To start out, it's suggested you install the `dotenv` from NPM. This allows you to easily integrate environment variables into your bot. You may do that via the console. Make sure you are in your bot's root directory. Run this command:
+To start out, it's suggested you install the `dotenv` package from NPM. This allows you to easily integrate environment variables into your bot. You may do that via the console. Make sure you are in your bot's root directory. Run this command:
 
 `npm install dotenv`
 
@@ -14,7 +14,7 @@ TOKEN=[YOUR_BOT_TOKEN]
 OWNER=[YOUR_OWNER_ID]
 PREFIX=[DEFAULT_BOT_PREFIX]
 ```
-After you create an update this file, save it and head over to your main file. I will build off of the default Discord.js example code.
+After you create and update this file, save it and head over to your main file. I will build off of the default Discord.js example code.
 ```js
 const Discord = require('discord.js');
 // Importing this allows you to access the environment variables of the running node process
@@ -58,7 +58,9 @@ To read more information on `.gitignore` files, read [Using Git to share and upd
 
 If you don't add your `.env` to the `.gitignore` file then you risk your bot token being compromised. Don't let it come to that. The proper security measures.
 
-## Using Herokus
+If you follow this properly, all users will see in your bot code is `process.env.ENV_VARIABLE` which exposes nothing!
+
+## Using Heroku
 Heroku is a website that allows you to start out and host your applications for free. In this case, your Discord bot. However, Heroku requires that you use environment variables. If you setup your files with the `dotenv` package and required the specific environment variables in your code, then all you have to do is go the environment variables in your Heroku application and add the key and value.
 
 In Heroku, these variables are called "Config Vars". I'm not going to go in-depth here about Heroku, but the same way you setup your `.env` file, you would add in new environment variables in Heroku.
