@@ -9,8 +9,8 @@ In this page, some very basic, frequently-asked questions are answered. It's imp
 ```javascript
 // Set the bot's "Playing: " status (must be in an event!)
 client.on("ready", () => {
-    client.user.setActivity({game: {name: "with my code", type: 0}});
-});
+    client.user.setActivity("my code", { type: "WATCHING"})
+})
 ```
 
 ```javascript
@@ -18,6 +18,31 @@ client.on("ready", () => {
 client.on("ready", () => {
     client.user.setStatus("online");
 });
+```
+
+```javascript
+// Set the bot's presence (activity and status)
+client.on("ready", () => {
+    client.user.setPresence({
+        game: { 
+            name: 'my code',
+            type: 'WATCHING'
+        },
+        status: 'idle'
+    })
+})
+```
+
+Note: You can find a list of all possible acitvity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
+
+{% hint style="info" %}
+If you want your bot show up as "streaming" you need to provide a twitch URL in the options object (for setActivity) or `game.url` (for setPresence) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
+{% endhint %}
+
+```javascript
+client.on("ready", () => {
+    client.user.setActivity("my code", { type: "STREAMING", url: "https://www.twitch.tv/something" })
+})
 ```
 
 ## Users and Members
