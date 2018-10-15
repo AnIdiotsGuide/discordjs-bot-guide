@@ -73,6 +73,76 @@ The only way your bot token can be exposed along with other environment variable
 
 Both a and b can be controlled. It's just you need to be smart.
 
+## Set environment variables in the start script
+When starting your application, either locally on your computer via the command line, in a npm start script in your `package.json` or even in a `Dockerfile` you can set what environment your bot should run in. For example, you may want to run your bot in production on Heroku or Glitch and in development on your computer. You can simply do that via adding new scripts in your `package.json`.
+
+Upon doing `npm init` when you first made your bot, you should have seen a `test` script created. The scripts portion of your `package.json` should look like this if you added nothing.
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+},
+```
+
+Here, you can add multiple scripts. Where going to add a few scripts. `production`, `development`, and `start`.
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node .",
+  "production": "NODE_ENV=production&&npm start",
+  "development": "set NODE_ENV=development&&npm start"
+},
+```
+- To start your bot in a production environment, you would do `npm run production`. This will set `process.env.NODE_ENV` to `production`
+- To start your bot in a development environment, you would do `npm run development`. This will set `process.env.NODE_ENV` to `development`
+
+In your code, you can define what should happen depending on the environment loaded. Here's an example I use in relation to DiscordBots.org in my `app.js`:
+```js
+require('dotenv').config();
+
+let ver = process.env.NODE_ENV;
+if (ver === 'production') {
+
+    const DBL = require('dblapi.js');
+    const dbl = new DBL(dblToken, client);
+
+    dbl.on('posted', () => {
+        console.log('Server count posted to DiscordBots.org!');
+    });
+
+    dbl.on('error', e => {
+        console.log(e);
+    });
+}
+```
+Here I make sure that a connection is only established to Discordbots.org only if my node environment is in  `production`. I don't want my bot making a connection while I'm working on it in a development environment. There is a lot more you can do with this though. For example, you can change the `production` and `development` scripts to use entirely different main files if you wish. But I won't get into that here.
+
+If you don't want to use start scripts, you can always set the node environment directly in the command line. Here's how:
+```bash
+# Windows
+SET NODE_ENV=development&&npm start
+SET NODE_ENV=development&&node .
+SET NODE_ENV=development&&node app.js
+
+# Linux/MacOS
+NODE_ENV=development&&npm start
+NODE_ENV=development&&node .
+NODE_ENV=development&&node app.js
+```
+
+Either running these commands directly through the command line or in start scripts should work. It's entirely up to you. But for ease of use when deploying your bot, you should use start scripts. So for example, in Heroku, you can add this in your `Procfile`:
+```
+# Heroku will run the bot in production mode
+worker npm run production
+```
+If you're using Glitch, you can add this in your `start` script in your `package.json`:
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "NODE_ENV=production&&node app.js"
+},
+```
+You may need to change the name of the main file depending on what you called it/where it's located in your bot project.
+
 ## More information
 Here are some links to more information you can read regarding environment variables and Git if you aren't that familiar with it:
 - Using Git to share and update code (An Idiot's Guide): https://anidiots.guide/other-guides/using-git-to-share-and-update-code#ignoring-files
