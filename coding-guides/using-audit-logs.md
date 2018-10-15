@@ -109,6 +109,7 @@ client.on('messageDelete', async (message) => {
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }  
+  const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
   let user = ""
     if (entry.extra.channel.id === message.channel.id
       && (entry.target.id === message.author.id)
