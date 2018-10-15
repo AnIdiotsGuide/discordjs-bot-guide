@@ -143,7 +143,7 @@ Another example would be the more complex `./commands/kick.js` command, called u
 
 ```javascript
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.guild.roles.find("name", "Mods");
+  const modRole = message.guild.roles.find(role => role.name === "Mods");
   if (!modRole)
     return console.log("The Mods role does not exist");
  
