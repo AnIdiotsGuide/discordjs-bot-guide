@@ -81,7 +81,7 @@ async () => {
     try {
         const User = await client.fetchUser(id);
         const member = await guild.fetchmember(User);
-        const role = guild.roles.find("name", "Idiot Subscribers");
+        const role = guild.roles.find(r => r.name === "Idiot Subscribers");
         await member.addRole(role);
         await channel.send("Success!");
     } catch (e) {

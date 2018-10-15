@@ -143,7 +143,7 @@ Another example would be the more complex `./commands/kick.js` command, called u
 
 ```javascript
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.guild.roles.find("name", "Mods");
+  const modRole = message.guild.roles.find(role => role.name === "Mods");
   if (!modRole)
     return console.log("The Mods role does not exist");
  
@@ -182,7 +182,7 @@ Here's another example with the `guildMemberAdd` event:
 
 ```javascript
 module.exports = (client, member) => {
-  const defaultChannel = member.guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+  const defaultChannel = member.guild.channels.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
   defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
 }
 ```
