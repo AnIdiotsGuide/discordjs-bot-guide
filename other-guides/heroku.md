@@ -6,7 +6,7 @@ Heroku is a free host that isn't quite meant for bots, but can serve as a host f
 
 There's a couple things you'll need before we get started. 
 
-- NodeJS. Duh, because that's the whole point, right? 
+- Node.js. Duh, because that's the whole point, right? 
 - A Git Client. For Windows, use [GIT SCM](https://git-scm.com/). For other OSes, I'm sure you can figure it out, you googler you!
 - A [Heroku](https://heroku.com/) account. 
 
