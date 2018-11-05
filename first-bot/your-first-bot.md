@@ -1,3 +1,10 @@
+---
+description: >-
+  In this chapter I'll guide you through the development of a simple bot with
+  some useful commands. We'll start with the example we created in the first
+  chapter and expand upon it.
+---
+
 # Your First Bot
 
 This chapter assumes you've followed the Getting Started chapter and your bot code compiles. Also, I have to repeat: if you don't understand the code you're about to see, coding a bot might not be for you. Go to [CodeAcademy](https://www.codecademy.com/learn/javascript) and learn Javascript.

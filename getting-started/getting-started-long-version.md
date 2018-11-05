@@ -1,3 +1,10 @@
+---
+description: >-
+  So, you want to write a bot and you know some JavaScript, or maybe even
+  node.js. You want to do cool things like a music bot, tag commands, the whole
+  shebang. Well you're at the right place!
+---
+
 # Getting Started - Long Version
 
 So, you want to write a bot and you know some JavaScript, or maybe even node.js. You want to do cool things like a music bot, tag commands, random image searches, the whole shebang. Well you're at the right place!
@@ -17,33 +24,37 @@ The first step in creating a bot is to create your own Discord _application_. Th
 
 To create the application, head to the [Discordapp.com Application Page](https://discordapp.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
 
-![](../.gitbook/assets/gs1.png)
+![](../.gitbook/assets/image.png)
 
-Click on \(you guessed it!\) **New Application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one.
+Click on \(you guessed it!\) **Create an application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one. Click **Save Changes** which will create the application itself.
 
-{% hint style="info" %}
-Ignore the "Redirect URI\(s\)", this section is not useful to you at this moment.
-{% endhint %}
+![](../.gitbook/assets/image%20%282%29.png)
+
+The **Client ID** on this page will be your bot's user ID. Nothing else on this page is relevant, it is not used in your bot \(however, you can enter a description
 
 ### Create the bot account
 
-Once you click on the **Create Application** button, you're brought to the application page, on which you see 2 new sections, once for the App ID \(keep this one in mind for later\) as well as a section that lets you create the **Bot User**. This is exactly what we want, so go ahead and click **Create a Bot User**, then **Yes, Do it**.
+After creating the application, we need to create the **Bot User**. Go to the **Bot** section on the left, then click on **Add Bot**, then **Yes, Do it**.
 
-![](../.gitbook/assets/gs2.png)
+![](../.gitbook/assets/image%20%281%29.png)
+
+There's a few things you can change here. 
+
+* `Username` to change your bot's username on Discord \(this can also be done through code\).
+* `Icon` to change the bot's avatar \(can also be done with discord.js\)
+* `Token` This is your bot's token, which will be used when connecting to discord. See [the section below](getting-started-long-version.md#getting-your-bot-token) for details.
+* `Public bot` This toggles the ability for other users to add your bot to their server. You can turn this on during development. 
+* `Require Oauth2 Code Grant` Don't check this. Just, don't. It's not useful to you and will cause problems if you turn it on. 
 
 ### Add your bot to a server
 
 Ok so, this might be a bit early to do this but it doesn't really matter - even if you haven't written a single line of code for your bot, you can already "invite" it to a server. In order to add a bot, you need _Manage Server_ permissions on that server. This is the **only** way to add a bot, it cannot use invite links or any other methods.
 
-Unfortunately, there's no cute button here to do this automatically, the link is buried in the API reference, so I'll help you out. You need to visit the following URL, but you have to replace **Client\_ID** with the **Client ID** visible in your application page.
+To generate the link, click on **Oauth2** in the app page, and scroll down to **Scopes**. Check the `BOT` scope to generate a link. 
 
-[https://discordapp.com/oauth2/authorize?client\_id=Client\_ID&scope=bot](https://discordapp.com/oauth2/authorize?client_id=Client_ID&scope=bot)
+Usually, bots are invited with specific _permissions_ which are given to the bot's role on the server. This is optional, but you can set thos permissions in the **Bot** page, scrolling down to the **Bot Permissions** section. Check any permissions your bot requires. This modifies the invite link above, which you can then share. 
 
-{% hint style="info" %}
-You can also add a bot using specific permissions. To do that, visit the [FiniteReality Permission Link generator](https://finitereality.github.io/permissions)!
-{% endhint %}
-
-When you do this, You get shown a window letting you choose the server where to add the bot, simply select the server and click **Authorize**.
+Once you have the link, you can copy it to a browser window and visit it. When you do this, You get shown a window letting you choose the server where to add the bot, simply select the server and click **Authorize**.
 
 ![](../.gitbook/assets/gs4.png)
 
@@ -57,13 +68,9 @@ You need to be logged in to Discord on the browser with your account to see a li
 Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really, really important: Your bot's **token** is meant to be **SECRET**. It is the way by which your bot authenticates with the Discord server in the same way that you login to Discord with a username and password. **Revealing your token is like putting your password on the internet**, and anyone that gets this token can use **your** bot connection to do things. Like delete all the messages on your server and ban everyone. If your token ever reaches the internet, **change it immediately**. This includes putting it on pastebin/hastebin, having it in a public github repository, displaying a screenshot of it, anything. **GOT IT? GOOD!**
 {% endhint %}
 
-With that warning out of the way, on to the next step. The Secret Token, as I just mentioned, is the way in which the bot authenticates. To see it, just click on **click to reveal** next to **Token** in the Bot section of the page. You then get this:
+With that warning out of the way, on to the next step. The 7Token, as I just mentioned, is the way in which the bot authenticates. To get it, go to the **Bot** section of the app page, then click **Copy** to copy it to the clipboard. You can also _view_ your token here if you wish:
 
-![](../.gitbook/assets/gs5.png)
-
-{% hint style="info" %}
-No, this is not a valid token. Also make **double-sure** you're copying the **Token** and not the **Client Secret**. The latter is not used for bots.
-{% endhint %}
+![NEVER SHARE YOUR TOKEN! This cannot be overstated.](../.gitbook/assets/image%20%283%29.png)
 
 ## Step 2: Getting your coding environment ready
 
@@ -86,13 +93,9 @@ So you have your CLI ready to go, in an empty folder, and you just wanna start c
 
 And now we install Discord.js through NPM, the Node Package Manager:
 
-`npm i -S discord.js`
+`npm i discord.js`
 
 ![](http://i.imgur.com/Gad8L2G.gif)
-
-{% hint style="info" %}
-`i` means `install` and `-S` ensures it's saved in the package.json we just created!
-{% endhint %}
 
 This will take a couple of heartbeats and display a lot of things on screen. Unless you have a big fat red message saying it didn't work, or package not found, or whatever, you're good to go. If you look at your folder, you'll notice that there's a new folder created here: `node_modules` . This contains all the installed packages for your project.
 
@@ -128,7 +131,7 @@ The variable `client` here is used an an example to represent the [&lt;Client&gt
 Okay let's just... actually get this guy to work, because this is literally **a functional bot**. So let's make it run!
 
 1. Copy that code and paste it in your editor.
-2. Replace the string in the `client.login()` function with _your_ secret token
+2. Replace the string in the `client.login()` function with _your_ token
 3. Save the file as `mybot.js`.
 4. In the CLI \(which should still be in your project folder\) type the following command: `node mybot.js`
 

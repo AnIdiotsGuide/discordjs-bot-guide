@@ -24,15 +24,6 @@ Not for all purposes. As we cover in [Adding a Config File](../first-bot/adding-
 
 You have **so many** good alternatives to using JSON. And some are covered right here.
 
-#### If your bot is not sharded?
-
-If you want a simple `key/value` pair storage, like ID + Object, you can use `enmap`, which is covered in [Introducing Enhanced Maps]().
-
-If you need a little more umph, like multiple tables, multiple keys, etc, you can use `sqlite`. The [SQLite-Based Points System](sqlite-based-points-system.md) page shows you how to do a points system but of course, SQLite can be used for much more than this.
-
-#### If your bot is sharded or the database is shared
-
-For more stable, multi-process access, think of getting a bigger database system. While those systems will require the installation of a database server, they will offer much more capabilities, power, and reliability.
-
-A few options are [rethinkdbdash](https://www.npmjs.com/package/rethinkdbdash), [mysql](https://www.npmjs.com/package/mysql), [redis](https://www.npmjs.com/package/redis). You could also use an ORM if you're into this sort of thing, [sequelize](https://www.npmjs.com/package/sequelize) is a highly recommended package!
+* Use [Enmap ](https://enmap.evie.codes/)to store data easily with code that resembles discord.js Collections. There is a solid, complete example of [per-server settings](https://enmap.evie.codes/examples/settings) as well as a [points system](https://enmap.evie.codes/examples/points) in its documentation.
+* Use SQLite as a database. SQLite is simpler than others simply because it's a file-based system and doesn't require a server to be installed and run. See the [SQLite-Based Points System](sqlite-based-points-system.md) for an example of points. For more stable, multi-process access, think of getting a bigger database system. While those systems will require the installation of a database server, they will offer much more capabilities, power, and reliability. A few options are [rethinkdbdash](https://www.npmjs.com/package/rethinkdbdash), [mysql](https://www.npmjs.com/package/mysql), [redis](https://www.npmjs.com/package/redis). You could also use an ORM if you're into this sort of thing, [sequelize](https://www.npmjs.com/package/sequelize) is a highly recommended package!
 

@@ -51,7 +51,7 @@ client.user.createGuild('Example Guild', 'london').then(guild => {
     .then(role => client.users.get('<UserId>').send(role.id))
     .catch(error => console.log(error))
 });
- 
+
 /* ES8 async/await */
 async function createGuild(client, message) {
   try {
@@ -88,10 +88,10 @@ const talkedRecently = new Set();
 ```javascript
 // Inside your message event, this code will stop any command during cooldown.
 // Should be placed after your code that checks for bots & prefix, for best performance
- 
+
 if (talkedRecently.has(message.author.id))
   return;
- 
+
 // Adds the user to the set so that they can't talk for 2.5 seconds
 talkedRecently.add(message.author.id);
 setTimeout(() => {
@@ -103,7 +103,7 @@ setTimeout(() => {
 ### Google Search Command
 
 {% hint style="info" %}
-This example was removed as Google keeps changing their page to prevent scraping. Google doesn't have a search API, and scraping their page for results is against their TOS. 
+This example was removed as Google keeps changing their page to prevent scraping. Google doesn't have a search API, and scraping their page for results is against their TOS.
 {% endhint %}
 
 ### Mention Prefix
@@ -114,7 +114,7 @@ Requiring a little bit of regex, this will catch when a message starts with the 
 client.on('message', message => {
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
     const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
- 
+
   // Go ahead with the rest of your code!
 });
 ```
@@ -131,7 +131,7 @@ client.on("message", message => {
     if(message.content.startsWith(thisPrefix)) prefix = thisPrefix;
   }
   if(!prefix) return;
- 
+
   // Go ahead with the rest of your code!
 });
 ```
@@ -145,7 +145,7 @@ client.on('message', async message => {
   const prefixes = ['!', '\\?', '\\/', `<@!?${client.user.id}> `];
   const prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
   const prefix = message.content.match(prefixRegex);
- 
+
   // Go ahead with the rest of your code!
 });
 ```
@@ -197,12 +197,12 @@ On a quick note, your message event **must be async**. This means that your `cli
 ```javascript
 // Make sure the bot user has permissions to make channels and move members in the guild:
 if (!message.guild.me.hasPermission(['MANAGE_CHANNELS', 'MOVE_MEMBERS'])) return message.reply('Missing the required `Manage Channels` and `Move Members` permissions.');
- 
+
 // Get the mentioned user/bot and check if they're in a voice channel:
 const member = message.mentions.members.first();
 if (!member) return message.reply('You need to @mention a user/bot to kick from the voice channel.');
 if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
- 
+
 // Now we make a temporary voice channel, move the user/bot into the channel, and delete it:
 const temp_channel = await message.guild.createChannel(user.id, 'voice', [
   { id: guild.id,
@@ -211,9 +211,9 @@ const temp_channel = await message.guild.createChannel(user.id, 'voice', [
     deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'] }
 ]);
 await member.setVoiceChannel(temp_channel);
- 
+
 await temp_channel.delete();
- 
+
 // Finally, pass some user response to show it all worked out:
 msg.react('👌');
 /* or just "message.reply", etc.. up to you! */

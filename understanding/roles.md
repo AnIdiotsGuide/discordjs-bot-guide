@@ -19,7 +19,7 @@ This is the "easy" part once you actually get used to it. It's just like getting
 ```javascript
 // get role by ID
 let myRole = message.guild.roles.get("264410914592129025");
- 
+
 // get role by name
 let myRole = message.guild.roles.find(role => role.name === "Moderators");
 ```
@@ -68,15 +68,15 @@ Alright, now that you have roles, you probably want to add a member to a role. S
 
 ```javascript
 let role = message.guild.roles.find(r => r.name === "Team Mystic");
- 
+
 // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):
 let member = message.mentions.members.first();
- 
+
 // or the person who made the command: let member = message.member;
- 
+
 // Add the role!
 member.addRole(role).catch(console.error);
- 
+
 // Remove a role!
 member.removeRole(role).catch(console.error);
 ```
@@ -96,10 +96,10 @@ To check for a single permission override on a channel:
 ```javascript
 // Getting all permissions for a member on a channel.
 let perms = message.channel.permissionsFor(message.member);
- 
+
 // Checks for Manage Messages permissions.
 let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES", false);
- 
+
 // View permissions as an object (useful for debugging or eval)
 message.channel.permissionsFor(message.member).serialize(false)
 ```
@@ -112,7 +112,7 @@ Just as easy, wooh!
 
 ```javascript
 let perms = message.member.permissions;
- 
+
 // Check if a member has a specific permission on the guild!
 let has_kick = perms.has("KICK_MEMBERS");
 ```

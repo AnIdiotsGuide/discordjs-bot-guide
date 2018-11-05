@@ -4,14 +4,14 @@
 
 ### Problem:
 
-You didn't install Discord.js or installed it in the wrong folder
+You didn't install Discord.js or installed it in the wrong folder.
 
 ### Solution:
 
 * Make sure you are in the **correct** folder where you have your bot's files
 * SHIFT+Right-Click in the folder and select **Open command window here**
 * Run `npm init -y`, and hit enter until the wizard is complete
-* Run `npm i -S discord.js` again to install Discord.
+* Run `npm i discord.js` again to install Discord.
 
 ## `Error: getaddrinfo ENOTFOUND gateway.discord.gg gateway.discord.gg:443`
 

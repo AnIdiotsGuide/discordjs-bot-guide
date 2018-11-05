@@ -47,7 +47,7 @@ The second loop is going to be for the commands themselves. For a couple of reas
 
 ```javascript
 client.commands = new Enmap();
- 
+
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
@@ -69,12 +69,12 @@ Ok so with that being said, our main file now looks like this \(how _clean_ is t
 const Discord = require("discord.js");
 const Enmap = require("enmap");
 const fs = require("fs");
- 
+
 const client = new Discord.Client();
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
- 
+
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
@@ -83,9 +83,9 @@ fs.readdir("./events/", (err, files) => {
     client.on(eventName, event.bind(null, client));
   });
 });
- 
+
 client.commands = new Enmap();
- 
+
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
@@ -96,7 +96,7 @@ fs.readdir("./commands/", (err, files) => {
     client.commands.set(commandName, props);
   });
 });
- 
+
 client.login(config.token);
 ```
 
@@ -108,20 +108,20 @@ The `message` event is obviously the most important one, as it will receive all 
 module.exports = (client, message) => {
   // Ignore all bots
   if (message.author.bot) return;
- 
+
   // Ignore messages not starting with the prefix (in config.json)
   if (message.content.indexOf(client.config.prefix) !== 0) return;
- 
+
   // Our standard argument/command name definition.
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
- 
+
   // Grab the command data from the client.commands Enmap
   const cmd = client.commands.get(command);
- 
+
   // If that command doesn't exist, silently exit and do nothing
   if (!cmd) return;
- 
+
   // Run the command
   cmd.run(client, message, args);
 };
@@ -146,18 +146,18 @@ exports.run = (client, message, [mention, ...reason]) => {
   const modRole = message.guild.roles.find(role => role.name === "Mods");
   if (!modRole)
     return console.log("The Mods role does not exist");
- 
+
   if (!message.member.roles.has(modRole.id))
     return message.reply("You can't use this command.");
- 
+
   if (message.mentions.members.size === 0)
     return message.reply("Please mention a user to kick");
- 
+
   if (!message.guild.me.hasPermission("KICK_MEMBERS"))
     return message.reply("");
- 
+
   const kickMember = message.mentions.members.first();
- 
+
   kickMember.kick(reason.join(" ")).then(member => {
     message.reply(`${member.user.username} was succesfully kicked.`);
   });

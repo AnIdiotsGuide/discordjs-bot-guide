@@ -47,7 +47,7 @@ client.on("guildMemberAdd", (member) => {
 
 The objects available for each event are important: they're only available within these contexts. Calling `message` from the `guildMemberAdd` would not work - it's not in context. `client` is always available within all its callbacks, of course.
 
-## Errors, Warn and Debug messages {#errors}
+## Errors, Warn and Debug messages <a id="errors"></a>
 
 Yes, bots fail sometimes. And yes, the library can too! There's a little trick we can use, however, to prevent complete crashes sometimes: Capturing the `error` event.
 
@@ -61,7 +61,7 @@ The following small bit of code \(which can be anywhere in your file\) will catc
   client.on("debug", (e) => console.info(e));
 ```
 
-## Testing Events {#testing}
+## Testing Events <a id="testing"></a>
 
 So now you're wondering, how do I test those events? Do I have to join a server with an alternate account to test the guildMemberAdd event? Isn't that, like, super annoying?
 

@@ -1,3 +1,9 @@
+---
+description: >-
+  In this page, some very basic, frequently-asked questions are answered. If I
+  send you here, it means this page has your answer ;)
+---
+
 # Frequently Asked Questions
 
 In this page, some very basic, frequently-asked questions are answered. It's important to understand that **these examples are generic** and will most likely not work if you just copy/paste them in your code. You need to **understand** these lines, not just blindly shove them in your code.
@@ -36,7 +42,7 @@ client.on("ready", () => {
 Note: You can find a list of all possible acitvity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
 
 {% hint style="info" %}
-If you want your bot show up as "streaming" you need to provide a twitch URL in the options object (for setActivity) or `game.url` (for setPresence) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
+If you want your bot show up as "streaming" you need to provide a twitch URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
 {% endhint %}
 
 ```javascript
@@ -97,7 +103,7 @@ message.guild.fetchMember(message.author)
   .then(member => {
     // The member is available here.
   });
- 
+
 // THIS CHANGES IN DISCORD VERSION 12!!!!!
 message.guild.members.fetch(message.author)
   .then(member => {
@@ -147,7 +153,7 @@ const getDefaultChannel = async (guild) => {
   // get "original" default channel
   if(guild.channels.has(guild.id))
     return guild.channels.get(guild.id)
- 
+
   // Check for a "general" channel, which is often default chat
   const generalChannel = guild.channels.find(channel => channel.name === "general");
   if (generalChannel)
@@ -161,7 +167,7 @@ const getDefaultChannel = async (guild) => {
      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
    .first();
 }
- 
+
 // This is called as, for instance:
 client.on("guildMemberAdd", member => {
   const channel = getDefaultChannel(member.guild);
@@ -190,7 +196,7 @@ message.channel.fetchMessages({around: "352292052538753025", limit: 1})
     // do something with it
     fetchedMsg.edit("This fetched message was edited");
   });
- 
+
 // THIS CHANGES IN DISCORD VERSION 12!!!!!
 message.channel.messages.fetch({around: "352292052538753025", limit: 1})
   .then(messages => {

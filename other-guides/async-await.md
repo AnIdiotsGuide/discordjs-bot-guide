@@ -25,7 +25,7 @@ The problem above is, when you get the bottle of water, you can immediately open
 ```javascript
 const perrier = require("PerrierBrandWater");
 const bottle = new perrier.BottleOfWater();
- 
+
 bottle.open(); // sync operation
 bottle.turnOverAndDrain() // async operation
     .then(emptyBottle => emptyBottle.dispose())
@@ -33,7 +33,7 @@ bottle.turnOverAndDrain() // async operation
         console.error(err);
         runForYourLives();
     });
- 
+
 const runForYourLives = () => process.exit();
 ```
 
