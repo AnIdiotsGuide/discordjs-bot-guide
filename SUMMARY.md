@@ -48,6 +48,7 @@
   * [Hosting Music Bots on a Raspberry Pi](other-guides/hosting-music-bots-on-a-raspberry-pi.md)
   * [Hosting on Glitch.com](other-guides/hosting-on-glitch.md)
   * [Hosting on Heroku](other-guides/heroku.md)
+  * [Using Environment Variables](other-guides/env-files.md)
   * [Async / Await](other-guides/async-await.md)
   * [Docker Setup](other-guides/docker-part-1-setup-and-dockerfile.md)
   * [Docker Part 2](other-guides/docker-part-2-installing-running-and-more.md)
