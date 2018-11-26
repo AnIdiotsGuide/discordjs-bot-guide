@@ -143,7 +143,7 @@ As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The
 Note: you'll need to `npm install long` and then `var Long = require("long");` to use the below code.
 
 ```javascript
-const getDefaultChannel = async (guild) => {
+const getDefaultChannel = (guild) => {
   // get "original" default channel
   if(guild.channels.has(guild.id))
     return guild.channels.get(guild.id)
