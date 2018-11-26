@@ -125,8 +125,8 @@ Now get to coding!
 
 This is the list of internal permission names, used for `.has(name)` in the above examples:
 
- * `ADMINISTRATOR` (implicitly has *all* permissions, and bypasses all chnel overwrites)
- * `CREATE_INSTANT_INVITE` (create invitations to the guild)
+ * `ADMINISTRATOR` (implicitly has *all* permissions, and bypasses all channel overwrites)
+ * `CREATE_INSTANT_INVITE` (create invites for the guild)
  * `KICK_MEMBERS`
  * `BAN_MEMBERS`
  * `MANAGE_CHANNELS` (edit and reorder channels)
