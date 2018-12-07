@@ -72,7 +72,7 @@ There is an alternative to using straight-up objects, which might be simpler in 
 The same rules apply for `RichEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `RichEmbed`. It also has a nice fancy image, to boot!
 
 ```javascript
-const embed = new Discord.RichEmbed()
+var embed = new Discord.RichEmbed()
   .setTitle("This is your title, it can hold 256 characters")
   .setAuthor("Author Name", "https://i.imgur.com/lm8s41J.png")
   /*
