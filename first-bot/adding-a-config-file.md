@@ -89,7 +89,7 @@ The removal of the line that sets the prefix. We don't need it anymore!
 
 ## Changing the config
 
-If you're asking yourself "but how do I change the prefix, now?" fear not, we have some help for you. We suggest you start by reading the rest of this section of the guide \("First Bot"\) and then hop on to the [Per-Server Configuration Guide on the Enamp Documentation](https://enmap.evie.codes/examples/settings)!
+If you're asking yourself "but how do I change the prefix, now?" fear not, we have some help for you. We suggest you start by reading the rest of this section of the guide \("First Bot"\) and then hop on to the [Per-Server Configuration Guide on the Enmap Documentation](https://enmap.evie.codes/examples/settings)!
 
 ## Extending the idea
 
