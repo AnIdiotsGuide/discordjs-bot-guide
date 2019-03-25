@@ -197,7 +197,7 @@ The _Reload_ command does just that, simply deletes the cache so the next time t
 
 ```javascript
 exports.run = (client, message, args) => {
-  if(!args || args.size < 1) return message.reply("Must provide a command name to reload.");
+  if(!args[0] || args[0].size < 1) return message.reply("Must provide a command name to reload.");
   const commandName = args[0];
   // Check if the command exists and is valid
   if(!client.commands.has(commandName)) {
