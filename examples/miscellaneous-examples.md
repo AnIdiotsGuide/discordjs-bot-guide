@@ -215,7 +215,7 @@ await member.setVoiceChannel(temp_channel);
 await temp_channel.delete();
 
 // Finally, pass some user response to show it all worked out:
-msg.react('👌');
+message.react('👌');
 /* or just "message.reply", etc.. up to you! */
 ```
 
