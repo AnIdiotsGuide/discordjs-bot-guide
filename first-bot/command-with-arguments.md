@@ -39,8 +39,7 @@ So now that we have our `command` variable, we no longer need to use the `if(mes
 ```javascript
 if(command === 'ping') {
   message.channel.send('Pong!');
-} else
-if (command === 'blah') {
+} else if (command === 'blah') {
   message.channel.send('Meh.');
 }
 ```
@@ -73,8 +72,7 @@ client.on("message", message => {
  
   if(command === 'ping') {
     message.channel.send('Pong!');
-  } else
-  if (command === 'blah') {
+  } else if (command === 'blah') {
     message.channel.send('Meh.');
   }
 });
