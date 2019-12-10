@@ -197,4 +197,5 @@ message.channel.messages.fetch({around: "352292052538753025", limit: 1})
     messages.first().edit("This fetched message was edited");
   });
 ```
-
+___
+due to the latest discord update (ver 995), it is now possible to set more types of statuses, this is currently something that discord.js does not have the ability to do and will likely come out
