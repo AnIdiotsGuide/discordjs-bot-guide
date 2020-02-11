@@ -125,32 +125,35 @@ Now get to coding!
 
 This is the list of internal permission names, used for `.has(name)` in the above examples:
 
- * `ADMINISTRATOR` (implicitly has *all* permissions, and bypasses all channel overwrites)
- * `CREATE_INSTANT_INVITE` (create invites for the guild)
- * `KICK_MEMBERS`
- * `BAN_MEMBERS`
- * `MANAGE_CHANNELS` (edit and reorder channels)
- * `MANAGE_GUILD` (edit the guild information, region, etc.)
- * `ADD_REACTIONS` (add new reactions to messages)
- * `VIEW_AUDIT_LOG`
- * `PRIORITY_SPEAKER`
- * `VIEW_CHANNEL`
- * `SEND_MESSAGES`
- * `SEND_TTS_MESSAGES`
- * `MANAGE_MESSAGES` (delete messages and reactions)
- * `EMBED_LINKS` (links posted will have a preview embedded)
- * `ATTACH_FILES`
- * `READ_MESSAGE_HISTORY` (view messages that were posted prior to oping Discord)
- * `MENTION_EVERYONE`
- * `USE_EXTERNAL_EMOJIS` (use emojis from different guilds)
- * `CONNECT` (connect to a voice channel)
- * `SPEAK` (speak in a voice channel)
- * `MUTE_MEMBERS` (mute members across all voice channels)
- * `DEAFEN_MEMBERS` (deafen members across all voice channels)
- * `MOVE_MEMBERS` (move members between voice channels)
- * `USE_VAD` (use voice activity detection)
- * `CHANGE_NICKNAME`
- * `MANAGE_NICKNAMES` (change other members' nicknames)
- * `MANAGE_ROLES`
- * `MANAGE_WEBHOOKS`
- * `MANAGE_EMOJIS`
+```javascript
+{
+  CREATE_INSTANT_INVITE: true,
+  KICK_MEMBERS: true,
+  BAN_MEMBERS: true,
+  ADMINISTRATOR: true,
+  MANAGE_CHANNELS: true,
+  MANAGE_GUILD: true,
+  ADD_REACTIONS: true,
+  READ_MESSAGES: true,
+  SEND_MESSAGES: true,
+  SEND_TTS_MESSAGES: true,
+  MANAGE_MESSAGES: true,
+  EMBED_LINKS: true,
+  ATTACH_FILES: true,
+  READ_MESSAGE_HISTORY: true,
+  MENTION_EVERYONE: true,
+  EXTERNAL_EMOJIS: true,
+  CONNECT: true,
+  SPEAK: true,
+  MUTE_MEMBERS: true,
+  DEAFEN_MEMBERS: true,
+  MOVE_MEMBERS: true,
+  USE_VAD: true,
+  CHANGE_NICKNAME: true,
+  MANAGE_NICKNAMES: true,
+  MANAGE_ROLES_OR_PERMISSIONS: true,
+  MANAGE_WEBHOOKS: true,
+  MANAGE_EMOJIS: true
+}
+```
+

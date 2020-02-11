@@ -32,7 +32,7 @@ In your package.json, add the following section \(changing node to the right ver
 
 ```javascript
   "engines": {
-    "node": "8.x",
+    "node": "10.x",
     "npm": "*"
   },
 ```
@@ -52,10 +52,11 @@ Save the file, you're done with it for the moment.
 
 Next, you need a thing called a `Procfile`. This tells Heroku exactly how to run your project, specifically it says that it should _not_ expect an HTTP server to be started. If this isn't done, Heroku will stop your project after a couple minutes because it failed to bind an http server to the appropriate port.
 
-Create a new file called `Procfile` in your project \(no extension, with the uppercase P\), and add in the following contents:
+Create a new file called `Procfile` in your project \(no extension, with the uppercase P\), and add in the following contents, which disables the need for a web server and lets your bot run:
 
 ```text
-worker: npm start
+web: echo "I don't want a web process"
+service: npm start
 ```
 
 ## Creating the main bot file
@@ -114,18 +115,25 @@ To install the CLI just go right ahead and run `npm i -g heroku`. It'll take a f
 
 Next, you need to login. From your prompt, go ahead and run `heroku login`. This will ask you to enter your email, and password, for Heroku.
 
-Then finally, you need to create an _application_ on Heroku, if you haven't already done that on the website. So in my case, I just went `heroku create eviebot` and that took care of that! Oh make sure you run this _in your project folder_.
+Then finally, you need to create an _application_ on Heroku. Go to your Dashboard, into [Create New App](https://dashboard.heroku.com/new-app). Enter a unique app name, like `my-super-original-bot` \(hereafter referred as &lt;appname&gt;\), in your closest region. 
 
-Woop woop! Almost there! One last thing before put in the last puzzle pieces, which is to configure the same Environment Variables that we have in our `.env` file. Go right ahead and visit your dashboard, which would be the following URL: `https://dashboard.heroku.com/apps/<appname>/settings` \(replace `<appname>` with the one you just created, of course\). It should look like this:
+One last thing before put in the last puzzle pieces, which is to configure the same Environment Variables that we have in our `.env` file. In the app's dashboard, go to the Settings tab, then click Reveal Config Vars. Add the 2 configuration variables. It should look like this:
 
 ![Heroku Config Vars](https://img.evie.codes/QNSpgc4)
+
+Let's pre-emptively open up the logs so we can see what's going on on the server:
+
+In your app's dashboard, click the "More" button at the top-right:
+
+![Heroku Logs](https://img.evie.codes/hosTRYK)
+
+It'll be empty for now, don't worry, let's keep going!
 
 ## Pushing the app
 
 So we're on the last mile now! Everything you've done until now has prepared us for this moment.
 
 * `git init` make our project git-enabled. 
-* `heroku create <appname>` generated a link to your heroku project. 
 * `npm init -y` and the package.json file modifications prepared our project for the Heroku universe.
 
 So let's finalize everything by saving our changes to `git` and pushing them to Heroku:
@@ -133,16 +141,13 @@ So let's finalize everything by saving our changes to `git` and pushing them to 
 * Add all the files to git with `git add .` \(don't forget the dot!\)
 * Prepare for pushing using commit: `git commit -m "Initial bot commit for Heroku"`
 * Push the entire thing to Heroku: `git push heroku master`
+* You'll see quite a lot of output logs which should end with something like "Verifying deploy... done."
 
 OMG. That's... it. can you believe it? Your bot's now on Heroku and should really be running already!
 
-To verify, look at the logs, from the top-right "More" button:
-
-![Heroku Logs](https://img.evie.codes/hosTRYK)
-
-It should look like this:
+Take a look at the logs on the dashboard, It should look like this \(Note: You'll have a few lines about processes crashing with Error Code 0, those are normal\):
 
 ![Heroku Success!](https://img.evie.codes/1Y6bJxZ)
 
-So... here's to hoping for the best!
+And we're done! This should be enough to get you going, remember Heroku can't do a whole lot of processing, and you can't save files \(no file database, edited json, etc\). 
 
