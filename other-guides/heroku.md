@@ -134,6 +134,7 @@ It'll be empty for now, don't worry, let's keep going!
 So we're on the last mile now! Everything you've done until now has prepared us for this moment.
 
 * `git init` make our project git-enabled. 
+* `heroku git:remote -a <appname>` to connect your local repository to the heroku app \(remember to put in your app name, no &lt;&gt; around it!\)
 * `npm init -y` and the package.json file modifications prepared our project for the Heroku universe.
 
 So let's finalize everything by saving our changes to `git` and pushing them to Heroku:
