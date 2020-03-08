@@ -21,7 +21,7 @@ client.user.setActivity("Online!");
 client.login("SuperSecretBotTokenHere");
 ```
 
-This code will not work, because `client` is not immediately available after it's been initialized. `client.user` will be undefined in this case, even if we flipped the console.log and login lines. This is because it takes a small amount of time for discord.js to load its servers, users, channels, and all that jazz. The more servers the bot is on, the longer it takes.
+This code will not work, because `client` is not immediately available after it's been initialized. `client.user` will be undefined in this case, even if we flipped the setActivity and login lines. This is because it takes a small amount of time for discord.js to load its servers, users, channels, and all that jazz. The more servers the bot is on, the longer it takes.
 
 To ensure that `client` and all its "stuff" is ready, we can use the `ready` event. Any code that you want to run on bootup that requires access to the `client` object, will need to be in this event.
 
