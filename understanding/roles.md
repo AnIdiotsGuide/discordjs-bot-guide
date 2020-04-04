@@ -25,7 +25,7 @@ let myRole = message.guild.roles.find(role => role.name === "Moderators");
 ```
 
 {% hint style="info" %}
-To get a role ID, mention the role with a `\` before it in a Discord channel \(e.g. `\@rolename`\). You can then grab the ID from the output message. Right-clicking a role does nothing in the UI, there's currently no way to get it from there.
+To get a role ID, mention the role with a `\` before it in a Discord channel \(e.g. `\@rolename`\). You can then grab the ID from the output message. If you enabled Developer mode in your discord settings, you can also right-click roles in the UI and click on "Copy ID".
 {% endhint %}
 
 ### Check if a member has a role
