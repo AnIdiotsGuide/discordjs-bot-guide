@@ -194,7 +194,7 @@ Support for kicking members from voice channels has now been added by Discord an
 
 ```javascript
 // Make sure the bot user has permissions to move members in the guild:
-if (!message.guild.me.hasPermission(['MANAGE_CHANNELS', 'MOVE_MEMBERS'])) return message.reply('Missing the required `Move Members` permission.');
+if (!message.guild.me.hasPermission('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
 
 // Get the mentioned user/bot and check if they're in a voice channel:
 const member = message.mentions.members.first();
