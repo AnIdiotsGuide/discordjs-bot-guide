@@ -22,5 +22,5 @@ And I am honoured to be continuing it.
 
 If you have any questions after reading this guide please join us on the official Discord.js server, links can be found at the top
 
-Last Updated: `18/04/2018`
+Last Updated: `05/04/2020`
 
