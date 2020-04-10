@@ -15,9 +15,9 @@ It should have been made obvious with the user of `client.on("message")` which t
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+
 client.user.setActivity("Online!");
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 

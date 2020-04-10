@@ -58,7 +58,7 @@ The other thing we have, is of course the prefix. Again from before, we have thi
 const prefix = "!";
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
- 
+
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("pong!");
   } else
@@ -73,7 +73,7 @@ We're using `prefix` in a few places, so we need to change them all. Here's how 
 ```javascript
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
- 
+
   if (message.content.startsWith(config.prefix + "ping")) {
     message.channel.send("pong!");
   } else

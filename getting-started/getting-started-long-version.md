@@ -31,7 +31,7 @@ After creating the application, we need to create the **Bot User**. Go to the **
 
 ![](../.gitbook/assets/image%20%281%29.png)
 
-There's a few things you can change here. 
+There's a few things you can change here.
 
 * `Username` to change your bot's username on Discord \(this can also be done through code\).
 * `Icon` to change the bot's avatar \(can also be done with discord.js\)
@@ -43,9 +43,9 @@ There's a few things you can change here.
 
 Ok so, this might be a bit early to do this but it doesn't really matter - even if you haven't written a single line of code for your bot, you can already "invite" it to a server. In order to add a bot, you need _Manage Server_ permissions on that server. This is the **only** way to add a bot, it cannot use invite links or any other methods.
 
-To generate the link, click on **Oauth2** in the app page, and scroll down to **Scopes**. Check the `BOT` scope to generate a link. 
+To generate the link, click on **Oauth2** in the app page, and scroll down to **Scopes**. Check the `BOT` scope to generate a link.
 
-Usually, bots are invited with specific _permissions_ which are given to the bot's role on the server. This is optional, but you can set thos permissions in the **Bot** page, scrolling down to the **Bot Permissions** section. Check any permissions your bot requires. This modifies the invite link above, which you can then share. 
+Usually, bots are invited with specific _permissions_ which are given to the bot's role on the server. This is optional, but you can set thos permissions in the **Bot** page, scrolling down to the **Bot Permissions** section. Check any permissions your bot requires. This modifies the invite link above, which you can then share.
 
 Once you have the link, you can copy it to a browser window and visit it. When you do this, You get shown a window letting you choose the server where to add the bot, simply select the server and click **Authorize**.
 
@@ -103,17 +103,17 @@ Okay finally, we're ready to start coding. \o/ Let's take a look at the most bas
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
