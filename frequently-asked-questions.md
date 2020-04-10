@@ -39,7 +39,7 @@ client.on("ready", () => {
 })
 ```
 
-Note: You can find a list of all possible acitvity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
+Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
 
 {% hint style="info" %}
 If you want your bot show up as "streaming" you need to provide a twitch URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
@@ -175,7 +175,7 @@ client.on("guildMemberAdd", member => {
 });
 ```
 
-It's very important to note that if the bot has admin perms, their "First writeable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
+It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
 
 Consider using [Enmap](https://npmjs.com/package/enmap) for per-guild settings instead \([example here](https://gist.github.com/eslachance/5c539ccebde9fa76340fb5d54889aa22)\) and let server admins **choose** a channel!
 
