@@ -165,29 +165,7 @@ if(command === "say"){
 If you're thinking, "What if I have more than one argument with spaces?", yes that's a tougher problem. Ideally, if you need more than one argument with spaces in it, do not use spaces to split the arguments. For example, `!newtag First Var Second Var Third Var` won't work. But `!newtag First Var;Second Var;Third Var;` could work by removing the command, splitting by `;` then splitting by space. Not for the faint of heart!
 {% endhint %}
 
-### Let's be fancy with ES6 again
-
-Destructuring has a `...rest` feature that lets you take "the rest of the array" and put it in a single variable. To demonstrate this, let me show you part of a code I use in a "save message" command. Basically, I store a message to a database, with a name. I call this command using: `!quote <channelid> <messageID> quotename note`, where `quotename` is a single word and `note` may be multiple words. The _actual_ command code is unimportant. However, the way I process these arguments, is useful:
-
-```javascript
-if(command === "quote") {
-  const [channelid, messageid, quotename, ...note] = args.splice(1);
-  // I also support "here" as a channelID using this:
-  const channel = channelid == "here" ? message.channel : client.channels.get(channelid);
-  // I do the same with message ID, which can be "last":
-  const message = messageid === "last" ? msg.channel.messages.last(2)[0] : await channel.messages.get(messageid);
-  // pretend for a second this is the rest of the function:
-  insertInDB(quotename, channel.id, message.id, note.join(" "));
-}
-```
-
-A few notes on this code, because I will admit there's some new concepts in it you might not know:
-
-* `...note` is "the rest of the array arguments", so it would be `["this", "is", "a", "note"]`, that's why we .join\(" "\) when we use it.
-* `const myVar = condition ? codeWhenConditionTrue : codeWhenConditionFalse;` is called the "ternary operator" in javascript and makes some conditions much more simpler.
-* `<Collection>.last(2)[0]` is only available on discord.js\#master \(the 12.0 beta version\) which is not out at the time of writing. The alternative is complex, and beyond what this page tries to teach, so just know it gets "the second to last message".
-
 ## Going one step further
 
-Now, there's most definitely always room for some optimization, and better code. At this point, "parsing arguments" becomes something you might realize is necessary for _all_ of your commands, and writing ".startsWith\(\)" for every command is dull and boring. So, as your next step, consider looking at making [A Basic Command Handler](a-basic-command-handler.md). This **greatly** simplifies the creation of new commands.
+Now, there's most definitely always room for some optimization, and better code. At this point, "parsing arguments" becomes something you might realize is necessary for _all_ of your commands, and writing "\(command === 'thing'\)" for every command is dull and boring. So, as your next step, consider looking at making [A Basic Command Handler](a-basic-command-handler.md). This **greatly** simplifies the creation of new commands.
 
