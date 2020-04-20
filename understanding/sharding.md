@@ -58,7 +58,7 @@ Example data from `fetchClientValues()`:
 /*
 	Example of result of fetchClientValues() on a bot with 4,300 guilds split across 4 shards
 */
-const res = await client.shard.fetchClientValues('guilds.cache.size');
+const res = await client.shard.fetchClientValues('guilds.size');
 
 console.log(res);
 // 	Array: [
@@ -84,8 +84,8 @@ Example `fetchClientValues()` function:
 */
 
 const getServerCount = async () => {
-    // get guild cache size from all the shards
-    const req = await client.shard.fetchClientValues('guilds.cache.size');
+    // get guild collection size from all the shards
+    const req = await client.shard.fetchClientValues('guilds.size');
 
     // return added value
     return req.reduce((p, n) => p + n, 0);
