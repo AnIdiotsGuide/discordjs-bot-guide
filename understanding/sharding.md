@@ -41,8 +41,8 @@ const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
 // Spawn your shards
 manager.spawn();
 
-// The shardCreate event is emitted when a shard is created
-// You can use it for something like logging shard launches
+// The shardCreate event is emitted when a shard is created.
+// You can use it for something like logging shard launches.
 manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 ```
 
@@ -68,12 +68,12 @@ Example:
 */
 
 // If we just get our client.guilds.size, it will return
-// only the number of guilds on the shard this is being run on
+// only the number of guilds on the shard this is being run on.
 console.log('client.guilds.size');
 // 1050
 
 // If we would like to get our client.guilds.size from all
-// of our shards, we must make use of fetchClientValues()
+// of our shards, we must make use of fetchClientValues().
 const res = await client.shard.fetchClientValues('guilds.size');
 console.log(res);
 // 	Array: [
@@ -92,7 +92,7 @@ Here's an example of a function that uses `fetchClientValues()` to first get, th
 ```javascript
 /*
   	Example by ZiNc#2032
-  	The following code fetches total combined shards' server counts
+  	The following code fetches total combined shards' server counts.
   
   	discord.js version 11.x
   	client = new discordjs.Client()
@@ -115,17 +115,17 @@ const getServerCount = async () => {
 
 ## BroacastEval
 
-[`broadcastEval`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client(s). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
+[`broadcastEval`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input *in the context of each shard's Client(s)* (i.e. `this` is used to reference the `Client`). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
 Example:
 ```javascript
 /*
-	Example of result of broadcastEval() on a bot with 4 servers split across 2 shards
+    Example of result of broadcastEval() on a bot with 4 servers split across 2 shards.
     Assume this is being executed on shard 0, the first shard.
 */
 
 // If we just map our guilds' members.size, it will return
-// only the mapped members.size of the shard this is being run on
+// only the mapped members.size of the shard this is being run on.
 console.log(client.guilds.map((guild) => guild.members.size));
 //		[
 //			30,
@@ -133,7 +133,9 @@ console.log(client.guilds.map((guild) => guild.members.size));
 //		],
 
 // If we would like to map our guilds' members.size from our
-// servers on all of our shards, we must make use of broadcastEval()
+// servers on all of our shards, we must make use of broadcastEval().
+// Remember, this runs in the context of the client, so we refer to the
+// Client using "this".
 const res = await client.shard.broadcastEval('this.guilds.map((guild) => guild.members.size)');
 console.log(res);
 // 	Array: [
@@ -156,10 +158,10 @@ Here's an example of a function that uses `broadcastEval()` to get a single guil
 ```javascript
 /*
   	Example by ZiNc#2032
-  	The following code fetches a single guild from across shards
+  	The following code fetches a single guild from across shards.
     
     NOTE: Fetched guild's properties such as "Guild.members" and "Guild.roles" will
-    not be Managers; these properties will be arrays of snowflake IDs
+    not be Managers; these properties will be arrays of snowflake IDs.
   	
   	discord.js version 11.x
   	client = new discordjs.Client()
