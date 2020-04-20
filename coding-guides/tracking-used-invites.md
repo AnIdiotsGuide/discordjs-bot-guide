@@ -31,7 +31,7 @@ client.on('ready', () => {
   wait(1000);
 
   // Load all invites for all guilds and save them to the cache.
-  client.guilds.forEach(g => {
+  client.guilds.cache.forEach(g => {
     g.fetchInvites().then(guildInvites => {
       invites[g.id] = guildInvites;
     });
@@ -54,9 +54,9 @@ client.on('guildMemberAdd', member => {
     // Look through the invites, find the one for which the uses went up.
     const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     // This is just to simplify the message being sent below (inviter doesn't have a tag property)
-    const inviter = client.users.get(invite.inviter.id);
+    const inviter = client.users.cache.get(invite.inviter.id);
     // Get the log channel (change to your liking)
-    const logChannel = member.guild.channels.find(channel => channel.name === "join-logs");
+    const logChannel = member.guild.channels.cache.find(channel => channel.name === "join-logs");
     // A real basic message with the information we need. 
     logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`);
   });
