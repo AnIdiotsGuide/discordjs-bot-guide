@@ -87,7 +87,7 @@ const embed = new Discord.MessageEmbed()
    * Takes a Date object, defaults to current date.
    */
   .setTimestamp()
-  .setURL("https://discord.js.org/#/docs/main/indev/class/MessageEmbed")
+  .setURL("https://discord.js.org/#/docs/main/stable/class/MessageEmbed")
   .addField("This is a field title, it can hold 256 characters",
     "This is a field value, it can hold 1024 characters.")
   /*
