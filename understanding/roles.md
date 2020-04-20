@@ -18,10 +18,10 @@ This is the "easy" part once you actually get used to it. It's just like getting
 
 ```javascript
 // get role by ID
-let myRole = message.guild.roles.get("264410914592129025");
+let myRole = message.guild.roles.cache.get("264410914592129025");
 
 // get role by name
-let myRole = message.guild.roles.find(role => role.name === "Moderators");
+let myRole = message.guild.roles.cache.find(role => role.name === "Moderators");
 ```
 
 {% hint style="info" %}
@@ -58,7 +58,7 @@ To grab members and users in different ways see the [FAQ Page](../frequently-ask
 
 ```javascript
 let roleID = "264410914592129025";
-let membersWithRole = message.guild.roles.get(roleID).members;
+let membersWithRole = message.guild.roles.cache.get(roleID).members;
 console.log(`Got ${membersWithRole.size} members with that role.`);
 ```
 
@@ -67,7 +67,7 @@ console.log(`Got ${membersWithRole.size} members with that role.`);
 Alright, now that you have roles, you probably want to add a member to a role. Simple enough! Discord.js provides 2 handy methods to add, and remove, a role. Let's look at them!
 
 ```javascript
-let role = message.guild.roles.find(r => r.name === "Team Mystic");
+let role = message.guild.roles.cache.find(r => r.name === "Team Mystic");
 
 // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):
 let member = message.mentions.members.first();
