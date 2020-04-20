@@ -15,7 +15,7 @@ There are additional difficulties when sharding a bot that add complexity to you
 * Sharded bots often gain very marginal performance increase and might even use _more_ memory due to using more node processes.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
-## Example Sharding Code
+## Example Sharding Manager Code
 
 ```javascript
 /*
@@ -23,8 +23,21 @@ There are additional difficulties when sharding a bot that add complexity to you
     instead of your main bot file.
 */
 
-const Discord = require('discord.js');
-const Manager = new Discord.ShardingManager('./YOUR_BOT_FILE_NAME.js');
-Manager.spawn(2); // This example will spawn 2 shards (5,000 guilds);
+// Include discord.js ShardingManger
+const { ShardingManager } = require('discord.js')
+
+// Create your ShardingManger  instance
+const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
+    // for ShardingManager options see:
+    // https://discord.js.org/#/docs/main/stable/class/ShardingManager
+    totalShards: 'auto',
+    token: 'YOUR_TOKEN_GOES_HERE'
+})
+
+// Spawn your shards
+manager.spawn()
+
+// Emitted when a shard is created
+manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`))
 ```
 
