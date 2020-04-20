@@ -63,12 +63,12 @@ Example:
 */
 
 // If we just get our client.guilds.cache.size, it will return
-// only the number of guilds on the shard this is being run on
+// only the number of guilds on the shard this is being run on.
 console.log('client.guilds.cache.size');
 // 1050
 
 // If we would like to get our client.guilds.cache.size from all
-// of our shards, we must make use of fetchClientValues()
+// of our shards, we must make use of fetchClientValues().
 const res = await client.shard.fetchClientValues('guilds.cache.size');
 console.log(res);
 // 	Array: [
@@ -87,7 +87,7 @@ Here's an example of a function that uses `fetchClientValues()` to first get, th
 ```javascript
 /*
   	Example by ZiNc#2032
-  	The following code fetches total combined shards' server counts
+  	The following code fetches total combined shards' server counts.
   
   	discord.js version 12.x
   	client = new discordjs.Client()
@@ -115,12 +115,12 @@ const getServerCount = async () => {
 Example:
 ```javascript
 /*
-	Example of result of broadcastEval() on a bot with 4 servers split across 2 shards
+    Example of result of broadcastEval() on a bot with 4 servers split across 2 shards.
     Assume this is being executed on shard 0, the first shard.
 */
 
 // If we just map our guilds' members.cache.size, it will return
-// only the mapped members.size of the shard this is being run on
+// only the mapped members.size of the shard this is being run on.
 console.log(client.guilds.cache.map((guild) => guild.members.cache.size));
 //		[
 //			30,
@@ -128,7 +128,9 @@ console.log(client.guilds.cache.map((guild) => guild.members.cache.size));
 //		],
 
 // If we would like to map our guilds' members.cache.size from our
-// servers on all of our shards, we must make use of broadcastEval()
+// servers on all of our shards, we must make use of broadcastEval().
+// Remember, this runs in the context of the client, so we refer to the
+// Client using "this".
 const res = await client.shard.broadcastEval('this.guilds.cache.map((guild) => guild.members.cache.size)');
 console.log(res);
 // 	Array: [
@@ -151,10 +153,10 @@ Here's an example of a function that uses `broadcastEval()` to get a single guil
 ```javascript
 /*
   	Example by ZiNc#2032
-  	The following code fetches a single guild from across shards
+  	The following code fetches a single guild from across shards.
     
     NOTE: Fetched guild's properties such as "Guild.members.cache" and "Guild.roles.cache" will
-    not be Managers or Collections; these properties will be arrays of snowflake IDs
+    not be Managers or Collections; these properties will be arrays of snowflake IDs.
   	
   	discord.js version 12.x
   	client = new discordjs.Client()
