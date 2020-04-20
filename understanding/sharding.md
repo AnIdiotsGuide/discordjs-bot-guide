@@ -24,7 +24,7 @@ There are additional difficulties when sharding a bot that add complexity to you
 */
 
 // Include discord.js ShardingManger
-const { ShardingManager } = require('discord.js')
+const { ShardingManager } = require('discord.js');
 
 // Create your ShardingManger  instance
 const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
@@ -32,12 +32,12 @@ const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
     // https://discord.js.org/#/docs/main/stable/class/ShardingManager
     totalShards: 'auto',
     token: 'YOUR_TOKEN_GOES_HERE'
-})
+});
 
 // Spawn your shards
-manager.spawn()
+manager.spawn();
 
 // Emitted when a shard is created
-manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`))
+manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 ```
 
