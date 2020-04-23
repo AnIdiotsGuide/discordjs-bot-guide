@@ -2,8 +2,6 @@
 
 * [Welcome](README.md)
 * [Support me on Patreon](https://www.patreon.com/anidiotsguide)
-* [Frequently Asked Questions](frequently-asked-questions.md)
-* [Common Errors](common-errors.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Long Version](getting-started/getting-started-long-version.md)
   * [Getting Started - Linux TL;DR](getting-started/getting-started-linux-tl-dr.md)
@@ -14,6 +12,8 @@
   * [Command with arguments](first-bot/command-with-arguments.md)
   * [A Basic Command Handler](first-bot/a-basic-command-handler.md)
   * [Using Embeds in messages](first-bot/using-embeds-in-messages.md)
+* [Frequently Asked Questions](frequently-asked-questions.md)
+* [Common Errors](common-errors.md)
 * [Coding Guides](coding-guides/README.md)
   * [JSON-Based Points System](coding-guides/json-based-points-system.md)
   * [SQLite-Based Points System](coding-guides/sqlite-based-points-system.md)
