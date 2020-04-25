@@ -274,7 +274,7 @@ if(command === "leaderboard") {
     // Now shake it and show it! (as a nice embed, too!)
   const embed = new Discord.MessageEmbed()
     .setTitle("Leaderboard")
-    .setAuthor(client.user.username, client.user.avatarURL)
+    .setAuthor(client.user.username, client.user.avatarURL())
     .setDescription("Our top 10 points leaders!")
     .setColor(0x00AE86);
 
