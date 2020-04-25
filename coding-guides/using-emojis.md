@@ -17,7 +17,7 @@ When I want to write this emoji in my chat, I simply type `:ayy:` and it turns i
 
 ## How does Discord.js store emojis?
 
-There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis` is a collection of every emoji the client has access to, and `guild.emojis` is a collection of the emojis of a specific guild.
+There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis.cache` is a collection of every emoji the client has access to, and `guild.emojis.cache` is a collection of the emojis of a specific guild.
 
 If you've learned anything from [Understanding Collections](using-emojis.md), you might already know how to get something by ID from a collection:
 
@@ -48,7 +48,7 @@ If you wanted to list all the emojis in a guild, a simple map operation on the c
 
 ```javascript
 if (message.content === "listemojis") {
-  const emojiList = message.guild.emojis.cache.map(e=>e.toString()).join(" ");
+  const emojiList = message.guild.emojis.cache.map(emoji => emoji.toString()).join(" ");
   message.channel.send(emojiList);
 }
 ```

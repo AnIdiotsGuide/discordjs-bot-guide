@@ -50,7 +50,7 @@ module.exports = class {
     // Here we get the starboard channel from the guilds settings. 
     const { starboardChannel } = this.client.settings.get(message.guild.id); 
     // Here we will find the channel
-    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.cache.find(channel => channel.name == starboardChannel)
     // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   }

@@ -2,7 +2,7 @@
 
 From time to time, users in "An Idiot's Guide Official Server" need to reference audit logs for whatever reason, let it be viewing them for certain actions to adding things into the audit logs. This guide will explain everything about audit logs and how to use them.
 
-The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](../first-bot/your-first-bot.md) to get started. Now, some things to take note of. This guide is using discord.js@11.3.2. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
+The first thing that you will need is a working Discord Bot. If you do not have one, please visit [Your First Bot](../first-bot/your-first-bot.md) to get started. Now, some things to take note of. This guide is using discord.js. The bot will need some permissions. The main permission the bot will need is `'VIEW_AUDIT_LOGS'`. This permission allows the bot to view the audit logs.
 
 Now that the permission has been established. Lets get started!
 
@@ -11,12 +11,12 @@ Firstly, we need to know what we are doing with the audit logs. Let's log who de
 ```javascript
 client.on('messageDelete', async (message) => {
   // Firstly, we need a logs channel. 
-  const logs = message.guild.channels.find(channel => channel.name === "logs");
+  const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
 
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    await message.guild.createChannel('logs', 'text');
+    await message.guild.channels.create('logs', { type: 'text' });
   }
 
   // If we do not have permissions, console log both errors
@@ -102,9 +102,9 @@ The final code should look like this:
 
 ```javascript
 client.on('messageDelete', async (message) => {
-  const logs = message.guild.channels.find(channel => channel.name === "logs");
+  const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.createChannel('logs', 'text');
+    message.guild.channels.create('logs', { type: 'text' });
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
@@ -125,43 +125,44 @@ client.on('messageDelete', async (message) => {
 
 And there you have it. Thats how you can view audit logs as most of them, if not all, of them work the same.
 
-Types of Audit Logs:
+[Types of Audit Logs:](https://discord.js.org/#/docs/main/master/typedef/AuditLogAction)
 
 ```javascript
-GUILD_UPDATE
-CHANNEL_CREATE
-CHANNEL_UPDATE
-CHANNEL_DELETE
-CHANNEL_OVERWRITE_CREATE
-CHANNEL_OVERWRITE_UPDATE
-CHANNEL_OVERWRITE_DELETE
-MEMBER_KICK
-MEMBER_PRUNE
-MEMBER_BAN_ADD
-MEMBER_BAN_REMOVE
-MEMBER_UPDATE
-MEMBER_ROLE_UPDATE
-MEMBER_MOVE
-MEMBER_DISCONNECT
-BOT_ADD
-ROLE_CREATE
-ROLE_UPDATE
-ROLE_DELETE
-INVITE_CREATE
-INVITE_UPDATE
-INVITE_DELETE
-WEBHOOK_CREATE
-WEBHOOK_UPDATE
-WEBHOOK_DELETE
-EMOJI_CREATE
-EMOJI_UPDATE
-EMOJI_DELETE
-MESSAGE_DELETE
-MESSAGE_BULK_DELETE
-MESSAGE_PIN
-MESSAGE_UNPIN
-INTEGRATION_CREATE
-INTEGRATION_UPDATE
-INTEGRATION_DELETE
+ALL: null
+GUILD_UPDATE: 1
+CHANNEL_CREATE: 10
+CHANNEL_UPDATE: 11
+CHANNEL_DELETE: 12
+CHANNEL_OVERWRITE_CREATE: 13
+CHANNEL_OVERWRITE_UPDATE: 14
+CHANNEL_OVERWRITE_DELETE: 15
+MEMBER_KICK: 20
+MEMBER_PRUNE: 21
+MEMBER_BAN_ADD: 22
+MEMBER_BAN_REMOVE: 23
+MEMBER_UPDATE: 24
+MEMBER_ROLE_UPDATE: 25
+MEMBER_MOVE: 26
+MEMBER_DISCONNECT: 27
+BOT_ADD: 28,
+ROLE_CREATE: 30
+ROLE_UPDATE: 31
+ROLE_DELETE: 32
+INVITE_CREATE: 40
+INVITE_UPDATE: 41
+INVITE_DELETE: 42
+WEBHOOK_CREATE: 50
+WEBHOOK_UPDATE: 51
+WEBHOOK_DELETE: 52
+EMOJI_CREATE: 60
+EMOJI_UPDATE: 61
+EMOJI_DELETE: 62
+MESSAGE_DELETE: 72
+MESSAGE_BULK_DELETE: 73
+MESSAGE_PIN: 74
+MESSAGE_UNPIN: 75
+INTEGRATION_CREATE: 80
+INTEGRATION_UPDATE: 81
+INTEGRATION_DELETE: 82
 ```
 

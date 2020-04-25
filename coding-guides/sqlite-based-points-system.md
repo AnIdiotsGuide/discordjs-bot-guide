@@ -244,7 +244,7 @@ if(command === "give") {
   // Limited to guild owner - adjust to your own preference!
   if(!message.author.id === message.guild.owner) return message.reply("You're not the boss of me, you can't do that!");
 
-  const user = message.mentions.users.first() || client.users.get(args[0]);
+  const user = message.mentions.users.first() || client.users.cache.get(args[0]);
   if(!user) return message.reply("You must mention someone or give their ID!");
 
   const pointsToAdd = parseInt(args[1], 10);
