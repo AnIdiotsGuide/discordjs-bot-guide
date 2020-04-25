@@ -17,11 +17,11 @@ The first step in creating a bot is to create your own Discord _application_. Th
 
 To create the application, head to the [Discordapp.com Application Page](https://discordapp.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
 Click on \(you guessed it!\) **Create an application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one. Click **Save Changes** which will create the application itself.
 
-![](../.gitbook/assets/image%20%282%29.png)
+![](../.gitbook/assets/image%20%283%29.png)
 
 The **Client ID** on this page will be your bot's user ID. Nothing else on this page is relevant, it is not used in your bot \(however, you can enter a description
 
@@ -29,7 +29,7 @@ The **Client ID** on this page will be your bot's user ID. Nothing else on this 
 
 After creating the application, we need to create the **Bot User**. Go to the **Bot** section on the left, then click on **Add Bot**, then **Yes, Do it**.
 
-![](../.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%282%29.png)
 
 There's a few things you can change here.
 
@@ -63,7 +63,7 @@ Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really,
 
 With that warning out of the way, on to the next step. The Token, as I just mentioned, is the way in which the bot authenticates. To get it, go to the **Bot** section of the app page, then click **Copy** to copy it to the clipboard. You can also _view_ your token here if you wish:
 
-![NEVER SHARE YOUR TOKEN! This cannot be overstated.](../.gitbook/assets/image%20%283%29.png)
+![NEVER SHARE YOUR TOKEN! This cannot be overstated.](../.gitbook/assets/image%20%284%29.png)
 
 ## Step 2: Getting your coding environment ready
 
