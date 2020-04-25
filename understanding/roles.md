@@ -34,7 +34,7 @@ In a `message` handler, you have access to checking the GuildMember class of the
 
 ```javascript
 // assuming role.id is an actual ID of a valid role:
-if(message.member.roles.has(role.id)) {
+if(message.member.roles.cache.has(role.id)) {
   console.log(`Yay, the author of the message has the role!`);
 } else {
   console.log(`Nope, noppers, nadda.`);
@@ -43,7 +43,7 @@ if(message.member.roles.has(role.id)) {
 
 ```javascript
 // Check if they have one of many roles
-if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
+if(message.member.roles.cache.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
   // has one of the roles
 } else {
   // has none of the roles
@@ -75,17 +75,17 @@ let member = message.mentions.members.first();
 // or the person who made the command: let member = message.member;
 
 // Add the role!
-member.addRole(role).catch(console.error);
+member.roles.add(role).catch(console.error);
 
 // Remove a role!
-member.removeRole(role).catch(console.error);
+member.roles.remove(role).catch(console.error);
 ```
 
 Alright I feel like I have to add a _little_ precision here on implementation:
 
 * You can **not** add or remove a role that is higher than the bot's. This should be obvious.
 * The bot requires `MANAGE_ROLES` permissions for this. You can check for it using the code further down this page.
-* Because of global rate limits, you cannot do 2 role "actions" immediately one after the other. The first action will work, the second will not. You can go around that by using `<GuildMember>.setRoles([array, of, roles])`. This will overwrite all existing roles and only apply the ones in the array so be careful with it.
+* Because of global rate limits, you cannot do 2 role "actions" immediately one after the other. The first action will work, the second will not. You can go around that by using `<GuildMember>.roles.set([array, of, roles])`. This will overwrite all existing roles and only apply the ones in the array so be careful with it.
 
 ## Permission code
 
@@ -127,14 +127,17 @@ This is the list of internal permission names, used for `.has(name)` in the abov
 
 ```javascript
 {
+  ADMINISTRATOR: true,
   CREATE_INSTANT_INVITE: true,
   KICK_MEMBERS: true,
   BAN_MEMBERS: true,
-  ADMINISTRATOR: true,
   MANAGE_CHANNELS: true,
   MANAGE_GUILD: true,
   ADD_REACTIONS: true,
-  READ_MESSAGES: true,
+  VIEW_AUDIT_LOG: true,
+  PRIORITY_SPEAKER: true,
+  STREAM: true,
+  VIEW_CHANNEL: true,
   SEND_MESSAGES: true,
   SEND_TTS_MESSAGES: true,
   MANAGE_MESSAGES: true,
@@ -142,7 +145,8 @@ This is the list of internal permission names, used for `.has(name)` in the abov
   ATTACH_FILES: true,
   READ_MESSAGE_HISTORY: true,
   MENTION_EVERYONE: true,
-  EXTERNAL_EMOJIS: true,
+  USE_EXTERNAL_EMOJIS: true,
+  VIEW_GUILD_INSIGHTS: true,
   CONNECT: true,
   SPEAK: true,
   MUTE_MEMBERS: true,
@@ -151,7 +155,7 @@ This is the list of internal permission names, used for `.has(name)` in the abov
   USE_VAD: true,
   CHANGE_NICKNAME: true,
   MANAGE_NICKNAMES: true,
-  MANAGE_ROLES_OR_PERMISSIONS: true,
+  MANAGE_ROLES: true,
   MANAGE_WEBHOOKS: true,
   MANAGE_EMOJIS: true
 }
