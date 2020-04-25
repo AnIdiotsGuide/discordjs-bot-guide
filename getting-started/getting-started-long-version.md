@@ -86,7 +86,7 @@ So you have your CLI ready to go, in an empty folder, and you just wanna start c
 
 And now we install Discord.js through NPM, the Node Package Manager:
 
-`npm i discord.js`
+`npm install discord.js@11.6.4`
 
 ![](http://i.imgur.com/Gad8L2G.gif)
 
@@ -142,7 +142,7 @@ Now that you have a basic, functional bot, it's time to start adding new feature
 
 Before you start getting support from Discord servers to help you with your bot, I strongly advise taking a look at the following, very useful, resources.
 
-* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+* [Discord.js v11 Documentation](https://discord.js.org/#/docs/main/v11/) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
 * [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
 * [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
 * [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
