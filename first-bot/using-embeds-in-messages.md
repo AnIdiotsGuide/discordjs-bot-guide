@@ -54,7 +54,7 @@ message.channel.send({embed: {
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: client.user.avatarURL,
+      icon_url: client.user.avatarURL(),
       text: "© Example"
     }
   }
@@ -88,19 +88,19 @@ const embed = new Discord.MessageEmbed()
    */
   .setTimestamp()
   .setURL("https://discord.js.org/#/docs/main/v12/class/MessageEmbed")
-  .addField("This is a field title, it can hold 256 characters",
-    "This is a field value, it can hold 1024 characters.")
+  .addFields({ name: "This is a field title, it can hold 256 characters",
+      value: "This is a field value, it can hold 1024 characters."})
   /*
    * Inline fields may not display as inline if the thumbnail and/or image is too big.
    */
-  .addField("Inline Field", "They can also be inline.", true)
+  .addFields({ name: "Inline Field", value: "They can also be inline.", inline: true })
   /*
    * Blank field, useful to create some space.
    */
-  .addBlankField(true)
-  .addField("Inline Field 3", "You can have a maximum of 25 fields.", true);
+  .addBlankField({ name: '\u200b', value: '\u200b' })
+  .addFields({ name: "Inline Field 3", value: "You can have a maximum of 25 fields.", inline: true});
  
-  message.channel.send({embed});
+  message.channel.send(embed);
 ```
 
 Which produces the following:

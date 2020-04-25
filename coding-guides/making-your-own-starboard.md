@@ -80,7 +80,7 @@ if (stars) {
   const foundStar = stars.embeds[0];
   // We use the this.extension function to see if there is anything attached to the message.
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -105,7 +105,7 @@ if (!stars) {
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
   // If the message is empty, we don't allow the user to star the message.
   if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     // We set the color to a nice yellow here.
     .setColor(15844367)
     // Here we use cleanContent, which replaces all mentions in the message with their
@@ -143,7 +143,7 @@ module.exports = class {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -156,7 +156,7 @@ module.exports = class {
     if (!stars) {
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(15844367)
         .setDescription(message.cleanContent)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -191,7 +191,7 @@ if (stars) {
   const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -226,7 +226,7 @@ module.exports = class {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
