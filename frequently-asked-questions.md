@@ -39,7 +39,7 @@ client.on("ready", () => {
 })
 ```
 
-Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
+Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/v12/typedef/ActivityType).
 
 {% hint style="info" %}
 If you want your bot show up as "streaming" you need to provide a twitch URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
