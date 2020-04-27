@@ -29,7 +29,7 @@ const { ShardingManager } = require('discord.js');
 // Create your ShardingManger instance
 const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
     // for ShardingManager options see:
-    // https://discord.js.org/#/docs/main/master/class/ShardingManager
+    // https://discord.js.org/#/docs/main/v12/class/ShardingManager
     totalShards: 'auto',
     token: 'YOUR_TOKEN_GOES_HERE'
 });
@@ -47,13 +47,13 @@ manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 Information is not readily available between shards. In order to get or share information across shards, you will need to make use of either `fetchClientValues()` or `broadcastEval()`.
 {% endhint %}
 
-Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because your sharded bot is now in separate, individual instances, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](https://discord.js.org/#/docs/main/master/class/ShardClientUtil?scrollTo=fetchClientValues) or [`broadcastEval`](https://discord.js.org/#/docs/main/master/class/ShardClientUtil?scrollTo=broadcastEval) to get information from across shards.
+Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because your sharded bot is now in separate, individual instances, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](##FetchClientValues) or [`broadcastEval`](##BroadcastEval) to get information from across shards.
 
 These two functions are your go-to for getting any information from other shards, so get familiar with them!
 
 ## FetchClientValues
 
-[`fetchClientValues`](https://discord.js.org/#/docs/main/master/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
+[`fetchClientValues`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
 
 Example:
 ```javascript
@@ -71,7 +71,7 @@ console.log('client.guilds.cache.size');
 // of our shards, we must make use of fetchClientValues().
 const res = await client.shard.fetchClientValues('guilds.cache.size');
 console.log(res);
-// 	Array: [
+// 	[
 //		1050,	// shard 0
 //		1100,	// shard 1
 //		1075,	// shard 2
@@ -110,7 +110,7 @@ const getServerCount = async () => {
 
 ## BroacastEval
 
-[`broadcastEval`](https://discord.js.org/#/docs/main/master/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client(s). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
+[`broadcastEval`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client(s). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
 Example:
 ```javascript
@@ -133,7 +133,7 @@ console.log(client.guilds.cache.map((guild) => guild.members.cache.size));
 // Client using "this".
 const res = await client.shard.broadcastEval('this.guilds.cache.map((guild) => guild.members.cache.size)');
 console.log(res);
-// 	Array: [
+// 	[
 //		[	// shard 0
 //			30,
 //			25
