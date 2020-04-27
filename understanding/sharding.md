@@ -92,7 +92,7 @@ Here's an example of a function that uses `fetchClientValues()` to first get, th
   	discord.js version 12.x
   	client = new discordjs.Client()
 
-  	returns Number
+  	returns number
 */
 
 const getServerCount = async () => {
