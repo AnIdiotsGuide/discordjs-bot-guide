@@ -47,10 +47,10 @@ Inside `then` and `catch` there are functions, inside then, we use the variable 
 
 Don't get it? There's an example with Discord.JS:
 
-Some practise, the method [client.fetchUser](https://discord.js.org/#/docs/main/master/class/client?scrollTo=fetchUser) returns `Promise<User>`. It means, when you call that method, it'll return a **Promise**, resolving with a **User** object \(but it can also throw an error\).
+Some practise, the method [client.users.fetch](https://discord.js.org/#/docs/main/v12/class/UserManager?scrollTo=fetch) returns `Promise<User>`. It means, when you call that method, it'll return a **Promise**, resolving with a **User** object \(but it can also throw an error\).
 
 ```javascript
-client.fetchUser(id)
+client.users.fetch(id)
     .then((User) => {
         // Do something with the User object
     })
@@ -67,22 +67,22 @@ Once we know how to use the `Object Promise` and we know how to work with it, it
 
 ```javascript
 async () => {
-    const User = await client.fetchUser(id);
+    const User = await client.users.fetch(id);
     // Do something with the User object
 }
 ```
 
-**WAIT WHAT? THAT'S ALL?** Yes, it is. in the code above, you're defining the constant `User` as the result of the Promise, hence the keyword `await`. In this context, your code \(when it executes\), calls the method `client.fetchUser()`, but it'll stop there, once the promise resolves, the returned value \(User Object\) is assigned to the constant User.
+**WAIT WHAT? THAT'S ALL?** Yes, it is. in the code above, you're defining the constant `User` as the result of the Promise, hence the keyword `await`. In this context, your code \(when it executes\), calls the method `client.users.fetch()`, but it'll stop there, once the promise resolves, the returned value \(User Object\) is assigned to the constant User.
 
 **Wait, we have the replacement for** `then`**, but what if the method fails?** An advantage of ES8 Async/Await is that, you can call multiple AsyncFunctions, and catch them all once. As in the following example:
 
 ```javascript
 async () => {
     try {
-        const User = await client.fetchUser(id);
-        const member = await guild.fetchmember(User);
-        const role = guild.roles.find(r => r.name === "Idiot Subscribers");
-        await member.addRole(role);
+        const User = await client.users.fetch(id);
+        const member = await guild.members.fetch(User);
+        const role = guild.roles.cache.find(r => r.name === "Idiot Subscribers");
+        await member.roles.add(role);
         await channel.send("Success!");
     } catch (e) {
         console.error(e);
@@ -102,14 +102,14 @@ To use the `await` keyword, you **MUST** have written the `async` keyword in the
 
 ```javascript
 const EditMessage = async (id, content) => {
-    const Message = await channel.fetchMessage(id); // Async
+    const Message = await channel.messages.fetch(id); // Async
     return Message.edit(content);
 }
 ```
 
 ```javascript
 async function EditMessage(id, content) {
-    const Message = await channel.fetchMessage(id); // Async
+    const Message = await channel.messages.fetch(id); // Async
     return Message.edit(content);
 }
 ```
@@ -118,7 +118,7 @@ However, if you have a function inside another, for example:
 
 ```javascript
 const EditMessage = async (id, content) => {
-    const Message = await channel.fetchMessage(id);
+    const Message = await channel.messages.fetch(id);
     setTimeout(() => {
         await Message.edit(content);
         Message.channel.send("Edited!");

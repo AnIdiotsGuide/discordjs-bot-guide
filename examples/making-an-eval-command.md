@@ -2,7 +2,7 @@
 
 ## What is eval exactly?
 
-In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.map(g=>g.name).join('\n')` then it will return a list of guild names separated by a line return. Cool, right?
+In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.cache.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.cache.map(g=>g.name).join('\n')` then it will return a list of guild names separated by a line return. Cool, right?
 
 ## But eval is dangerous
 

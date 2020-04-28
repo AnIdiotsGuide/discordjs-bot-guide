@@ -29,8 +29,8 @@ Here's a simple example of using the `ready` event handler:
 
 ```javascript
 client.on("ready", () => {
-  client.user.setActivity(`on ${client.guilds.size} servers`);
-  console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
+  client.user.setActivity(`on ${client.guilds.cache.size} servers`);
+  console.log(`Ready to serve on ${client.guilds.cache.size} servers, for ${client.users.cache.size} users.`);
 });
 ```
 

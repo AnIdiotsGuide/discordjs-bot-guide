@@ -14,7 +14,7 @@ The standard webhook \(above\) basically acts like a normal message you would se
 
 ![Slack-Compatible Webhook](../.gitbook/assets/wh08.png)
 
-The slack-compatible webhook \(above\) is very fancy in comparison, they're basically `RichEmbeds` that you see a lot of moderation bots use, you can have thumbnails, images, and more \(see the [Slack Documentation](https://api.slack.com/incoming-webhooks) for more information\).
+The slack-compatible webhook \(above\) is very fancy in comparison, they're basically `MessageEmbeds` that you see a lot of moderation bots use, you can have thumbnails, images, and more \(see the [Slack Documentation](https://api.slack.com/incoming-webhooks) for more information\).
 
 ![Github-Compatible Webhook](../.gitbook/assets/wh09.png)
 

@@ -143,11 +143,11 @@ Another example would be the more complex `./commands/kick.js` command, called u
 
 ```javascript
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.guild.roles.find(role => role.name === "Mods");
+  const modRole = message.guild.roles.cache.find(role => role.name === "Mods");
   if (!modRole)
     return console.log("The Mods role does not exist");
 
-  if (!message.member.roles.has(modRole.id))
+  if (!message.member.roles.cache.has(modRole.id))
     return message.reply("You can't use this command.");
 
   if (message.mentions.members.size === 0)
@@ -172,7 +172,7 @@ Events are handled almost exactly in the same way, except that the number of arg
 
 ```javascript
 module.exports = (client) => {
-  console.log(`Ready to serve in ${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.users.size} users.`);
+  console.log(`Ready to serve in ${client.channels.cache.size} channels on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.size} users.`);
 }
 ```
 
@@ -182,7 +182,7 @@ Here's another example with the `guildMemberAdd` event:
 
 ```javascript
 module.exports = (client, member) => {
-  const defaultChannel = member.guild.channels.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+  const defaultChannel = member.guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
   defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
 }
 ```

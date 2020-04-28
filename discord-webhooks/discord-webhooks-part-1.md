@@ -25,7 +25,7 @@ client.on("message", (message) => {
 client.login("SuperSecretBotTokenHere");
 ```
 
-Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
+Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/v12/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
 
 ```javascript
 // This will create the webhook with the name "Example Webhook" and an example avatar.
