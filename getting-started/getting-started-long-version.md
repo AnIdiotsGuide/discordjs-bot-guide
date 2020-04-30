@@ -17,11 +17,11 @@ The first step in creating a bot is to create your own Discord _application_. Th
 
 To create the application, head to the [Discordapp.com Application Page](https://discordapp.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
 Click on \(you guessed it!\) **Create an application**. This brings you to the following page, in which you should simply enter a name for the _application_ \(this will be the inital bot username\). You don't really need a description or icon, but feel free to add one. Click **Save Changes** which will create the application itself.
 
-![](../.gitbook/assets/image%20%282%29.png)
+![](../.gitbook/assets/image%20%283%29.png)
 
 The **Client ID** on this page will be your bot's user ID. Nothing else on this page is relevant, it is not used in your bot \(however, you can enter a description
 
@@ -29,7 +29,7 @@ The **Client ID** on this page will be your bot's user ID. Nothing else on this 
 
 After creating the application, we need to create the **Bot User**. Go to the **Bot** section on the left, then click on **Add Bot**, then **Yes, Do it**.
 
-![](../.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%282%29.png)
 
 There's a few things you can change here.
 
@@ -63,7 +63,7 @@ Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really,
 
 With that warning out of the way, on to the next step. The Token, as I just mentioned, is the way in which the bot authenticates. To get it, go to the **Bot** section of the app page, then click **Copy** to copy it to the clipboard. You can also _view_ your token here if you wish:
 
-![NEVER SHARE YOUR TOKEN! This cannot be overstated.](../.gitbook/assets/image%20%283%29.png)
+![NEVER SHARE YOUR TOKEN! This cannot be overstated.](../.gitbook/assets/image%20%284%29.png)
 
 ## Step 2: Getting your coding environment ready
 
@@ -86,7 +86,7 @@ So you have your CLI ready to go, in an empty folder, and you just wanna start c
 
 And now we install Discord.js through NPM, the Node Package Manager:
 
-`npm i discord.js`
+`npm install discord.js@11.6.4`
 
 ![](http://i.imgur.com/Gad8L2G.gif)
 
@@ -142,7 +142,7 @@ Now that you have a basic, functional bot, it's time to start adding new feature
 
 Before you start getting support from Discord servers to help you with your bot, I strongly advise taking a look at the following, very useful, resources.
 
-* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+* [Discord.js v11 Documentation](https://discord.js.org/#/docs/main/v11/) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
 * [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
 * [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
 * [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
