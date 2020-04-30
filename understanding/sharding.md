@@ -6,17 +6,52 @@
 You do not need to worry about sharding until your bot hits around 2,400 guilds. YOU MUST SHARD before you hit 2,500 guilds, however.
 {% endhint %}
 
-## Sharding Caveats
+## Sharding Styles
+
+There are two styles of sharding that we'll be discussing: [`internal` sharding](#internal-sharding) and [`traditional` sharding](#traditional-sharding). Each of these sharding styles holds benefits depending on your situation.
+
+### Internal Sharding
+
+`internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`) because all of the shards share the same process.
+
+Because an internally sharded bot is run in one process, it is not ideal for bots with many guilds due to the large memory size the process will grow to. If you would like to use internal sharding, adjust the Client options in your main bot file where you define your client.
+
+Here is an example of how to make use of internal sharding:
+
+```javascript
+/*
+    The following code goes into your main bot file.
+*/
+
+// Include discord.js ShardingManger
+const Discord = require("discord.js");
+
+// When we define our client, we include the property "shardCount"
+// and set it to 'auto' to allow the client to automatically create
+// the correct number of shards.
+// If you would like to have a different number of shards, you may
+// also set this to a number.
+const client = new Discord.client({ shardCount: 'auto'});
+```
+
+### Traditional Sharding
+
+`traditional` sharding is the method by which a bot's code spawns individual child processes via a main shard manager process, each child process being one shard of the bot. When using this style of sharding, guilds, channels, and users on one shard will *not* be available to another via direct call (e.g. `client.guilds.cache.get('GUILD_ID')`) because each shard is in a separate process.
+
+This style of sharding is ideal for larger bots, or bots that need to be scalable to allow for future growth. The rest of this page will discuss [how to make use of traditional sharding](#example-sharding-manager-code) and [how to share information between shards](#sharding-information-between-shards) as information is not readily available between shards.
+
+To learn how to make use of traditional sharding, read on!
+
+## Traditional Sharding Caveats
 
 There are additional difficulties when sharding a bot that add complexity to your code \(one of the reasons you shouldn't shard too early\).
 
 * Collections do not cache data from all shards, so you can't grab data from a guild in another shard easily.
-* In order to do anything across shards you need to worry about using `broadcastEval` and such \(Examples and explanation below\).
+* In order to do anything across shards you need to worry about using [`fetchClientValues`](#fetchclientvalues) and [`broadcastEval`](#broadcasteval) \(Examples and explanation below\).
 * Sharded bots often gain very marginal performance increase and might even use _more_ memory due to using more node processes.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
 ## Example Sharding Manager Code
-
 ```javascript
 /*
     The following code goes into it's own file, and you run this file
@@ -44,10 +79,10 @@ manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 ## Sharing Information Between Shards
 
 {% hint style="info" %}
-Information is not readily available between shards. In order to get or share information across shards, you will need to make use of either `fetchClientValues()` or `broadcastEval()`.
+Information is not readily available between shards. In order to get or share information across shards, you will need to make use of either [`fetchClientValues`](#fetchclientvalues) or [`broadcastEval`](#broadcasteval).
 {% endhint %}
 
-Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because your sharded bot is now in separate, individual instances, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](##FetchClientValues) or [`broadcastEval`](##BroadcastEval) to get information from across shards.
+Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because your sharded bot is now in separate, individual instances, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](#fetchclientvalues) or [`broadcastEval`](#broadcasteval) to get information from across shards.
 
 These two functions are your go-to for getting any information from other shards, so get familiar with them!
 
