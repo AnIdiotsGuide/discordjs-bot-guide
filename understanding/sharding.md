@@ -80,7 +80,7 @@ manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 
 ## Sharing Information Between Shards
 
-Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because your sharded bot is now in separate, individual instances, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](#fetchclientvalues) or [`broadcastEval`](#broadcasteval) to get information from across shards.
+Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because of this, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](#fetchclientvalues) or [`broadcastEval`](#broadcasteval) to get information from across shards.
 
 These two functions are your go-to for getting any information from other shards, so get familiar with them!
 
