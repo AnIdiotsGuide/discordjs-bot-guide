@@ -2,25 +2,19 @@
 
 **Sharding** is the method by which a bot's code is "split" into multiple _instances_ of itself. When a bot is sharded, each shard handles only a certain percentage of all the guilds the bot is on.
 
-{% hint style="info" %}
-You do not need to worry about sharding until your bot hits around 2,400 guilds. YOU MUST SHARD before you hit 2,500 guilds, however.
-{% endhint %}
+There are additional difficulties when sharding a bot that add complexity to your code \(one of the reasons you shouldn't shard too early\). You do not need to worry about sharding until your bot hits around 2,400 guilds. YOU MUST SHARD by the time you hit 2,500 guilds, however.
 
 ## Sharding Styles
 
-There are two styles of sharding that we'll be discussing: [`internal` sharding](#internal-sharding) and [`traditional` sharding](#traditional-sharding). Each of these sharding styles holds benefits depending on your situation.
+There are two styles of sharding that we'll be discussing: [internal sharding](#internal-sharding) and [traditional sharding](#traditional-sharding). Each of these sharding styles holds benefits depending on your situation.
 
 ## Internal Sharding
 
 `internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`). Due to the large memory size the single bot process will grow to using this style of sharding, it is not ideal for bots with many guilds.
 
-{% hint style="info" %}
-There are additional difficulties when sharding a bot that add complexity to your code \(one of the reasons you shouldn't shard too early\).
-{% endhint %}
-
 ### Internal Sharding Caveats
 
-* Internally sharded bots often gain very marginal performance increase and will use _more_ memory.
+* Internally sharded bots often gain very marginal performance increase and will use *more memory*.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
 ### Internally Sharded Client
@@ -56,7 +50,7 @@ To learn how to make use of this, read on!
 * Collections do not cache data from all shards, so you can't grab data from a guild in another shard easily.
 * In order to do anything across shards you need to worry about using [`fetchClientValues`](#fetchclientvalues) and [`broadcastEval`](#broadcasteval) \(Examples and explanation below\).
 And again:
-* Traditionally sharded bots often gain very marginal performance increase and might even use _more_ memory due to using more node processes.
+* Traditionally sharded bots often gain very marginal performance increase and might even use *more memory* due to using more node processes.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
 ### Example Sharding Manager Code
@@ -85,10 +79,6 @@ manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 ```
 
 ## Sharing Information Between Shards
-
-{% hint style="info" %}
-Information is not readily available between shards. In order to get or share information across shards, you will need to make use of either [`fetchClientValues`](#fetchclientvalues) or [`broadcastEval`](#broadcasteval).
-{% endhint %}
 
 Remember how we were talking about sharding being a method of "splitting" the bot into multiple instances of itself? Because your sharded bot is now in separate, individual instances, things like your adding your total guilds or getting a specific guild are not as simple as they were before. We must now use either [`fetchClientValues`](#fetchclientvalues) or [`broadcastEval`](#broadcasteval) to get information from across shards.
 
