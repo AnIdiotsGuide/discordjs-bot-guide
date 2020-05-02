@@ -10,9 +10,20 @@ You do not need to worry about sharding until your bot hits around 2,400 guilds.
 
 There are two styles of sharding that we'll be discussing: [`internal` sharding](#internal-sharding) and [`traditional` sharding](#traditional-sharding). Each of these sharding styles holds benefits depending on your situation.
 
-### Internal Sharding
+## Internal Sharding
 
 `internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`). Due to the large memory size the single bot process will grow to using this style of sharding, it is not ideal for bots with many guilds.
+
+{% hint style="info" %}
+There are additional difficulties when sharding a bot that add complexity to your code \(one of the reasons you shouldn't shard too early\).
+{% endhint %}
+
+### Internal Sharding Caveats
+
+* Internally sharded bots often gain very marginal performance increase and will use _more_ memory.
+* If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
+
+### Internally Sharded Client
 
 If you would like to use this, adjust the Client options in your main bot file where you define your client like so:
 
@@ -32,7 +43,7 @@ const Discord = require("discord.js");
 const client = new Discord.client({ shardCount: 'auto'});
 ```
 
-### Traditional Sharding
+## Traditional Sharding
 
 `traditional` sharding is the method by which a bot's code spawns individual child processes via a main shard manager process, each child process being one shard of the bot. When using this style of sharding, guilds, channels, and users on one shard will *not* be available to another via direct call (e.g. `client.guilds.cache.get('GUILD_ID')`) because each shard is in a separate process.
 
@@ -40,16 +51,15 @@ This style of sharding is ideal for larger bots, or bots that need to be scalabl
 
 To learn how to make use of this, read on!
 
-## Traditional Sharding Caveats
-
-There are additional difficulties when sharding a bot that add complexity to your code \(one of the reasons you shouldn't shard too early\).
+### Traditional Sharding Caveats
 
 * Collections do not cache data from all shards, so you can't grab data from a guild in another shard easily.
 * In order to do anything across shards you need to worry about using [`fetchClientValues`](#fetchclientvalues) and [`broadcastEval`](#broadcasteval) \(Examples and explanation below\).
-* Sharded bots often gain very marginal performance increase and might even use _more_ memory due to using more node processes.
+And again:
+* Traditionally sharded bots often gain very marginal performance increase and might even use _more_ memory due to using more node processes.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
-## Example Sharding Manager Code
+### Example Sharding Manager Code
 ```javascript
 /*
     The following code goes into it's own file, and you run this file
@@ -84,7 +94,7 @@ Remember how we were talking about sharding being a method of "splitting" the bo
 
 These two functions are your go-to for getting any information from other shards, so get familiar with them!
 
-## FetchClientValues
+### FetchClientValues
 
 [`fetchClientValues`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
 
@@ -141,7 +151,7 @@ const getServerCount = async () => {
 `fetchClientValues()` does not allow you to make use of javascript methods or client methods to get or process information before returning it. It only allows you to get information from client properties.
 {% endhint %}
 
-## BroacastEval
+### BroacastEval
 
 [`broadcastEval`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client(s). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
