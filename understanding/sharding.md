@@ -10,7 +10,7 @@ You do not need to worry about sharding until your bot hits around 2,400 guilds.
 
 There are two styles of sharding that we'll be discussing: [`internal` sharding](#internal-sharding) and [`traditional` sharding](#traditional-sharding). Each of these sharding styles holds benefits depending on your situation.
 
-#### Internal Sharding
+### Internal Sharding
 
 `internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`). Due to the large memory size the single bot process will grow to using this style of sharding, it is not ideal for bots with many guilds.
 
@@ -32,7 +32,7 @@ const Discord = require("discord.js");
 const client = new Discord.client({ shardCount: 'auto'});
 ```
 
-#### Traditional Sharding
+### Traditional Sharding
 
 `traditional` sharding is the method by which a bot's code spawns individual child processes via a main shard manager process, each child process being one shard of the bot. When using this style of sharding, guilds, channels, and users on one shard will *not* be available to another via direct call (e.g. `client.guilds.cache.get('GUILD_ID')`) because each shard is in a separate process.
 
