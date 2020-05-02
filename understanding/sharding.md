@@ -113,7 +113,7 @@ console.log(res);
 
 ````
 
-Let's say you want to do something like get your total server count - In a non-sharded environment, this would be as simple as getting the `client.guilds.cache.size`. However, in this case `client.guilds.cache.size` will return not the total servers your bot is in. Instead it returns only the total number of servers *on this shard*, like in the first part of the example above.
+Let's say you want to do something like get your total server count - In a non-sharded environment, this would be as simple as getting the `client.guilds.cache.size`. However, in this case `client.guilds.cache.size` will not return the total servers your bot is in. Instead it returns only the total number of servers *on this shard*, like in the first part of the example above.
 
 Here's an example of a function that uses `fetchClientValues()` to first get, then add the total number of guilds from *all shards* (i.e. your bot's total guild count):
 
