@@ -10,13 +10,11 @@ You do not need to worry about sharding until your bot hits around 2,400 guilds.
 
 There are two styles of sharding that we'll be discussing: [`internal` sharding](#internal-sharding) and [`traditional` sharding](#traditional-sharding). Each of these sharding styles holds benefits depending on your situation.
 
-### Internal Sharding
+#### Internal Sharding
 
-`internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`) because all of the shards share the same process.
+`internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`). Due to the large memory size the single bot process will grow to using this style of sharding, it is not ideal for bots with many guilds.
 
-Because an internally sharded bot is run in one process, it is not ideal for bots with many guilds due to the large memory size the process will grow to. If you would like to use internal sharding, adjust the Client options in your main bot file where you define your client.
-
-Here is an example of how to make use of internal sharding:
+If you would like to use this, adjust the Client options in your main bot file where you define your client like so:
 
 ```javascript
 /*
@@ -34,13 +32,13 @@ const Discord = require("discord.js");
 const client = new Discord.client({ shardCount: 'auto'});
 ```
 
-### Traditional Sharding
+#### Traditional Sharding
 
 `traditional` sharding is the method by which a bot's code spawns individual child processes via a main shard manager process, each child process being one shard of the bot. When using this style of sharding, guilds, channels, and users on one shard will *not* be available to another via direct call (e.g. `client.guilds.cache.get('GUILD_ID')`) because each shard is in a separate process.
 
-This style of sharding is ideal for larger bots, or bots that need to be scalable to allow for future growth. The rest of this page will discuss [how to make use of traditional sharding](#example-sharding-manager-code) and [how to share information between shards](#sharding-information-between-shards) as information is not readily available between shards.
+This style of sharding is ideal for larger bots, or bots that need to be scalable to allow for future growth. The rest of this page will discuss [how to make use of traditional sharding](#example-sharding-manager-code) and [how to share information between shards](#sharding-information-between-shards).
 
-To learn how to make use of traditional sharding, read on!
+To learn how to make use of this, read on!
 
 ## Traditional Sharding Caveats
 
@@ -99,7 +97,7 @@ Example:
 
 // If we just get our client.guilds.cache.size, it will return
 // only the number of guilds on the shard this is being run on.
-console.log('client.guilds.cache.size');
+console.log(client.guilds.cache.size);
 // 1050
 
 // If we would like to get our client.guilds.cache.size from all
@@ -115,7 +113,7 @@ console.log(res);
 
 ````
 
-Let's say you want to do something like get your total server count - In a non-sharded environment, this would be as simple as getting the `client.guilds.cache.size`. However in a sharded environment, `client.guilds.cache.size` will return not the total servers your bot is in. Instead it returns only the total number of servers *on this shard*, like in the first part of the example above.
+Let's say you want to do something like get your total server count - In a non-sharded environment, this would be as simple as getting the `client.guilds.cache.size`. However, in this case `client.guilds.cache.size` will return not the total servers your bot is in. Instead it returns only the total number of servers *on this shard*, like in the first part of the example above.
 
 Here's an example of a function that uses `fetchClientValues()` to first get, then add the total number of guilds from *all shards* (i.e. your bot's total guild count):
 
@@ -181,7 +179,7 @@ console.log(res);
 
 ````
 
-Say you want to get a guild from your client. In a non-sharded environment, you would simply use `client.guilds.cache.get('ID')` or something of that nature and then carry on with your code. In a sharded environment however, it is possible that the guild you're trying to get *is not present on the shard*. In order to get the guild for use, you would then need to fetch it from whatever shard it is present on using `broadcastEval()`.
+Say you want to get a guild from your client. In a non-sharded environment, you would simply use `client.guilds.cache.get('ID')` or something of that nature and then carry on with your code. In this case however, it is possible that the guild you're trying to get *is not present on the shard*. In order to get the guild for use, you would then need to fetch it from whatever shard it is present on using `broadcastEval()`.
 
 Here's an example of a function that uses `broadcastEval()` to get a single guild no matter what shard it is present on:
 
@@ -203,8 +201,8 @@ const getServer = async (guildID) => {
     // try to get guild from all the shards
     const req = await client.shard.broadcastEval(`this.guilds.cache.get("${guildID}")`);
 
-    // return non-null response or false if not found
-    return (req.find((res) => !!res) || false);
+    // return Guild or null if not found
+    return req.find(res => !!res) || null;
 }
 ```
 
