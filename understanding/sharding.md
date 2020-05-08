@@ -14,7 +14,6 @@ There are two styles of sharding that we'll be discussing: [internal sharding](#
 
 ### Internal Sharding Caveats
 
-* Internally sharded bots often gain very marginal performance increase and will use *more memory*.
 * If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
 
 ### Internally Sharded Client
@@ -119,9 +118,8 @@ Here's an example of a function that uses `fetchClientValues()` to first get, th
 
 ```javascript
 /*
-  	Example by ZiNc#2032
-  	The following code fetches total combined shards' server counts.
-  
+    Example by ZiNc#2032
+      
   	discord.js version 12.x
   	client = new discordjs.Client()
 
@@ -186,7 +184,6 @@ Here's an example of a function that uses `broadcastEval()` to get a single guil
 ```javascript
 /*
   	Example by ZiNc#2032
-  	The following code fetches a single guild from across shards.
     
     NOTE: Fetched guild's properties such as "Guild.members.cache" and "Guild.roles.cache" will
     not be Managers or Collections; these properties will be arrays of snowflake IDs.
@@ -209,3 +206,73 @@ const getServer = async (guildID) => {
 {% hint style="info" %}
 `broadcastEval()` will only return basic javascript objects, and will not return Discord.js structures such as Collections, Guild objects, Member object, and the likes. You will need to interact directly with the API or build these structures yourself after getting a response back from your `broadcastEval()`.
 {% endhint %}
+
+Example of a Guild object returned by [`broadcastEval`](#broadcasteval):
+
+```javascript
+const res = await client.shard.broadcastEval(this.guilds.cache.get(GUILD_ID));
+console.log(res);
+// 	[
+//		[	// whichever shard has the guild
+//          {
+//            members: [
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789'
+//            ],
+//            channels: [
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789'
+//            ],
+//            roles: [
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789'
+//            ],
+//            emojis: [
+//              '123456789123456789', '123456789123456789', '123456789123456789',
+//              '123456789123456789', '123456789123456789', '123456789123456789'
+//            ],
+//            afkChannelID: null,
+//            afkTimeout: 300,
+//            applicationID: null,
+//            banner: null,
+//            bannerURL: null
+//            createdTimestamp: 1234567891234,
+//            defaultMessageNotifications: 'MENTIONS',
+//            deleted: false,
+//            description: null,
+//            explicitContentFilter: 'MEMBERS_WITHOUT_ROLES',
+//            features: [ 'ANIMATED_ICON', 'INVITE_SPLASH' ],
+//            icon: 'ICON_ID',
+//            iconURL: 'ICON_URL',
+//            id: '123456789123456789',
+//            joinedTimestamp: 1234567891234,
+//            large: true,
+//            memberCount: 6000,
+//            mfaLevel: 1,
+//            name: 'Server_Name',
+//            nameAcronym: 'E',
+//            ownerID: '123456789123456789',
+//            premiumSubscriptionCount: 3,
+//            premiumTier: 1,
+//            publicUpdatesChannelID: null,
+//            region: 'us-east',
+//            rulesChannelID: null,
+//            shardID: 0,
+//            splash: 'SPLASH_ID',
+//            splashURL: 'SPLASH_URL',
+//            systemChannelFlags: 1,
+//            systemChannelID: '123456789123456789',
+//            vanityURLCode: null,
+//            verificationLevel: 'MEDIUM',
+//          }
+//		],
+//
+//      ...null // all other shard replies
+// 	]
+```
