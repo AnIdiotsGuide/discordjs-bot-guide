@@ -12,10 +12,6 @@ There are two styles of sharding that we'll be discussing: [internal sharding](#
 
 `internal` sharding is the method by which a bot's code creates multiple shard connections to the Discord API *within a single process*. This means that all the guilds, channels, and users on one shard will be available to another shard via a direct call (e.g. `client.guilds.cache.get('GUILD_ID')`). Due to the large memory size the single bot process will grow to using this style of sharding, it is not ideal for bots with many guilds.
 
-### Internal Sharding Caveats
-
-* If you're using any sort of database or connection, multiple shards may cause issues with multiple processes connecting to a single end point.
-
 ### Internally Sharded Client
 
 If you would like to use this, adjust the Client options in your main bot file where you define your client like so:
