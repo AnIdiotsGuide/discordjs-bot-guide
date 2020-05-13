@@ -81,7 +81,7 @@ These two functions are your go-to for getting any information from other shards
 
 ### FetchClientValues
 
-[`fetchClientValues`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
+[`fetchClientValues`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.cache.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
 
 Example:
 ```javascript
