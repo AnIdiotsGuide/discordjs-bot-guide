@@ -69,7 +69,7 @@ I told you it wasn't that complicated. Let's keep going.
 
 ```javascript
 // Here we fetch 100 messages from the starboard channel.
-const fetch = await starChannel.fetchMessages({ limit: 100 }); 
+const fetch = await starChannel.messages.fetch({ limit: 100 }); 
 // We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
 const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); 
 // Now we setup an if statement for if the message is found within the starboard.
@@ -88,7 +88,7 @@ if (stars) {
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
   // We fetch the ID of the message already on the starboard.
-  const starMsg = await starChannel.fetchMessage(stars.id);
+  const starMsg = await starChannel.messages.fetch(stars.id);
   // And now we edit the message with the new embed!
   await starMsg.edit({ embed }); 
 }
@@ -137,7 +137,7 @@ module.exports = class {
     const { starboardChannel } = this.client.settings.get(message.guild.id);
     const starChannel = message.guild.channels.find(channel => channel.name === starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
-    const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
+    const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
@@ -150,7 +150,7 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await starChannel.fetchMessage(stars.id);
+      const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embed });
     }
     if (!stars) {
@@ -198,7 +198,7 @@ if (stars) {
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
-  const starMsg = await starChannel.fetchMessage(stars.id);
+  const starMsg = await starChannel.messages.fetch(stars.id);
   await starMsg.edit({ embed });
   // Here we want to check if the message now has 0 Stars
   if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
@@ -220,7 +220,7 @@ module.exports = class {
     const { starboardChannel } = this.client.settings.get(message.guild.id);
     const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
-    const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
+    const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
@@ -233,7 +233,7 @@ module.exports = class {
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await starChannel.fetchMessage(stars.id);
+      const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embed });
       if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }
