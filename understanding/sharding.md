@@ -147,7 +147,7 @@ Example:
 */
 
 // If we just map our guilds' members.cache.size, it will return
-// only the mapped members.size of the shard this is being run on.
+// only the mapped members.cache.size of the shard this is being run on.
 console.log(client.guilds.cache.map((guild) => guild.members.cache.size));
 //		[
 //			30,
