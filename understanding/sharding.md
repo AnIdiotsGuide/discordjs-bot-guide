@@ -29,7 +29,7 @@ const Discord = require("discord.js");
 // the correct number of shards.
 // If you would like to have a different number of shards, you may
 // also set this to a number.
-const client = new Discord.client({ shardCount: 'auto'});
+const client = new Discord.client({ shardCount: 'auto' });
 ```
 
 ## Traditional Sharding
