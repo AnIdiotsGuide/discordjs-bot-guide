@@ -59,13 +59,13 @@ In these examples `Guild` is a placeholder for where you get the guild. This can
 
 ```javascript
 // Get a User by ID
-client.users.get("user id here");
+client.users.cache.get("user id here");
 // Returns <User>
 ```
 
 ```javascript
 // Get a Member by ID
-message.guild.members.get("user ID here");
+message.guild.members.cache.get("user ID here");
 // Returns <Member>
 ```
 
