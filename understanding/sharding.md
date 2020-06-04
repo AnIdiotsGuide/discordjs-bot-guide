@@ -113,7 +113,7 @@ const getServerCount = async () => {
 `fetchClientValues()` does not allow you to make use of javascript methods or client methods to get or process information before returning it. It only allows you to get information from client properties.
 {% endhint %}
 
-## BroacastEval
+## BroadcastEval
 
 [`broadcastEval`](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input *in the context of each shard's Client(s)* (i.e. `this` is used to reference the `Client`). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
