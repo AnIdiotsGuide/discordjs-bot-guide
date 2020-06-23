@@ -11,11 +11,11 @@ Let's grab some example code...
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
@@ -24,7 +24,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -36,11 +36,11 @@ You want to start off by defining your webhook at the top of your code, don't fo
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const mentionHook = new Discord.WebhookClient("Webhook ID", "Webhook Token");
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
@@ -49,7 +49,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -119,11 +119,11 @@ Alright, now we're done with the conditions for the webhook, let's actually use 
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const mentionHook = new Discord.WebhookClient('Webhook ID', 'Webhook Token');
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
@@ -136,7 +136,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -156,11 +156,11 @@ This webhook has long since been deleted.
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const mentionHook = new Discord.WebhookClient("336099488869384192", "UT_jumpd9cEi3X7Dxls0pv9_dscvTSB5oDAVHEWhMh2Psz8n0ZwAVr7JjSszfu5z7BGH");
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
@@ -174,7 +174,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 

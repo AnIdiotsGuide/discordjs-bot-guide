@@ -99,7 +99,7 @@ const embed = new Discord.MessageEmbed()
    */
   .addFields({ name: '\u200b', value: '\u200b' })
   .addFields({ name: "Inline Field 3", value: "You can have a maximum of 25 fields.", inline: true});
- 
+
   message.channel.send(embed);
 ```
 

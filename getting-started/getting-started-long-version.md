@@ -63,7 +63,7 @@ Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really,
 
 With that warning out of the way, on to the next step. The Token, as I just mentioned, is the way in which the bot authenticates. To get it, go to the **Bot** section of the app page, then click **Copy** to copy it to the clipboard. You can also _view_ your token here if you wish:
 
-![NEVER SHARE YOUR TOKEN! This cannot be overstated.](../.gitbook/assets/image%20%284%29.png)
+![NEVER SHARE YOUR TOKEN! This cannot be overstated.](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/a7c503b74a4562ec7e3a2fb96a958de5d1751ec9/.gitbook/assets/image%20%284%29.png)
 
 ## Step 2: Getting your coding environment ready
 
