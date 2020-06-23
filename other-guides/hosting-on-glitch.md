@@ -1,7 +1,5 @@
 # Hosting on Glitch.com
 
-
-
 {% hint style="danger" %}
 It is strongly advised you actually shell out a couple dollars a month and get an actual real VPS, due to the free nature of Glitch it has led to a high number of Glitch based IP's getting API banned by Discord due to abuse and now Glitch are actively banning users for using external site pingers such as Uptimerobot.
 {% endhint %}
