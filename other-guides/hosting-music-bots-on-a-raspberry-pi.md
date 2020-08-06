@@ -32,11 +32,7 @@ AoDude's OhGodMusicBot is available [here](https://github.com/bdistin/OhGodMusic
 
 You will require a free discord.com account to use the discord service, sign up [here](https://discord.com/)
 
-You can join the _"An Idiot's Guide Official Server"_ [here](https://discord.gg/4NE4bk7)
-
 If you'd like to support me on Patreon, you can do so [here](https://www.patreon.com/anidiotsguide)
-
-Don't forget to join the _"Official Discord.js Server"_ [here](https://discord.gg/bRCvFy9)
 
 Check out the Discord Developers portal [here](https://discord.com/developers/docs/intro)
 
