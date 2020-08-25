@@ -69,7 +69,7 @@ And... well, that's pretty much it. But....
 
 So here's the problem. Each time you fetch invites, you're hitting the Discord API with a request for information. While that's not an issue for small bots, it might as the bot grows. I'm not saying that using this code would get you banned from the API - there is no inherent problem with querying the API if it's not abuse. However, there are a few technical issues with performance especially.
 
-The more guilds you have, the more invites are in each guild, the more data you're receiving from the API. Rember, because of the way the `ready` event works, you need to _wait_ a bit before running the fetchInvite method, and the more guilds you have, the more time you need to wait. During this time, member joins won't correctly register because the cache doesn't exist.
+The more guilds you have, the more invites are in each guild, the more data you're receiving from the API. Remember, because of the way the `ready` event works, you need to _wait_ a bit before running the fetchInvite method, and the more guilds you have, the more time you need to wait. During this time, member joins won't correctly register because the cache doesn't exist.
 
 Furthermore, the cache itself grows in size, so you're using more memory. On top of which, it takes more time to sort through the invites the more invites exist. It might make the bot appear as being slower to respond to members joining.
 
