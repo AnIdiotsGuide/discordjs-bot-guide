@@ -70,7 +70,7 @@ Example:
 
 // If we just get our client.guilds.size, it will return
 // only the number of guilds on the shard this is being run on.
-console.log('client.guilds.size');
+console.log(client.guilds.size);
 // 1050
 
 // If we would like to get our client.guilds.size from all
