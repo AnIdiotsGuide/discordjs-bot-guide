@@ -31,7 +31,11 @@ To create a new repl from a Github repo, simply click the blue **+** icon at the
 * [https://github.com/eslachance/djs-handler](https://github.com/eslachance/djs-handler.git) : A bot with our recommended Command Handler, where each file and event is its own file. I'd recommend going with this one, the code is still very easy to understand. Heck, it even includes a Help command and support for commands in folders for easy categorization!
 * [https://github.com/AnIdiotsGuide/guidebot/](https://github.com/AnIdiotsGuide/guidebot/) : The full guidebot boilerplate. Note that this one will not work as-is, so we'll have a separate page to give you the exact steps to make this one work \(I'll write it after this!\). Notably however, this repository uses enmap which creates a data folder which, as the warning above implies, is public. We'll update the page once we have more info on this.
 
-Once you've entered your repository \(it will be simplified to `username/repositoryname`, don't worry, it's normal\), just click **Import from Github** and watch it go! Once it's finished you'll be ready to Run the bot, but _don't do this right now_, as we need to make sure your token is there and secured \(see below\).
+Once you've entered your repository \(it will be simplified to `username/repositoryname`, don't worry, it's normal\), just click **Import from Github** and watch it go! Once that's done, you'll be presented with a small window on the top-right of the workspace. This window asks you _what language your repl is using_. If nodejs isn't already selected \(it tries to guess\), select it. Leave the run button to `npm start` and just click Done.
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+Once it's finished you'll be ready to Run the bot, but _don't do this right now_, as we need to make sure your token is there and secured \(see below\).
 
 ## Create your bot from scratch
 
@@ -130,7 +134,7 @@ So, the first thing you'll need is to register a new account on UptimeRobot.com.
 
 If all worked well, you'll see the ping turn green \(if it doesn't, make sure to RUN your application!\)
 
-![](../.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%286%29.png)
 
 ## Conclusion
 
