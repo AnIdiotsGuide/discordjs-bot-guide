@@ -3,7 +3,7 @@
 {% hint style="danger" %}
 Glitch.com **HAS CHANGED THEIR POLICY** on using internal or external ping systems to keep your application running, _unless you're paying for the service_. This unfortunately means that this entire guide is completely pointless to you if you're only looking for a free hosting. 
 
-For alternatives, look at [Hosting on Heroku](heroku.md) \(if you don't need to write files locally such as sqlite\) or [Hosting on Repl.IT](hosting-on-repl.it.md) \(if you don't mind your files being seen publicly\).
+For alternatives, look at [Hosting on Heroku](heroku.md) \(if you don't need to write files locally such as sqlite\) or [Hosting on Repl.IT](repl.md) \(if you don't mind your files being seen publicly\).
 {% endhint %}
 
 {% embed url="https://www.youtube.com/watch?v=xX4AcRFojk4" %}

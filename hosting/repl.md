@@ -4,7 +4,7 @@ description: Let's take a look at how to how a bot on repl.it securely and corre
 
 # Hosting on Repl.it
 
-There have been multiple attempts for people to find free ways to host their bot through the years that this guide has been around. Unfortunately it seems every time we find a new one, it lasts for a while and then somehow locks up. [This is what happened to the Glitch app](hosting-on-glitch.md), but let's hope Repl.it lasts for a while longer.
+There have been multiple attempts for people to find free ways to host their bot through the years that this guide has been around. Unfortunately it seems every time we find a new one, it lasts for a while and then somehow locks up. [This is what happened to the Glitch app](glitch.md), but let's hope Repl.it lasts for a while longer.
 
 This page will guide you through setting up your repl.it app, creating a discord.js bot that stays online 24/7. This method, unlike what happened to glitch, [_has been approved by the repl.it developers_](https://github.com/AnIdiotsGuide/discordjs-bot-guide/issues/119)_._ In other words, you're not breaking any rule doing this to keep your bot online.
 
