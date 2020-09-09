@@ -1,5 +1,7 @@
 ---
-description: Let's take a look at how to how a bot on repl.it securely and correctly.
+description: >-
+  Let's take a look at how to host a bot on repl.it securely and correctly. And,
+  for free!
 ---
 
 # Hosting on Repl.it
