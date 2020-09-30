@@ -11,7 +11,7 @@ There have been multiple attempts for people to find free ways to host their bot
 This page will guide you through setting up your repl.it app, creating a discord.js bot that stays online 24/7. This method, unlike what happened to glitch, [_has been approved by the repl.it developers_](https://github.com/AnIdiotsGuide/discordjs-bot-guide/issues/119)_._ In other words, you're not breaking any rule doing this to keep your bot online.
 
 {% hint style="danger" %}
-At the moment, we're not sure how to make Repl.it _hide files_ other than the .env file we'll be storing our token in. We're trying to get information from Repl.it on the subject, but it means if you're storing data in json files, js files, or sqlite/enmap/quick.db, this data **will be available for the public to see** so please be aware of this limitation for the time being.
+Every hosting service has their downside - Repl.it's limitation is that you cannot hide files from the public eye on free accounts, except for the .env file. This means, if you were to use a file-based or sqlite-based database \(such as enmap, quick.db, nedb\) your files would be visible. Since this is against the Discord Terms of Service \(exposing potential user data\), _do not use these modules or json files_ to store data. Instead, you can use the [Repl.It Database](https://docs.repl.it/misc/database) system to store data, or an external database server like Atlas Mongo, or Firebase.
 {% endhint %}
 
 ## Creating your Repl.it Account
@@ -138,7 +138,7 @@ If all worked well, you'll see the ping turn green \(if it doesn't, make sure to
 
 ## Conclusion
 
-While hosting your bot for free on Repl.it is not the _best_ solution out there \(we recommend going to a small-priced VPS such as [OVH.com](https://www.ovh.com/), we understand that some new developers can't afford even a few dollars a month. 
+While hosting your bot for free on Repl.it is not the _best_ solution out there \(we recommend going to a small-priced VPS such as [OVH.com](https://www.ovh.com/)\), we understand that some new developers can't afford even a few dollars a month. 
 
 For Repl.it support, please visit[ their discord server](https://discord.com/invite/5gcPC6B). An Idiot's Guide can provide very limited support for external services, and Repl.it is not an exception to this rule!
 
