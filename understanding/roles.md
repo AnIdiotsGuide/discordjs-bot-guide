@@ -43,7 +43,7 @@ if(message.member.roles.has(role.id)) {
 
 ```javascript
 // Check if they have one of many roles
-if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
+if(message.member.roles.cache.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
   // has one of the roles
 } else {
   // has none of the roles
