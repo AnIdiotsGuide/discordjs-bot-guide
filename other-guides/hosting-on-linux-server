@@ -1,0 +1,53 @@
+# Hosting on a Linux Server
+
+The best way to host your bot is on a Linux Server (or simply said: just a virtual server. Its also for bare metal servers).
+
+## Requirements
+
+- A Linux Server with a stable version, node, npm, git, pm2. 
+- Github repository from your bot (privat).
+- SSH Client
+
+## Getting Started
+
+### Login
+
+The best way to do that is with root access. If its root access the username would be `root`.
+The first step you do is to login into your Linux Server. You can use a SSH Client, with Windows CMD `ssh (username)@(ip)` or on macOS ssh 192.168.2.30 -l (username)`
+
+### Get Bot Files
+
+After you login in, clone your bot repository to your server. We use git for that.
+To clone your repository just type `git clone https://github.com/(username)/(rep-name).git`. Username is your github account name and rep-name the name of your repository.
+Now you need to go the file folder. Type `ls`to see dir of your server. If you found a folder with the name of the repository this should be your bot files folder.
+Now type `cd (folder-name)`to get there. Now type again `ls`. If you see the files from the bot your right. 
+
+### Starting Bot
+
+Now deleted the node_modules folder (if you have) with `rm -r node_modules`
+and type next `npm i`. You need to reinstall that because the Linux got a other compiler then your windows computer (this is because there are diffrent OS). After you installed node_modules,
+do `pm2 start <index>.js` (<index> stands for the main script in your project). Pm2 is a process manager for node application. This is one of the best PM for hosting. Now do `pm2 list` to get a list
+of your running application. This would look like this:
+```
+┌─────┬──────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id  │ name     │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼──────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0   │ index    │ default     │ 1.0.0   │ fork    │ 3854     │ 9h     │ 23   │ online    │ 0%       │ 148.5mb  │ root     │ disabled │
+└─────┴──────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+```
+When the status is `online` the bot should be online. 
+
+**Yay your bot is working!**
+
+### Pm2 Features
+
+#### Logs
+
+To see the console logs you need to type `pm2 logs`.
+
+#### Monitoring
+
+To monitor your application type `pm2 monit`. You can see awesome things like CPU/RAM usage, process lists, logs and more.
+
+
+- ookamicodes ;)
