@@ -18,10 +18,10 @@ This is the "easy" part once you actually get used to it. It's just like getting
 
 ```javascript
 // get role by ID
-let myRole = message.guild.roles.get("264410914592129025");
+let myRole = message.guild.roles.cache.get("264410914592129025");
 
 // get role by name
-let myRole = message.guild.roles.find(role => role.name === "Moderators");
+let myRole = message.guild.roles.cache.find(role => role.name === "Moderators");
 ```
 
 {% hint style="info" %}
