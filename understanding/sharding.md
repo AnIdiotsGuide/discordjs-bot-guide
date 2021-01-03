@@ -213,7 +213,7 @@ const getServer = async (guildID) => {
 Example of a Guild object returned by [`broadcastEval`](sharding.md#broadcasteval):
 
 ```javascript
-const res = await client.shard.broadcastEval(this.guilds.cache.get(GUILD_ID));
+const res = await client.shard.broadcastEval(`this.guilds.cache.get("${GUILD_ID}")`);
 console.log(res);
 //     [
 //        [    // whichever shard has the guild
