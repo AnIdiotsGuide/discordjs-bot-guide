@@ -204,3 +204,32 @@ message.channel.messages.fetch({around: "352292052538753025", limit: 1})
   });
 ```
 
+## Voice channel
+
+```javascript
+    var voiceChannel = message.member.voice.channel; // connect to the voice channel where the user is currently active
+
+    if (!voiceChannel) { // when the user isn't in any voice channels
+      return message.reply("You haven't entered the voice channel");
+    } else if (!voiceChannel.permissionsFor(message.client.user).has("SPEAK")) { 
+    // when the bot does not have the permission to speak in the voice channel, can be resovled by enabling the permission at the discord bot configuration
+      return message.reply("I don't have the permission to speak in the voice channel");
+    } else {
+      const connection = voiceChannel.join();
+      const dispatcher = connection.play(`./demo.mp3`, {
+          volume: 1,
+        });
+
+        dispatcher.on("start", () => {
+          message.channel.send(`The audio is now being played`);
+        });
+
+        dispatcher.on("finish", () => {
+          message.channel.send(`Audio playing completed`);
+          voiceChannel.leave();
+        });
+
+        dispatcher.on("error", console.error);
+    }
+```
+
