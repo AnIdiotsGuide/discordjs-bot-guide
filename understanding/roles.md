@@ -34,7 +34,7 @@ In a `message` handler, you have access to checking the GuildMember class of the
 
 ```javascript
 // assuming role.id is an actual ID of a valid role:
-if(message.member.roles.has(role.id)) {
+if(message.member.roles.cache.has(role.id)) {
   console.log(`Yay, the author of the message has the role!`);
 } else {
   console.log(`Nope, noppers, nadda.`);
@@ -58,7 +58,7 @@ To grab members and users in different ways see the [FAQ Page](../frequently-ask
 
 ```javascript
 let roleID = "264410914592129025";
-let membersWithRole = message.guild.roles.get(roleID).members;
+let membersWithRole = message.guild.roles.cache.get(roleID).members;
 console.log(`Got ${membersWithRole.size} members with that role.`);
 ```
 
@@ -67,7 +67,7 @@ console.log(`Got ${membersWithRole.size} members with that role.`);
 Alright, now that you have roles, you probably want to add a member to a role. Simple enough! Discord.js provides 2 handy methods to add, and remove, a role. Let's look at them!
 
 ```javascript
-let role = message.guild.roles.find(r => r.name === "Team Mystic");
+let role = message.guild.roles.cache.find(r => r.name === "Team Mystic");
 
 // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):
 let member = message.mentions.members.first();
@@ -75,10 +75,10 @@ let member = message.mentions.members.first();
 // or the person who made the command: let member = message.member;
 
 // Add the role!
-member.addRole(role).catch(console.error);
+member.roles.add(role).catch(console.error);
 
 // Remove a role!
-member.removeRole(role).catch(console.error);
+member.roles.remove(role).catch(console.error);
 ```
 
 Alright I feel like I have to add a _little_ precision here on implementation:
