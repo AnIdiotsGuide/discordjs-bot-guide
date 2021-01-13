@@ -33,7 +33,7 @@ we have to write code to kick member from discord server
 - Results
 ![image](https://user-images.githubusercontent.com/65860180/104461568-87d1ca00-55d5-11eb-9def-2990a3997bb9.png)
 
-- if the image is not clear code is written here
+
 
 
 ### Hope You understood now how to BAN members from server.
