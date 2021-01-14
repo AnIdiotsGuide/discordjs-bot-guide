@@ -69,11 +69,11 @@ const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
     token: 'YOUR_TOKEN_GOES_HERE'
 });
 
-// Spawn your shards
-manager.spawn();
-
 // Emitted when a shard is created
 manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
+
+// Spawn your shards
+manager.spawn();
 ```
 
 ## Sharing Information Between Shards
