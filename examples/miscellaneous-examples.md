@@ -126,11 +126,8 @@ Let's make it 3 prefixes, this is fairly universal. This could also be in the co
 ```javascript
 client.on("message", message => {
   const prefixes = ['!', '?', '/'];
-  let prefix = false;
-  for(const thisPrefix of prefixes) {
-    if(message.content.startsWith(thisPrefix)) prefix = thisPrefix;
-  }
-  if(!prefix) return;
+  const prefix = prefixes.find(p => message.content.startsWith(p));
+  if (!prefix) return;
 
   // Go ahead with the rest of your code!
 });
