@@ -30,7 +30,7 @@ client.on("ready", () => {
 // Set the bot's presence (activity and status)
 client.on("ready", () => {
     client.user.setPresence({
-        game: { 
+        activity: { 
             name: 'my code',
             type: 'WATCHING'
         },
