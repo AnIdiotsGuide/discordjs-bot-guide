@@ -272,6 +272,7 @@ if(command === "leaderboard") {
   const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
 
     // Now shake it and show it! (as a nice embed, too!)
+    const { MessageEmbed } = require('discord.js');
   const embed = new MessageEmbed()
     .setTitle("Leaderboard")
     .setAuthor(client.user.username, client.user.displayAvatarURL())
