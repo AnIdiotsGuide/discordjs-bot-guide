@@ -14,3 +14,6 @@ _book
 *.epub
 *.mobi
 *.pdf
+
+# some junk code editor files 
+.replit
