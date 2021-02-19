@@ -34,7 +34,7 @@ message.channel.send({embed: {
     color: 3447003,
     author: {
       name: client.user.username,
-      icon_url: client.user.avatarURL
+      icon_url: client.user.displayAvatarURL()
     },
     title: "This is an embed",
     url: "http://google.com",
@@ -54,7 +54,7 @@ message.channel.send({embed: {
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: client.user.avatarURL,
+      icon_url: client.user.displayAvatarURL(),
       text: "© Example"
     }
   }
@@ -65,14 +65,15 @@ This results in the following:
 
 ![](../.gitbook/assets/embedexample1.png)
 
-## RichEmbed Builder
+## MessageEmbed Builder
 
-There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `RichEmbed` builder.
+There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `MessageEmbed` builder.
 
-The same rules apply for `RichEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `RichEmbed`. It also has a nice fancy image, to boot!
+The same rules apply for `MessageEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `MessageEmbed`. It also has a nice fancy image, to boot!
 
 ```javascript
-const embed = new Discord.RichEmbed()
+const { MessageEmbed } = require('discord.js');
+const embed = new MessageEmbed()
   .setTitle("This is your title, it can hold 256 characters")
   .setAuthor("Author Name", "https://i.imgur.com/lm8s41J.png")
   /*
