@@ -104,7 +104,7 @@ The final code should look like this:
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-           ('logs', 'text');
+    message.guild.channels.create('logs', 'text');
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
