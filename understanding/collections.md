@@ -19,11 +19,11 @@ Very simply, to get anything by ID you can use `Collection.get(id)`. For instanc
 
 If you don't have the ID but only some other property, you may use `find()` to search by property:
 
-`let guild = client.guilds.find(guild => guild.name === "Discord.js Official");`
+`let guild = client.guilds.cache.find(guild => guild.name === "Discord.js Official");`
 
 The _first_ result that returns `true` within the function, will be returned. The generic idea of this is:
 
-`let result = <Collection>.find(item => item.property === "a value")`
+`let result = <Collection>.cache.find(item => item.property === "a value")`
 
 You can also be looking at other data, properties not a the top level, etc. Your imagination is the limit.
 
@@ -31,7 +31,7 @@ Want a great example? Here's getting the first role that matches one of 4 role n
 
 ```javascript
 const acceptedRoles = ["Mod", "Moderator", "Staff", "Mod Staff"];
-const modRole = member.roles.find(role => acceptedRoles.includes(role.name));
+const modRole = member.roles.cache.find(role => acceptedRoles.includes(role.name));
 if(!modRole) return "No role found";
 ```
 
@@ -40,7 +40,7 @@ Don't need to return the actual role? `.some()` might be what you need. It's fas
 {% endhint %}
 
 ```javascript
-const hasModRole = member.roles.some(role => acceptedRoles.includes(role.name));
+const hasModRole = member.roles.cache.some(role => acceptedRoles.includes(role.name));
 // hasModRole is boolean.
 ```
 
@@ -48,7 +48,7 @@ const hasModRole = member.roles.some(role => acceptedRoles.includes(role.name));
 
 _Collections_ also have a custom way to filter their content with an anonymous function:
 
-`let large_guilds = client.guilds.filter(g => g.memberCount > 100);`
+`let large_guilds = client.guilds.cache.filter(g => g.memberCount > 100);`
 
 `filter()` returns a new collection containing only items where the filter returned `true`, in this case guilds with more than 100 members.
 
@@ -57,7 +57,7 @@ _Collections_ also have a custom way to filter their content with an anonymous f
 One great thing you can do with a collection is to grab specific data from it with `map()`, which is useful when listing stuff. `<Collection>.map()` takes a function which returns a string. Its result is an array of all the strings returned by each item. Here's an example: let's get a complete list of all the guilds a bot is in, by name:
 
 ```javascript
-const guildNames = client.guilds.map(g => g.name).join("\n")
+const guildNames = client.guilds.cache.map(g => g.name).join("\n")
 ```
 
 Since `.join()` is an array method, which links all entries together, we get a nice list of all guilds, with a line return between each. Neat!
@@ -65,7 +65,7 @@ Since `.join()` is an array method, which links all entries together, we get a n
 We can also get a most custom string. Let's pretend the `user.tag` property doesn't exist, and we wanted to get all the user\#discrim in our bot. Here's how we'd do it \(using awesome template literals\):
 
 ```javascript
-const tags = client.users.map(u=> `${u.username}#${u.discriminator}`).join(", ");
+const tags = client.users.cache.map(u=> `${u.username}#${u.discriminator}`).join(", ");
 ```
 
 ## Combining and Chaining
@@ -73,7 +73,7 @@ const tags = client.users.map(u=> `${u.username}#${u.discriminator}`).join(", ")
 In a lot of cases you can definitely chain methods together for really clean code. For instance, this is a comma-delimited list of all the small guilds in a bot:
 
 ```javascript
-const smallGuilds = client.guilds.filter(g => g.memberCount < 10).map(g => g.name).join("\n");
+const smallGuilds = client.guilds.cache.filter(g => g.memberCount < 10).map(g => g.name).join("\n");
 ```
 
 ## More Data!
