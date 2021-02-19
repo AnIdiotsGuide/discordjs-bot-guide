@@ -180,7 +180,7 @@ You can then access this from anywhere using `process.env.TOKEN`, so again with 
 
 * `X was compiled against a different Node.js version`
 
-That error means you forgot to set your engines in your package file, make sure you have added `"engines": { "node": "8.4.0" }` to your package, you can also use the following commands in the console \(you can access the console by going to your Project Name &gt; Advanced Options &gt; Open Console\), `nvm use NODE VERSION`, followed by `npm rebuild`, that should eliminate the error.
+That error means you forgot to set your engines in your package file, make sure you have added `"engines": { "node": "12.x" }` to your package, you can also use the following commands in the console \(you can access the console by going to your Project Name &gt; Advanced Options &gt; Open Console\), `nvm use NODE VERSION`, followed by `npm rebuild`, that should eliminate the error.
 
 * "My bot goes down after X"
 
