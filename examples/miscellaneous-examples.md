@@ -44,30 +44,30 @@ Discord quietly changed the Create Guild API endpoint, small bots \(10 guilds or
 
 ```javascript
 /* ES6 Promises */
-client.user.createGuild('Example Guild', 'london').then(guild => {
-  guild.channels.get(guild.id).createInvite()
-    .then(invite => client.users.get('<USERID>').send(invite.url));
-  guild.createRole({name:'Example Role', permissions:['ADMINISTRATOR']})
-    .then(role => client.users.get('<UserId>').send(role.id))
+client.user.guilds.create('Example Guild', 'london').then(guild => {
+  guild.channels.cache.get(guild.id).createInvite()
+    .then(invite => client.users.cache.get('<USERID>').send(invite.url));
+  guild.roles.create({name:'Example Role', permissions:['ADMINISTRATOR']})
+    .then(role => client.users.cache.get('<UserId>').send(role.id))
     .catch(error => console.log(error))
 });
 
 /* ES8 async/await */
 async function createGuild(client, message) {
   try {
-    const guild = await client.user.createGuild('Example Guild', 'london');
-    const defaultChannel = guild.channels.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const guild = await client.user.guilds.create('Example Guild', 'london');
+    const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const invite = await defaultChannel.createInvite();
     await message.author.send(invite.url);
-    const role = await guild.createRole({ name:'Example Role', permissions:['ADMINISTRATOR'] });
+    const role = await guild.roles.create({ name:'Example Role', permissions:['ADMINISTRATOR'] });
     await message.author.send(role.id);
   } catch (e) {
     console.error(e);
   }
 }
-createGuild(client, message);
+guilds.create(client, message);
 // Run this once you've joined the bot created guild.
-message.member.addRole('<THE ROLE ID YOU GET SENT>');
+message.member.roles.add('<THE ROLE ID YOU GET SENT>');
 ```
 
 ### Command Cooldown
@@ -169,7 +169,7 @@ message.channel.fetchMessages({
  limit: 100,
 }).then((messages) => {
  if (user) {
- const filterBy = user ? user.id : Client.user.id;
+ const filterBy = user ? user.id : client.user.id;
  messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
  }
  message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
