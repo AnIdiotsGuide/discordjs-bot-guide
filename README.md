@@ -4,10 +4,6 @@
 
 This guide makes a best effort attempt at humanizing the use of the Discord.js library. It is maintained by York\#0001 and Hindsight\#2020 \("Evie.Codes"\), with the help of many precious contributors that enable us to keep updating and enhancing this guide.
 
-{% hint style="danger" %}
-Please take note that this guide is not yet fully updated to Version 12. You're currently in the v11 branch. You can switch to the V12 version by the top-left selector:
-{% endhint %}
-
 ![The Gitbook version selector](.gitbook/assets/selector.png)
 
 This guide was born out of necessity - the first version of this guide for Discord.js version 7, more than 4 years ago, was the first of its kind because I \(Evie\) could not find any such beginner's guide and the documentation was \(and still is\) unfathomably difficult to navigate for anyone without a sufficiently advanced knowledge of JavaScript concepts.
