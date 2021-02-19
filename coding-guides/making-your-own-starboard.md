@@ -50,7 +50,7 @@ module.exports = class {
     // Here we get the starboard channel from the guilds settings. 
     const { starboardChannel } = this.client.settings.get(message.guild.id); 
     // Here we will find the channel
-    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.cache.find(channel => channel.name == starboardChannel)
     // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   }
@@ -80,10 +80,10 @@ if (stars) {
   const foundStar = stars.embeds[0];
   // We use the this.extension function to see if there is anything attached to the message.
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
@@ -105,7 +105,7 @@ if (!stars) {
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
   // If the message is empty, we don't allow the user to star the message.
   if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     // We set the color to a nice yellow here.
     .setColor(15844367)
     // Here we use cleanContent, which replaces all mentions in the message with their
@@ -113,7 +113,7 @@ if (!stars) {
     // At the date of this edit (09/06/18) embeds do not mention yet.
     // But nothing is stopping Discord from enabling mentions from embeds in a future update.
     .setDescription(message.cleanContent) 
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
     .setImage(image);
@@ -135,7 +135,7 @@ module.exports = class {
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const starChannel = message.guild.channels.find(channel => channel.name === starboardChannel)
+    const starChannel = message.guild.channels.cache. find(channel => channel.name === starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
@@ -143,10 +143,10 @@ module.exports = class {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
@@ -156,10 +156,10 @@ module.exports = class {
     if (!stars) {
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(15844367)
         .setDescription(message.cleanContent)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
         .setImage(image);
@@ -191,10 +191,10 @@ if (stars) {
   const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
@@ -218,7 +218,7 @@ module.exports = class {
     if (message.author.id === user.id) return;
     if (reaction.emoji.name !== '⭐') return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.cache. find(channel => channel.name == starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
@@ -226,10 +226,10 @@ module.exports = class {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
