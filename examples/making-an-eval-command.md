@@ -88,7 +88,8 @@ client.on("message", message => {
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
-  }
+  } else {
+  } message.channel.send("You do not have permission to run this command.");
 });
 ```
 
