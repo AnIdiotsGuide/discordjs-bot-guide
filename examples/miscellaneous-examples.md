@@ -1,6 +1,6 @@
 # Miscellaneous Examples
 
-## Conventions Used in Examples
+## Conventions used in Examples
 
 Conventions are important - they are the agreements on which society functions. So let's take a moment to agree on a few.
 
@@ -48,7 +48,7 @@ client.guilds.create('Example Guild', 'london').then(guild => {
   guild.channels.cache.get(guild.id).createInvite()
     .then(invite => client.users.cache.get('<USERID>').send(invite.url));
   guild.roles.create({ name:'Example Role', permissions:['ADMINISTRATOR'] })
-    .then(role => client.users.cache.get('<UserId>').send(role.id))
+    .then(role => client.users.cache.get('<USERID>').send(role.id))
     .catch(error => console.log(error))
 });
 
@@ -78,7 +78,7 @@ Example by ItsJordan\#4297
 
 Adds a cooldown to your commands so the user will have to wait 2.5 seconds between each command.
 
-You can change the nature of the cool down by changing the return to something else.
+You can change the nature of the cooldown by changing the return to something else.
 
 ```javascript
 // First, this must be at the top level of your code, **NOT** in any event!
@@ -89,8 +89,7 @@ const talkedRecently = new Set();
 // Inside your message event, this code will stop any command during cooldown.
 // Should be placed after your code that checks for bots & prefix, for best performance
 
-if (talkedRecently.has(message.author.id))
-  return;
+if (talkedRecently.has(message.author.id)) return;
 
 // Adds the user to the set so that they can't talk for 2.5 seconds
 talkedRecently.add(message.author.id);
@@ -107,7 +106,7 @@ Requiring a little bit of regex, this will catch when a message starts with the 
 ```javascript
 client.on('message', message => {
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
-    const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
+  const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
 
   // Go ahead with the rest of your code!
 });
