@@ -1,5 +1,7 @@
 # Hosting on Heroku
 
+{% hint style="info" %} Since Heroku changed the hosting time for free users, bots ran at Heroku will be only for around 25 days a month online {% endhint %}
+
 Heroku is a free host that isn't quite meant for bots, but can serve as a host for small bots that are not too demanding on resources. In this guide we'll be taking a look at how to setup the Heroku CLI on your system, how to configure your project to be useable on Heroku, and how to push your changes to Heroku.
 
 > Let's get 2 things out of the way first. First, Heroku can't handle Music Bots - don't even try, it won't be worth it. Second, you cannot _save data_ on a Heroku instance meaning you can't use sqlite, json data, enmap, or any other "save file on disk" concept. You'd need pgsql or a separate database instance.
@@ -146,9 +148,9 @@ So let's finalize everything by saving our changes to `git` and pushing them to 
 
 OMG. That's... it. can you believe it? Your bot's now on Heroku and should really be running already!
 
-Take a look at the logs on the dashboard, It should look like this \(Note: You'll have a few lines about processes crashing with Error Code 0, those are normal\):
+Take a look at the logs on the dashboard, it should look like this \(Note: You'll have a few lines about processes crashing with Error Code 0, those are normal\):
 
-![Heroku Success!](https://img.evie.codes/1Y6bJxZ)
+![Success!](https://img.evie.codes/1Y6bJxZ)
 
 And we're done! This should be enough to get you going, remember Heroku can't do a whole lot of processing, and you can't save files \(no file database, edited json, etc\). 
 
