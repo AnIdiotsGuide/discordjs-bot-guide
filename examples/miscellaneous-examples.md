@@ -100,12 +100,6 @@ setTimeout(() => {
 }, 2500);
 ```
 
-### Google Search Command
-
-{% hint style="info" %}
-This example was removed as Google keeps changing their page to prevent scraping. Google doesn't have a search API, and scraping their page for results is against their TOS.
-{% endhint %}
-
 ### Mention Prefix
 
 Requiring a little bit of regex, this will catch when a message starts with the bot being mentioned.
@@ -157,7 +151,7 @@ Example usage: !purge @user 10 , or !purge 25
 
 ```javascript
 const user = message.mentions.users.first();
-// Parse Amount
+// Parse amount of messages to delete
 const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
 if (!amount) return message.reply('Must specify an amount to delete!');
 if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
@@ -166,7 +160,7 @@ message.channel.messages.fetch({
  limit: 100,
 }).then((messages) => {
  if (user) {
- const filterBy = user ? user.id : Client.user.id;
+ const filterBy = user ? user.id : client.user.id;
  messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
  }
  message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
@@ -198,8 +192,8 @@ const member = message.mentions.members.first();
 if (!member) return message.reply('You need to @mention a user/bot to kick from the voice channel.');
 if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
 
-// Now we set the member's voice channel to null, in other words disconnecting them from the voice channel.
-member.voice.setChannel(null);
+// Now we kick the member from the voice channel.
+member.voice.kick();
 
 // Finally, pass some user response to show it all worked out:
 message.react('👌');
