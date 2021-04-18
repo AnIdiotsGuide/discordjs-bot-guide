@@ -35,7 +35,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 ```
-or methode 2
+or method 2
 ```javascript
 const { token, prefix } = require("./config.json");
 ```
