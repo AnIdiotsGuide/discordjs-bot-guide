@@ -61,6 +61,8 @@ client.on('guildMemberAdd', member => {
     logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`);
   });
 });
+
+client.on('inviteCreate', async invite => invites[invite.guild.id] = await invite.guild.fetchInvites())
 ```
 
 And... well, that's pretty much it. But....
