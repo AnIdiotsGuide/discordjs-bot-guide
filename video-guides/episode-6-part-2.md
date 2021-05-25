@@ -16,7 +16,7 @@ All of the tutorial source code is available [here](https://github.com/AnIdiotsG
 
 You will require a free discordapp.com account to use the discord service, sign up [here](https://discordapp.com/hypesquad?ref=PYisfiCTRf)
 
-You can join the _"An Idiot's Guide Official Server"_ [here](https://discord.gg/gkZCQtH)
+You can join the _"An Idiot's Guide Official Server"_ [here](https://discord.gg/vXVxsAjSMF)
 
 If you'd like to support me on Patreon, you can do so [here](https://www.patreon.com/anidiotsguide)
 
