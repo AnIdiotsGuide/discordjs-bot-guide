@@ -15,7 +15,7 @@ The first step in creating a bot is to create your own Discord _application_. Th
 
 ### Creating the App account
 
-To create the application, head to the [Discordapp.com Application Page](https://discordapp.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
+To create the application, head to the [Discord.com Application Page](https://discord.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
 
 ![](../.gitbook/assets/image%20%281%29.png)
 
