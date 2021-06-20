@@ -55,9 +55,10 @@ Next, you need a thing called a `Procfile`. This tells Heroku exactly how to run
 Create a new file called `Procfile` in your project \(no extension, with the uppercase P\), and add in the following contents, which disables the need for a web server and lets your bot run:
 
 ```text
-web: echo "I don't want a web process"
-service: npm start
+worker: npm start
 ```
+
+this executes the `start` script within package.json
 
 ## Creating the main bot file
 
@@ -143,6 +144,8 @@ So let's finalize everything by saving our changes to `git` and pushing them to 
 * Prepare for pushing using commit: `git commit -m "Initial bot commit for Heroku"`
 * Push the entire thing to Heroku: `git push heroku master`
 * You'll see quite a lot of output logs which should end with something like "Verifying deploy... done."
+
+Also remember to enable the `worker` dynamo and try disabling any other processes if you are having issues.
 
 OMG. That's... it. can you believe it? Your bot's now on Heroku and should really be running already!
 
