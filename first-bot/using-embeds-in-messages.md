@@ -17,10 +17,11 @@ Those aren't just guidelines, they are rules, and breaking those rules means you
 There are 2 ways to do embeds. The first, is by writing the embed yourself, as an object. Here's a very, _very_ basic embed that writes on a single line:
 
 ```javascript
-message.channel.send({embed: {
-  color: 3447003,
-  description: "A very simple Embed!"
-}});
+message.channel.send({embeds: [{
+    color: 3447003,
+    description: "A very simple Embed!"
+  }]
+});
 ```
 
 The `color` determines the bar on the left \(here, a very nice blue\), and the `description` is the main contents of the message.
@@ -30,11 +31,11 @@ The `color` determines the bar on the left \(here, a very nice blue\), and the `
 Fields are what can make embeds really nice - each field can have a title and value, and fields can also be stacked horizontally - as columns. Here's a more complex example of an embed that has many different fields, as well as icons and a footer:
 
 ```javascript
-message.channel.send({embed: {
+message.channel.send({embeds: [{
     color: 3447003,
     author: {
       name: client.user.username,
-      icon_url: client.user.avatarURL
+      icon_url: client.user.displayAvatarURL()
     },
     title: "This is an embed",
     url: "http://google.com",
@@ -54,10 +55,10 @@ message.channel.send({embed: {
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: client.user.avatarURL,
+      icon_url: client.user.displayAvatarURL(),
       text: "© Example"
     }
-  }
+  }]
 });
 ```
 
@@ -65,14 +66,14 @@ This results in the following:
 
 ![](../.gitbook/assets/embedexample1.png)
 
-## RichEmbed Builder
+## MessageEmbed Builder
 
-There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `RichEmbed` builder.
+There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `MessageEmbed` builder.
 
-The same rules apply for `RichEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `RichEmbed`. It also has a nice fancy image, to boot!
+The same rules apply for `MessageEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `MessageEmbed`. It also has a nice fancy image, to boot!
 
 ```javascript
-const embed = new Discord.RichEmbed()
+const embed = new Discord.MessageEmbed()
   .setTitle("This is your title, it can hold 256 characters")
   .setAuthor("Author Name", "https://i.imgur.com/lm8s41J.png")
   /*
@@ -88,7 +89,7 @@ const embed = new Discord.RichEmbed()
    * Takes a Date object, defaults to current date.
    */
   .setTimestamp()
-  .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
+  .setURL("https://discord.js.org/#/docs/main/stable/class/MessageEmbed")
   .addField("This is a field title, it can hold 256 characters",
     "This is a field value, it can hold 1024 characters.")
   /*
@@ -98,10 +99,10 @@ const embed = new Discord.RichEmbed()
   /*
    * Blank field, useful to create some space.
    */
-  .addBlankField(true)
+  .addField("\u200b", "\u200b", true)
   .addField("Inline Field 3", "You can have a maximum of 25 fields.", true);
  
-  message.channel.send({embed});
+  message.channel.send({ embeds: [embed] });
 ```
 
 Which produces the following:
