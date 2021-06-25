@@ -35,7 +35,7 @@ client.on("guildMemberAdd", (member) => {
   newUsers.set(member.id, member.user);
 
   if (newUsers.size > 10) {
-    const defaultChannel = guild.channels.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const userlist = newUsers.map(u => u.toString()).join(" ");
     defaultChannel.send("Welcome our new users!\n" + userlist);
     newUsers.clear();
@@ -75,7 +75,7 @@ client.on("guildMemberAdd", (member) => {
 
   if (newUsers[guild.id].size > 10) {
     const userlist = newUsers[guild.id].map(u => u.toString()).join(" ");
-    guild.channels.find(channel => channel.name === "general").send("Welcome our new users!\n" + userlist);
+    guild.channels.cache.find(channel => channel.name === "general").send("Welcome our new users!\n" + userlist);
     newUsers[guild.id].clear();
   }
 });

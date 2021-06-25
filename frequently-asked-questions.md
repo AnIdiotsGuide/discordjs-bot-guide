@@ -39,7 +39,7 @@ client.on("ready", () => {
 })
 ```
 
-Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
+Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/v12/typedef/ActivityType).
 
 {% hint style="info" %}
 If you want your bot show up as "streaming" you need to provide a twitch URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
@@ -98,13 +98,6 @@ if (message.content.startsWith(prefix + 'commandname')) {
 ```
 
 ```javascript
-// FETCH a member. Useful if an invisible user sends a message.
-message.guild.members.fetch(message.author)
-  .then(member => {
-    // The member is available here.
-  });
-
-// THIS CHANGES IN DISCORD VERSION 12!!!!!
 message.guild.members.fetch(message.author)
   .then(member => {
     // The member is available here.
@@ -160,7 +153,7 @@ const getDefaultChannel = (guild) => {
     return generalChannel;
   // Now we get into the heavy stuff: first channel in order where the bot can speak
   // hold on to your hats!
-  return guild.channels
+  return guild.channels.cache
    .filter(c => c.type === "text" &&
      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
    .sort((a, b) => a.position - b.position ||
@@ -192,15 +185,9 @@ message.channel.send("Test").then(sentMessage => sentMessage.edit("Blah"));
 // note: you can line return right before a "dot" in JS, that is valid.
 message.channel.messages.fetch({around: "352292052538753025", limit: 1})
   .then(messages => {
-    const fetchedMsg = messages.first(); // messages is a collection!)
+    const fetchedMsg = messages.first(); // messages is a collection!
     // do something with it
     fetchedMsg.edit("This fetched message was edited");
-  });
-
-// THIS CHANGES IN DISCORD VERSION 12!!!!!
-message.channel.messages.fetch({around: "352292052538753025", limit: 1})
-  .then(messages => {
-    messages.first().edit("This fetched message was edited");
   });
 ```
 

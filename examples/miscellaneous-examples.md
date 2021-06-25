@@ -44,10 +44,17 @@ Discord quietly changed the Create Guild API endpoint, small bots \(10 guilds or
 
 ```javascript
 /* ES6 Promises */
+<<<<<<< HEAD
 client.guilds.create('Example Guild', { region: 'london' }).then(guild => {
   guild.channels.cache.get(guild.id).createInvite()
     .then(invite => client.users.cache.get('<USERID>').send(invite.url));
   guild.roles.create({ name: 'Example Role', permissions: ['ADMINISTRATOR'] })
+=======
+client.guilds.create('Example Guild', 'london').then(guild => {
+  guild.channels.cache.get(guild.id).createInvite()
+    .then(invite => client.users.cache.get('<USERID>').send(invite.url));
+  guild.roles.create({ name:'Example Role', permissions:['ADMINISTRATOR'] })
+>>>>>>> 52f734d6f4e9b4e2dc9cec0d4b18ac5473eb6d3b
     .then(role => client.users.cache.get('<UserId>').send(role.id))
     .catch(error => console.log(error))
 });
@@ -55,7 +62,11 @@ client.guilds.create('Example Guild', { region: 'london' }).then(guild => {
 /* ES8 async/await */
 async function createGuild(client, message) {
   try {
+<<<<<<< HEAD
     const guild = await client.guilds.create('Example Guild', { region: 'london' });
+=======
+    const guild = await client.guilds.create('Example Guild', 'london');
+>>>>>>> 52f734d6f4e9b4e2dc9cec0d4b18ac5473eb6d3b
     const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const invite = await defaultChannel.createInvite();
     await message.author.send(invite.url);
@@ -126,11 +137,8 @@ Let's make it 3 prefixes, this is fairly universal. This could also be in the co
 ```javascript
 client.on("message", message => {
   const prefixes = ['!', '?', '/'];
-  let prefix = false;
-  for(const thisPrefix of prefixes) {
-    if(message.content.startsWith(thisPrefix)) prefix = thisPrefix;
-  }
-  if(!prefix) return;
+  const prefix = prefixes.find(p => message.content.startsWith(p));
+  if (!prefix) return;
 
   // Go ahead with the rest of your code!
 });

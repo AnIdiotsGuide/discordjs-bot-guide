@@ -35,12 +35,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 ```
-or method 2
-```javascript
-const { token, prefix } = require("./config.json");
-```
+
 This means that now, `config` is your configuration object. `config.token` is your token, `config.prefix` is your prefix! Simple enough.
-With the other methode you only need to type `token`or `prefix` to get the data from the JSON file.
 
 ## Step 3: Using `config` in your code
 
@@ -90,32 +86,6 @@ client.on("message", (message) => {
 {% hint style="info" %}
 The removal of the line that sets the prefix. We don't need it anymore!
 {% endhint %}
-
-## Using `token`, `prefix` in your code
-
-Its the same thing like above. The only one that change is, that you don't need `config`.`(data)`.
-You only need to use `token`for the bot token and `prefix`for the bot prefix.
-
-#### Usage example of `token`
-
-```javascript
-client.login(token);
-```
-
-#### Usage example of `prefix`
-
-```javascript
-client.on("message", (message) => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-  if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("pong!");
-  } else
-  if (message.content.startsWith(prefix + "foo")) {
-    message.channel.send("bar!");
-  }
-});
-```
 
 ## Changing the config
 

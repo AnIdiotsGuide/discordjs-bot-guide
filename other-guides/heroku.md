@@ -32,7 +32,7 @@ In your package.json, add the following section \(changing node to the right ver
 
 ```javascript
   "engines": {
-    "node": "10.x",
+    "node": "12.x",
     "npm": "*"
   },
 ```

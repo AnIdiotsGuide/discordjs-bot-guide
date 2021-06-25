@@ -46,7 +46,7 @@ fs.readdir("./events/", (err, files) => {
 The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we like to use Enmap for this purpose, the "non-persistent" one:
 
 ```javascript
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
@@ -67,7 +67,6 @@ Ok so with that being said, our main file now looks like this \(how _clean_ is t
 
 ```javascript
 const Discord = require("discord.js");
-const Enmap = require("enmap");
 const fs = require("fs");
 
 const client = new Discord.Client();
@@ -84,7 +83,7 @@ fs.readdir("./events/", (err, files) => {
   });
 });
 
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
@@ -172,7 +171,7 @@ Events are handled almost exactly in the same way, except that the number of arg
 
 ```javascript
 module.exports = (client) => {
-  console.log(`Ready to serve in ${client.channels.cache.size} channels on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.cache.size} users.`);
+  console.log(`Ready to serve in ${client.channels.cache.size} channels on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.size} users.`);
 }
 ```
 

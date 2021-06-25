@@ -2,7 +2,7 @@
 
 In the last two chapters we covered how to create and use the webhook's via code.
 
-In this chapter we will cover third party services such as [Zapier](https://zapier.com/), [IFTTT](https://ifttt.com/) and even [ShareX](https://getsharex.com/). If you're a member of my guild you'll know it has a \#video-guides channel where a webhook posts my videos when I release them, that youtube-to-discord bridge is provided by Zapier \(More on that later\).
+In this chapter we will cover third party services such as [Zapier](https://zapier.com/), [IFTT](https://ifttt.com/) and even [ShareX](https://getsharex.com/). If you're a member of my guild you'll know it has a \#video-guides channel where a webhook posts my videos when I release them, that youtube-to-discord bridge is provided by Zapier \(More on that later\).
 
 But before we jump to Zapier, let's cover something I should of covered in the first chapter.
 

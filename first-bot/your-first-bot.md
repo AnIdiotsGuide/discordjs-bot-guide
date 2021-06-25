@@ -7,17 +7,17 @@ In this chapter I'll guide you through the development of a simple bot with some
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -37,7 +37,7 @@ This is, specifically, an event in _discord.js_ but it's similar to how other AP
 
 Why is this important? Well, if you intend to use your bot on a large server, or if you want it to be on multiple servers, this becomes a large number of events triggering at every moment. I don't want to go into too much optimization talk, but for a single point: **use a single event function for each event**.
 
-Discord.js contains a large number of events that can trigger under certain situations. For instance, the `ready` event triggers when the bot comes online. The `guildMemberAdd` event triggers when a new user joins a server shared with the bot. For a full list of events, see [Events in the documentation](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=channelCreate). We will come back to some of those later in this chapter.
+Discord.js contains a large number of events that can trigger under certain situations. For instance, the `ready` event triggers when the bot comes online. The `guildMemberAdd` event triggers when a new user joins a server shared with the bot. For a full list of events, see [Events in the documentation](https://discord.js.org/#/docs/main/v12/class/Client?scrollTo=channelCreate). We will come back to some of those later in this chapter.
 
 ## Adding a second command
 
@@ -52,7 +52,7 @@ client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   } else
- 
+
   if (message.content.startsWith("foo")) {
     message.channel.send("bar!");
   }
@@ -79,7 +79,7 @@ const prefix = "!";
 client.on("message", (message) => {
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
- 
+
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("pong!");
   } else
@@ -129,13 +129,13 @@ The full bot code would now be:
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+
 // Set the prefix
 let prefix = "!";
 client.on("message", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
- 
+
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("pong!");
   } else
@@ -143,7 +143,7 @@ client.on("message", (message) => {
     message.channel.send("bar!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 

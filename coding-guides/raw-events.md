@@ -30,7 +30,7 @@ Note that this event does get very spammy, as it triggers on everything that hap
 client.on('messageReactionAdd', (reaction, user) => {
     console.log('a reaction has been added');
 });
- 
+
 client.on('messageReactionRemove', (reaction, user) => {
     console.log('a reaction has been removed');
 });
@@ -51,9 +51,9 @@ client.on('raw', packet => {
         // Emojis can have identifiers of name:id format, so we have to account for that case as well
         const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
         // This gives us the reaction we need to emit the event properly, in top of the message object
-        const reaction = message.reactions.get(emoji);
+        const reaction = message.reactions.cache.get(emoji);
         // Adds the currently reacting user to the reaction's users collection.
-        if (reaction) reaction.users.set(packet.d.user_id, client.users.cache.get(packet.d.user_id));
+        if (reaction) reaction.users.cache.set(packet.d.user_id, client.users.cache.get(packet.d.user_id));
         // Check which type of event it is before emitting
         if (packet.t === 'MESSAGE_REACTION_ADD') {
             client.emit('messageReactionAdd', reaction, client.users.cache.get(packet.d.user_id));

@@ -30,11 +30,11 @@ _**LINK DUMP**_
 
 AoDude's OhGodMusicBot is available [here](https://github.com/bdistin/OhGodMusicBot)
 
-You will require a free discord.com account to use the discord service, sign up [here](https://discord.com/)
+You will require a free discordapp.com account to use the discord service, sign up [here](https://discordapp.com/hypesquad?ref=PYisfiCTRf)
 
 If you'd like to support me on Patreon, you can do so [here](https://www.patreon.com/anidiotsguide)
 
-Check out the Discord Developers portal [here](https://discord.com/developers/docs/intro)
+Check out the Discord Developers portal [here](https://discordapp.com/developers/docs/intro)
 
 Discord.js Official Documentation is available [here](https://discord.js.org/#!/)
 

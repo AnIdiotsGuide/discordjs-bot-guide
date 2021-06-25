@@ -47,7 +47,7 @@ Inside `then` and `catch` there are functions, inside then, we use the variable 
 
 Don't get it? There's an example with Discord.JS:
 
-Some practise, the method [client.users.fetch](https://discord.js.org/#/docs/main/stable/class/UserManager?scrollTo=fetch) returns `Promise<User>`. It means, when you call that method, it'll return a **Promise**, resolving with a **User** object \(but it can also throw an error\).
+Some practise, the method [client.users.fetch](https://discord.js.org/#/docs/main/v12/class/UserManager?scrollTo=fetch) returns `Promise<User>`. It means, when you call that method, it'll return a **Promise**, resolving with a **User** object \(but it can also throw an error\).
 
 ```javascript
 client.users.fetch(id)

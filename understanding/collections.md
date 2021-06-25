@@ -6,10 +6,10 @@ A **Collection** is a _utility class_ that stores data. Collections are the Java
 
 Examples of Collections include:
 
-* `client.users`, `client.guilds`, `client.channels`
-* `guild.channels`, `guild.members`
-* message logs \(in the callback of `messages.fetch`\)
-* `client.emojis`
+* `client.users.cache`, `client.guilds.cache`, `client.channels.cache`
+* `guild.channels.cache`, `guild.members.cache`
+* message logs \(in the callback of `messages.fetch()`\)
+* `client.emojis.cache`
 
 ## Getting by ID
 
@@ -78,5 +78,5 @@ const smallGuilds = client.guilds.cache.filter(g => g.memberCount < 10).map(g =>
 
 ## More Data!
 
-To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/main/stable/class/Collection). Since Collection extends Map\(\), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.
+To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/main/v12/class/Collection). Since Collection extends Map\(\), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.
 

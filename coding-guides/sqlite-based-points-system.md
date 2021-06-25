@@ -279,7 +279,7 @@ if(command === "leaderboard") {
     .setColor(0x00AE86);
 
   for(const data of top10) {
-    embed.addField(client.users.cache.get(data.user).tag, `${data.points} points (level ${data.level})`);
+    embed.addFields({ name: client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
   }
   return message.channel.send({ embed });
 }
