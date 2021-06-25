@@ -12,7 +12,7 @@ Want a better, updated version of this code? We're now maintaining this command 
 
 In order to correctly write and use a command handler, I would suggest you get familiar with a few things.
 
-* Check out [Introduction to Modules](../other-guides/introduction-to-modules.md) for information on modules \(which we'll use for each command\)
+* Check out [Introduction to Modules]() for information on modules \(which we'll use for each command\)
 * Understand how [Events](../understanding/events-and-handlers.md) work, and how each event has different arguments provided.
 * Have a good grasp of, at the very least, [Commands with Arguments](command-with-arguments.md), which we'll be using as a base for most of our code.
 
@@ -46,7 +46,7 @@ fs.readdir("./events/", (err, files) => {
 The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we like to use Enmap for this purpose, the "non-persistent" one:
 
 ```javascript
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
@@ -67,7 +67,6 @@ Ok so with that being said, our main file now looks like this \(how _clean_ is t
 
 ```javascript
 const Discord = require("discord.js");
-const Enmap = require("enmap");
 const fs = require("fs");
 
 const client = new Discord.Client();
@@ -84,7 +83,7 @@ fs.readdir("./events/", (err, files) => {
   });
 });
 
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
@@ -143,11 +142,11 @@ Another example would be the more complex `./commands/kick.js` command, called u
 
 ```javascript
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.guild.roles.find(role => role.name === "Mods");
+  const modRole = message.guild.roles.cache.find(role => role.name === "Mods");
   if (!modRole)
     return console.log("The Mods role does not exist");
 
-  if (!message.member.roles.has(modRole.id))
+  if (!message.member.roles.cache.has(modRole.id))
     return message.reply("You can't use this command.");
 
   if (message.mentions.members.size === 0)
@@ -172,7 +171,7 @@ Events are handled almost exactly in the same way, except that the number of arg
 
 ```javascript
 module.exports = (client) => {
-  console.log(`Ready to serve in ${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.users.size} users.`);
+  console.log(`Ready to serve in ${client.channels.cache.size} channels on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.size} users.`);
 }
 ```
 
@@ -182,7 +181,7 @@ Here's another example with the `guildMemberAdd` event:
 
 ```javascript
 module.exports = (client, member) => {
-  const defaultChannel = member.guild.channels.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+  const defaultChannel = member.guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
   defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
 }
 ```

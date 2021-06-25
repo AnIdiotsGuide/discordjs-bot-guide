@@ -20,7 +20,7 @@ Install the following through your package manager:
 
 Once you have this all installed, create a folder for your project and install discord.js:
 
-`mkdir mybot && cd mybot` `npm install discord.js@11.6.4`
+`mkdir mybot && cd mybot` `npm install discord.js`
 
 **For sound support** add `npm install opusscript` \(ez mode\) or `npm install node-opus` \(better performance but requires `python 2.7.x` and `build-essential`\). BOTH these options require `ffmpeg` to run on your system, installed through `sudo apt-get install ffmpeg`.
 
@@ -31,17 +31,17 @@ The following is a simple ping/pong bot. Save as a text file \(e.g. `mybot.js`\)
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
+ 
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
+ 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
-
+ 
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -55,9 +55,9 @@ If no errors are shown, the bot should join the server\(s\) you added it to.
 
 ## Resources
 
-* [Discord.js v11 Documentation](https://discord.js.org/#/docs/main/v11/) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
 * [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
 * [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
-* [An Idiot's Guide Official Server](https://discord.gg/vXVxsAjSMF): The official server for An Idiot's Guide. Full of friendly helpful users!
+* [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
 * [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
 

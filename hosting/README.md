@@ -1,2 +1,0 @@
-# Hosting Guides
-
