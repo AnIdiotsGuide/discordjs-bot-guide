@@ -10,7 +10,7 @@ This is a long awaited feature, requested by many people.
 
 Let's begin by talking about what a starboard is. This is an example taken from the Discord.js Official Server.
 
-![Starboard](../.gitbook/assets/starboard%20%281%29.png)
+![Starboard](../.gitbook/assets/starboard.png)
 
 A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! To make a functioning starboard, we need to monitor for a reaction being added to a message, and we'll do this with the `messageReactionAdd` and `messageReactionRemove` events.
 

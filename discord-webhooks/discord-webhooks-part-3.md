@@ -16,7 +16,7 @@ The standard webhook \(above\) basically acts like a normal message you would se
 
 The slack-compatible webhook \(above\) is very fancy in comparison, they're basically `RichEmbeds` that you see a lot of moderation bots use, you can have thumbnails, images, and more \(see the [Slack Documentation](https://api.slack.com/incoming-webhooks) for more information\).
 
-![Github-Compatible Webhook](../.gitbook/assets/wh09%20%282%29.png)
+![Github-Compatible Webhook](../.gitbook/assets/wh09.png)
 
 The github-compatible webhook \(above\) is like the slack-compatible webhook, but it's limited in it's customisability, you can only "customise" what information it sends from Github and you cannot style it.
 
@@ -50,11 +50,11 @@ On the left side, there is a series of drop down menus, click the drop down for 
 
 If everything went smoothly, you should have a response in the bottom right text box, it should look something like this;
 
-![A successful response.](../.gitbook/assets/wh13%20%282%29.png)
+![A successful response.](../.gitbook/assets/wh13.png)
 
 And if we go to our channel and check it out we should see the following;
 
-![Success!](../.gitbook/assets/wh14%20%282%29.png)
+![Success!](../.gitbook/assets/wh14.png)
 
 ## Congratulations
 

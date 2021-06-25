@@ -11,17 +11,17 @@ As per usual let's grab the example source code.
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
+ 
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
+ 
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
-
+ 
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -39,9 +39,9 @@ message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.pn
 
 This is what it should look like if you test the code.
 
-![Created the webhook](../.gitbook/assets/wh01%20%281%29.png)
+![Created the webhook](../.gitbook/assets/wh01.png)
 
-![Successfully created webhook](../.gitbook/assets/wh02%20%281%29.png)
+![Successfully created webhook](../.gitbook/assets/wh02.png)
 
 {% hint style="info" %}
 This webhook link has long since been deleted.
@@ -75,7 +75,7 @@ Here's the regex on it's own
 
 Using the above regex with `match`, `replace` and `test` will allow you to isolate the image url in the string and leave the remaining string to be used as the webhook's name, there's an amazing online tool called [regex101.com](https://regex101.com/), with that tool I was able to create the above regex, here's an image of it in action.
 
-![Regex in action.](../.gitbook/assets/wh03%20%281%29.png)
+![Regex in action.](../.gitbook/assets/wh03.png)
 
 I'm not going to go into much detail, but the fact that both of the test strings are highlighted, and it's saying there's 2 matches is all we need to know, it works with links starting with `http` and `https`, and it looks for valid extensions, which are jpg, jpeg and png.
 
@@ -97,7 +97,7 @@ message.channel.createWebhook(name, avatar)
 
 Alright, now let's throw that together with our bot code and issue the command!
 
-![Command usage.](../.gitbook/assets/wh04%20%281%29.png)
+![Command usage.](../.gitbook/assets/wh04.png)
 
 And let's check the channel webhooks!
 

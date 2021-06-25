@@ -1,5 +1,7 @@
 # Episode 7
 
+
+
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 In this episode we start going over the moderation actions, we start with warning, mute and channel lockdown!.

@@ -1,6 +1,6 @@
 # Docker Setup
 
-{% embed url="https://www.youtube.com/watch?v=wJpucehzhLo" caption="" %}
+{% embed url="https://www.youtube.com/watch?v=wJpucehzhLo" %}
 
 Welcome to a new mini-series, where I show you how to use Docker, in this episode I go through the steps of showing you how to setup a Docker environment \(on a raspberry pi\), and how to make a Dockerfile for it.
 

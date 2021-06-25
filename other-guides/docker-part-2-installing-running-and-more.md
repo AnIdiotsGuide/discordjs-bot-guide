@@ -1,6 +1,6 @@
 # Docker Part 2
 
-{% embed url="https://www.youtube.com/watch?v=uTqwCM2Keoc" caption="" %}
+{% embed url="https://www.youtube.com/watch?v=uTqwCM2Keoc" %}
 
 Welcome back to the Docker new mini-series, where I show you how to use Docker, in this episode I go through the steps of creating the project and getting it ready for the Dockerfile.
 

@@ -6,7 +6,7 @@ However, if you insist on creating a music bot you can either check out the exam
 
 As well as the music bot tutorial you also get a `patron` role on my guild, a private patron only channel to discuss with other patrons, priority d.js bot help, behind the scenes pictures, videos and vlogs, and early access to regular content and future patron tutorial series.
 
-![Support me on Patreon](../.gitbook/assets/becomeAPatronBanner.png)
+![Support me on Patreon](../.gitbook/assets/becomeapatronbanner.png)
 
 If you do not feel like supporting me, there are these amazing examples; [OhGodMusicBot](https://github.com/bdistin/OhGodMusicBot) by AoDude [Moosik](https://github.com/Gawdl3y/discord-moosik) by Gawdl3y [Commando's Music](https://github.com/iCrawl/Commando/tree/master/commands/music) by Crawl
 
