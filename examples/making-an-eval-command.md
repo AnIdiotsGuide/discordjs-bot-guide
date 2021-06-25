@@ -2,7 +2,7 @@
 
 ## What is eval exactly?
 
-In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.map(g=>g.name).join('\n')` then it will return a list of guild names separated by a line return. Cool, right?
+In JavaScript \(and node\), `eval()` is a function that evaluates any string _as javascript code_ and actually executes it. Meaning, if I `eval(2+2)` , eval will return `4`. If I eval `client.guilds.cache.size`, it'll return however many guilds the bot is currently on. And if I eval `client.guilds.cache.map(g=>g.name).join('\n')` then it will return a list of guild names separated by a line return. Cool, right?
 
 ## But eval is dangerous
 
@@ -74,16 +74,16 @@ Alright, So let's get down to the brass tax: The actual eval command. Here it is
 ```javascript
 client.on("message", message => {
   const args = message.content.split(" ").slice(1);
- 
+
   if (message.content.startsWith(config.prefix + "eval")) {
     if(message.author.id !== config.ownerID) return;
     try {
       const code = args.join(" ");
       let evaled = eval(code);
- 
+
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
- 
+
       message.channel.send(clean(evaled), {code:"xl"});
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);

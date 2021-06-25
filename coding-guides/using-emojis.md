@@ -17,18 +17,18 @@ When I want to write this emoji in my chat, I simply type `:ayy:` and it turns i
 
 ## How does Discord.js store emojis?
 
-There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis` is a collection of every emoji the client has access to, and `guild.emojis` is a collection of the emojis of a specific guild.
+There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis.cache` is a collection of every emoji the client has access to, and `guild.emojis.cache` is a collection of the emojis of a specific guild.
 
 If you've learned anything from [Understanding Collections](using-emojis.md), you might already know how to get something by ID from a collection:
 
 ```javascript
-const ayy = client.emojis.get("305818615712579584");
+const ayy = client.emojis.cache.get("305818615712579584");
 ```
 
 You might also know how to use `find` to get something with another property - so here, I can get `ayy` through its name:
 
 ```javascript
-const ayy = client.emojis.find(emoji => emoji.name === "ayy");
+const ayy = client.emojis.cache.find(emoji => emoji.name === "ayy");
 ```
 
 ## Outputting Emoji in chat
@@ -39,7 +39,7 @@ You can also take advantage of concatenation and template literals to simplify t
 
 ```javascript
 if(message.content === "ayy") {
-   const ayy = client.emojis.find(emoji => emoji.name === "ayy");
+   const ayy = client.emojis.cache.find(emoji => emoji.name === "ayy");
    message.reply(`${ayy} LMAO`);
 }
 ```
@@ -48,7 +48,7 @@ If you wanted to list all the emojis in a guild, a simple map operation on the c
 
 ```javascript
 if (message.content === "listemojis") {
-  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+  const emojiList = message.guild.emojis.cache.map(emoji => emoji.toString()).join(" ");
   message.channel.send(emojiList);
 }
 ```
@@ -57,7 +57,7 @@ In this example, you can list all custom emojis with \(emoji.id, emoji.image and
 
 ```javascript
 if (message.content === "listemojis") {
-   const emojiList = message.guild.emojis.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
+   const emojiList = message.guild.emojis.cache.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
    message.channel.send(emojiList);
 }
 

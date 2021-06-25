@@ -2,7 +2,7 @@
 
 In the last two chapters we covered how to create and use the webhook's via code.
 
-In this chapter we will cover third party services such as [Zapier](https://zapier.com/), [IFTTT](https://ifttt.com/) and even [ShareX](https://getsharex.com/). If you're a member of my guild you'll know it has a \#video-guides channel where a webhook posts my videos when I release them, that youtube-to-discord bridge is provided by Zapier \(More on that later\).
+In this chapter we will cover third party services such as [Zapier](https://zapier.com/), [IFTT](https://ifttt.com/) and even [ShareX](https://getsharex.com/). If you're a member of my guild you'll know it has a \#video-guides channel where a webhook posts my videos when I release them, that youtube-to-discord bridge is provided by Zapier \(More on that later\).
 
 But before we jump to Zapier, let's cover something I should of covered in the first chapter.
 
@@ -14,7 +14,7 @@ The standard webhook \(above\) basically acts like a normal message you would se
 
 ![Slack-Compatible Webhook](../.gitbook/assets/wh08.png)
 
-The slack-compatible webhook \(above\) is very fancy in comparison, they're basically `RichEmbeds` that you see a lot of moderation bots use, you can have thumbnails, images, and more \(see the [Slack Documentation](https://api.slack.com/incoming-webhooks) for more information\).
+The slack-compatible webhook \(above\) is very fancy in comparison, they're basically `MessageEmbeds` that you see a lot of moderation bots use, you can have thumbnails, images, and more \(see the [Slack Documentation](https://api.slack.com/incoming-webhooks) for more information\).
 
 ![Github-Compatible Webhook](../.gitbook/assets/wh09.png)
 

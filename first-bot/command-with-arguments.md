@@ -67,10 +67,10 @@ client.on("message", message => {
   if (message.author.bot) return;
   // This is where we'll put our code.
   if (message.content.indexOf(config.prefix) !== 0) return;
- 
+
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
- 
+
   if(command === 'ping') {
     message.channel.send('Pong!');
   } else
@@ -112,12 +112,12 @@ This is called [Destructuring](https://developer.mozilla.org/en/docs/Web/JavaScr
 
 Another way to use arguments, when the command should target a specific user \(or users\), is to use _Mentions_. For instance, to kick annoying shitposters with `!kick @Xx_SniperBitch_xX @UselessIdiot` can be done with ease, instead of attempting to grab their ID or their name.
 
-In the context of the `message` event handler, all mentions in a message are part of the `msg.mentions` object. This object then contains multiple [Collections ](../understanding/collections.md)of different mention types. Here are the various available mention types: 
+In the context of the `message` event handler, all mentions in a message are part of the `msg.mentions` object. This object then contains multiple [Collections ](../understanding/collections.md)of different mention types. Here are the various available mention types:
 
-* `message.mentions.members` contains all @mention as [GuildMember ](https://discord.js.org/#/docs/main/stable/class/GuildMember)objects. 
-* `message.mentions.users` contains all @mention as [User ](https://discord.js.org/#/docs/main/stable/class/User)objects. 
-* `message.mentions.roles` contains all @role mention as [Role ](https://discord.js.org/#/docs/main/stable/class/Role)objects. 
-* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
+* `message.mentions.members` contains all @mention as [GuildMember ](https://discord.js.org/#/docs/main/v12/class/GuildMember)objects. 
+* `message.mentions.users` contains all @mention as [User ](https://discord.js.org/#/docs/main/v12/class/User)objects. 
+* `message.mentions.roles` contains all @role mention as [Role ](https://discord.js.org/#/docs/main/v12/class/Role)objects. 
+* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/v12/class/TextChannel) objects.
 
 Each of are collections so any collection method can be used on them. The most common method to use on mentions is .first\(\) which gets the very first mention, since there is often only one of them.
 

@@ -50,7 +50,7 @@ module.exports = class {
     // Here we get the starboard channel from the guilds settings. 
     const { starboardChannel } = this.client.settings.get(message.guild.id); 
     // Here we will find the channel
-    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.cache.find(channel => channel.name == starboardChannel)
     // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   }
@@ -69,7 +69,7 @@ I told you it wasn't that complicated. Let's keep going.
 
 ```javascript
 // Here we fetch 100 messages from the starboard channel.
-const fetch = await starChannel.fetchMessages({ limit: 100 }); 
+const fetch = await starChannel.messages.fetch({ limit: 100 }); 
 // We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
 const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); 
 // Now we setup an if statement for if the message is found within the starboard.
@@ -80,7 +80,7 @@ if (stars) {
   const foundStar = stars.embeds[0];
   // We use the this.extension function to see if there is anything attached to the message.
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -88,7 +88,7 @@ if (stars) {
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);
   // We fetch the ID of the message already on the starboard.
-  const starMsg = await starChannel.fetchMessage(stars.id);
+  const starMsg = await starChannel.messages.fetch(stars.id);
   // And now we edit the message with the new embed!
   await starMsg.edit({ embed }); 
 }
@@ -105,7 +105,7 @@ if (!stars) {
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
   // If the message is empty, we don't allow the user to star the message.
   if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     // We set the color to a nice yellow here.
     .setColor(15844367)
     // Here we use cleanContent, which replaces all mentions in the message with their
@@ -135,28 +135,28 @@ module.exports = class {
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const starChannel = message.guild.channels.find(channel => channel.name === starboardChannel)
+    const starChannel = message.guild.channels.cache.find(channel => channel.name === starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
-    const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
+    const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await starChannel.fetchMessage(stars.id);
+      const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embed });
     }
     if (!stars) {
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
       if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(15844367)
         .setDescription(message.cleanContent)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -191,14 +191,14 @@ if (stars) {
   const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
     .setAuthor(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
-  const starMsg = await starChannel.fetchMessage(stars.id);
+  const starMsg = await starChannel.messages.fetch(stars.id);
   await starMsg.edit({ embed });
   // Here we want to check if the message now has 0 Stars
   if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
@@ -218,22 +218,22 @@ module.exports = class {
     if (message.author.id === user.id) return;
     if (reaction.emoji.name !== '⭐') return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.cache.find(channel => channel.name == starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
-    const fetchedMessages = await starChannel.fetchMessages({ limit: 100 });
+    const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
-      const starMsg = await starChannel.fetchMessage(stars.id);
+      const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embed });
       if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }

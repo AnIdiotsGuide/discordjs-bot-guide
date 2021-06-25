@@ -54,11 +54,11 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       // This is the name of the role. For example, if you do 'role -add @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
       const name = args.slice(1).join(' ');
       // Find the role on the guild.
-      const role = message.guild.roles.find(r => r.name === name);
+      const role = message.guild.roles.cache.find(r => r.name === name);
       // End the command if the bot cannot find the role on the server.
       if (!role) return message.reply('I can\'t seem to find that role.');
       try {
-        await member.addRole(role);
+        await member.roles.add(role);
         await message.channel.send(`I've added the ${name} role to ${member.dsiplayName}.`);
       } catch (e) {
         console.log(e);
@@ -73,11 +73,11 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       // This is the name of the role. For example, if you do 'role -remove @York#2400 The Idiot Himself', the name of the role would be 'The Idiot Himself'.
       const name = args.slice(1).join(' ');
       // Find the role on the guild.
-      const role = message.guild.roles.find(r => r.name === name);
+      const role = message.guild.roles.cache.find(r => r.name === name);
       // End the command if the bot cannot find the role on the server.
       if (!role) return message.reply('I can\'t seem to find that role.');
       try {
-        await member.removeRole(role);
+        await member.roles.remove(role);
         await message.channel.send(`I've removed the ${name} role from ${member.displayName}.`);
       } catch (e) {
         console.log(e);

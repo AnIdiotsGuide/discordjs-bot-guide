@@ -11,11 +11,11 @@ Let's grab some example code...
 ```javascript
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
@@ -24,7 +24,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -36,11 +36,11 @@ You want to start off by defining your webhook at the top of your code, don't fo
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const mentionHook = new Discord.WebhookClient("Webhook ID", "Webhook Token");
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
@@ -49,18 +49,18 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
 Now, this bit will be a little long winded; but inside the message event you want to check for mentions, now the more mentions you can capture the better, for example there's the `@everyone` and `@here` mentions, role mentions and the direct mentions.
 
-The official documentation has the wonderful `Message.isMentioned(data)` boolean, that data can be a `GuildChannel`, `User` or `Role` Object, or a `string` representing the ID of any of the previously mentioned things, so inside the message event create a new `if statement`.
+The official documentation has the wonderful `Message.mentions.has(data)` boolean, that data can be a `GuildChannel`, `User` or `Role` Object, or a `string` representing the ID of any of the previously mentioned things, so inside the message event create a new `if statement`.
 
 ```javascript
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
-  if (message.isMentioned("YOUR USER ID")) {
+  if (message.mentions.has("YOUR USER ID")) {
       // Additional Code
   }
   let args = message.content.split(" ").slice(1);
@@ -77,7 +77,7 @@ Well the `message` object has `mentions` which has both `everyone` and `roles`, 
 ```javascript
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
-  if (message.isMentioned("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.member("YOUR USER ID").roles.has(r.id)).size > 0)) {
+  if (message.mentions.has("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)) {
       // Additional Code
   }
   let args = message.content.split(" ").slice(1);
@@ -90,7 +90,7 @@ client.on("message", (message) => {
 Alright, that's the mention detection stuff finished, but let me cover that last bit...
 
 ```javascript
-(message.guild && message.mentions.roles.filter(r => message.guild.member("YOUR USER ID").roles.has(r.id)).size > 0)
+(message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)
 ```
 
 The `message.guild` check will make sure we're being mentioned inside a guild channel, now the next bit is a little more complex basically the code is checking for any roles that were mentioned and filtering them against our own roles if any of them match \(making the size greater than 0\) it'll return true.
@@ -100,7 +100,7 @@ So far so good, we're almost half way there... We've set up the conditions to ch
 ```javascript
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
-  if (message.isMentioned("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.member("YOUR USER ID").roles.has(r.id)).size > 0)) {
+  if (message.mentions.has("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)) {
       if (message.author.id === "YOUR USER ID") return;
       // Additional Code
   }
@@ -119,15 +119,15 @@ Alright, now we're done with the conditions for the webhook, let's actually use 
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const mentionHook = new Discord.WebhookClient('Webhook ID', 'Webhook Token');
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
-  if (message.isMentioned("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.member("YOUR USER ID").roles.has(r.id)).size > 0)) {
+  if (message.mentions.has("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)) {
       if (message.author.id === "YOUR USER ID") return;
       // Additional Code
   }
@@ -136,7 +136,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 
@@ -156,15 +156,15 @@ This webhook has long since been deleted.
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const mentionHook = new Discord.WebhookClient("336099488869384192", "UT_jumpd9cEi3X7Dxls0pv9_dscvTSB5oDAVHEWhMh2Psz8n0ZwAVr7JjSszfu5z7BGH");
- 
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 let prefix = "~";
 client.on("message", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
-  if (message.isMentioned("146048938242211840") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.member("146048938242211840").roles.has(r.id)).size > 0)) {
+  if (message.mentions.has("146048938242211840") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("146048938242211840").roles.cache.has(r.id)).size > 0)) {
       if (message.author.id === "146048938242211840") return;
       // Additional Code
       mentionHook.send("You were mentioned!");
@@ -174,7 +174,7 @@ client.on("message", (message) => {
     message.channel.send("pong!");
   }
 });
- 
+
 client.login("SuperSecretBotTokenHere");
 ```
 

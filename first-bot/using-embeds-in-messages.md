@@ -34,7 +34,7 @@ message.channel.send({embed: {
     color: 3447003,
     author: {
       name: client.user.username,
-      icon_url: client.user.avatarURL
+      icon_url: client.user.avatarURL()
     },
     title: "This is an embed",
     url: "http://google.com",
@@ -54,7 +54,7 @@ message.channel.send({embed: {
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: client.user.avatarURL,
+      icon_url: client.user.avatarURL(),
       text: "© Example"
     }
   }
@@ -65,20 +65,19 @@ This results in the following:
 
 ![](../.gitbook/assets/embedexample1.png)
 
-## RichEmbed Builder
+## MessageEmbed Builder
 
-There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `RichEmbed` builder.
+There is an alternative to using straight-up objects, which might be simpler in some cases - it's certainly cleaner! It's using the `MessageEmbed` builder.
 
-The same rules apply for `RichEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `RichEmbed`. It also has a nice fancy image, to boot!
+The same rules apply for `MessageEmbed` as does normal ones. In fact, the builder is just a shortcut to get the same object and offers no more, no less functionality. Here is a similar example to the one above, using the `MessageEmbed`. It also has a nice fancy image, to boot!
 
 ```javascript
-const embed = new Discord.RichEmbed()
+const embed = new Discord.MessageEmbed()
   .setTitle("This is your title, it can hold 256 characters")
   .setAuthor("Author Name", "https://i.imgur.com/lm8s41J.png")
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
-   
   .setColor(0x00AE86)
   .setDescription("This is the main body of text, it can hold 2048 characters.")
   .setFooter("This is the footer text, it can hold 2048 characters", "http://i.imgur.com/w1vhFSR.png")
@@ -88,20 +87,20 @@ const embed = new Discord.RichEmbed()
    * Takes a Date object, defaults to current date.
    */
   .setTimestamp()
-  .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
-  .addField("This is a field title, it can hold 256 characters",
-    "This is a field value, it can hold 1024 characters.")
+  .setURL("https://discord.js.org/#/docs/main/v12/class/MessageEmbed")
+  .addFields({ name: "This is a field title, it can hold 256 characters",
+      value: "This is a field value, it can hold 1024 characters."})
   /*
    * Inline fields may not display as inline if the thumbnail and/or image is too big.
    */
-  .addField("Inline Field", "They can also be inline.", true)
+  .addFields({ name: "Inline Field", value: "They can also be inline.", inline: true })
   /*
    * Blank field, useful to create some space.
    */
-  .addBlankField(true)
-  .addField("Inline Field 3", "You can have a maximum of 25 fields.", true);
- 
-  message.channel.send({embed});
+  .addFields({ name: '\u200b', value: '\u200b' })
+  .addFields({ name: "Inline Field 3", value: "You can have a maximum of 25 fields.", inline: true});
+
+  message.channel.send(embed);
 ```
 
 Which produces the following:

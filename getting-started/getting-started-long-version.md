@@ -15,7 +15,7 @@ The first step in creating a bot is to create your own Discord _application_. Th
 
 ### Creating the App account
 
-To create the application, head to the [Discord.com Application Page](https://discord.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
+To create the application, head to the [Discordapp.com Application Page](https://discordapp.com/developers/applications/me). Assuming you're logged in \(if not, do so now\), you'll reach a page that looks like this:
 
 ![](../.gitbook/assets/image%20%281%29.png)
 
@@ -63,18 +63,14 @@ Alright so, **big flashy warning**, **PAY ATTENTION**. This next part is really,
 
 With that warning out of the way, on to the next step. The Token, as I just mentioned, is the way in which the bot authenticates. To get it, go to the **Bot** section of the app page, then click **Copy** to copy it to the clipboard. You can also _view_ your token here if you wish:
 
-![NEVER SHARE YOUR TOKEN! This cannot be overstated.](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/cb3b11a9a73a0635199dc4de420c4e9ff49ab2f2/.gitbook/assets/image%20%284%29.png)
+![NEVER SHARE YOUR TOKEN! This cannot be overstated.](https://github.com/AnIdiotsGuide/discordjs-bot-guide/tree/a7c503b74a4562ec7e3a2fb96a958de5d1751ec9/.gitbook/assets/image%20%284%29.png)
 
 ## Step 2: Getting your coding environment ready
 
 This might go beyond saying but I'll say it anyway: You can't just start shoving bot code in notepad.exe and expect it to work. In order to use discord.js you will need a couple of things installed. At the very least:
 
-* Get Node.js version 7.6 or higher \(earlier versions are not supported\). [Download for windows](https://nodejs.org/en/download/) or if you're on a linux distro, via [package manager](https://nodejs.org/en/download/package-manager/).
+* Get Node.js version 14 or higher \(earlier versions are not supported\). [Download for windows](https://nodejs.org/en/download/) or if you're on a linux distro, via [package manager](https://nodejs.org/en/download/package-manager/).
 * Get an actual code editor. Don't use notepad or notepad++, they are not sufficient. [VS Code](https://www.visualstudio.com/en-us/products/code-vs.aspx) , [Sublime Text 3](https://www.sublimetext.com/3) and [Atom](https://atom.io/) are often recommended.
-
-{% hint style="info" %}
-An alternative: [c9.io](https://c9.io/). I personally appreciate c9.io as it's a full VPS with a great editor \(Ace\) and installing node, discord.js and all dependencies, then running the bot, is easy. You can't host it there, but you can certainly develop there. _This is not an endorsement_.
-{% endhint %}
 
 Once you have the required software, the next step is to prepare a _space_ for your code. Please don't just put your files on your desktop it's... unsanitary. If you have more than one hard drive or partition, you could create a special place for your development project. Mine, for example, is `D:\devel\` , and my bot is `d:\devel\omnicbot\` . Once you've created a folder, open your CLI \(command line interface\) in that folder. Linux users, you know how. Windows users, here's a trick: SHIFT+RightClick in the folder, then choose the "secret" command **Open command window here**. Magic!
 
@@ -86,7 +82,7 @@ So you have your CLI ready to go, in an empty folder, and you just wanna start c
 
 And now we install Discord.js through NPM, the Node Package Manager:
 
-`npm install discord.js@11.6.4`
+`npm i discord.js`
 
 ![](http://i.imgur.com/Gad8L2G.gif)
 
@@ -118,7 +114,7 @@ client.login("SuperSecretBotTokenHere");
 ```
 
 {% hint style="info" %}
-The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/stable/class/Client) class. Some people call it `bot`, but you can technically call it whatever you want. I recommend sticking to `client` though!
+The variable `client` here is used an an example to represent the [&lt;Client&gt;](https://discord.js.org/#/docs/main/v12/class/Client) class. Some people call it `bot`, but you can technically call it whatever you want. I recommend sticking to `client` though!
 {% endhint %}
 
 Okay let's just... actually get this guy to work, because this is literally **a functional bot**. So let's make it run!
@@ -142,9 +138,9 @@ Now that you have a basic, functional bot, it's time to start adding new feature
 
 Before you start getting support from Discord servers to help you with your bot, I strongly advise taking a look at the following, very useful, resources.
 
-* [Discord.js v11 Documentation](https://discord.js.org/#/docs/main/v11/) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
+* [Discord.js Documentation](http://discord.js.org) : For the love of all that is \(un\)holy, **read the documentation**. Yes, it will be alien at first if you are not used to "developer documentation" but it contains a whole lot of information about each and every feature of the API. Combine this with the examples above to see the API in context.
 * [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
 * [Evie.Codes on Youtube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's youtube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
-* [An Idiot's Guide Official Server](https://discord.gg/vXVxsAjSMF): The official server for An Idiot's Guide. Full of friendly helpful users!
+* [An Idiot's Guide Official Server](https://discord.gg/9ESEZAx): The official server for An Idiot's Guide. Full of friendly helpful users!
 * [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
 
