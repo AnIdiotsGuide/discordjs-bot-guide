@@ -90,7 +90,7 @@ if (stars) {
   // We fetch the ID of the message already on the starboard.
   const starMsg = await starChannel.messages.fetch(stars.id);
   // And now we edit the message with the new embed!
-  await starMsg.edit({ embeds: [embed] }); 
+  await starMsg.edit({ embed }); 
 }
 ```
 
@@ -117,7 +117,7 @@ if (!stars) {
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
     .setImage(image);
-  await starChannel.send({ embeds: [embed] });
+  await starChannel.send({ embed });
 }
 ```
 
@@ -152,7 +152,7 @@ module.exports = class {
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
-      await starMsg.edit({ embeds: [embed] });
+      await starMsg.edit({ embed });
     }
     if (!stars) {
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.first().url) : '';
@@ -164,7 +164,7 @@ module.exports = class {
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
         .setImage(image);
-      await starChannel.send({ embeds: [embed] });
+      await starChannel.send({ embed });
     }
   }
 
@@ -200,13 +200,9 @@ if (stars) {
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
   const starMsg = await starChannel.messages.fetch(stars.id);
-  await starMsg.edit({ embeds: [embed] });
+  await starMsg.edit({ embed });
   // Here we want to check if the message now has 0 Stars
-  if(parseInt(star[1]) - 1 == 0) return new Promise(resolve => {
-    this.client.setTimeout(() => {
-      resolve(starMsg.delete());
-    }, 1000);
-  });
+  if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
 }
 ```
 
@@ -240,12 +236,8 @@ module.exports = class {
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
-      await starMsg.edit({ embeds: [embed] });
-      if(parseInt(star[1]) - 1 == 0) return new Promise(resolve => {
-        this.client.setTimeout(() => {
-          resolve(starMsg.delete());
-        }, 1000);
-      });
+      await starMsg.edit({ embed });
+      if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }
   }
 

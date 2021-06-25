@@ -29,7 +29,7 @@ const { ShardingManager } = require('discord.js');
 // Create your ShardingManger instance
 const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
     // for ShardingManager options see:
-    // https://discord.js.org/#/docs/main/v11/class/ShardingManager
+    // https://discord.js.org/#/docs/main/v12/class/ShardingManager
 
     // 'auto' handles shard count automatically
     totalShards: 'auto', 
@@ -58,7 +58,7 @@ These two functions are your go-to for getting any information from other shards
 
 ## FetchClientValues
 
-[`fetchClientValues`](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
+[`fetchClientValues`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.cache.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
 
 Example:
 
@@ -68,14 +68,14 @@ Example:
     Assume this is being executed on shard 0, the first shard.
 */
 
-// If we just get our client.guilds.size, it will return
+// If we just get our client.guilds.cache.size, it will return
 // only the number of guilds on the shard this is being run on.
-console.log(client.guilds.size);
+console.log(client.guilds.cache.size);
 // 1050
 
-// If we would like to get our client.guilds.size from all
+// If we would like to get our client.guilds.cache.size from all
 // of our shards, we must make use of fetchClientValues().
-const res = await client.shard.fetchClientValues('guilds.size');
+const res = await client.shard.fetchClientValues('guilds.cache.size');
 console.log(res);
 //     [
 //        1050,    // shard 0
@@ -87,7 +87,7 @@ console.log(res);
 `
 ```
 
-Let's say you want to do something like get your total server count - In a non-sharded environment, this would be as simple as getting the `client.guilds.size`. However in a sharded environment, `client.guilds.size` will return not the total servers your bot is in. Instead it returns only the total number of servers _on this shard_, like in the first part of the example above.
+Let's say you want to do something like get your total server count - In a non-sharded environment, this would be as simple as getting the `client.guilds.cache.size`. However in a sharded environment, `client.guilds.cache.size` will return not the total servers your bot is in. Instead it returns only the total number of servers _on this shard_, like in the first part of the example above.
 
 Here's an example of a function that uses `fetchClientValues()` to first get, then add the total number of guilds from _all shards_ \(i.e. your bot's total guild count\):
 
@@ -104,7 +104,7 @@ Here's an example of a function that uses `fetchClientValues()` to first get, th
 
 const getServerCount = async () => {
     // get guild collection size from all the shards
-    const req = await client.shard.fetchClientValues('guilds.size');
+    const req = await client.shard.fetchClientValues('guilds.cache.size');
 
     // return the added value
     return req.reduce((p, n) => p + n, 0);
@@ -117,7 +117,7 @@ const getServerCount = async () => {
 
 ## BroadcastEval
 
-[`broadcastEval`](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input _in the context of each shard's Client\(s\)_ \(i.e. `this` is used to reference the `Client`\). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
+[`broadcastEval`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input _in the context of each shard's Client\(s\)_ \(i.e. `this` is used to reference the `Client`\). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
 Example:
 
@@ -129,7 +129,7 @@ Example:
 
 // If we just map our guilds' members.size, it will return
 // only the mapped members.size of the shard this is being run on.
-console.log(client.guilds.map((guild) => guild.members.size));
+console.log(client.guilds.map((guild) => guild.members.cache.size));
 //        [
 //            30,
 //            25
@@ -139,7 +139,7 @@ console.log(client.guilds.map((guild) => guild.members.size));
 // servers on all of our shards, we must make use of broadcastEval().
 // Remember, this runs in the context of the client, so we refer to the
 // Client using "this".
-const res = await client.shard.broadcastEval('this.guilds.map((guild) => guild.members.size)');
+const res = await client.shard.broadcastEval('this.guilds.map((guild) => guild.members.cache.size)');
 console.log(res);
 //     [
 //        [    // shard 0
@@ -155,7 +155,7 @@ console.log(res);
 `
 ```
 
-Say you want to get a guild from your client. In a non-sharded environment, you would simply use `client.guilds.get('ID')` or something of that nature and then carry on with your code. In a sharded environment however, it is possible that the guild you're trying to get _is not present on the shard_. In order to get the guild for use, you would then need to fetch it from whatever shard it is present on using `broadcastEval()`.
+Say you want to get a guild from your client. In a non-sharded environment, you would simply use `client.guilds.cache.get('ID')` or something of that nature and then carry on with your code. In a sharded environment however, it is possible that the guild you're trying to get _is not present on the shard_. In order to get the guild for use, you would then need to fetch it from whatever shard it is present on using `broadcastEval()`.
 
 Here's an example of a function that uses `broadcastEval()` to get a single guild no matter what shard it is present on:
 
@@ -175,7 +175,7 @@ Here's an example of a function that uses `broadcastEval()` to get a single guil
 
 const getServer = async (guildID) => {
     // try to get guild from all the shards
-    const req = await client.shard.broadcastEval(`this.guilds.get("${guildID}")`);
+    const req = await client.shard.broadcastEval(`this.guilds.cache.get("${guildID}")`);
 
     // return non-null response or false if not found
     return (req.find((res) => !!res) || false);

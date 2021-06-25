@@ -29,10 +29,8 @@ For this example points system we want the user's ID, points and level. I'm not 
 Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](../first-bot/command-with-arguments.md) page of this guide. The code is as such:
 
 ```javascript
-const { Client, MessageEmbed, Intents } = require("discord.js");
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.PRIVILIGED, Intents.FLAGS.GUILD_MESSAGES]
-});
+const Discord = require("discord.js");
+const client = new Discord.Client();
 const config = require("./config.json"); // Contains the prefix, and token!
 
 client.on("ready", () => {
@@ -75,10 +73,8 @@ client.on("message", message => {
 Your code should look like this now:
 
 ```javascript
-const { Client, MessageEmbed, Intents } = require("discord.js");
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.PRIVILIGED, Intents.FLAGS.GUILD_MESSAGES]
-});
+const Discord = require("discord.js");
+const client = new Discord.Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
@@ -179,10 +175,8 @@ client.setScore.run(score);
 Let's put it all together. Your code should now look like this.
 
 ```javascript
-const { Client, MessageEmbed, Intents } = require("discord.js");
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.PRIVILIGED, Intents.FLAGS.GUILD_MESSAGES]
-});
+const Discord = require("discord.js");
+const client = new Discord.Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
@@ -278,7 +272,7 @@ if(command === "leaderboard") {
   const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
 
     // Now shake it and show it! (as a nice embed, too!)
-  const embed = new MessageEmbed()
+  const embed = new Discord.MessageEmbed()
     .setTitle("Leaderboard")
     .setAuthor(client.user.username, client.user.displayAvatarURL())
     .setDescription("Our top 10 points leaders!")
@@ -287,7 +281,7 @@ if(command === "leaderboard") {
   for(const data of top10) {
     embed.addField(client.users.cache.get(data.user).tag, `${data.points} points (level ${data.level})`);
   }
-  return message.channel.send({ embeds: [embed] });
+  return message.channel.send({ embed });
 }
 ```
 

@@ -30,7 +30,7 @@ client.on("ready", () => {
 // Set the bot's presence (activity and status)
 client.on("ready", () => {
     client.user.setPresence({
-        game: { 
+        activity: { 
             name: 'my code',
             type: 'WATCHING'
         },
@@ -59,13 +59,13 @@ In these examples `Guild` is a placeholder for where you get the guild. This can
 
 ```javascript
 // Get a User by ID
-client.users.get("user id here");
+client.users.cache.get("user id here");
 // Returns <User>
 ```
 
 ```javascript
 // Get a Member by ID
-message.guild.members.get("user ID here");
+message.guild.members.cache.get("user ID here");
 // Returns <Member>
 ```
 
@@ -99,7 +99,7 @@ if (message.content.startsWith(prefix + 'commandname')) {
 
 ```javascript
 // FETCH a member. Useful if an invisible user sends a message.
-message.guild.fetchMember(message.author)
+message.guild.members.fetch(message.author)
   .then(member => {
     // The member is available here.
   });
@@ -115,19 +115,19 @@ message.guild.members.fetch(message.author)
 
 ```javascript
 // Get a Guild by ID
-client.guilds.get("the guild id");
+client.guilds.cache.get("the guild id");
 // Returns <Guild>
 ```
 
 ```javascript
 // Get a Channel by ID
-client.channels.get("the channel id");
+client.channels.cache.get("the channel id");
 // Returns <Channel>
 ```
 
 ```javascript
 // Get a Channel by Name
-message.guild.channels.find(channel => channel.name === "channel-name");
+message.guild.channels.cache.find(channel => channel.name === "channel-name");
 // returns <Channel>
 ```
 
@@ -135,7 +135,7 @@ message.guild.channels.find(channel => channel.name === "channel-name");
 // Create an invite and send it in the channel
 // You can only create an invite from a GuildChannel
 // Messages can only be sent to a TextChannel
-message.guild.channels.get('<CHANNEL ID>').createInvite().then(invite =>
+message.guild.channels.cache.get('<CHANNEL ID>').createInvite().then(invite =>
     message.channel.send(invite.url)
 );
 ```
@@ -151,11 +151,11 @@ Note: you'll need to `npm install long` and then `var Long = require("long");` t
 ```javascript
 const getDefaultChannel = (guild) => {
   // get "original" default channel
-  if(guild.channels.has(guild.id))
-    return guild.channels.get(guild.id)
+  if(guild.channels.cache.has(guild.id))
+    return guild.channels.cache.get(guild.id)
 
   // Check for a "general" channel, which is often default chat
-  const generalChannel = guild.channels.find(channel => channel.name === "general");
+  const generalChannel = guild.channels.cache.find(channel => channel.name === "general");
   if (generalChannel)
     return generalChannel;
   // Now we get into the heavy stuff: first channel in order where the bot can speak
@@ -190,7 +190,7 @@ message.channel.send("Test").then(sentMessage => sentMessage.edit("Blah"));
 ```javascript
 // Fetching a message by ID (Discord.js versions 9 through 11)
 // note: you can line return right before a "dot" in JS, that is valid.
-message.channel.fetchMessages({around: "352292052538753025", limit: 1})
+message.channel.messages.fetch({around: "352292052538753025", limit: 1})
   .then(messages => {
     const fetchedMsg = messages.first(); // messages is a collection!)
     // do something with it

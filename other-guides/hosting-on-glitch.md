@@ -115,7 +115,7 @@ For best results, have an outside source pinging the project address as well, gl
 
 There are 2 things that you much change in the project's package.json file in order to ensure that your project will actually work.
 
-First, you must provide for a _node.js version_ if your project requires a higher version of node \(for instance, 8.4.0\). This is done with the `engines` key, as such: `"engines": { "node": "8.4.0" }`
+First, you must provide for a _node.js version_ if your project requires a higher version of node \(for instance, 12.x\). This is done with the `engines` key, as such: `"engines": { "node": "12.x" }`
 
 Second, you must provide for the `start` script. A lot of us just generally configure the `main: index.js` key and this is not sufficient. You must provide for a start script:
 
@@ -138,7 +138,7 @@ I show the `test` script here because this is by default in any project where `n
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "engines": { "node": "8.4.0" },
+  "engines": { "node": "12.x" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AnIdiotsGuide/guidebot.git"
@@ -150,7 +150,7 @@ I show the `test` script here because this is by default in any project where `n
   },
   "homepage": "https://github.com/AnIdiotsGuide/guidebot#readme",
   "dependencies": {
-    "discord.js": "^11.2.1",
+    "discord.js": "^12.5.3",
     "enmap": "^0.3.2",
     "moment": "^2.18.1",
     "moment-duration-format": "^1.3.0",
@@ -180,7 +180,7 @@ You can then access this from anywhere using `process.env.TOKEN`, so again with 
 
 * `X was compiled against a different Node.js version`
 
-That error means you forgot to set your engines in your package file, make sure you have added `"engines": { "node": "8.4.0" }` to your package, you can also use the following commands in the console \(you can access the console by going to your Project Name &gt; Advanced Options &gt; Open Console\), `nvm use NODE VERSION`, followed by `npm rebuild`, that should eliminate the error.
+That error means you forgot to set your engines in your package file, make sure you have added `"engines": { "node": "12.x" }` to your package, you can also use the following commands in the console \(you can access the console by going to your Project Name &gt; Advanced Options &gt; Open Console\), `nvm use NODE VERSION`, followed by `npm rebuild`, that should eliminate the error.
 
 * "My bot goes down after X"
 

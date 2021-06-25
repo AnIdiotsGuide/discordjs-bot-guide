@@ -29,8 +29,8 @@ Here's a simple example of using the `ready` event handler:
 
 ```javascript
 client.on("ready", () => {
-  client.user.setActivity(`on ${client.guilds.size} servers`);
-  console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
+  client.user.setActivity(`on ${client.guilds.cache.size} servers`);
+  console.log(`Ready to serve on ${client.guilds.cache.size} servers, for ${client.users.cache.size} users.`);
 });
 ```
 
@@ -41,7 +41,7 @@ Another useful event is [`guildMemberAdd`](http://hydrabolt.github.io/discord.js
 ```javascript
 client.on("guildMemberAdd", (member) => {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  member.guild.channels.find(c => c.name === "welcome").send(`"${member.user.username}" has joined this server`);
+  member.guild.channels.cache.find(c => c.name === "welcome").send(`"${member.user.username}" has joined this server`);
 });
 ```
 

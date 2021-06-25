@@ -44,22 +44,22 @@ Discord quietly changed the Create Guild API endpoint, small bots \(10 guilds or
 
 ```javascript
 /* ES6 Promises */
-client.user.createGuild('Example Guild', 'london').then(guild => {
-  guild.channels.get(guild.id).createInvite()
-    .then(invite => client.users.get('<USERID>').send(invite.url));
-  guild.createRole({name:'Example Role', permissions:['ADMINISTRATOR']})
-    .then(role => client.users.get('<UserId>').send(role.id))
+client.guilds.create('Example Guild', { region: 'london' }).then(guild => {
+  guild.channels.cache.get(guild.id).createInvite()
+    .then(invite => client.users.cache.get('<USERID>').send(invite.url));
+  guild.roles.create({ name: 'Example Role', permissions: ['ADMINISTRATOR'] })
+    .then(role => client.users.cache.get('<UserId>').send(role.id))
     .catch(error => console.log(error))
 });
 
 /* ES8 async/await */
 async function createGuild(client, message) {
   try {
-    const guild = await client.user.createGuild('Example Guild', 'london');
-    const defaultChannel = guild.channels.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const guild = await client.guilds.create('Example Guild', { region: 'london' });
+    const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const invite = await defaultChannel.createInvite();
     await message.author.send(invite.url);
-    const role = await guild.createRole({ name:'Example Role', permissions:['ADMINISTRATOR'] });
+    const role = await guild.roles.create({ name:'Example Role', permissions:['ADMINISTRATOR'] });
     await message.author.send(role.id);
   } catch (e) {
     console.error(e);
@@ -67,7 +67,7 @@ async function createGuild(client, message) {
 }
 createGuild(client, message);
 // Run this once you've joined the bot created guild.
-message.member.addRole('<THE ROLE ID YOU GET SENT>');
+message.member.roles.add('<THE ROLE ID YOU GET SENT>');
 ```
 
 ### Command Cooldown
@@ -165,7 +165,7 @@ const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.cont
 if (!amount) return message.reply('Must specify an amount to delete!');
 if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
 // Fetch 100 messages (will be filtered and lowered up to max amount requested)
-message.channel.fetchMessages({
+message.channel.messages.fetch({
  limit: 100,
 }).then((messages) => {
  if (user) {
@@ -194,7 +194,7 @@ Support for kicking members from voice channels has now been added by Discord an
 
 ```javascript
 // Make sure the bot user has permissions to move members in the guild:
-if (!message.guild.me.hasPermission('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
+if (!message.guild.me.permissions.has('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
 
 // Get the mentioned user/bot and check if they're in a voice channel:
 const member = message.mentions.members.first();
@@ -202,7 +202,7 @@ if (!member) return message.reply('You need to @mention a user/bot to kick from 
 if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
 
 // Now we set the member's voice channel to null, in other words disconnecting them from the voice channel.
-member.setVoiceChannel(null);
+member.voice.setChannel(null);
 
 // Finally, pass some user response to show it all worked out:
 message.react('👌');
