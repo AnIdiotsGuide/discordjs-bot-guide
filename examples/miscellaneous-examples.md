@@ -67,7 +67,7 @@ async function createGuild(client, message) {
 }
 createGuild(client, message);
 // Run this once you've joined the bot created guild.
-message.member.addRole('<THE ROLE ID YOU GET SENT>');
+message.member.roles.add('<THE ROLE ID YOU GET SENT>');
 ```
 
 ### Command Cooldown
@@ -191,7 +191,7 @@ Support for kicking members from voice channels has now been added by Discord an
 
 ```javascript
 // Make sure the bot user has permissions to move members in the guild:
-if (!message.guild.me.hasPermission('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
+if (!message.guild.me.permissions.has('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
 
 // Get the mentioned user/bot and check if they're in a voice channel:
 const member = message.mentions.members.first();

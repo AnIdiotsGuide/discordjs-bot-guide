@@ -23,7 +23,7 @@ If you don't have the ID but only some other property, you may use `find()` to s
 
 The _first_ result that returns `true` within the function, will be returned. The generic idea of this is:
 
-`let result = <Collection>.find(item => item.property === "a value")`
+`let result = <Collection>.cache.find(item => item.property === "a value")`
 
 You can also be looking at other data, properties not a the top level, etc. Your imagination is the limit.
 

@@ -2,7 +2,7 @@
 
 {% embed url="https://www.youtube.com/watch?v=kpci6V8969g" %}
 
-A lot of people have asked how to host their bots on a raspberry pi, and there's a lot of conflicting information on the internet, well my fellow idiots, I'm here to give you the information you'll need to get your discord.js bot running on node v6 on a raspberry pi.
+A lot of people have asked how to host their bots on a raspberry pi, and there's a lot of conflicting information on the internet, well my fellow idiots, I'm here to give you the information you'll need to get your discord.js bot running on node v12 on a raspberry pi.
 
 I'm using a Raspberry Pi 2 Model B running in headless mode with a WiFi dongle, on Raspbian 8 \(Jessie\)
 
@@ -20,11 +20,7 @@ Commands used in the video;
 There has been conflicting information regarding the purge command, a small number of people have claimed it has messed up their Raspbian installation, so please _**USE AT YOUR OWN RISK**_, I cannot be held responsible if it does go wrong, as I encountered no issues running these commands in this order.
 {% endhint %}
 
-`curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -` - This will download everything required for node to be installed.
-
-{% hint style="info" %}
-You can swap out `setup_6.x` for `setup_8.x` to update straight to Node 8.
-{% endhint %}
+`curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -` - This will download everything required for node to be installed.
 
 `sudo apt-get install -y nodejs` - This will install node for you, the `-y` flag will auto-accept all terms and agreements for you.
 

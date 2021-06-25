@@ -16,13 +16,13 @@
 
 Install the following through your package manager:
 
-* nodejs \(Version 6.X and higher required, see [here](https://nodejs.org/en/download/package-manager/)\)
+* nodejs \(Version 12.X and higher required, see [here](https://nodejs.org/en/download/package-manager/)\)
 
 Once you have this all installed, create a folder for your project and install discord.js:
 
 `mkdir mybot && cd mybot` `npm install discord.js`
 
-**For sound support** add `npm install opusscript` \(ez mode\) or `npm install node-opus` \(better performance but requires `python 2.7.x` and `build-essential`\). BOTH these options require `ffmpeg` to run on your system, installed through `sudo apt-get install ffmpeg`.
+**For sound support** add `npm install opusscript` \(ez mode\) or `npm install @discordjs/opus` \(better performance but requires `python 2.7.x` and `build-essential`\). BOTH these options require `ffmpeg` to run on your system, installed through `sudo apt-get install ffmpeg`.
 
 ## Example Code
 
