@@ -1,7 +1,5 @@
 # Episode 3
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 In this episode we cover the main guildEvents, such events for members joining, leaving, been banned or unbanned for example!

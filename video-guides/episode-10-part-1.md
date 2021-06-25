@@ -1,6 +1,6 @@
 # Episode 10 Part 1
 
-{% embed url="https://www.youtube.com/watch?v=W8tgc8I-dQs" %}
+{% embed url="https://www.youtube.com/watch?v=W8tgc8I-dQs" caption="" %}
 
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 

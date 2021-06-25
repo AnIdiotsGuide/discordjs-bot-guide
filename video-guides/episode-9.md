@@ -1,7 +1,5 @@
 # Episode 9
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 We made some nice embeds for the moderation action logs in the previous episode, but I'm not happy with them, so in this episode after we update the code to v11.1.0 we get to work making those embeds even sexier.

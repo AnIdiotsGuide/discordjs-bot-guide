@@ -1,7 +1,5 @@
 # Episode 4
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 We're back with more events, the next episode we'll be tackling role events, that should be a juicy one!

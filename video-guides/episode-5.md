@@ -1,7 +1,5 @@
 # Episode 5
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 And we're back, and this time we're taking on roles! They're not as bad as people make out once you know how to use them, we cover them a fair bit in this episode!

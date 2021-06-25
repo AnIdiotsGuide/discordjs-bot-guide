@@ -1,7 +1,5 @@
 # Episode 6 Part 1
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 This is part 1 of a 2 parter, wewlad, I had a lot to get recorded in this episode, turned out alright didn't it, in this episode we're breaking down our bot into separate files, we're doing event and command handlers, this will clean up our code for what's coming in the next few videos

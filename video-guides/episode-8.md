@@ -1,7 +1,5 @@
 # Episode 8
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 Continuing off from the last episode, we go straight into giving people the boot, and the hammer!

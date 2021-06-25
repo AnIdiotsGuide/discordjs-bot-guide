@@ -1,7 +1,5 @@
 # Episode 6 Part 2
 
-
-
 Welcome back to my guide, helping you create a Discord Bot using the amazing Discord.js library I hope you follow along and create your very own bot!
 
 This is the second part \(final\) of the handlers episode, I want to apologise for how long it's taken me to get this video edited, rendered and uploaded!
