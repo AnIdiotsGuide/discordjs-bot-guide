@@ -21,7 +21,7 @@ Atom starts off with a simple interface with a nice welcome screen and a guide, 
 To the contrary of some more basic editors, Atom has the ability to open a project _folder_ so you don't have to keep opening files individually.
 
 * Go to **File**, **Open Folder** \(CTRL+SHIFT+O\)
-* Browse to the location of your main bot file \(mybot.js, app.js, or whatever\)
+* Browse to the location of your main bot file \(index.js, app.js, or whatever\)
 * Click on **Select Folder** \(_Note: your files will not appear here, only the folder structure. Don't worry they haven't gone anywhere_\)
 
 On the left of the editor you will have all the files. Just double-click any of them to open it. To clean things up, you can close the Welcome Screen and such.
@@ -59,7 +59,7 @@ ESLint, by default, will expect _very_ strict code from you, and will complain f
 ESLint options can be global or local to your project. Let's do a local one as an example.
 
 * Create a new file in Atom
-* Save it as `.eslintrc.json` in your project folder \(where your app.js/mybot.js is\)
+* Save it as `.eslintrc.json` in your project folder \(where your app.js/index.js is\)
 * Copy the code below inside the file and save it again:
 
 ```javascript

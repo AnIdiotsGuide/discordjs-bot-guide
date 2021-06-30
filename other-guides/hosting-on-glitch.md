@@ -172,7 +172,7 @@ Obviously use your real token, duh!
 You can then access this from anywhere using `process.env.TOKEN`, so again with the guidebot example, you would do the following in `config.js`:
 
 ```javascript
-  // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
+  // Your Bot's Token. Available on https://discord.com/developers/applications/me
   "token": process.env.TOKEN,
 ```
 

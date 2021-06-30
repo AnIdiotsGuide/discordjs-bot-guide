@@ -6,13 +6,13 @@ Here's a fun fact you might not know about bots on Discord: They have access to 
 
 Let's start by tearing apart exactly what an Emoji is, how they're configured and how they're accessed. So here, we have an emoji:
 
-![](https://cdn.discordapp.com/emojis/305818615712579584.png)
+![](https://cdn.discord.com/emojis/305818615712579584.png)
 
 When I want to write this emoji in my chat, I simply type `:ayy:` and it turns into the above \(smaller, of course, but still\). But behind the scenes, 2 things happen for this emoji to show:
 
 * Discord looks up the emoji in my list , finds the one with the name `ayy` and looks up its ID.
 * It then sends the _actual_ emoji code to the server, which looks like this: `<:ayy:305818615712579584>`. This is the code that makes up the emoji.
-* When a client receives the above, it looks up the URL for the Emoji from its ID, to get the image location. In this case, it's: `https://cdn.discordapp.com/emojis/305818615712579584.png`.
+* When a client receives the above, it looks up the URL for the Emoji from its ID, to get the image location. In this case, it's: `https://cdn.discord.com/emojis/305818615712579584.png`.
 * As you can see the ID is the only thing that really matters in the URL. This ID is unique to each emoji.
 
 ## How does Discord.js store emojis?

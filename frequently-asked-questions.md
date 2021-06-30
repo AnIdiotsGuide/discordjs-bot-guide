@@ -30,24 +30,24 @@ client.on("ready", () => {
 // Set the bot's presence (activity and status)
 client.on("ready", () => {
     client.user.setPresence({
-        activity: { 
+        activities: [{ 
             name: 'my code',
             type: 'WATCHING'
-        },
+        }],
         status: 'idle'
     })
 })
 ```
 
-Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/v12/typedef/ActivityType).
+Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
 
 {% hint style="info" %}
-If you want your bot show up as "streaming" you need to provide a twitch URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
+If you want your bot show up as "streaming" you need to provide a Twitch or YouTube URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
 {% endhint %}
 
 ```javascript
 client.on("ready", () => {
-    client.user.setActivity("my code", { type: "STREAMING", url: "https://www.twitch.tv/something" })
+    client.user.setActivity("my code", { type: "STREAMING", url: "https://www.twitch.tv/an_idiots_guide" })
 })
 ```
 
@@ -84,7 +84,7 @@ message.member.send("Heya!");
 
 ```javascript
 // Mention a user in a message
-message.channel.send(`Hello ${user}, and welcome!`);
+message.channel.send(`Hello ${message.author.toString()}, and welcome!`);
 // or
 message.channel.send("Hello " + message.author.toString() + ", and welcome!");
 ```
@@ -170,7 +170,7 @@ client.on("guildMemberAdd", member => {
 
 It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
 
-Consider using [Enmap](https://npmjs.com/package/enmap) for per-guild settings instead \([example here](https://gist.github.com/eslachance/5c539ccebde9fa76340fb5d54889aa22)\) and let server admins **choose** a channel!
+Consider using [Enmap](https://npmjs.com/package/enmap) for per-guild settings instead \([example here](https://enmap.evie.dev/complete-examples/per-server-settings)\) and let server admins **choose** a channel!
 
 ## Messages
 
@@ -183,11 +183,10 @@ message.channel.send("Test").then(sentMessage => sentMessage.edit("Blah"));
 ```javascript
 // Fetching a message by ID (Discord.js versions 9 through 11)
 // note: you can line return right before a "dot" in JS, that is valid.
-message.channel.messages.fetch({around: "352292052538753025", limit: 1})
+message.channel.messages.fetch({ around: "352292052538753025", limit: 1 })
   .then(messages => {
     const fetchedMsg = messages.first(); // messages is a collection!
     // do something with it
     fetchedMsg.edit("This fetched message was edited");
   });
 ```
-

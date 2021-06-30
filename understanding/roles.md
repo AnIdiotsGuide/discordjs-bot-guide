@@ -6,7 +6,7 @@ Roles are a powerful feature in Discord, and admittedly have been one of the har
 
 Let's start with a basic overview of the hierarchy of roles in Discord.
 
-... or actually not, they already explain it better than I care to: [Role Management 101](https://support.discordapp.com/hc/en-us/articles/214836687-Role-Management-101). Read up on that, then come back here. I'll wait. \(Yeah I know that's cheesy, so sue me\).
+... or actually not, they already explain it better than I care to: [Role Management 101](https://support.discord.com/hc/en-us/articles/214836687-Role-Management-101). Read up on that, then come back here. I'll wait. \(Yeah I know that's cheesy, so sue me\).
 
 ## Role code
 
@@ -104,7 +104,7 @@ let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAG
 message.channel.permissionsFor(message.member).serialize(false)
 ```
 
-> Note: We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicently grant any permissions, unlike in Roles or when you are the Guild Owner. \(The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord devs have stated this is [intended behavior](https://github.com/discordapp/discord-api-docs/issues/640).\)
+> Note: We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicently grant any permissions, unlike in Roles or when you are the Guild Owner. \(The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord devs have stated this is [intended behavior](https://github.com/discord/discord-api-docs/issues/640).\)
 
 ### Get all permissions of a member on a guild
 

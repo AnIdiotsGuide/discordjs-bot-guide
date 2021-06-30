@@ -8,7 +8,7 @@ Putting your token in a config file is fine, but **DO NOT COMMIT IT TO GITHUB** 
 
 ## Why a config file?
 
-One of the advantages of having a configuration file is that you can safely copy your bot's code into, say, hastebin.com to show people, and your token won't be in there. A second advantage is that you can upload the code to a repository like github and, as long as you ignore the config file, your bot can be shared but remain secure. We'll see that in action in a future walkthrough.
+One of the advantages of having a configuration file is that you can safely copy your bot's code into, say, hastebin.com to show people, and your token won't be in there. A second advantage is that you can upload the code to a repository like github and, as long as you ignore the config file, your bot can be shared but remain secure. We'll see that in action in a future walk through.
 
 ## Step 1: The config file
 
@@ -32,7 +32,9 @@ At the top of your bot file, you need to add a line that will load this configur
 
 ```javascript
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES"]
+});
 const config = require("./config.json");
 ```
 
@@ -84,7 +86,7 @@ client.on("message", (message) => {
 ```
 
 {% hint style="info" %}
-The removal of the line that sets the prefix. We don't need it anymore!
+We remove the line that sets the prefix. We don't need it anymore!
 {% endhint %}
 
 ## Changing the config
@@ -103,7 +105,7 @@ So is there anything else you could put in that config file? Absolutely. One thi
 }
 ```
 
-Then, in a protected command, I could use the following line to prevent access to all the users that think they can use it!:
+Then, in a protected command ([eval](../examples/making-an-eval-command.md) for example), I could use the following line to prevent access to all the users that think they can use it!:
 
 ```javascript
 if(message.author.id !== config.ownerID) return;
@@ -112,4 +114,3 @@ if(message.author.id !== config.ownerID) return;
 ## What's next _now_?
 
 So now that we have a functional bot with a configuration file, let's add more stuff to it! Follow me to the [Command with arguments](command-with-arguments.md) for the next part!
-

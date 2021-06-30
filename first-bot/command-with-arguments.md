@@ -17,8 +17,8 @@ In the greatest majority of the code I've seen, arguments are _split_ at the beg
 In my experience, the best \(and most efficient\) way of separating all these things is the following 2 lines of code:
 
 ```javascript
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+const args = message.content.slice(prefix.length).trim().split(/ +/g);
+const command = args.shift().toLowerCase();
 ```
 
 Let's break this down into what it _actually_ does, line by line.
@@ -95,7 +95,7 @@ if (command === "asl") {
 }
 ```
 
-And if you want to be **really** fancy with ECMAScript 6, here's an awesome one \(requires Node 6!\):
+And if you want to be **really** fancy with ECMAScript 6, here's an awesome one:
 
 ```javascript
 if (command === "asl") {
@@ -110,16 +110,16 @@ This is called [Destructuring](https://developer.mozilla.org/en/docs/Web/JavaScr
 
 ## Grabbing Mentions
 
-Another way to use arguments, when the command should target a specific user \(or users\), is to use _Mentions_. For instance, to kick annoying shitposters with `!kick @Xx_SniperBitch_xX @UselessIdiot` can be done with ease, instead of attempting to grab their ID or their name.
+Another way to use arguments, when the command should target a specific user \(or users\), is to use _Mentions_. For instance, to kick annoying shit-posters with `!kick @Xx_SniperBitch_xX @UselessIdiot` can be done with ease, instead of attempting to grab their ID or their name.
 
-In the context of the `message` event handler, all mentions in a message are part of the `msg.mentions` object. This object then contains multiple [Collections ](../understanding/collections.md)of different mention types. Here are the various available mention types:
+In the context of the `message` event handler, all mentions in a message are part of the `message.mentions` object. This object then contains multiple [Collections](../understanding/collections.md) of different mention types. Here are the various available mention types:
 
-* `message.mentions.members` contains all @mention as [GuildMember ](https://discord.js.org/#/docs/main/v12/class/GuildMember)objects. 
-* `message.mentions.users` contains all @mention as [User ](https://discord.js.org/#/docs/main/v12/class/User)objects. 
-* `message.mentions.roles` contains all @role mention as [Role ](https://discord.js.org/#/docs/main/v12/class/Role)objects. 
-* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/v12/class/TextChannel) objects.
+* `message.mentions.members` contains all @mention as [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember) objects.
+* `message.mentions.users` contains all @mention as [User](https://discord.js.org/#/docs/main/stable/class/User) objects.
+* `message.mentions.roles` contains all @role mention as [Role](https://discord.js.org/#/docs/main/stable/class/Role) objects.
+* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
 
-Each of are collections so any collection method can be used on them. The most common method to use on mentions is .first\(\) which gets the very first mention, since there is often only one of them.
+Each of these are collections so any collection method can be used on them. The most common method to use on mentions is .first\(\) which gets the very first mention, since there is often only one of them.
 
 Let's build a quick and dirty `kick` command, then. No error handling or mod checks - just straight up! \(_Cul Sec_, as the French would say\):
 
@@ -149,7 +149,7 @@ if(command === "kick") {
 
 So, the reason is obtained by removing the first elements \(the mention, which looks like `<@1234567489213>`\) and re-joining the rest of the array elements with a space.
 
-To use this command, a user would do something like: `!kick @SuperGamerDude Obvious Troll, shitposting`.
+To use this command, a user would do something like: `!kick @SuperGamerDude Obvious Troll, shit-posting`.
 
 Here's another example, with a super simple command, the `say` command. It makes the bot say what you just sent, and then delete your message:
 
@@ -168,4 +168,3 @@ If you're thinking, "What if I have more than one argument with spaces?", yes th
 ## Going one step further
 
 Now, there's most definitely always room for some optimization, and better code. At this point, "parsing arguments" becomes something you might realize is necessary for _all_ of your commands, and writing "\(command === 'thing'\)" for every command is dull and boring. So, as your next step, consider looking at making [A Basic Command Handler](a-basic-command-handler.md). This **greatly** simplifies the creation of new commands.
-

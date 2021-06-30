@@ -78,5 +78,5 @@ const smallGuilds = client.guilds.cache.filter(g => g.memberCount < 10).map(g =>
 
 ## More Data!
 
-To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/main/v12/class/Collection). Since Collection extends Map\(\), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.
+To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/main/stable/class/Collection). Since Collection extends Map\(\), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.
 

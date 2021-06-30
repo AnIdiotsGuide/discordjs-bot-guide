@@ -64,7 +64,7 @@ const { ShardingManager } = require('discord.js');
 // Create your ShardingManger instance
 const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
     // for ShardingManager options see:
-    // https://discord.js.org/#/docs/main/v12/class/ShardingManager
+    // https://discord.js.org/#/docs/main/stable/class/ShardingManager
     totalShards: 'auto',
     token: 'YOUR_TOKEN_GOES_HERE'
 });
@@ -84,7 +84,7 @@ These two functions are your go-to for getting any information from other shards
 
 ### FetchClientValues
 
-[`fetchClientValues`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.cache.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
+[`fetchClientValues`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=fetchClientValues) gets Client properties from all shards. This is what you should use when you would like to get any of the nested properties of the Client, such as `guilds.cache.size` or `uptime`. It's useful for getting things like Collection sizes, basic client properties, and unprocessed information about the client.
 
 Example:
 
@@ -142,7 +142,7 @@ const getServerCount = async () => {
 
 ### BroacastEval
 
-[`broadcastEval`](https://discord.js.org/#/docs/main/v12/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client\(s\). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
+[`broadcastEval`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client\(s\). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
 Example:
 

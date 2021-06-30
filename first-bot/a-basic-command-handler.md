@@ -12,7 +12,7 @@ Want a better, updated version of this code? We're now maintaining this command 
 
 In order to correctly write and use a command handler, I would suggest you get familiar with a few things.
 
-* Check out [Introduction to Modules]() for information on modules \(which we'll use for each command\)
+* Check out [Introduction to Modules](https://js.evie.dev/modules) for information on modules \(which we'll use for each command\)
 * Understand how [Events](../understanding/events-and-handlers.md) work, and how each event has different arguments provided.
 * Have a good grasp of, at the very least, [Commands with Arguments](command-with-arguments.md), which we'll be using as a base for most of our code.
 
@@ -43,7 +43,7 @@ fs.readdir("./events/", (err, files) => {
 });
 ```
 
-The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we like to use Enmap for this purpose, the "non-persistent" one:
+The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we'll use a Discord Collection:
 
 ```javascript
 client.commands = new Discord.Collection();
@@ -69,7 +69,9 @@ Ok so with that being said, our main file now looks like this \(how _clean_ is t
 const Discord = require("discord.js");
 const fs = require("fs");
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES"]
+});
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
@@ -153,12 +155,12 @@ exports.run = (client, message, [mention, ...reason]) => {
     return message.reply("Please mention a user to kick");
 
   if (!message.guild.me.hasPermission("KICK_MEMBERS"))
-    return message.reply("");
+    return message.reply("I don't have the `KICK_MEMBERS` permission");
 
   const kickMember = message.mentions.members.first();
 
   kickMember.kick(reason.join(" ")).then(member => {
-    message.reply(`${member.user.username} was succesfully kicked.`);
+    message.reply(`${member.user.username} was successfully kicked.`);
   });
 };
 ```
@@ -175,7 +177,7 @@ module.exports = (client) => {
 }
 ```
 
-Note that the `ready` event normally doesn't have any arguments, it's just \(\). But because we're in separate modules, it's necessary to "pass" the `client` variable to it or it would not be accessible. That's what our fancy `bind` is for in the main file!
+Note that the `ready` event normally doesn't have any arguments, it's just `()`. But because we're in separate modules, it's necessary to "pass" the `client` variable to it or it would not be accessible. That's what our fancy `bind` is for in the main file!
 
 Here's another example with the `guildMemberAdd` event:
 
@@ -214,3 +216,4 @@ exports.run = (client, message, args) => {
 
 Remember that all of this is just a fairly basic version of the GuideBot command handler which also has permissions, levels, per-guild configurations, and a whole lot of example commands and events! [Head on over to Github](https://github.com/AnIdiotsGuide/guidebot/) to see the completed handler.
 
+Next up is making this basic command handler _better_ with the addition of [slash commands](slash-commands/md).

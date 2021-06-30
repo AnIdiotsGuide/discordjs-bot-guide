@@ -1,6 +1,6 @@
 # Raw Events
 
-This will essentially cover how to make use of the `raw` event in order to make use of message reactions. Discord.js processes raw packets in order to give you pretty-formatted events that you make use of in your bots. The underlying architecture, however, is not so pretty. You can find documentation for the general structure of these packets [here](https://discordapp.com/developers/docs/topics/gateway#payloads). The packet contents in `d` can differ very greatly. The contents of that field is each gateway event. For the purpose of this guide, we will take a look at [`messageReactionAdd`](https://discordapp.com/developers/docs/topics/gateway#message-reaction-add).
+This will essentially cover how to make use of the `raw` event in order to make use of message reactions. Discord.js processes raw packets in order to give you pretty-formatted events that you make use of in your bots. The underlying architecture, however, is not so pretty. You can find documentation for the general structure of these packets [here](https://discord.com/developers/docs/topics/gateway#payloads). The packet contents in `d` can differ very greatly. The contents of that field is each gateway event. For the purpose of this guide, we will take a look at [`messageReactionAdd`](https://discord.com/developers/docs/topics/gateway#message-reaction-add).
 
 Here is what a packet can essentially look like:
 
@@ -66,4 +66,3 @@ client.on('raw', packet => {
 ```
 
 Now, both of those events should trigger for any message ever!
-

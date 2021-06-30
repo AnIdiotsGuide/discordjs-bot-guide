@@ -180,11 +180,11 @@ client.login("SuperSecretBotTokenHere");
 
 Now, just get someone to mention you!
 
-![Getting Mentioned](../.gitbook/assets/wh06%20%281%29.png)
+![Getting Mentioned](../.gitbook/assets/wh06.png)
 
 If all goes well, check the channel you set the webhook for and you should see something like this...
 
-![You got Mentioned!](../.gitbook/assets/wh07%20%282%29.png)
+![You got Mentioned!](../.gitbook/assets/wh07.png)
 
 That's basically it for this guide, but you can spice up the webhook notification by grabbing who mentioned you, what channel/guild you were mentioned in and what the content was \(in cases of deletion.\)
 

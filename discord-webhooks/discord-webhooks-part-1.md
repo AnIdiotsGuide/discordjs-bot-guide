@@ -25,7 +25,7 @@ client.on("message", (message) => {
 client.login("SuperSecretBotTokenHere");
 ```
 
-Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/v12/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
+Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
 
 ```javascript
 // This will create the webhook with the name "Example Webhook" and an example avatar.
@@ -34,7 +34,7 @@ message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.pn
 .then(webhook => webhook.edit("Example Webhook", "https://i.imgur.com/p2qNFag.png")
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
-.then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
+.then(wb => message.author.send(`Here is your webhook https://discord.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
 ```
 
 This is what it should look like if you test the code.
@@ -58,7 +58,7 @@ client.on("message", message => {
   if (message.content.startsWith(prefix + "createHook")) {
     message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.png")
       .then(webhook => webhook.edit("Example Webhook", "https://i.imgur.com/p2qNFag.png")
-        .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`))
+        .then(wb => message.author.send(`Here is your webhook https://discord.com/api/webhooks/${wb.id}/${wb.token}`))
         .catch(console.error))
       .catch(console.error);
   }
@@ -90,7 +90,7 @@ const name = nameAvatar.replace(linkCheck, "");
 message.channel.createWebhook(name, avatar)
   .then(webhook => webhook.edit(name, avatar)
     .catch(error => console.log(error)))
-  .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}\n\nPlease keep this safe, as you could be exploited.`)
+  .then(wb => message.author.send(`Here is your webhook https://discord.com/api/webhooks/${wb.id}/${wb.token}\n\nPlease keep this safe, as you could be exploited.`)
     .catch(error => console.log(error)))
   .catch(error => console.log(error));
 ```
@@ -101,7 +101,7 @@ Alright, now let's throw that together with our bot code and issue the command!
 
 And let's check the channel webhooks!
 
-![Channel Webhooks](../.gitbook/assets/wh05%20%281%29.png)
+![Channel Webhooks](../.gitbook/assets/wh05.png)
 
 Wooo! we did it!
 
