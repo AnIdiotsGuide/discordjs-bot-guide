@@ -6,20 +6,20 @@ Here's a fun fact you might not know about bots on Discord: They have access to 
 
 Let's start by tearing apart exactly what an Emoji is, how they're configured and how they're accessed. So here, we have an emoji:
 
-![](https://cdn.discord.com/emojis/305818615712579584.png)
+![ayy](https://cdn.discordapp.com/emojis/305818615712579584.png)
 
 When I want to write this emoji in my chat, I simply type `:ayy:` and it turns into the above \(smaller, of course, but still\). But behind the scenes, 2 things happen for this emoji to show:
 
 * Discord looks up the emoji in my list , finds the one with the name `ayy` and looks up its ID.
 * It then sends the _actual_ emoji code to the server, which looks like this: `<:ayy:305818615712579584>`. This is the code that makes up the emoji.
-* When a client receives the above, it looks up the URL for the Emoji from its ID, to get the image location. In this case, it's: `https://cdn.discord.com/emojis/305818615712579584.png`.
+* When a client receives the above, it looks up the URL for the Emoji from its ID, to get the image location. In this case, it's: `https://cdn.discordapp.com/emojis/305818615712579584.png`.
 * As you can see the ID is the only thing that really matters in the URL. This ID is unique to each emoji.
 
 ## How does Discord.js store emojis?
 
 There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis.cache` is a collection of every emoji the client has access to, and `guild.emojis.cache` is a collection of the emojis of a specific guild.
 
-If you've learned anything from [Understanding Collections](using-emojis.md), you might already know how to get something by ID from a collection:
+If you've learned anything from [Understanding Collections](../understanding/collections.md), you might already know how to get something by ID from a collection:
 
 ```javascript
 const ayy = client.emojis.cache.get("305818615712579584");
@@ -57,7 +57,7 @@ In this example, you can list all custom emojis with \(emoji.id, emoji.image and
 
 ```javascript
 if (message.content === "listemojis") {
-   const emojiList = message.guild.emojis.cache.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
+   const emojiList = message.guild.emojis.cache.map((e, x) => (x + ' = ' + e) + ' | ' + e.name).join('\n');
    message.channel.send(emojiList);
 }
 
@@ -74,4 +74,3 @@ You can also use custom emojis as reactions to messages, using `message.react(em
 Don't forget there is a very extensive collection of emojis that are built into Discord that you can have access to. Discord uses Twemoji, provided by Twitter. You can use those emojis to react to messages directly.
 
 The way that Discord expects those emojis however is that they have to be the _unicode_ character, not the "text". Meaning, you can't just do `message.send(":poop:")` and expect to see 💩 appear. You actually need to get the unicode value. How do you do that? Just escape the emoji in chat: `\:poop:` will show as 💩. You can copy/paste that inside your bot's code either in a message string, or as an emoji reaction such as `message.react("💩")`.
-

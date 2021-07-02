@@ -10,19 +10,21 @@ So to get started, let's grab the example from [getting started](../getting-star
 
 ```javascript
 const Discord = require("discord.js");
-const client = new Discord.Client();
- 
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES"]
+});
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
- 
+
 client.on("message", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
 });
- 
-client.login("superSecretBotTokenHere");
+
+client.login("SuperSecretBotTokenHere");
 ```
 
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
@@ -30,13 +32,13 @@ Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](htt
 ```javascript
 var Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
-cleverbot.configure({botapi: "IAMKEY"});
+cleverbot.configure({ botapi: "IAMKEY" });
 cleverbot.write(cleverMessage, function (response) {
    console.log(response.output);
 });
 ```
 
-Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node` with the `--save` flag if you have a `package.json` file \(and you should!\).
+Alright, we've got both parts we need, now before we continue we should get the module installed, just run `npm i cleverbot-node`.
 
 Installed? Good! Now, let's get to the final step... the code.
 
@@ -56,14 +58,18 @@ cleverbot = new Cleverbot;
 ```javascript
 const Discord = require("discord.js");
 const Cleverbot = require("cleverbot-node");
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES"]
+});
 const clbot = new Cleverbot;
-clbot.configure({botapi: "IAMKEY"});
+clbot.configure({ botapi: "IAMKEY" });
 ```
 
 I renamed `cleverbot` to `clbot` to reduce any possible confusion between the variable names as JavaScript is case sensitive.
 
-Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we"ll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\)
+Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we"ll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\) but we also need to add the `DIRECT_MESSAGES` intent and the `CHANNEL` partial as DM channels can be uncached.
+
+Checking the channel type.
 
 ```javascript
 if (message.channel.type === "dm") {
@@ -71,14 +77,25 @@ if (message.channel.type === "dm") {
 }
 ```
 
+Don't forget to add these within your client object.
+
+```javascript
+["DIRECT_MESSAGES"],
+partials: ["CHANNEL"]
+```
+
 Your code should look something like this...
 
 ```javascript
 const Discord = require("discord.js");
 const Cleverbot = require("cleverbot-node");
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
+  partials: ["CHANNEL"]
+});
 const clbot = new Cleverbot;
- 
+clbot.configure({ botapi: "IAMKEY" });
+
 client.on("message", message => {
   if (message.channel.type === "dm") {
     clbot.write(message.content, (response) => {
@@ -100,5 +117,4 @@ client.login("superSecretBotTokenHere");
 
 If everything is as above, then just send your bot a DM and watch the magic unfold!
 
-![Success!](../.gitbook/assets/cleverbot.png)
-
+![Success!](../.gitbook/assets/cleverbot-results.png)

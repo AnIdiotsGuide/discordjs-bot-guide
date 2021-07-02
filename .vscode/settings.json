@@ -3,6 +3,7 @@
     "bot",
     "bot's",
     "botception",
+    "clbot",
     "commandname",
     "discordjs",
     "distro",
@@ -13,10 +14,17 @@
     "gitbook",
     "hastebin",
     "mkdir",
-    "pastebin"
+    "pastebin",
+    "syncronous"
   ],
   "cSpell.ignoreWords": [
+    "ayyy",
+    "botapi",
     "chonker",
-    "cleverbot"
+    "cleverbot",
+    "halp",
+    "iamkey",
+    "leaderboard",
+    "npmjs"
   ]
 }

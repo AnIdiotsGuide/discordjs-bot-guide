@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Welcome](README.md)
-* [Support me on Patreon](https://www.patreon.com/anidiotsguide)
 * [Frequently Asked Questions](frequently-asked-questions.md)
 * [Common Errors](common-errors.md)
 * [Getting Started](getting-started/README.md)
@@ -16,13 +15,11 @@
   * [Using Embeds in messages](first-bot/using-embeds-in-messages.md)
 * [Coding Guides](coding-guides/README.md)
   * [SQLite-Based Points System](coding-guides/sqlite-based-points-system.md)
-  * [Creating a Music Bot](coding-guides/creating-a-music-bot.md)
   * [Cleverbot Integration](coding-guides/cleverbot-integration.md)
   * [Using Emojis](coding-guides/using-emojis.md)
   * [Making a Starboard](coding-guides/making-your-own-starboard.md)
   * [Tracking Used Invites](coding-guides/tracking-used-invites.md)
   * [Using Audit Logs](coding-guides/using-audit-logs.md)
-  * [Raw Events](coding-guides/raw-events.md)
 * [Understanding](understanding/README.md)
   * [Events and Handlers](understanding/events-and-handlers.md)
   * [Collections](understanding/collections.md)
@@ -41,3 +38,4 @@
   * [Using Git to share and update code](other-guides/using-git-to-share-and-update-code.md)
   * [Using Environment Variables](other-guides/env-files.md)
   * [Async / Await](other-guides/async-await.md)
+  
