@@ -108,7 +108,7 @@ So is there anything else you could put in that config file? Absolutely. One thi
 Then, in a protected command ([eval](../examples/making-an-eval-command.md) for example), I could use the following line to prevent access to all the users that think they can use it!:
 
 ```javascript
-if(message.author.id !== config.ownerID) return;
+if (message.author.id !== config.ownerID) return;
 ```
 
 ## What's next _now_?

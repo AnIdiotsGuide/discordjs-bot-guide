@@ -1,12 +1,6 @@
 # SQLite-Based Points System
 
-As mentioned in the [Storing Data in a JSON file]() guide, JSON files could get corrupted due to [_race conditions_](https://en.wikipedia.org/wiki/Race_condition#Software). However SQLite doesn't suffer from that and is a better method of storing data between boot ups than JSON.
-
-That is the focus of this guide: we'll be recreating the points system with SQLite instead of JSON. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/package/better-sqlite3).
-
-{% hint style="info" %}
-This guide was updated on 2018/03/16 to use `better-sqlite3` which, believe it or not, is a _syncronous_ module for sqlite that's faster than both `sqlite` and `sqlite3`.
-{% endhint %}
+That is the focus of this guide: we'll be creating the points system with SQLite. The core of this system is using the `better-sqlite3` package that you can get from [npmjs.com](https://npmjs.com/package/better-sqlite3).
 
 ## Installation
 
@@ -22,15 +16,17 @@ npm i node-gyp better-sqlite3
 
 ## Setting the table
 
-Like in the JSON guide you had a data structure, SQLite is no different, but it's called a table. Now what do we want in our table? I'll tell ya!
+You've got SQLite installed, now what do we want in our table? I'll tell ya!
 
-For this example points system we want the user's ID, points and level. I'm not going to go to deep in to the jargon surrounding SQL and SQLite, but the tables are made from rows and columns of data. Got it? Good, moving on!
+For this example points system we want the user's ID, points and level to be compliant with Discord's Developer Terms of Service. I'm not going to go to deep in to the jargon surrounding SQL and SQLite, but the tables are made from rows and columns of data. Got it? Good, moving on!
 
 Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](../first-bot/command-with-arguments.md) page of this guide. The code is as such:
 
 ```javascript
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES"]
+});
 const config = require("./config.json"); // Contains the prefix, and token!
 
 client.on("ready", () => {
@@ -124,7 +120,7 @@ client.on("ready", () => {
 });
 ```
 
-## You get points, and You get points and EVERYBODY GETS POINTS.
+## You get points, and you get points and EVERYBODY GETS POINTS.
 
 Now we can go right ahead and start using the database to retrieve and store points data. We'll be doing this inside the Message handler, and our very first step is to try to retrieve the existing points for a user inside the points table, which would look like this:
 
@@ -132,7 +128,7 @@ Now we can go right ahead and start using the database to retrieve and store poi
 let score = client.getScore.get(message.author.id, message.guild.id);
 ```
 
-Importantly, if we've never seen this user before, they will not be seen, which means we have to "defined" their initial values. This can be done with a simple condition, though:
+Importantly, if the bot has never seen this user before they won't have any data, which means we have to "define" their initial values. This can be done with a simple condition, though:
 
 ```javascript
 if (!score) {
@@ -148,7 +144,7 @@ if (!score) {
 
 ## Keeping Score
 
-Now that we have our initial "Scores" value, we can do two things: first, increment the points. And second, calculate the level of the user.
+Now that we have our initial "scores" value, we can do two things: first, increment the points. And second, calculate the level of the user.
 
 ```javascript
 // Increment the score
@@ -158,7 +154,7 @@ score.points++;
 const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
 
 // Check if the user has leveled up, and let them know if they have:
-if(score.level < curLevel) {
+if (score.level < curLevel) {
   // Level up!
   score.level++;
   message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
@@ -208,7 +204,7 @@ client.on("message", message => {
     }
     score.points++;
     const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
-    if(score.level < curLevel) {
+    if (score.level < curLevel) {
       score.level++;
       message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
     }
@@ -230,58 +226,59 @@ client.login(config.token);
 Now we've got the core of this code done, we need to add a few commands, which we can add below all our code in the message handler. We've already separated the arguments and commands, so this will be pretty easy, especially since we've already loaded the `score`, calculated the points, and the level!
 
 ```javascript
-if(command === "points") {
+if (command === "points") {
   return message.reply(`You currently have ${score.points} points and are level ${score.level}!`);
 }
 ```
 
-### Addendum: Leaderboard and Give commands!
+### Addendum: Leader board and Give commands!
 
 Here are some quick & easy commands you can use, assuming the above code is used and this is still happening in the same file:
 
 ```javascript
-if(command === "give") {
+// You can modify the code below to remove points from the mentioned user as well!
+if (command === "give") {
   // Limited to guild owner - adjust to your own preference!
-  if(!message.author.id === message.guild.owner) return message.reply("You're not the boss of me, you can't do that!");
+  if (!message.author.id === message.guild.owner) return message.reply("You're not the boss of me, you can't do that!");
 
   const user = message.mentions.users.first() || client.users.cache.get(args[0]);
-  if(!user) return message.reply("You must mention someone or give their ID!");
+  if (!user) return message.reply("You must mention someone or give their ID!");
 
   const pointsToAdd = parseInt(args[1], 10);
-  if(!pointsToAdd) return message.reply("You didn't tell me how many points to give...")
+  if (!pointsToAdd) return message.reply("You didn't tell me how many points to give...");
 
   // Get their current points.
-  let userscore = client.getScore.get(user.id, message.guild.id);
+  let userScore = client.getScore.get(user.id, message.guild.id);
+
   // It's possible to give points to a user we haven't seen, so we need to initiate defaults here too!
-  if (!userscore) {
-    userscore = { id: `${message.guild.id}-${user.id}`, user: user.id, guild: message.guild.id, points: 0, level: 1 }
+  if (!userScore) {
+    userScore = { id: `${message.guild.id}-${user.id}`, user: user.id, guild: message.guild.id, points: 0, level: 1 }
   }
-  userscore.points += pointsToAdd;
+  userScore.points += pointsToAdd;
 
   // We also want to update their level (but we won't notify them if it changes)
   let userLevel = Math.floor(0.1 * Math.sqrt(score.points));
-  userscore.level = userLevel;
+  userScore.level = userLevel;
 
   // And we save it!
-  client.setScore.run(userscore);
+  client.setScore.run(userScore);
 
-  return message.channel.send(`${user.tag} has received ${pointsToAdd} points and now stands at ${userscore.points} points.`);
+  return message.channel.send(`${user.tag} has received ${pointsToAdd} points and now stands at ${userScore.points} points.`);
 }
 
-if(command === "leaderboard") {
+if (command === "leaderboard") {
   const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
 
     // Now shake it and show it! (as a nice embed, too!)
   const embed = new Discord.MessageEmbed()
-    .setTitle("Leaderboard")
+    .setTitle("Leader board")
     .setAuthor(client.user.username, client.user.avatarURL())
     .setDescription("Our top 10 points leaders!")
     .setColor(0x00AE86);
 
-  for(const data of top10) {
+  for (const data of top10) {
     embed.addFields({ name: client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
   }
   return message.channel.send({embed});
 }
 ```
-

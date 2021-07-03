@@ -1,6 +1,6 @@
 # Using Emojis
 
-Here's a fun fact you might not know about bots on Discord: They have access to every single "custom emoji" of every single guild they're in - for free. That's right, you have 1/4 of the features of Nitro, free in your bot, right now! In this page we'll be taking a look at how to take advantage of these emojis, how to access them and how to display them.
+Here's a fun fact you might not know about bots on Discord: They have access to every single "custom emoji" of every single guild they're in - for free. That's right, you have a feature of Nitro, free in your bot, right now! In this page we'll be taking a look at how to take advantage of these emojis, how to access them and how to display them.
 
 ## What's an Emoji?
 
@@ -38,7 +38,7 @@ But how does one output that emoji to the chat? Well, just like users and roles,
 You can also take advantage of concatenation and template literals to simplify the task, since they will automatically do the conversion for you:
 
 ```javascript
-if(message.content === "ayy") {
+if (message.content === "ayy") {
    const ayy = client.emojis.cache.find(emoji => emoji.name === "ayy");
    message.reply(`${ayy} LMAO`);
 }
