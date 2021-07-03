@@ -4,7 +4,7 @@
 Embeds might look nice but they can be disabled through permissions and user preferences, and will not look the same on mobile - especially complex ones. It's strongly recommended _not_ to use them unless you have a text-only fallback. Yes they're nice, but, don't use them if you don't _need_ to!
 {% endhint %}
 
-## Object-based embeds
+## Embeds
 
 Here are a few rules for embeds:
 

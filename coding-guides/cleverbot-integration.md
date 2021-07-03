@@ -4,7 +4,7 @@
 Cleverbot **NO LONGER** offers a free trial; this guide page will **NOT** be updated to use any other module.
 {% endhint %}
 
-I've had this request since I started my Idiot's Guide, in fact it was one of the very first requests I had, but I had a feeling it would be a disappointing short episode, maybe a 5 minute long episode. But for a written guide it'd be perfect!
+I've had this request since I started An Idiot's Guide, in fact it was one of the very first requests I had, but I had a feeling it would be a disappointing short episode, maybe a 5 minute long episode. But for a written guide it'd be perfect!
 
 So to get started, let's grab the example from [getting started](../getting-started/getting-started-long-version.md) and shove it in a file.
 
@@ -67,7 +67,7 @@ clbot.configure({ botapi: "IAMKEY" });
 
 I renamed `cleverbot` to `clbot` to reduce any possible confusion between the variable names as JavaScript is case sensitive.
 
-Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we"ll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\) but we also need to add the `DIRECT_MESSAGES` intent and the `CHANNEL` partial as DM channels can be uncached.
+Then we take the rest of the code and place that inside our message event handler, but for this example I only want the bot to talk to me in DM's, so we'll check the channel `type` with the following code, you can make it respond on mentions or even in channels \(I would honestly advise against that.\) but we also need to add the `DIRECT_MESSAGES` intent and the `CHANNEL` partial as DM channels can be uncached.
 
 Checking the channel type.
 
