@@ -19,7 +19,7 @@ Very simply, to get anything by ID you can use `Collection.get(id)`. For instanc
 
 If you don't have the ID but only some other property, you may use `find()` to search by property:
 
-`let guild = client.guilds.cache.find(guild => guild.name === "Discord.js Official");`
+`let guild = client.guilds.cache.find(guild => guild.name === "discord.js - imagine a bot");`
 
 The _first_ result that returns `true` within the function, will be returned. The generic idea of this is:
 
@@ -62,10 +62,10 @@ const guildNames = client.guilds.cache.map(g => g.name).join("\n")
 
 Since `.join()` is an array method, which links all entries together, we get a nice list of all guilds, with a line return between each. Neat!
 
-We can also get a most custom string. Let's pretend the `user.tag` property doesn't exist, and we wanted to get all the user\#discrim in our bot. Here's how we'd do it \(using awesome template literals\):
+We can also get a most custom string. Let's pretend the `user.tag` property doesn't exist, and we wanted to get all the user\#discriminator in our bot. Here's how we'd do it \(using awesome template literals\):
 
 ```javascript
-const tags = client.users.cache.map(u=> `${u.username}#${u.discriminator}`).join(", ");
+const tags = client.users.cache.map(u => `${u.username}#${u.discriminator}`).join(", ");
 ```
 
 ## Combining and Chaining
@@ -78,5 +78,4 @@ const smallGuilds = client.guilds.cache.filter(g => g.memberCount < 10).map(g =>
 
 ## More Data!
 
-To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/main/stable/class/Collection). Since Collection extends Map\(\), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.
-
+To see **all** of the Discord.js Collection Methods, please [refer to the docs](https://discord.js.org/#/docs/collection/main/general/welcome). Since Collection extends Map\(\), you will also need to refer to [this awesome mdn page](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) which describe the native methods - most notably `.forEach()`, `.has()`, etc.

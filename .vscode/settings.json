@@ -1,8 +1,10 @@
 {
   "cSpell.words": [
+    "bootup",
     "bot",
     "bot's",
     "botception",
+    "broadcasteval",
     "clbot",
     "commandname",
     "discordjs",
@@ -11,24 +13,32 @@
     "enmap",
     "evie",
     "evie's",
+    "fetchclientvalues",
     "gitbook",
     "hastebin",
     "mkdir",
     "pastebin",
+    "sharded",
     "syncronous"
   ],
   "cSpell.ignoreWords": [
+    "addrole",
     "ayyy",
     "botapi",
     "chonker",
     "cleverbot",
+    "ezpz",
     "halp",
     "iamkey",
     "leaderboard",
     "listemojis",
     "mycommand",
+    "nadda",
     "newtag",
+    "noppers",
     "npmjs",
-    "twemoji"
+    "rolename",
+    "twemoji",
+    "woah"
   ]
 }

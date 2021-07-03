@@ -36,7 +36,7 @@ const client = new Discord.client({ shardCount: 'auto' });
 
 `traditional` sharding is the method by which a bot's code spawns individual child processes via a main shard manager process, each child process being one shard of the bot. When using this style of sharding, guilds, channels, and users on one shard will _not_ be available to another via direct call \(e.g. `client.guilds.cache.get('GUILD_ID')`\) because each shard is in a separate process.
 
-This style of sharding is ideal for larger bots, or bots that need to be scalable to allow for future growth. The rest of this page will discuss [how to make use of traditional sharding](sharding.md#example-sharding-manager-code) and [how to share information between shards](sharding.md#sharding-information-between-shards).
+This style of sharding is ideal for larger bots, or bots that need to be scalable to allow for future growth. The rest of this page will discuss [how to make use of traditional sharding](sharding.md#example-sharding-manager-code) and [how to share information between shards](sharding.md#sharing-information-between-shards).
 
 To learn how to make use of this, read on!
 
@@ -140,7 +140,7 @@ const getServerCount = async () => {
 `fetchClientValues()` does not allow you to make use of javascript methods or client methods to get or process information before returning it. It only allows you to get information from client properties.
 {% endhint %}
 
-### BroacastEval
+### BroadcastEval
 
 [`broadcastEval`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval) evaluates the input in the context of each shard's Client\(s\). This is what you should use when you want to execute a method or process data on a shard and return the result. It's useful for getting information that isn't available through client properties and must instead be retrieved through the use of methods.
 
@@ -279,4 +279,3 @@ console.log(res);
 //      ...null // all other shard replies
 //     ]
 ```
-

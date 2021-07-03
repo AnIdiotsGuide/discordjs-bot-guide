@@ -1,6 +1,6 @@
 # Roles and Permissions
 
-Roles are a powerful feature in Discord, and admittedly have been one of the hardest parts to master in discord.js. This walkthrough aims at explaining how roles and permissions work. We'll also explore how to use roles to protect your commands.
+Roles are a powerful feature in Discord, and admittedly have been one of the hardest parts to master in discord.js. This walk through aims at explaining how roles and permissions work. We'll also explore how to use roles to protect your commands.
 
 ## Role hierarchy
 
@@ -34,7 +34,7 @@ In a `message` handler, you have access to checking the GuildMember class of the
 
 ```javascript
 // assuming role.id is an actual ID of a valid role:
-if(message.member.roles.cache.has(role.id)) {
+if (message.member.roles.cache.has(role.id)) {
   console.log(`Yay, the author of the message has the role!`);
 } else {
   console.log(`Nope, noppers, nadda.`);
@@ -43,7 +43,7 @@ if(message.member.roles.cache.has(role.id)) {
 
 ```javascript
 // Check if they have one of many roles
-if(message.member.roles.cache.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
+if (message.member.roles.cache.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
   // has one of the roles
 } else {
   // has none of the roles
@@ -98,17 +98,18 @@ To check for a single permission override on a channel:
 let perms = message.channel.permissionsFor(message.member);
 
 // Checks for Manage Messages permissions.
-let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES", false);
+let can_manage_messages = message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES", false);
 
 // View permissions as an object (useful for debugging or eval)
 message.channel.permissionsFor(message.member).serialize(false)
 ```
 
-> Note: We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicently grant any permissions, unlike in Roles or when you are the Guild Owner. \(The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord devs have stated this is [intended behavior](https://github.com/discord/discord-api-docs/issues/640).\)
+{% hint style="info" %} We pass `false` for the checkAdmin parameter because Administrator channel overwrites don't implicitly grant any permissions, unlike in Roles or when you are the Guild Owner. \(The API will allow you to create an overwrite with Administrator, and even tell D.JS that a channel overwrite has had Administrator permissions set. Discord developers have stated this is [intended behavior](https://github.com/discord/discord-api-docs/issues/640).\)
+{% endhint %}
 
 ### Get all permissions of a member on a guild
 
-Just as easy, wooh!
+Just as easy, woah!
 
 ```javascript
 let perms = message.member.permissions;
@@ -123,41 +124,4 @@ Now get to coding!
 
 ## ADDENDUM: Permission Names
 
-This is the list of internal permission names, used for `.has(name)` in the above examples:
-
-```javascript
-{
-  ADMINISTRATOR: true,
-  CREATE_INSTANT_INVITE: true,
-  KICK_MEMBERS: true,
-  BAN_MEMBERS: true,
-  MANAGE_CHANNELS: true,
-  MANAGE_GUILD: true,
-  ADD_REACTIONS: true,
-  VIEW_AUDIT_LOG: true,
-  PRIORITY_SPEAKER: true,
-  STREAM: true,
-  VIEW_CHANNEL: true,
-  SEND_MESSAGES: true,
-  SEND_TTS_MESSAGES: true,
-  MANAGE_MESSAGES: true,
-  EMBED_LINKS: true,
-  ATTACH_FILES: true,
-  READ_MESSAGE_HISTORY: true,
-  MENTION_EVERYONE: true,
-  USE_EXTERNAL_EMOJIS: true,
-  VIEW_GUILD_INSIGHTS: true,
-  CONNECT: true,
-  SPEAK: true,
-  MUTE_MEMBERS: true,
-  DEAFEN_MEMBERS: true,
-  MOVE_MEMBERS: true,
-  USE_VAD: true,
-  CHANGE_NICKNAME: true,
-  MANAGE_NICKNAMES: true,
-  MANAGE_ROLES: true,
-  MANAGE_WEBHOOKS: true,
-  MANAGE_EMOJIS: true
-}
-```
-
+Click [here](https://discord.js.org/#/docs/main/master/class/Permissions?scrollTo=s-FLAGS) for the full list of internal permission names, used for `.has(name)` in the above examples
