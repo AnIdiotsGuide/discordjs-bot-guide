@@ -46,19 +46,8 @@ So now you've been thoroughly briefed on the dangers of Eval, let's take a look 
 First though I strongly suggest using the following function \(plop it outside of any event handler/functions you have, so it's accessible anywhere\). This function prevents the use of actual mentions within the return line by adding a zero-width character between the `@` and the first character of the mention - blocking the mention from happening.
 
 {% hint style="info" %}
-**EITHER** of the following clean snippets are _**REQUIRED**_ to make the eval work.
+The following clean snippet is _**REQUIRED**_ to make the eval work.
 {% endhint %}
-
-```javascript
-const clean = async text => {
-  if (typeof(text) === "string")
-    return text
-    .replace(/`/g, "`" + String.fromCharCode(8203))
-    .replace(/@/g, "@" + String.fromCharCode(8203));
-  else
-      return text;
-}
-```
 
 ```javascript
 const clean = async (text) => {
