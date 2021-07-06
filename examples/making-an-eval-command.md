@@ -34,7 +34,7 @@ So how do you secure it? Simple: only allow use from your own user ID. So for ex
 In the code for the bot:
 
 ```javascript
-if(message.author.id !== config.ownerID) return;
+if (message.author.id !== config.ownerID) return;
 ```
 
 It's as simple as that to protect the command directly inside of your condition or file or whatever. Of course, if you have some sort of command handler there's most likely a way to restrict to an ID too. This isn't specific to discord.js : there's always a way to do this. If there isn't \(if a command handler won't let you restrict by ID\), then you're using the **wrong lib**.
@@ -50,44 +50,44 @@ First though I strongly suggest using the following function \(plop it outside o
 {% endhint %}
 
 ```javascript
-function clean(text) {
+const clean = async text => {
   if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    return text
+    .replace(/`/g, "`" + String.fromCharCode(8203))
+    .replace(/@/g, "@" + String.fromCharCode(8203));
   else
       return text;
 }
 ```
 
-It's ES6 variant:
-
 ```javascript
-const clean = text => {
-  if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-  else
-      return text;
-}
+const clean = async (text) => {
+if (text && text.constructor.name == "Promise")
+      text = await text;
+    if (typeof text !== "string")
+      text = require("util").inspect(text, { depth: 1 });
+
+    text = text
+      .replace(/`/g, "`" + String.fromCharCode(8203))
+      .replace(/@/g, "@" + String.fromCharCode(8203));
+
+    return text;
 ```
 
 Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory, assuming you've followed this guide all along:
 
 ```javascript
-client.on("message", message => {
+client.on("message", async (message) => {
   const args = message.content.split(" ").slice(1);
-
   if (message.content.startsWith(config.prefix + "eval")) {
-    if(message.author.id !== config.ownerID) return;
-    try {
-      const code = args.join(" ");
-      let evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.send(clean(evaled), {code:"xl"});
-    } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
+    if (message.author.id !== config.ownerID) return;
+      try {
+        const evaled = eval(code);
+        const cleaned = await clean(evaled);
+        message.channel.send(`\`\`\`js\n${cleaned}\n\`\`\``);
+      } catch (err) {
+        message.channel.send(`\`ERROR\` \`\`\`xl\n${cleaned}\n\`\`\``);
+      }
   }
 });
 ```
@@ -98,9 +98,29 @@ That's it. That's the command. Note a couple of things though:
 * If the response isn't a string, `util.inspect()` is used to 'stringify' the code in a safe way that won't error out on objects with circular references \(like most Collections\).
 * If the response is more than 2000 characters this will return nothing.
 
+{% hint style="info" %} This won't censor/remove your client token, to censor your token just add the following code.
+{% endhint %}
+
+```javascript
+// You will need to pass the client into the clean function like so.
+const clean = async (client, text) => { 
+  // The rest of the code
+}
+
+// Then you will ned to place this inside the clean function, before the return
+// text line;
+text = replaceAll(text, client.token, "Not for you.");
+
+// And finally, add this function to the file.
+function replaceAll(haystack, needle, replacement) {
+  return haystack.split(needle).join(replacement)
+}
+```
+
+If you are using Node v15, you do not need to include the [`replaceAll`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll) function, as it is native to Node v15 but a slight modification to the code will be required.
+
 {% hint style="danger" %}
 **I AM NOT RESPONSIBLE IF YOU FUCK UP, AND NEITHER ARE ANY OF THE DISCORD.JS USERS AND DEVELOPERS**
 {% endhint %}
 
 Hopefully the warnings were clear enough to help you understand the dangers... but the idea of eval is still attractive enough that you'll use it for yourself anyway!
-
