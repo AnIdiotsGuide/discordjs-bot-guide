@@ -61,6 +61,7 @@ if (text && text.constructor.name == "Promise")
       .replace(/@/g, "@" + String.fromCharCode(8203));
 
     return text;
+}
 ```
 
 Alright, So let's get down to the brass tax: The actual eval command. Here it is in all its glory, assuming you've followed this guide all along:
