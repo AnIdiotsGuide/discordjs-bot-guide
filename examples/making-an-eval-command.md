@@ -36,7 +36,7 @@ In the code for the bot:
 
 ```javascript
 // If the message author's ID does not equal
-// our ownerID, get outa there!
+// our ownerID, get outta there!
 if (message.author.id !== config.ownerID) return;
 ```
 
@@ -91,7 +91,7 @@ client.on("messageCreate", async (message) => {
   if (message.content.startsWith(config.prefix + "eval")) {
 
     // If the message author's ID does not equal
-    // our ownerID, get outa there!
+    // our ownerID, get outta there!
     if (message.author.id !== config.ownerID)
       return;
 
@@ -129,6 +129,7 @@ The above eval command WILL NOT censor/remove your client token if it is returne
 {% endhint %}
 
 Adjust our `clean()` function to receive the client as an input like so.
+
 ```javascript
 const clean = async (client, text) => { 
   // The rest of the code
@@ -136,6 +137,7 @@ const clean = async (client, text) => {
 ```
 
 Be sure to supply the client as an input when we call the function later in the code.
+
 ```javascript
     // ...
 
@@ -148,6 +150,7 @@ Be sure to supply the client as an input when we call the function later in the 
 ```
 
 * **For NodeJS versions 12.x through 14.x** (For NodeJS 15.x+, see next bullet)
+
 ```javascript
 // If you are on NodeJS versions 12.x-14.x, in
 // order to replace all instances of our input
