@@ -57,7 +57,7 @@ This will output a new commit with some stats including the number of changed li
 
 With `git` you have a lot of choices when it comes to hosting your projects online. Pushing to an online repository gives you the safety in backups - your whole commit history is available, and nothing is lost whatever happens. Also gives you the ability to share your projects either publicly or privately with other people, and have them contribute to your project if you want them to.
 
-The 3 main `git` hosting services that are free are GitHub, GitLab and BitBucket. While all three are free, GitHub is the only one that doesn't offer private repository - but it's also the most _stable_ and _open_. I'll be going with GitHub in this case, but most of the steps I'll take here are the same for all 3 services. You just need an account and you're good to go!
+The 3 main `git` hosting services that are free are GitHub, GitLab and BitBucket. I'll be going with GitHub in this case, but most of the steps I'll take here are the same for all 3 services. You just need an account and you're good to go!
 
 So let's go ahead and prepare GitHub. On [GitHub.com](https://github.com/) , create an account and then create a **New Repository**. Give it a name that identifies your project - it doesn't need to be identical to your folder name, and you can change it later if you want. Don't add a readme for now.
 
