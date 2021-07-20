@@ -23,7 +23,9 @@ Click on \(you guessed it!\) **New Application**. This brings up the following m
 
 ![New application modal](../.gitbook/assets/gs-new-application.png)
 
-The **Application ID** on the  page will be your bot's user ID. Nothing else on this page is relevant, it is not used in your bot \(however, you can enter a description if you wanted to.\)
+The **Application ID** on the  page will be your bot's user ID. The application description is used in the bots `About me` section. So feel free to add a description of your bot in under 190 characters.
+
+{% hint style="info" %} Whilst the page clearly indicates a maximum of 400, only 190 will be displayed in the `About me` section.{% endhint %}
 
 ![The created application](../.gitbook/assets/gs-created-application.png)
 
