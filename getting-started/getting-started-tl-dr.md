@@ -20,23 +20,24 @@ Depending on the operating system you're running the installation will be slight
 
 Once you have this all installed, create a folder for your project and install discord.js:
 
-`md mybot` `cd mybot` `npm i discord.js`
+`mkdir mybot` `cd mybot` `npm i discord.js`
 
 ## Example Code
 
 The following is a simple ping/pong bot. Save as a text file \(e.g. `index.js`\), replacing the string on the last line with the secret bot token you got earlier:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const { Client, Intents } = require("discord.js");
+// Since discord.js exports an object by default, we can destructure it. Read up more here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
  
 client.on("ready", () => {
   console.log("I am ready!");
 });
  
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }

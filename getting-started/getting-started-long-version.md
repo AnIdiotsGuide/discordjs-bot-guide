@@ -108,16 +108,17 @@ I honestly consider that if you don't understand the code you're about to see, c
 Okay finally, we're ready to start coding. \o/ Let's take a look at the most basic of examples, the ping-pong bot. Here's the code in its entirety:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const { Client, Intents } = require("discord.js");
+// The Client and Intents are destructured from discord.js, since it exports an object by default. Read up on destructuring here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
@@ -155,4 +156,4 @@ Before you start getting support from Discord servers to help you with your bot,
 * [An Idiot's Guide](https://www.youtube.com/c/AnIdiotsGuide) is another great channel with more material. York's guides are great, and he continues to update them.
 * [Evie.Codes on YouTube](https://www.youtube.com/channel/UCvQubaJPD0D-PSokbd5DAiw): If you prefer video to words, Evie's YouTube series \(which is good, though no longer maintained with new videos!\) gets you started with bots.
 * [An Idiot's Guide Official Server](https://discord.gg/vXVxsAjSMF): The official server for An Idiot's Guide. Full of friendly helpful users!
-* [Discord.js Official Server](https://discord.gg/bRCvFy9): The official server has a number of competent people to help you, and the development team is there too!
+* [Discord.js Official Server](https://discord.gg/djs): The official server has a number of competent people to help you, and the development team is there too!
