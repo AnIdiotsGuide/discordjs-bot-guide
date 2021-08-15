@@ -30,10 +30,12 @@ client.on("ready", () => {
 // Set the bot's presence (activity and status)
 client.on("ready", () => {
     client.user.setPresence({
-        activities: [{ 
+        activities: [
+          { 
             name: 'my code',
             type: 'WATCHING'
-        }],
+          }
+        ],
         status: 'idle'
     })
 })
@@ -42,7 +44,9 @@ client.on("ready", () => {
 Note: You can find a list of all possible activity types [here](https://discord.js.org/#/docs/main/stable/typedef/ActivityType).
 
 {% hint style="info" %}
-If you want your bot show up as "streaming" you need to provide a Twitch or YouTube URL in the options object \(for setActivity\) or `game.url` \(for setPresence\) alongside with the activity type "STREAMING". Streaming non-twitch URLs is currently not supported by the Discord API.
+If you want your bot's status to show up as `STREAMING`, you need to provide a Twitch or YouTube URL.
+For `setActivity`, you need to provide an options object, which needs to have the URL, and the type should be set to streaming.
+For `setPresence`, you need to provide the presence data object, which needs to contain the activities array, with the url and type \(Set it to "STREAMING"\).
 {% endhint %}
 
 ```javascript
@@ -72,7 +76,7 @@ message.guild.members.cache.get("user ID here");
 ```javascript
 // Get a Member from message Mention
 message.mentions.members.first();
-// Returns <Member>
+// Returns <Member>, if there is a mentioned member
 ```
 
 ```javascript
@@ -91,7 +95,7 @@ message.channel.send("Hello " + message.author.toString() + ", and welcome!");
 
 ```javascript
 // Restrict a command to a specific user by ID
-if (message.content.startsWith(prefix + 'commandname')) {
+if (message.content.startsWith(`${prefix}commandname`)) {
     if (message.author.id !== 'A user ID') return;
     // Your Command Here
 }
@@ -101,7 +105,10 @@ if (message.content.startsWith(prefix + 'commandname')) {
 message.guild.members.fetch(message.author)
   .then(member => {
     // The member is available here.
-  });
+  })
+  .catch(() => {
+    // When an error occurs.
+  })
 ```
 
 ## Channels and Guilds
@@ -139,7 +146,7 @@ message.guild.channels.cache.get('<CHANNEL ID>').createInvite().then(invite =>
 As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The \#general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those _really_ wanting to send to what "looks" like the default channel, here's a dirty workaround.
 {% endhint %}
 
-Note: you'll need to `npm install long` and then `var Long = require("long");` to use the below code.
+Note: you'll need to `npm install long` and then `const Long = require("long");` to use the below code.
 
 ```javascript
 const getDefaultChannel = (guild) => {
@@ -154,7 +161,7 @@ const getDefaultChannel = (guild) => {
   // Now we get into the heavy stuff: first channel in order where the bot can speak
   // hold on to your hats!
   return guild.channels.cache
-   .filter(c => c.type === "text" &&
+   .filter(c => c.type === "TEXT" &&
      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
    .sort((a, b) => a.position - b.position ||
      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
@@ -181,12 +188,15 @@ message.channel.send("Test").then(sentMessage => sentMessage.edit("Blah"));
 ```
 
 ```javascript
-// Fetching a message by ID (Discord.js versions 9 through 11)
+// Fetching a message by ID (Discord.js versions 9 through 13)
 // note: you can line return right before a "dot" in JS, that is valid.
 message.channel.messages.fetch({ around: "352292052538753025", limit: 1 })
   .then(messages => {
     const fetchedMsg = messages.first(); // messages is a collection!
-    // do something with it
+    // Check if the author of the message is the bot
+    if (message.client.user.id !== fetchedMsg.id) return console.log('I\'m not the author of that message!');
+
+    // Edit the message
     fetchedMsg.edit("This fetched message was edited");
   });
 ```
