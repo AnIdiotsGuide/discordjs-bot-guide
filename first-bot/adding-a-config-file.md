@@ -31,9 +31,9 @@ Simply take the following example, and create a new file in the same folder as y
 At the top of your bot file, you need to add a line that will load this configuration, and put it in a variable. This is what it looks like:
 
 ```javascript
-const Discord = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 const config = require("./config.json");
 ```
@@ -61,10 +61,10 @@ const prefix = "!";
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
-  if (message.content.startsWith(prefix + "foo")) {
+  if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
 });
@@ -76,10 +76,10 @@ We're using `prefix` in a few places, so we need to change them all. Here's how 
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(config.prefix + "ping")) {
+  if (message.content.startsWith(`${config.prefix}ping`)) {
     message.channel.send("pong!");
   } else
-  if (message.content.startsWith(config.prefix + "foo")) {
+  if (message.content.startsWith(`${config.prefix}foo`)) {
     message.channel.send("bar!");
   }
 });

@@ -63,7 +63,7 @@ switch (command) {
 Here's a complete example that's very often the command handler I've used as a base to build on:
 
 ```javascript
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
   // This is where we'll put our code.
   if (message.content.indexOf(config.prefix) !== 0) return;

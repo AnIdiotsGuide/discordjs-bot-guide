@@ -66,11 +66,11 @@ fs.readdir("./commands/", (err, files) => {
 Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\):
 
 ```javascript
-const Discord = require("discord.js");
+const { Client, Intents: { FLAGS } } = require("discord.js"); // We are using nested destructuring to destructure FLAGS from Intents
 const fs = require("fs");
 
 const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+  intents: [FLAGS.GUILDS, FLAGS.GUILD_MESSAGES]
 });
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
