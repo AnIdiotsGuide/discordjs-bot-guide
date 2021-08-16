@@ -1,4 +1,1 @@
 # Coding Guides
-
-
-

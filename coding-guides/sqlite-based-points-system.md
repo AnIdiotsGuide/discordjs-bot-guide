@@ -23,9 +23,9 @@ For this example points system we want the user's ID, points and level to be com
 Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](../first-bot/command-with-arguments.md) page of this guide. The code is as such:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES } } } = require("discord.js");
+const client = new Client({
+  intents: [GUILDS, GUILD_MESSAGES]
 });
 const config = require("./config.json"); // Contains the prefix, and token!
 
@@ -33,7 +33,7 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
   // This is where we'll put our code.
   if (message.content.indexOf(config.prefix) !== 0) return;
@@ -69,8 +69,8 @@ client.on("message", message => {
 Your code should look like this now:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client } = require("discord.js");
+const client = new Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
@@ -79,7 +79,7 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
     if (message.guild) {
     // This is where we'll put our code.
@@ -171,8 +171,8 @@ client.setScore.run(score);
 Let's put it all together. Your code should now look like this.
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client, MessageEmbed } = require("discord.js");
+const client = new Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
@@ -194,7 +194,7 @@ client.on("ready", () => {
   client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 });
 
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
   let score;
   if (message.guild) {
@@ -270,7 +270,7 @@ if (command === "leaderboard") {
   const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
 
     // Now shake it and show it! (as a nice embed, too!)
-  const embed = new Discord.MessageEmbed()
+  const embed = new MessageEmbed()
     .setTitle("Leader board")
     .setAuthor(client.user.username, client.user.avatarURL())
     .setDescription("Our top 10 points leaders!")

@@ -9,16 +9,16 @@ I've had this request since I started An Idiot's Guide, in fact it was one of th
 So to get started, let's grab the example from [getting started](../getting-started/getting-started-long-version.md) and shove it in a file.
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES } } } = require("discord.js");
+const client = new Client({
+  intents: [GUILDS, GUILD_MESSAGES]
 });
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
@@ -30,7 +30,7 @@ client.login("SuperSecretBotTokenHere");
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
 
 ```javascript
-var Cleverbot = require("cleverbot-node");
+let Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
 cleverbot.configure({ botapi: "IAMKEY" });
 cleverbot.write(cleverMessage, function (response) {
@@ -56,10 +56,10 @@ cleverbot = new Cleverbot;
 ...and put them with our discord definitions.
 
 ```javascript
-const Discord = require("discord.js");
+const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES } } } = require("discord.js");
 const Cleverbot = require("cleverbot-node");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const client = new Client({
+  intents: [GUILDS, GUILD_MESSAGES]
 });
 const clbot = new Cleverbot;
 clbot.configure({ botapi: "IAMKEY" });
@@ -80,17 +80,17 @@ if (message.channel.type === "dm") {
 Don't forget to add these within your client object.
 
 ```javascript
-["DIRECT_MESSAGES"],
+[DIRECT_MESSAGES],
 partials: ["CHANNEL"]
 ```
 
 Your code should look something like this...
 
 ```javascript
-const Discord = require("discord.js");
+const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES, DIRECT_MESSAGES } } } = require("discord.js");
 const Cleverbot = require("cleverbot-node");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
+const client = new Client({
+  intents: [GUILDS, GUILD_MESSAGES, DIRECT_MESSAGES],
   partials: ["CHANNEL"]
 });
 const clbot = new Cleverbot;

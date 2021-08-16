@@ -23,7 +23,7 @@ So, let's begin!
 In this block, we just do some simple setup for later on. For ease, I personally define the message object as `message`, but this is completely optional. Next, we grab the starboardChannel key from the guilds settings.
 
 {% hint style="info" %}
-Reminder: GuideBot and GuideBot-Class use [Enmap ](https://www.npmjs.com/package/enmap)for settings!
+Reminder: GuideBot and GuideBot-Class use [Enmap](https://www.npmjs.com/package/enmap) for settings!
 {% endhint %}
 
 Then, we preform a couple of checks on the reaction and the message. First, we check if the reaction is **NOT** the unicode star emote. Next, we preform two checks on the message, checking to see if the user who added the reaction authored the message, if the user who sent the message is the person who reacted to it, and if the message author is a bot. If none of these checks return true, we're good to move on.
@@ -50,7 +50,7 @@ module.exports = class {
     // Here we get the starboard channel from the guilds settings. 
     const { starboardChannel } = this.client.settings.get(message.guild.id); 
     // Here we will find the channel
-    const starChannel = message.guild.channels.cache.find(channel => channel.name == starboardChannel)
+    const starChannel = message.guild.channels.cache.find(channel => channel.name === starboardChannel)
     // If there's no starboard channel, we stop the event from running any further, and tell them that they don't have a starboard channel.
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
   }
@@ -249,4 +249,3 @@ module.exports = class {
   };
 };
 ```
-
