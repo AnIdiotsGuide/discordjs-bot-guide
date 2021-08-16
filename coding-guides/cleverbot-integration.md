@@ -56,10 +56,10 @@ cleverbot = new Cleverbot;
 ...and put them with our discord definitions.
 
 ```javascript
-const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES } } } = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const Cleverbot = require("cleverbot-node");
 const client = new Client({
-  intents: [GUILDS, GUILD_MESSAGES]
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 const clbot = new Cleverbot;
 clbot.configure({ botapi: "IAMKEY" });
@@ -80,29 +80,28 @@ if (message.channel.type === "dm") {
 Don't forget to add these within your client object.
 
 ```javascript
-[DIRECT_MESSAGES],
+[Intents.FLAGS.DIRECT_MESSAGES],
 partials: ["CHANNEL"]
 ```
 
 Your code should look something like this...
 
 ```javascript
-const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES, DIRECT_MESSAGES } } } = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const Cleverbot = require("cleverbot-node");
 const client = new Client({
-  intents: [GUILDS, GUILD_MESSAGES, DIRECT_MESSAGES],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES],
   partials: ["CHANNEL"]
 });
 const clbot = new Cleverbot;
 clbot.configure({ botapi: "IAMKEY" });
 
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.channel.type === "dm") {
     clbot.write(message.content, (response) => {
-      message.channel.startTyping();
+      message.channel.sendTyping();
       setTimeout(() => {
         message.channel.send(response.output).catch(console.error);
-        message.channel.stopTyping();
       }, Math.random() * (1 - 3) + 1 * 1000);
     });
   }

@@ -26,9 +26,11 @@ const invites = {};
 const wait = require('util').promisify(setTimeout);
 
 client.on('ready', async () => {
+  // "ready" isn't really ready. We need to wait a spell.
+  await wait(1000);
   // Load all invites for all guilds and save them to the cache.
   client.guilds.cache.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
+    g.invites.fetch().then(guildInvites => {
       invites[g.id] = guildInvites;
     });
   });
@@ -58,7 +60,7 @@ So now that we have our `invites` object, we're ready to listen to the `guildMem
 ```javascript
 client.on('guildMemberAdd', member => {
   // To compare, we need to load the current invite list.
-  member.guild.fetchInvites().then(guildInvites => {
+  member.guild.invites.fetch().then(guildInvites => {
     // This is the *existing* invites for the guild.
     const ei = invites[member.guild.id];
     // Update the cached invites for the guild.

@@ -6,10 +6,6 @@ description: 'The unofficial Discord.js beginner''s guide, written by idiots for
 
 ## Introduction
 
-{% hint style="info" %}
-This guide is for Discord.js v13.
-{% endhint %}
-
 This guide makes a best effort attempt at humanizing the use of the Discord.js library, in its current version 13 iteration. It is maintained by York\#0001 and Discordaholic\#0001 \("Evie.Codes"\), with the help of many precious contributors that enable us to keep updating and enhancing this guide.
 
 It was born out of necessity - the first version of this guide for Discord.js version 7, more than 5 years ago, was the first of its kind because I \(Evie\) could not find any such beginner's guide and the documentation was \(and still is\) unfathomably difficult to navigate for anyone without a sufficiently advanced knowledge of JavaScript concepts.
