@@ -161,7 +161,7 @@ const getDefaultChannel = (guild) => {
   // Now we get into the heavy stuff: first channel in order where the bot can speak
   // hold on to your hats!
   return guild.channels.cache
-   .filter(c => c.type === "TEXT" &&
+   .filter(c => c.type === "GUILD_TEXT" &&
      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
    .sort((a, b) => a.position - b.position ||
      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())

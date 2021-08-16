@@ -58,7 +58,7 @@ The other thing we have, is of course the prefix. Again from before, we have thi
 
 ```javascript
 const prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   if (message.content.startsWith(`${prefix}ping`)) {
@@ -73,7 +73,7 @@ client.on("message", (message) => {
 We're using `prefix` in a few places, so we need to change them all. Here's how it looks like after the changes:
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   if (message.content.startsWith(`${config.prefix}ping`)) {
