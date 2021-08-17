@@ -13,9 +13,9 @@ Ah, asynchronous coding. So awesome. So hard to grasp when you first encounter i
 It should have been made obvious with the user of `client.on("message")` which triggers for each message. To explain how the `ready` event is important, let's look at the following code:
 
 ```javascript
-const Discord = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
 client.user.setActivity("Online!");
@@ -56,7 +56,7 @@ Yes, bots fail sometimes. And yes, the library can too! There's a little trick w
 The following small bit of code \(which can be anywhere in your file\) will catch all output message from discord.js. This includes all errors, warning and debug messages.
 
 {% hint style="danger" %}
-**NOTE:** The debug event **WILL** output your token, so exercise caution when handing over a debug log.
+**NOTE:** The debug event **WILL** output your token partially, so exercise caution when handing over a debug log.
 {% endhint %}
 
 ```javascript

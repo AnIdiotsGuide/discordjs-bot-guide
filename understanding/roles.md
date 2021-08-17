@@ -30,7 +30,7 @@ To get the ID of a role, you can either mention it with a `\` before it, like `\
 
 ### Check if a member has a role
 
-In a `message` handler, you have access to checking the GuildMember class of the message author:
+In a `messageCreate` handler, you have access to checking the GuildMember class of the message author:
 
 ```javascript
 // assuming role.id is an actual ID of a valid role:
