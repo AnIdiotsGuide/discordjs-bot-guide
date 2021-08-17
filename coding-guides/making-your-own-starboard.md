@@ -117,7 +117,7 @@ if (!stars) {
     .setTimestamp(new Date())
     .setFooter(`⭐ 1 | ${message.id}`)
     .setImage(image);
-  await starChannel.send({ embed });
+  await starChannel.send({ embeds: [embed] });
 }
 ```
 
@@ -163,7 +163,7 @@ module.exports = class {
         .setTimestamp(new Date())
         .setFooter(`⭐ 1 | ${message.id}`)
         .setImage(image);
-      await starChannel.send({ embed });
+      await starChannel.send({ embeds: [embed] });
     }
   }
 
@@ -199,7 +199,7 @@ if (stars) {
     .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
     .setImage(image);
   const starMsg = await starChannel.messages.fetch(stars.id);
-  await starMsg.edit({ embed });
+  await starMsg.edit({ embeds: [embed] });
   // Here we want to check if the message now has 0 Stars
   if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
 }
@@ -234,7 +234,7 @@ module.exports = class {
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
-      await starMsg.edit({ embed });
+      await starMsg.edit({ embeds: [embed] });
       if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
     }
   }

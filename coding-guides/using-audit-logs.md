@@ -15,8 +15,8 @@ client.on('messageDelete', async (message) => {
 
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    await message.guild.channels.create('logs', { type: 'text' });
+  if (message.guild.me.permissions.has('MANAGE_CHANNELS') && !logs) {
+    await message.guild.channels.create('logs', { type: 'GUILD_TEXT' });
   }
 
   // If we do not have permissions, console log both errors
@@ -103,10 +103,10 @@ The final code should look like this:
 ```javascript
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.channels.create('logs', { type: 'text' });
+  if (message.guild.me.permissions.has('MANAGE_CHANNELS') && !logs) {
+    message.guild.channels.create('logs', { type: 'GUILD_TEXT' });
   }
-  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
+  if (!message.guild.me.permissions.has('MANAGE_CHANNELS') && !logs) { 
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }  
   const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())

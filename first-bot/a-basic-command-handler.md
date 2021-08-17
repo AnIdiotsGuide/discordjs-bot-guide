@@ -66,7 +66,7 @@ fs.readdir("./commands/", (err, files) => {
 Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\):
 
 ```javascript
-const { Client, Intents } = require("discord.js"); // We are using nested destructuring to destructure FLAGS from Intents
+const { Client, Intents } = require("discord.js");
 const fs = require("fs");
 
 const client = new Discord.Client({

@@ -9,9 +9,9 @@ I've had this request since I started An Idiot's Guide, in fact it was one of th
 So to get started, let's grab the example from [getting started](../getting-started/getting-started-long-version.md) and shove it in a file.
 
 ```javascript
-const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES } } } = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const client = new Client({
-  intents: [GUILDS, GUILD_MESSAGES]
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
 client.on("ready", () => {
@@ -30,7 +30,7 @@ client.login("SuperSecretBotTokenHere");
 Once you've got that, we should go check out `cleverbot-node` on [npmjs.com](https://www.npmjs.com/package/cleverbot-node) and grab their example code
 
 ```javascript
-let Cleverbot = require("cleverbot-node");
+var Cleverbot = require("cleverbot-node");
 cleverbot = new Cleverbot;
 cleverbot.configure({ botapi: "IAMKEY" });
 cleverbot.write(cleverMessage, function (response) {
@@ -72,7 +72,7 @@ Then we take the rest of the code and place that inside our message event handle
 Checking the channel type.
 
 ```javascript
-if (message.channel.type === "dm") {
+if (message.channel.type === "DM") {
   // Cleverbot code goes here.
 }
 ```
@@ -97,7 +97,7 @@ const clbot = new Cleverbot;
 clbot.configure({ botapi: "IAMKEY" });
 
 client.on("messageCreate", message => {
-  if (message.channel.type === "dm") {
+  if (message.channel.type === "DM") {
     clbot.write(message.content, (response) => {
       message.channel.sendTyping();
       setTimeout(() => {

@@ -23,9 +23,9 @@ For this example points system we want the user's ID, points and level to be com
 Our starting point is a very basic message handler with pre-existing commands - such as what we see in the [Command with Arguments](../first-bot/command-with-arguments.md) page of this guide. The code is as such:
 
 ```javascript
-const { Client, Intents: { FLAGS: { GUILDS, GUILD_MESSAGES } } } = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const client = new Client({
-  intents: [GUILDS, GUILD_MESSAGES]
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 const config = require("./config.json"); // Contains the prefix, and token!
 
