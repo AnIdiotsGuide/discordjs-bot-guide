@@ -9,7 +9,7 @@ Conventions are important - they are the agreements on which society functions. 
 A "Placeholder" is a piece of text that _replaces something else_. In these FAQs we assume the following variables as "placeholders" for your own:
 
 * `client` is a placeholder that corresponds to your `client` variable, as we've covered at the end of the [Getting Started](../getting-started/getting-started-long-version.md) guide. `client.on("ready", () => {` for example.
-* `message` is a placeholder corresponds to your `message` event's variable which looks something like this: `client.on("message", msg => {`.
+* `messageCreate` is a placeholder corresponds to your `messageCreate` event's variable which looks something like this: `client.on("messageCreate", msg => {`.
 
 ## Examples
 
@@ -43,23 +43,26 @@ message.channel.send('What tag would you like to see? This will await will be ca
 Discord quietly changed the Create Guild API endpoint, small bots \(10 guilds or fewer\) are able to create guilds programmatically now. This example will have your bot create a new guild and create a role with the administrator permission, and the single line of code at the bottom will apply it to you when you execute it when you join the guild.
 
 ```javascript
+const { Permissions } = require('discord.js');
+
 /* ES6 Promises */
-client.guilds.create('Example Guild', 'london').then(guild => {
+client.guilds.create('Example Guild').then(guild => {
   guild.channels.cache.get(guild.id).createInvite()
     .then(invite => client.users.cache.get('<USERID>').send(invite.url));
-  guild.roles.create({ name:'Example Role', permissions:['ADMINISTRATOR'] })
+  guild.roles.create({ name: 'Example Role', permissions: Permissions.FLAGS.'ADMINISTRATOR' })
     .then(role => client.users.cache.get('<UserId>').send(role.id))
     .catch(error => console.log(error))
 });
 
 /* ES8 async/await */
 async function createGuild(client, message) {
+  const { Permissions } = require('discord.js');
   try {
-    const guild = await client.guilds.create('Example Guild', 'london');
+    const guild = await client.guilds.create('Example Guild');
     const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const invite = await defaultChannel.createInvite();
     await message.author.send(invite.url);
-    const role = await guild.roles.create({ name:'Example Role', permissions:['ADMINISTRATOR'] });
+    const role = await guild.roles.create({ name: 'Example Role', permissions: Permission.FLAGS.ADMINISTRATOR });
     await message.author.send(role.id);
   } catch (e) {
     console.error(e);
@@ -108,10 +111,14 @@ This example was removed as Google keeps changing their page to prevent scraping
 
 ### Mention Prefix
 
+{% hint style="info" %}
+Regex or Regular Expressions are used to match character combinations in strings. Read more about them [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions). You can create and test them [here](https://regex101.com/?flavor=javascript)
+{% endhint %}
+
 Requiring a little bit of regex, this will catch when a message starts with the bot being mentioned.
 
 ```javascript
-client.on('message', message => {
+client.on('messageCreate', message => {
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
     const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : '!';
 
@@ -124,7 +131,7 @@ client.on('message', message => {
 Let's make it 3 prefixes, this is fairly universal. This could also be in the config.json once you get there. So we'll start by setting it to false, we'll overwrite this in the loop. We should loop through the array using _for...of_ which is cleaner than that damn _i_ counter loop. This makes the prefix variable something else than false \('truthy'\) if the message starts with the prefix. If the message doesn't start with any of the 3 prefixes, then we can simply exit as usual.
 
 ```javascript
-client.on("message", message => {
+client.on("messageCreate", message => {
   const prefixes = ['!', '?', '/'];
   const prefix = prefixes.find(p => message.content.startsWith(p));
   if (!prefix) return;
@@ -138,7 +145,7 @@ This allows you to include the mention as a prefix, on top of the previous examp
 ### Multiple Prefixes Extension
 
 ```javascript
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   const prefixes = ['!', '\\?', '\\/', `<@!?${client.user.id}> `];
   const prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
   const prefix = message.content.match(prefixRegex);
@@ -157,8 +164,13 @@ Example usage: !purge @user 10 , or !purge 25
 
 ```javascript
 const user = message.mentions.users.first();
+
+if (!/^\d+$/.test(message.content.split(' ')[1])) return message.reply('Please provide a valid number');
+// Check if the provided argument is completely a number. We run this because parseInt can parse numbers like this 564gb, leading to some undesirable results
+
 // Parse Amount
 const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
+
 if (!amount) return message.reply('Must specify an amount to delete!');
 if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
 // Fetch 100 messages (will be filtered and lowered up to max amount requested)
@@ -178,8 +190,8 @@ message.channel.messages.fetch({
 This quick & dirty swear detector takes an array of swear words we don't want to see, and triggers on it.
 
 ```javascript
-const swearWords = ["darn", "shucks", "frak", "shite"];
-if( swearWords.some(word => message.content.includes(word)) ) {
+const swearWords = ["darn", "shucks", "frak", "shite"]; // Make sure all of the words are lowercased only.
+if( swearWords.some(word => message.content.toLowerCase().includes(word)) ) { // Lowercase the message content for better matching
   message.reply("Oh no you said a bad word!!!");
   // Or just do message.delete();
 }
@@ -191,12 +203,12 @@ Support for kicking members from voice channels has now been added by Discord an
 
 ```javascript
 // Make sure the bot user has permissions to move members in the guild:
-if (!message.guild.me.hasPermission('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
+if (!message.guild.me.permissions.has('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
 
 // Get the mentioned user/bot and check if they're in a voice channel:
 const member = message.mentions.members.first();
 if (!member) return message.reply('You need to @mention a user/bot to kick from the voice channel.');
-if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
+if (!member.voice.channel) return message.reply('That user/bot isn\'t in a voice channel.');
 
 // Now we set the member's voice channel to null, in other words disconnecting them from the voice channel.
 member.voice.setChannel(null);
@@ -207,4 +219,3 @@ message.react('👌');
 ```
 
 This does the same as clicking the disconnect button on a user or bot while they are in a voice channel.
-
