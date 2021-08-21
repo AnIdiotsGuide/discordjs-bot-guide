@@ -90,7 +90,7 @@ if (stars) {
   // We fetch the ID of the message already on the starboard.
   const starMsg = await starChannel.messages.fetch(stars.id);
   // And now we edit the message with the new embed!
-  await starMsg.edit({ embed }); 
+  await starMsg.edit({ embeds: [embed] }); 
 }
 ```
 
@@ -151,7 +151,7 @@ module.exports = class {
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
-      await starMsg.edit({ embed });
+      await starMsg.edit({ embeds: [embed] });
     }
     if (!stars) {
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
@@ -201,7 +201,7 @@ if (stars) {
   const starMsg = await starChannel.messages.fetch(stars.id);
   await starMsg.edit({ embeds: [embed] });
   // Here we want to check if the message now has 0 Stars
-  if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
+  if(parseInt(star[1]) - 1 == 0) return setTimeout(() => starMsg.delete(), 1000);
 }
 ```
 
@@ -235,7 +235,7 @@ module.exports = class {
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embeds: [embed] });
-      if(parseInt(star[1]) - 1 == 0) return starMsg.delete(1000);
+      if(parseInt(star[1]) - 1 == 0) return setTimeout(() => starMsg.delete(), 1000);
     }
   }
 

@@ -112,7 +112,7 @@ Now, one person types `!help` in a channel, and both bots respond. But, they wil
 
 ```javascript
 const prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   // our new check:
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   // [rest of the code]
@@ -137,7 +137,7 @@ const client = new Client({
 
 // Set the prefix
 let prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 

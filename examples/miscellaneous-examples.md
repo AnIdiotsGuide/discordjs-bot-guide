@@ -49,7 +49,7 @@ const { Permissions } = require('discord.js');
 client.guilds.create('Example Guild').then(guild => {
   guild.channels.cache.get(guild.id).createInvite()
     .then(invite => client.users.cache.get('<USERID>').send(invite.url));
-  guild.roles.create({ name: 'Example Role', permissions: Permissions.FLAGS.'ADMINISTRATOR' })
+  guild.roles.create({ name: 'Example Role', permissions: Permissions.FLAGS.ADMINISTRATOR })
     .then(role => client.users.cache.get('<UserId>').send(role.id))
     .catch(error => console.log(error))
 });
@@ -59,7 +59,7 @@ async function createGuild(client, message) {
   const { Permissions } = require('discord.js');
   try {
     const guild = await client.guilds.create('Example Guild');
-    const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const defaultChannel = guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has(Permissions.FLAGS.SEND_MESSAGES));
     const invite = await defaultChannel.createInvite();
     await message.author.send(invite.url);
     const role = await guild.roles.create({ name: 'Example Role', permissions: Permission.FLAGS.ADMINISTRATOR });
@@ -89,7 +89,7 @@ const talkedRecently = new Set();
 ```
 
 ```javascript
-// Inside your message event, this code will stop any command during cooldown.
+// Inside your messageCreate event, this code will stop any command during cooldown.
 // Should be placed after your code that checks for bots & prefix, for best performance
 
 if (talkedRecently.has(message.author.id))
@@ -202,8 +202,10 @@ if( swearWords.some(word => message.content.toLowerCase().includes(word)) ) { //
 Support for kicking members from voice channels has now been added by Discord and can be achieved by doing the following.
 
 ```javascript
+const { Permissions } = require('discord.js');
+
 // Make sure the bot user has permissions to move members in the guild:
-if (!message.guild.me.permissions.has('MOVE_MEMBERS')) return message.reply('Missing the required `Move Members` permission.');
+if (!message.guild.me.permissions.has(Permissions.FLAGS.MOVE_MEMBERS)) return message.reply('Missing the required `Move Members` permission.');
 
 // Get the mentioned user/bot and check if they're in a voice channel:
 const member = message.mentions.members.first();

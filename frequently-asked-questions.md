@@ -147,6 +147,8 @@ As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The
 Note: you'll need to `npm install long` and then `const Long = require("long");` to use the below code.
 
 ```javascript
+const { Permissions } = require('discord.js');
+
 const getDefaultChannel = (guild) => {
   // get "original" default channel
   if(guild.channels.cache.has(guild.id))
@@ -160,7 +162,7 @@ const getDefaultChannel = (guild) => {
   // hold on to your hats!
   return guild.channels.cache
    .filter(c => c.type === "GUILD_TEXT" &&
-     c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
+     c.permissionsFor(guild.client.user).has(Permissions.FLAGS.SEND_MESSAGES))
    .sort((a, b) => a.position - b.position ||
      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
    .first();
