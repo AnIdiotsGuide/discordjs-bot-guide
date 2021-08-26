@@ -149,8 +149,6 @@ Be sure to supply the client as an input when we call the function later in the 
     // ...
 ```
 
-* **For Node 15.x and higher**, you do not need to define the [`replaceAll`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll) function, as it is native after Node v15 as a string prototype.
-
 ```javascript
 const clean = async (client, text) => { 
   // ...

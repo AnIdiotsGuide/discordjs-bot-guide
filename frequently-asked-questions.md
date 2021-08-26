@@ -188,15 +188,12 @@ message.channel.send("Test").then(sentMessage => sentMessage.edit("Blah"));
 ```
 
 ```javascript
-// Fetching a message by ID (Discord.js versions 9 through 13)
-// note: you can line return right before a "dot" in JS, that is valid.
-message.channel.messages.fetch({ around: "352292052538753025", limit: 1 })
-  .then(messages => {
-    const fetchedMsg = messages.first(); // messages is a collection!
+message.channel.messages.fetch("352292052538753025")
+  .then(message => {
+    // do something with it
     // Check if the author of the message is the bot
-    if (message.client.user.id !== fetchedMsg.id) return console.log('I\'m not the author of that message!');
-
+    if (message.client.user.id !== message.id) return console.log("I'm not the author of that message!");
     // Edit the message
-    fetchedMsg.edit("This fetched message was edited");
+    message.edit("This fetched message was edited");
   });
 ```

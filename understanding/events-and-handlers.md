@@ -14,7 +14,7 @@ It should have been made obvious with the user of `client.on("message")` which t
 
 ```javascript
 const { Client, Intents } = require("discord.js");
-const client = new Discord.Client({
+const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 

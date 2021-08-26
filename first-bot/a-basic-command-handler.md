@@ -69,7 +69,7 @@ Ok so with that being said, our main file now looks like this \(how _clean_ is t
 const { Client, Intents } = require("discord.js");
 const fs = require("fs");
 
-const client = new Discord.Client({
+const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 const config = require("./config.json");
