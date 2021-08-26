@@ -59,4 +59,3 @@ And if we go to our channel and check it out we should see the following;
 ## Congratulations
 
 You've successfully managed to use Discord to store your quick image snips, but we're not done yet, in the next chapter we'll cover [Zapier](https://zapier.com/) and [IFTTT](https://ifttt.com/) for more advanced usages.
-
