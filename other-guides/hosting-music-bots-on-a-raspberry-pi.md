@@ -51,4 +51,3 @@ List of Atom addons and themes I use; Addons:
 Themes:
 
 * seti-syntax, seti-ui - jesseweed
-

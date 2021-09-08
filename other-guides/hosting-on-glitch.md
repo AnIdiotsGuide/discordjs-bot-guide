@@ -194,4 +194,3 @@ Here are a few Glitch resources:
 
 * [Glitch Discourse](https://support.glitch.com/) \(their Q&A/Forum place\)
 * [Glitch FAQ](https://glitch.com/faq) \(some pertient technical details\)
-

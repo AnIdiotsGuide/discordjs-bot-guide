@@ -6,9 +6,9 @@ Heroku is a free host that isn't quite meant for bots, but can serve as a host f
 
 There's a couple things you'll need before we get started.
 
-* Node.js. Duh, because that's the whole point, right? 
+* Node.js. Duh, because that's the whole point, right?
 * A Git Client. For Windows, use [GIT SCM](https://git-scm.com/). For other OSes, I'm sure you can figure it out, you googler you!
-* A [Heroku](https://heroku.com/) account. 
+* A [Heroku](https://heroku.com/) account.
 
 ## Installing Pre-Requisites
 
@@ -18,7 +18,7 @@ First we'll create a new empty folder. I'll call it `herokubot`. From this folde
 
 In the prompt, let's just prepare a couple things:
 
-* Run `git init` to initialize this as a git repository. 
+* Run `git init` to initialize this as a git repository.
 * Run `npm init -y` to automatically create a package.json. This is required because that's how heroku knows what to install for your project.
 * Run `npm i discord.js dotenv` to install the simplest pre-requisites for a bot. For why we need `dotenv`, see [Using Environment Files](env-files.md)
 
@@ -66,14 +66,14 @@ Next we need to actually create the bot. Per [Using Environment Files](https://g
 ```javascript
 // This line MUST be first, for discord.js to read the process envs!
 require('dotenv').config(); 
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client } = require("discord.js");
+const client = new Client();
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
   // The process.env.PREFIX is your bot's prefix in this case.
   if (message.content.indexOf(process.env.PREFIX) !== 0) return;
@@ -83,10 +83,10 @@ client.on("message", message => {
   const command = args.shift().toLowerCase();
 
   // And our 2 real basic commands!
-  if(command === 'ping') {
+  if(command === "ping") {
     message.channel.send('Pong!');
   } else
-  if (command === 'blah') {
+  if (command === "blah") {
     message.channel.send('Meh.');
   }
 });
@@ -115,7 +115,7 @@ To install the CLI just go right ahead and run `npm i -g heroku`. It'll take a f
 
 Next, you need to login. From your prompt, go ahead and run `heroku login`. This will ask you to enter your email, and password, for Heroku.
 
-Then finally, you need to create an _application_ on Heroku. Go to your Dashboard, into [Create New App](https://dashboard.heroku.com/new-app). Enter a unique app name, like `my-super-original-bot` \(hereafter referred as &lt;appname&gt;\), in your closest region. 
+Then finally, you need to create an _application_ on Heroku. Go to your Dashboard, into [Create New App](https://dashboard.heroku.com/new-app). Enter a unique app name, like `my-super-original-bot` \(hereafter referred as &lt;appname&gt;\), in your closest region.
 
 One last thing before put in the last puzzle pieces, which is to configure the same Environment Variables that we have in our `.env` file. In the app's dashboard, go to the Settings tab, then click Reveal Config Vars. Add the 2 configuration variables. It should look like this:
 
@@ -133,7 +133,7 @@ It'll be empty for now, don't worry, let's keep going!
 
 So we're on the last mile now! Everything you've done until now has prepared us for this moment.
 
-* `git init` make our project git-enabled. 
+* `git init` make our project git-enabled.
 * `heroku git:remote -a <appname>` to connect your local repository to the heroku app \(remember to put in your app name, no &lt;&gt; around it!\)
 * `npm init -y` and the package.json file modifications prepared our project for the Heroku universe.
 
@@ -150,5 +150,4 @@ Take a look at the logs on the dashboard, It should look like this \(Note: You'l
 
 ![Heroku Success!](https://img.evie.codes/1Y6bJxZ)
 
-And we're done! This should be enough to get you going, remember Heroku can't do a whole lot of processing, and you can't save files \(no file database, edited json, etc\). 
-
+And we're done! This should be enough to get you going, remember Heroku can't do a whole lot of processing, and you can't save files \(no file database, edited json, etc\).

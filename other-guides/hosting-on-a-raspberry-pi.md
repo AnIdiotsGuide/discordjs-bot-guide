@@ -33,4 +33,3 @@ You can swap out `setup_6.x` for `setup_8.x` to update straight to Node 8.
 `pm2 startup` - This will begin the process of creating a start up script.
 
 Then follow the on screen instructions
-

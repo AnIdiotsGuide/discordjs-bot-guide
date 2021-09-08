@@ -136,10 +136,6 @@ SyntaxError: Unexpected identifier
 
 This example failed because the function inside `setTimeout` doesn't have the `async` keyword.
 
-{% hint style="warning" %}
-**REQUIREMENTS** You must have Node.js v7.x to use Async/Await, since v7.6 you are not required to use the flag `--harmony` when you run your bot. And Discord.JS v12 will **require** Node.js v8.x. To know your **Node version**, run `node -v` or `node --version`. Download Node.JS v7.x [here](https://nodejs.org/en/download/), but if you want to install it with the package manager \(console commands\), follow the instructions [here](https://nodejs.org/en/download/package-manager/).
-{% endhint %}
-
 ## Documentation
 
 The following links are from MDN \(Mozilla Developer Network\), they provide syntax, description and examples.
@@ -149,4 +145,3 @@ The following links are from MDN \(Mozilla Developer Network\), they provide syn
 * [AsyncFunction \(Operator\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function)
 * [await \(Operator\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 * [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-

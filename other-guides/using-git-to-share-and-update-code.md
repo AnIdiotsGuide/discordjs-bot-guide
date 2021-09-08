@@ -116,4 +116,3 @@ You can connect to multiple remote repositories by running the `remote add` comm
 There is a **lot** more to `git` than what was shown here \(and I'm aware even that's already a shitton of information\). You can create and merge `branches`, `revert` to previous commits, make and accept `PR`s... [There is a lot more](https://www.google.com/search?q=git+tutorials) that you can you can learn!
 
 But for now... I think this massive wall of text is plenty.
-

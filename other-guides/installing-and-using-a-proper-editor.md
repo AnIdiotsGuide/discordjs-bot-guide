@@ -11,7 +11,7 @@ Other alternatives would be VS Code and Sublime Text 3. You'll have to look up s
 Far be it from me to actually show you how to install stuff on your computer - I will pretend for a moment you know what you're doing, and give you the outline:
 
 1. Go to the [Atom.io website](https://atom.io/).
-2. Click the big red **Download Windows Installer** button \(statistically, you're probably on Windows\).
+2. Click the big red **Download Windows Installer** button \(statistically, you're on Windows\).
 3. Once the .exe is downloaded, run it, and install it.
 
 Atom starts off with a simple interface with a nice welcome screen and a guide, so if you feel like it, go ahead and read up a bit.
@@ -102,4 +102,3 @@ Don't be daunted by this: it's just a little config in JSON format. I won't go i
 * Make linebreaks Windows styles
 * Warn on single quotes, prefer double quotes
 * Warn when the semicolon is absent
-
