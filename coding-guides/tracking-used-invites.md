@@ -23,7 +23,7 @@ The first part is to fetch all the invites and keep them cached in an object. Th
 const invites = {};
 
 // A pretty useful method to create a delay without blocking the whole script.
-const wait = require('util').promisify(setTimeout);
+const wait = require('timers/promisify').setTimeout;
 
 client.on('ready', async () => {
   // "ready" isn't really ready. We need to wait a spell.

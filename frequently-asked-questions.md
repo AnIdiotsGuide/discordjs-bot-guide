@@ -33,7 +33,7 @@ client.on("ready", () => {
         activities: [{ 
           name: 'my code',
           type: 'WATCHING'
-          }],
+        }],
         status: 'idle'
     })
 })

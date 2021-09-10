@@ -94,6 +94,10 @@ if (stars) {
 }
 ```
 
+{% hint style="info" %}
+Confused with what /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/ is? It is Regex or Regular Expressions, which is used for parsing and finding text. [Read up more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+{% endhint %}
+
 Now, if you were to just use the code above, your starboard would only function if there was already a message in the starboard channel. Let's take care of that.
 
 Here we add an if statement that mimics and is placed after the previous block, but this time manually setting the color of the embed, and also manually setting the amount of stars the embed will have.
@@ -214,7 +218,7 @@ module.exports = class {
   }
 
   async run(reaction, user) {
-    const message = reaction.message;
+    const { message } = reaction;
     if (message.author.id === user.id) return;
     if (reaction.emoji.name !== '⭐') return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);

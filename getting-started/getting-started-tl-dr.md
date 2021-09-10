@@ -16,7 +16,7 @@
 
 Depending on the operating system you're running the installation will be slightly different.
 
-* nodejs \(Version 12.x and higher required, see [Windows](https://nodejs.org/en/download/) or [Linux](https://nodejs.org/en/download/package-manager/)\)
+* nodejs \(Version 16.6 and higher required, see [Windows](https://nodejs.org/en/download/) or [Linux](https://nodejs.org/en/download/package-manager/)\)
 
 Once you have this all installed, create a folder for your project and install discord.js:
 
