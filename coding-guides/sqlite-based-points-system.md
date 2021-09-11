@@ -239,7 +239,7 @@ Here are some quick & easy commands you can use, assuming the above code is used
 // You can modify the code below to remove points from the mentioned user as well!
 if (command === "give") {
   // Limited to guild owner - adjust to your own preference!
-  if (!message.author.id === message.guild.owner) return message.reply("You're not the boss of me, you can't do that!");
+  if (!message.author.id === message.guild.ownerId) return message.reply("You're not the boss of me, you can't do that!");
 
   const user = message.mentions.users.first() || client.users.cache.get(args[0]);
   if (!user) return message.reply("You must mention someone or give their ID!");
@@ -279,6 +279,6 @@ if (command === "leaderboard") {
   for (const data of top10) {
     embed.addFields({ name: client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
   }
-  return message.channel.send({embed});
+  return message.channel.send({ embed: [embed] });
 }
 ```
