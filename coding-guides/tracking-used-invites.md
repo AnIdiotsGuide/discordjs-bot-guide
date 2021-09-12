@@ -23,9 +23,9 @@ The first part is to fetch all the invites and keep them cached in an object. Th
 const invites = {};
 
 // A pretty useful method to create a delay without blocking the whole script.
-const wait = require('timers/promisify').setTimeout;
+const wait = require("timers/promisify").setTimeout;
 
-client.on('ready', async () => {
+client.on("ready", async () => {
   // "ready" isn't really ready. We need to wait a spell.
   await wait(1000);
   // Load all invites for all guilds and save them to the cache.
@@ -42,12 +42,12 @@ client.on('ready', async () => {
 We need to add two events to our code, `inviteCreate` and `inviteDelete`, the code for them are identical, but you can find them below.
 
 ```javascript
-client.on('inviteCreate', (invite) => {
+client.on("inviteCreate", (invite) => {
   // This adds the created invite to the guild object
   invites[invite.guild.id].set(invite.code, invite);
 });
 
-client.on('inviteDelete', (invite) => {
+client.on("inviteDelete", (invite) => {
   // This deletes the invite from the guild object
   invites[invite.guild.id].delete(invite.code);
 });
@@ -58,7 +58,7 @@ client.on('inviteDelete', (invite) => {
 So now that we have our `invites` object, we're ready to listen to the `guildMemberAdd` event. When a new member joins, we need to fetch all of the guild's invites once again. Then, we look through our _cached_ invites and see which one has been used, by comparing the current invite's use with the cached ones.
 
 ```javascript
-client.on('guildMemberAdd', member => {
+client.on("guildMemberAdd", member => {
   // To compare, we need to load the current invite list.
   member.guild.invites.fetch().then(guildInvites => {
     // This is the *existing* invites for the guild.

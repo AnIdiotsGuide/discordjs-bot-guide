@@ -42,7 +42,7 @@ module.exports = class {
   async run(reaction, user) {
     const message = reaction.message;
      // This is the first check where we check to see if the reaction is not the unicode star emote.
-    if (reaction.emoji.name !== '⭐') return;
+    if (reaction.emoji.name !== "⭐") return;
      // Here we check to see if the person who reacted is the person who sent the original message.
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     // This is our final check, checking to see if message was sent by a bot.
@@ -71,7 +71,7 @@ I told you it wasn't that complicated. Let's keep going.
 // Here we fetch 100 messages from the starboard channel.
 const fetch = await starChannel.messages.fetch({ limit: 100 }); 
 // We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
-const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); 
+const stars = fetch.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(message.id)); 
 // Now we setup an if statement for if the message is found within the starboard.
 if (stars) {
   // Regex to check how many stars the embed has.
@@ -79,7 +79,7 @@ if (stars) {
   // A variable that allows us to use the color of the pre-existing embed.
   const foundStar = stars.embeds[0];
   // We use the this.extension function to see if there is anything attached to the message.
-  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
+  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ""; 
   const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
@@ -106,9 +106,9 @@ Here we add an if statement that mimics and is placed after the previous block, 
 // Now we use an if statement for if a message isn't found in the starboard for the message.
 if (!stars) {
   // We use the this.extension function to see if there is anything attached to the message.
-  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
+  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ""; 
   // If the message is empty, we don't allow the user to star the message.
-  if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
+  if (image === "" && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`); 
   const embed = new MessageEmbed()
     // We set the color to a nice yellow here.
     .setColor(15844367)
@@ -135,18 +135,18 @@ module.exports = class {
 
   async run(reaction, user) {
     const message = reaction.message;
-    if (reaction.emoji.name !== '⭐') return;
+    if (reaction.emoji.name !== "⭐") return;
     if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
     if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
     const { starboardChannel } = this.client.settings.get(message.guild.id);
     const starChannel = message.guild.channels.cache.find(channel => channel.name === starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
-    const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
+    const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
-      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
       const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
@@ -158,8 +158,8 @@ module.exports = class {
       await starMsg.edit({ embeds: [embed] });
     }
     if (!stars) {
-      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
+      if (image === "" && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
       const embed = new MessageEmbed()
         .setColor(15844367)
         .setDescription(message.cleanContent)
@@ -173,10 +173,10 @@ module.exports = class {
 
   // Here we add the this.extension function to check if there's anything attached to the message.
   extension(reaction, attachment) {
-    const imageLink = attachment.split('.');
+    const imageLink = attachment.split(".");
     const typeOfImage = imageLink[imageLink.length - 1];
     const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
-    if (!image) return '';
+    if (!image) return "";
     return attachment;
   }
 };
@@ -194,7 +194,7 @@ if (message.author.id === user.id) return;
 if (stars) {
   const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
-  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
   const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
@@ -220,16 +220,16 @@ module.exports = class {
   async run(reaction, user) {
     const { message } = reaction;
     if (message.author.id === user.id) return;
-    if (reaction.emoji.name !== '⭐') return;
+    if (reaction.emoji.name !== "⭐") return;
     const { starboardChannel } = this.client.settings.get(message.guild.id);
     const starChannel = message.guild.channels.cache.find(channel => channel.name == starboardChannel)
     if (!starChannel) return message.channel.send(`It appears that you do not have a \`${starboardChannel}\` channel.`); 
     const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
-    const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
+    const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
       const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
-      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
+      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
       const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
@@ -245,10 +245,10 @@ module.exports = class {
 
   // Now, it may seem weird that we use this in the messageReactionRemove event, but we still need to check if there's an image so that we can set it, if necessary.
   extension(reaction, attachment) {
-    const imageLink = attachment.split('.');
+    const imageLink = attachment.split(".");
     const typeOfImage = imageLink[imageLink.length - 1];
     const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
-    if (!image) return '';
+    if (!image) return "";
     return attachment;
   };
 };

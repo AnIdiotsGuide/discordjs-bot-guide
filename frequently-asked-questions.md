@@ -31,10 +31,10 @@ client.on("ready", () => {
 client.on("ready", () => {
     client.user.setPresence({
         activities: [{ 
-          name: 'my code',
-          type: 'WATCHING'
+          name: "my code",
+          type: "WATCHING"
         }],
-        status: 'idle'
+        status: "idle"
     })
 })
 ```
@@ -94,7 +94,7 @@ message.channel.send("Hello " + message.author.toString() + ", and welcome!");
 ```javascript
 // Restrict a command to a specific user by ID
 if (message.content.startsWith(`${prefix}commandname`)) {
-    if (message.author.id !== 'A user ID') return;
+    if (message.author.id !== "A user ID") return;
     // Your Command Here
 }
 ```
@@ -147,7 +147,7 @@ As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The
 Note: you'll need to `npm install long` and then `const Long = require("long");` to use the below code.
 
 ```javascript
-const { Permissions } = require('discord.js');
+const { Permissions } = require("discord.js");
 
 const getDefaultChannel = (guild) => {
   // get "original" default channel

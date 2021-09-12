@@ -35,9 +35,9 @@ In a `messageCreate` handler, you have access to checking the GuildMember class 
 ```javascript
 // assuming role.id is an actual ID of a valid role:
 if (message.member.roles.cache.has(role.id)) {
-  console.log(`Yay, the author of the message has the role!`);
+  console.log("Yay, the author of the message has the role!");
 } else {
-  console.log(`Nope, noppers, nadda.`);
+  console.log("Nope, noppers, nadda.");
 }
 ```
 

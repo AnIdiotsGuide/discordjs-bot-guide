@@ -29,7 +29,7 @@ const { Client } = require("discord.js");
 // the correct number of shards.
 // If you would like to have a different number of shards, you may
 // also set this to a number.
-const client = new Client({ shardCount: 'auto' });
+const client = new Client({ shardCount: "auto" });
 ```
 
 ## Traditional Sharding
@@ -59,18 +59,18 @@ To learn how to make use of this, read on!
 */
 
 // Include discord.js ShardingManager
-const { ShardingManager } = require('discord.js');
+const { ShardingManager } = require("discord.js");
 
 // Create your ShardingManager instance
-const manager = new ShardingManager('./YOUR_BOT_FILE_NAME.js', {
+const manager = new ShardingManager("./YOUR_BOT_FILE_NAME.js", {
     // for ShardingManager options see:
     // https://discord.js.org/#/docs/main/stable/class/ShardingManager
-    totalShards: 'auto',
-    token: 'YOUR_TOKEN_GOES_HERE'
+    totalShards: "auto",
+    token: "YOUR_TOKEN_GOES_HERE"
 });
 
 // Emitted when a shard is created
-manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
+manager.on("shardCreate", (shard) => console.log(`Shard ${shard.id} launched`));
 
 // Spawn your shards
 manager.spawn();
@@ -102,7 +102,7 @@ console.log(client.guilds.cache.size);
 
 // If we would like to get our client.guilds.cache.size from all
 // of our shards, we must make use of fetchClientValues().
-const res = await client.shard.fetchClientValues('guilds.cache.size');
+const res = await client.shard.fetchClientValues("guilds.cache.size");
 console.log(res);
 //     [
 //        1050,    // shard 0
@@ -128,7 +128,7 @@ Here's an example of a function that uses `fetchClientValues()` to first get, th
 
 const getServerCount = async () => {
     // get guild collection size from all the shards
-    const req = await client.shard.fetchClientValues('guilds.cache.size');
+    const req = await client.shard.fetchClientValues("guilds.cache.size");
 
     // return the added value
     return req.reduce((p, n) => p + n, 0);

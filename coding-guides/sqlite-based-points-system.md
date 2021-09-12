@@ -51,13 +51,13 @@ Now we've got that we should `require` sqlite and make use of it, put the follow
 
 ```javascript
 const SQLite = require("better-sqlite3");
-const sql = new SQLite('./scores.sqlite');
+const sql = new SQLite("./scores.sqlite");
 ```
 
 We do have a small caveat - we really don't want to react on Direct Messages, so our whole code will be in a block that checks for that. We don't just want to ignore DMs because our bot itself might have DM commands!
 
 ```javascript
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
   if (message.guild) {
     // This is where we'll put our code.
@@ -73,7 +73,7 @@ const { Client } = require("discord.js");
 const client = new Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
-const sql = new SQLite('./scores.sqlite');
+const sql = new SQLite("./scores.sqlite");
 
 client.on("ready", () => {
   console.log("I am ready!");
@@ -175,7 +175,7 @@ const { Client, MessageEmbed } = require("discord.js");
 const client = new Client();
 const config = require("./config.json");
 const SQLite = require("better-sqlite3");
-const sql = new SQLite('./scores.sqlite');
+const sql = new SQLite("./scores.sqlite");
 
 client.on("ready", () => {
   // Check if the table "points" exists.

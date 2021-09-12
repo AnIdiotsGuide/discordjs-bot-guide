@@ -10,7 +10,7 @@ In this, we need to do 3 things:
 * Grab the _command_ part \(`mycommand`\)
 * Grab the _array_ of _arguments_ which will be:
 
-`['arg1', 'arg2', 'arg3']`
+`["arg1", "arg2", "arg3"]`
 
 In the greatest majority of the code I've seen, arguments are _split_ at the beginning of the code, and each command will put the argument array back together as necessary within the command code.
 

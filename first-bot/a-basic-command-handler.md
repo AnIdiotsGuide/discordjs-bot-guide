@@ -182,7 +182,7 @@ Note that the `ready` event normally doesn't have any arguments, it's just `()`.
 Here's another example with the `guildMemberAdd` event:
 
 ```javascript
-const { Permissions } = require('discord.js');
+const { Permissions } = require("discord.js");
 
 module.exports = (client, member) => {
   const defaultChannel = member.guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has(Permissions.FLAGS.SEND_MESSAGES));
