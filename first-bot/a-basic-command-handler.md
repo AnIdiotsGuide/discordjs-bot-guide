@@ -20,7 +20,7 @@ In order to correctly write and use a command handler, I would suggest you get f
 
 Because we're creating a separate file \(module\) for each event and each commands, our main file \(app.js, or index.js, or whatever you're calling it\) will change drastically from a list of commands to a simple file that loads other files.
 
-Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `message` we want `./events/message.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc.
+Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `messageCreate` we want `./events/messageCreate.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc.
 
 ```javascript
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
@@ -103,7 +103,7 @@ client.login(config.token);
 
 ## Our first Event: Message
 
-The `message` event is obviously the most important one, as it will receive all messages sent to the bot. Create the `./events/message.js` file \(make sure it's spelled _exactly_ like that\) and look at this bit of code:
+The `messageCreate` event is obviously the most important one, as it will receive all messages sent to the bot. Create the `./events/messageCreate.js` file \(make sure it's spelled _exactly_ like that\) and look at this bit of code:
 
 ```javascript
 module.exports = (client, message) => {
