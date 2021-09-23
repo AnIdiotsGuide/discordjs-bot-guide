@@ -17,7 +17,6 @@ If you don't know what a Map is, read up [here](https://developer.mozilla.org/en
 While the below is a fair approximation of invite tracking, it's still not perfect. There are 2 things it doesn't track:
 
 * Temporary one-use invites \(when right-clicking someone, and doing Invite To =&gt; Server\). Those exist only for a few moments and cannot be tracked at all.
-* Invites created after the bot loaded. That would require fetching on a loop which is dangerous for API spam.
 
 ## Caching Invites
 
@@ -35,9 +34,9 @@ client.on("ready", async () => {
   await wait(1000);
 
   // Loop over all the guilds
-  client.guilds.cache.map(async (guild) => {
+  client.guilds.cache.forEach(async (guild) => {
     // Fetch all Guild Invites
-    const firstInvites = guild.invites.fetch();
+    const firstInvites = await guild.invites.fetch();
     // Set the key as Guild ID, and create a map which has the invite code, and the number of uses
     invites.set(guild.id, new Map(firstInvites.map((invite) => [invite.code, invite.uses])));
   });
@@ -95,7 +94,9 @@ client.on("guildMemberAdd", member => {
     // Get the log channel (change to your liking)
     const logChannel = member.guild.channels.cache.find(channel => channel.name === "join-logs");
     // A real basic message with the information we need. 
-    logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`);
+    inviter
+      ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
+      : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
   });
 });
 ```
