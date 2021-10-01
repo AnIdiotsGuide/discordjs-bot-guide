@@ -9,8 +9,10 @@ We have two choices, either create a stand-alone bot, or throw it in an existing
 Let's grab some example code...
 
 ```javascript
-const { Client } = require("discord.js");
-const client = new Client();
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+});
 
 client.on("ready", () => {
   console.log("I am ready!");
@@ -33,8 +35,10 @@ Now, we've got the example code, we want to take our previously made webhook and
 You want to start off by defining your webhook at the top of your code, don't forget to replace `Webhook ID` and `Webhook Token` with their respective values.
 
 ```javascript
-const { Client, WebhookClient } = require("discord.js");
-const client = new Client();
+const { Client, Intents, WebhookClient } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+});
 const mentionHook = new WebhookClient({ id: "Webhook ID", token: "Webhook Token" });
 
 client.on("ready", () => {

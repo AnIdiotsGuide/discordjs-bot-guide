@@ -23,44 +23,39 @@ Because we're creating a separate file \(module\) for each event and each comman
 Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `messageCreate` we want `./events/messageCreate.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc.
 
 ```javascript
-// This loop reads the /events/ folder and attaches each event file to the appropriate event.
-fs.readdir("./events/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    // If the file is not a JS file, ignore it (thanks, Apple)
-    if (!file.endsWith(".js")) return;
-    // Load the event file itself
-    const event = require(`./events/${file}`);
-    // Get just the event name from the file name
-    let eventName = file.split(".")[0];
+// Read the Files in the Events Directory and filter files that ends with .js
+const files = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+// Loop over each file
+for (const file of files) {
+  // Split the file at its extension and get the event name
+  const eventName = file.split(".")[0];
+  // Require the file
+  const event = require(`./events/${file}`);
     // super-secret recipe to call events with all their proper arguments *after* the `client` var.
     // without going into too many details, this means each event will be called with the client argument,
     // followed by its "normal" arguments, like message, member, etc etc.
     // This line is awesome by the way. Just sayin'.
-    client.on(eventName, event.bind(null, client));
-    delete require.cache[require.resolve(`./events/${file}`)];
-  });
-});
+  client.on(eventName, event.bind(null, client));
+}
 ```
 
 The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we'll use a Discord Collection:
 
 ```javascript
 client.commands = new Discord.Collection();
+// Read the Commands Directory, and filter the files that end with .js
+const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+// Loop over the Command files
+for (const file of commands) {
+  // Get the command name from splitting the file
+  const commandName = file.split(".")[0];
+  // Require the file
+  const command = require(`./commands/${file}`);
 
-fs.readdir("./commands/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    // Load the command file itself
-    let props = require(`./commands/${file}`);
-    // Get just the command name from the file name
-    let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
-    // Here we simply store the whole thing in the command Enmap. We're not running it right now.
-    client.commands.set(commandName, props);
-  });
-});
+  console.log(`Attempting to load command ${commandName}`);
+  // Set the command to a collection
+  client.commands.set(command.name, command);
+}
 ```
 
 Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\):
@@ -75,28 +70,23 @@ const client = new Client({
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
-
-fs.readdir("./events/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    const event = require(`./events/${file}`);
-    let eventName = file.split(".")[0];
-    client.on(eventName, event.bind(null, client));
-  });
-});
-
 client.commands = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    let props = require(`./commands/${file}`);
-    let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
-    client.commands.set(commandName, props);
-  });
-});
+const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+for (const file of events) {
+  const eventName = file.split(".")[0];
+  const event = require(`./events/${file}`);
+  client.on(eventName, event.bind(null, client));
+}
+
+const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+for (const file of commands) {
+  const commandName = file.split(".")[0];
+  const command = require(`./commands/${file}`);
+
+  console.log(`Attempting to load command ${commandName}`);
+  client.commands.set(command.name, command);
+}
 
 client.login(config.token);
 ```

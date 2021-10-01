@@ -5,8 +5,10 @@ This has been a rather demanded topic recently, everyone wants to know how to us
 As per usual let's grab the example source code.
 
 ```javascript
-const { Client } = require("discord.js");
-const client = new Client();
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILD, Intents.FLAGS.GUILD_MESSAGES]
+});
 
 client.on("ready", () => {
   console.log("I am ready!");
@@ -28,7 +30,7 @@ Right, we'll start off slow, we need to create a webhook first, if we look at th
 message.channel.createWebhook("Example Webhook", { avatar: "https://i.imgur.com/p2qNFag.png" })
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
-.then(wb => message.author.send(`Here is your webhook https://discord.com/api/webhooks/${wb.id}/${wb.token}`))
+.then(wb => message.author.send(`Here is your webhook ${wb.url}`))
 .catch(console.error);
 ```
 
@@ -48,7 +50,7 @@ client.on("messageCreate", message => {
   let args = message.content.split(" ").slice(1);
   if (message.content.startsWith(`${prefix}createHook`)) {
     message.channel.createWebhook("Example Webhook", { avatar: "https://i.imgur.com/p2qNFag.png" })
-      .then(wb => message.author.send(`Here is your webhook https://discord.com/api/webhooks/${wb.id}/${wb.token}`))
+      .then(wb => message.author.send(`Here is your webhook ${wb.url}`))
       .catch(console.error);
   }
 });
@@ -77,7 +79,7 @@ if (!linkCheck.test(nameAvatar)) return message.reply("You must supply an image 
 const avatar = nameAvatar.match(linkCheck)[0];
 const name = nameAvatar.replace(linkCheck, "");
 message.channel.createWebhook(name, { avatar })
-  .then(wb => message.author.send(`Here is your webhook https://discord.com/api/webhooks/${wb.id}/${wb.token}\n\nPlease keep this safe, as you could be exploited.`))
+  .then(wb => message.author.send(`Here is your webhook ${wb.url}. \n\nPlease keep this safe, as you could be exploited.`))
     .catch(error => console.log(error));
 ```
 

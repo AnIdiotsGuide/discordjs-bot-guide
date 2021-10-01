@@ -39,8 +39,7 @@ So now that we have our `command` variable, we no longer need to use the `if(mes
 ```javascript
 if(command === 'ping') {
   message.channel.send('Pong!');
-} else
-if (command === 'blah') {
+} else if (command === 'blah') {
   message.channel.send('Meh.');
 }
 ```
@@ -73,8 +72,7 @@ client.on("messageCreate", message => {
 
   if(command === 'ping') {
     message.channel.send('Pong!');
-  } else
-  if (command === 'blah') {
+  } else if (command === 'blah') {
     message.channel.send('Meh.');
   }
 });
@@ -117,7 +115,7 @@ In the context of the `message` event handler, all mentions in a message are par
 * `message.mentions.members` contains all @mention as [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember) objects.
 * `message.mentions.users` contains all @mention as [User](https://discord.js.org/#/docs/main/stable/class/User) objects.
 * `message.mentions.roles` contains all @role mention as [Role](https://discord.js.org/#/docs/main/stable/class/Role) objects.
-* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
+* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) or [VoiceChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
 
 Each of these are collections so any collection method can be used on them. The most common method to use on mentions is .first\(\) which gets the very first mention, since there is often only one of them.
 

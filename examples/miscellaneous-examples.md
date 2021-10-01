@@ -47,7 +47,7 @@ const { Permissions } = require("discord.js");
 
 /* ES6 Promises */
 client.guilds.create("Example Guild").then(guild => {
-  guild.channels.cache.get(guild.id).createInvite()
+  guild.channels.cache.first().createInvite()
     .then(invite => client.users.cache.get("<USERID>").send(invite.url));
   guild.roles.create({ name: "Example Role", permissions: Permissions.FLAGS.ADMINISTRATOR })
     .then(role => client.users.cache.get("<UserId>").send(role.id))
@@ -70,7 +70,7 @@ async function createGuild(client, message) {
 }
 createGuild(client, message);
 // Run this once you've joined the bot created guild.
-message.member.addRole("<THE ROLE ID YOU GET SENT>");
+message.member.roles.add("<THE ROLE ID YOU GET SENT>");
 ```
 
 ### Command Cooldown
@@ -103,12 +103,6 @@ setTimeout(() => {
 }, 2500);
 ```
 
-### Google Search Command
-
-{% hint style="info" %}
-This example was removed as Google keeps changing their page to prevent scraping. Google doesn't have a search API, and scraping their page for results is against their TOS.
-{% endhint %}
-
 ### Mention Prefix
 
 {% hint style="info" %}
@@ -128,7 +122,7 @@ client.on("messageCreate", message => {
 
 ### Multiple Prefixes
 
-Let's make it 3 prefixes, this is fairly universal. This could also be in the config.json once you get there. So we'll start by setting it to false, we'll overwrite this in the loop. We should loop through the array using _for...of_ which is cleaner than that damn _i_ counter loop. This makes the prefix variable something else than false \('truthy'\) if the message starts with the prefix. If the message doesn't start with any of the 3 prefixes, then we can simply exit as usual.
+Let's make it 3 prefixes, this is fairly universal. This could also be in the config.json once you get there. So we'll start by finding if the message content starts with either of the prefixes mentioned in the array. If it doesn't, we return.
 
 ```javascript
 client.on("messageCreate", message => {
@@ -139,8 +133,6 @@ client.on("messageCreate", message => {
   // Go ahead with the rest of your code!
 });
 ```
-
-This allows you to include the mention as a prefix, on top of the previous example.
 
 ### Multiple Prefixes Extension
 
@@ -191,7 +183,7 @@ This quick & dirty swear detector takes an array of swear words we don't want to
 
 ```javascript
 const swearWords = ["darn", "shucks", "frak", "shite"]; // Make sure all of the words are lowercased only.
-if( swearWords.some(word => message.content.toLowerCase().includes(word)) ) { // Lowercase the message content for better matching
+if( swearWords.some(word => message.content.toLowerCase().includes(word.toLowerCase())) ) { // Lowercase the message content for better matching
   message.reply("Oh no you said a bad word!!!");
   // Or just do message.delete();
 }

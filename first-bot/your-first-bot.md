@@ -53,15 +53,13 @@ From now on I will omit the code that requires and initiates the discord.js and 
 client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
-  } else
-
-  if (message.content.startsWith("foo")) {
+  } else if (message.content.startsWith("foo")) {
     message.channel.send("bar!");
   }
 });
 ```
 
-Save your code and reload your bot. To do so, use `CTRL+C` in the command line, and re-run `node index.js`. Yes, there are better ways to reload the code, as you will see later in this book.
+Save your code and restart your bot. To do so, use `CTRL+C` in the command line, and re-run `node index.js`. Yes, there are better ways to reload the code, as you will see later in this book.
 
 You can test your new command by saying `foo` in a channel you share with the bot. You can also confirm that `ping` still returns `pong`!
 

@@ -138,47 +138,6 @@ message.guild.channels.cache.get('<CHANNEL ID>').createInvite().then(invite =>
 );
 ```
 
-### Default Channel
-
-{% hint style="info" %}
-As of 03/08/2017, **there is no more Default Channel** in guilds on Discord. The \#general default channel can be deleted, and the `guild.defaultChannel` property no longer works. As an alternative, for those _really_ wanting to send to what "looks" like the default channel, here's a dirty workaround.
-{% endhint %}
-
-Note: you'll need to `npm install long` and then `const Long = require("long");` to use the below code.
-
-```javascript
-const { Permissions } = require("discord.js");
-
-const getDefaultChannel = (guild) => {
-  // get "original" default channel
-  if(guild.channels.cache.has(guild.id))
-    return guild.channels.cache.get(guild.id)
-
-  // Check for a "general" channel, which is often default chat
-  const generalChannel = guild.channels.cache.find(channel => channel.name === "general");
-  if (generalChannel)
-    return generalChannel;
-  // Now we get into the heavy stuff: first channel in order where the bot can speak
-  // hold on to your hats!
-  return guild.channels.cache
-   .filter(c => c.type === "GUILD_TEXT" &&
-     c.permissionsFor(guild.client.user).has(Permissions.FLAGS.SEND_MESSAGES))
-   .sort((a, b) => a.position - b.position ||
-     Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
-   .first();
-}
-
-// This is called as, for instance:
-client.on("guildMemberAdd", member => {
-  const channel = getDefaultChannel(member.guild);
-  channel.send(`Welcome ${member} to the server, wooh!`);
-});
-```
-
-It's very important to note that if the bot has admin perms, their "First writable channel" is the one on top. That could be Rules, Announcements, FAQs, whatever. So if the default channel was deleted and there's no general channel, you're going to annoy a lot of people.
-
-Consider using [Enmap](https://npmjs.com/package/enmap) for per-guild settings instead \([example here](https://enmap.evie.dev/complete-examples/per-server-settings)\) and let server admins **choose** a channel!
-
 ## Messages
 
 ```javascript
