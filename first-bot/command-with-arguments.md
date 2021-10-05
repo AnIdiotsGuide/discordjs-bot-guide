@@ -34,12 +34,14 @@ On the second line:
 
 ## Using the `command` variable properly
 
-So now that we have our `command` variable, we no longer need to use the `if(message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands:
+So now that we have our `command` variable, we no longer need to use the `if (message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands:
 
 ```javascript
-if(command === 'ping') {
+if (command === 'ping') {
   message.channel.send('Pong!');
-} else if (command === 'blah') {
+} else
+
+if (command === 'blah') {
   message.channel.send('Meh.');
 }
 ```
@@ -70,9 +72,11 @@ client.on("messageCreate", message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if(command === 'ping') {
+  if (command === 'ping') {
     message.channel.send('Pong!');
-  } else if (command === 'blah') {
+  } else
+
+  if (command === 'blah') {
     message.channel.send('Meh.');
   }
 });
@@ -138,7 +142,7 @@ Let's make the above kick command a little better. Because Discord now supports 
 So let's do this now, with what we've already learned, and a little extra:
 
 ```javascript
-if(command === "kick") {
+if (command === "kick") {
   let member = message.mentions.members.first();
   let reason = args.slice(1).join(" ");
   member.kick(reason);
@@ -152,7 +156,7 @@ To use this command, a user would do something like: `!kick @SuperGamerDude Obvi
 Here's another example, with a super simple command, the `say` command. It makes the bot say what you just sent, and then delete your message:
 
 ```javascript
-if(command === "say"){
+if (command === "say"){
   let text = args.join(" ");
   message.delete();
   message.channel.send(text);

@@ -87,7 +87,9 @@ if (entry.extra.channel.id === message.channel.id
 // We want to check the count as audit logs stores the amount deleted in a channel
 && entry.extra.count >= 1) {
   user = entry.executor.username
-} else { 
+}
+
+else { 
   // When all else fails, we can assume that the author has deleted their message.
   user = message.author.username
 }
@@ -120,7 +122,9 @@ client.on("messageDelete", async (message) => {
       && (entry.createdTimestamp > (Date.now() - 5000))
       && (entry.extra.count >= 1)) {
     user = entry.executor.username
-  } else { 
+  }
+
+  else { 
     user = message.author.username
   }
   logs.send(`A message was deleted in ${message.channel.name} by ${user}`);

@@ -64,6 +64,7 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
+
   if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
@@ -79,6 +80,7 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith(`${config.prefix}ping`)) {
     message.channel.send("pong!");
   } else
+
   if (message.content.startsWith(`${config.prefix}foo`)) {
     message.channel.send("bar!");
   }

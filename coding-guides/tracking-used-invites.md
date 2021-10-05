@@ -8,10 +8,10 @@ description: >-
 
 A relatively frequent thing people would love to know, is "what invite someone used to join". Unfortunately, the Discord API does not provide the information about the invite used to join a server.
 
-To get around this, we need to do two separate steps. The first one is to fetch all of the invites for each guild and store it in a temporary Map. The second is to fetch a guild's invite whenever someone joins, and find which one has a new use on it. Thankfully, that's actually pretty simple!
+To get around this, we need to do two separate steps. The first one is to fetch all of the invites for each guild and store it in a temporary [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). The second is to fetch a guild's invite whenever someone joins, and find which one has a new use on it. Thankfully, that's actually pretty simple!
 
 {% hint style="info" %}
-If you don't know what a Map is, read up [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+For this code to work, you need to have your privileged `GUILD_MEMBERS` intent enabled in your Bot's Application Page. You also need to make sure to initialize that the Intents property in your Client Options has this intent mentioned. These two vital steps will give you access to the privileged `guildMemberAdd` and `guildMemberRemove` events.
 {% endhint %}
 
 While the below is a fair approximation of invite tracking, it's still not perfect. There are 2 things it doesn't track:

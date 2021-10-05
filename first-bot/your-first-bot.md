@@ -53,7 +53,9 @@ From now on I will omit the code that requires and initiates the discord.js and 
 client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
-  } else if (message.content.startsWith("foo")) {
+  } else
+
+  if (message.content.startsWith("foo")) {
     message.channel.send("bar!");
   }
 });
@@ -84,6 +86,7 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
+
   if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
@@ -142,6 +145,7 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
+
   if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }

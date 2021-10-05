@@ -9,7 +9,7 @@ Conventions are important - they are the agreements on which society functions. 
 A "Placeholder" is a piece of text that _replaces something else_. In these FAQs we assume the following variables as "placeholders" for your own:
 
 * `client` is a placeholder that corresponds to your `client` variable, as we've covered at the end of the [Getting Started](../getting-started/getting-started-long-version.md) guide. `client.on("ready", () => {` for example.
-* `messageCreate` is a placeholder corresponds to your `messageCreate` event's variable which looks something like this: `client.on("messageCreate", msg => {`.
+* `client` is a placeholder corresponds to your `messageCreate` event's variable which looks something like this: `client.on("messageCreate", msg => {`.
 
 ## Examples
 
@@ -183,7 +183,7 @@ This quick & dirty swear detector takes an array of swear words we don't want to
 
 ```javascript
 const swearWords = ["darn", "shucks", "frak", "shite"]; // Make sure all of the words are lowercased only.
-if( swearWords.some(word => message.content.toLowerCase().includes(word.toLowerCase())) ) { // Lowercase the message content for better matching
+if (swearWords.forEach(word => message.content.toLowerCase().includes(word.toLowerCase()))) { // Lowercase the message content for better matching
   message.reply("Oh no you said a bad word!!!");
   // Or just do message.delete();
 }

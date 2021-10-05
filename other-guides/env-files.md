@@ -121,7 +121,9 @@ client.on("ready", () => {
 
   if (ver === "production") {
     client.user.setActivity("An Idiot's Guide", { type: "STREAMING", url: "https://twitch.tv/something" })
-  } else {
+  }
+
+  else {
     client.user.setActivity("in code land", { type: "PLAYING" });
   }
 });
