@@ -9,7 +9,7 @@ Conventions are important - they are the agreements on which society functions. 
 A "Placeholder" is a piece of text that _replaces something else_. In these FAQs we assume the following variables as "placeholders" for your own:
 
 * `client` is a placeholder that corresponds to your `client` variable, as we've covered at the end of the [Getting Started](../getting-started/getting-started-long-version.md) guide. `client.on("ready", () => {` for example.
-* `client` is a placeholder corresponds to your `messageCreate` event's variable which looks something like this: `client.on("messageCreate", msg => {`.
+* `message` is a placeholder corresponds to your `messageCreate` event's variable which looks something like this: `client.on("messageCreate", message => {`.
 
 ## Examples
 
