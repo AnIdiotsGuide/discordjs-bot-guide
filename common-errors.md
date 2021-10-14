@@ -39,7 +39,6 @@ Your code has an error somewhere. This is _impossible_ to troubleshoot without t
 
 The following trick is a lifesaver, so pay attention: Your code editor is trying to help you. Whatever editor you're using \(except notepad++.exe. Don't use notepad++!\), clicking on any \(and I mean any\) special character such as parentheses, square brackets, curly braces, double and single quotes, will automatically highlight the one that matches it. The screenshot below shows this: I clicked on the curly brace at the bottom, it shows me the one on top by highlighting it. Learn this, and how different functions and event handlers "look" like.
 
-![](.gitbook/assets/editorhelp.png)
+![They have friends](.gitbook/assets/editorhelp.png)
 
 You can check out [Installing and Using a Proper Editor](other-guides/installing-and-using-a-proper-editor.md) to help in at least knowing there are errors _before_ running your bot code.
-

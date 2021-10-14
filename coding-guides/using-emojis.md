@@ -1,12 +1,12 @@
 # Using Emojis
 
-Here's a fun fact you might not know about bots on Discord: They have access to every single "custom emoji" of every single guild they're in - for free. That's right, you have 1/4 of the features of Nitro, free in your bot, right now! In this page we'll be taking a look at how to take advantage of these emojis, how to access them and how to display them.
+Here's a fun fact you might not know about bots on Discord: They have access to every single "custom emoji" of every single guild they're in - for free. That's right, you have a feature of Nitro, free in your bot, right now! In this page we'll be taking a look at how to take advantage of these emojis, how to access them and how to display them.
 
 ## What's an Emoji?
 
 Let's start by tearing apart exactly what an Emoji is, how they're configured and how they're accessed. So here, we have an emoji:
 
-![](https://cdn.discordapp.com/emojis/305818615712579584.png)
+![ayy](https://cdn.discordapp.com/emojis/305818615712579584.png)
 
 When I want to write this emoji in my chat, I simply type `:ayy:` and it turns into the above \(smaller, of course, but still\). But behind the scenes, 2 things happen for this emoji to show:
 
@@ -19,7 +19,7 @@ When I want to write this emoji in my chat, I simply type `:ayy:` and it turns i
 
 There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis.cache` is a collection of every emoji the client has access to, and `guild.emojis.cache` is a collection of the emojis of a specific guild.
 
-If you've learned anything from [Understanding Collections](using-emojis.md), you might already know how to get something by ID from a collection:
+If you've learned anything from [Understanding Collections](../understanding/collections.md), you might already know how to get something by ID from a collection:
 
 ```javascript
 const ayy = client.emojis.cache.get("305818615712579584");
@@ -38,7 +38,7 @@ But how does one output that emoji to the chat? Well, just like users and roles,
 You can also take advantage of concatenation and template literals to simplify the task, since they will automatically do the conversion for you:
 
 ```javascript
-if(message.content === "ayy") {
+if (message.content === "ayy") {
    const ayy = client.emojis.cache.find(emoji => emoji.name === "ayy");
    message.reply(`${ayy} LMAO`);
 }
@@ -57,7 +57,7 @@ In this example, you can list all custom emojis with \(emoji.id, emoji.image and
 
 ```javascript
 if (message.content === "listemojis") {
-   const emojiList = message.guild.emojis.cache.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
+   const emojiList = message.guild.emojis.cache.map((e, x) => `${x} = ${e} | ${e.name}`).join("\n");
    message.channel.send(emojiList);
 }
 
@@ -74,4 +74,3 @@ You can also use custom emojis as reactions to messages, using `message.react(em
 Don't forget there is a very extensive collection of emojis that are built into Discord that you can have access to. Discord uses Twemoji, provided by Twitter. You can use those emojis to react to messages directly.
 
 The way that Discord expects those emojis however is that they have to be the _unicode_ character, not the "text". Meaning, you can't just do `message.send(":poop:")` and expect to see 💩 appear. You actually need to get the unicode value. How do you do that? Just escape the emoji in chat: `\:poop:` will show as 💩. You can copy/paste that inside your bot's code either in a message string, or as an emoji reaction such as `message.react("💩")`.
-

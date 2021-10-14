@@ -6,7 +6,7 @@ In this chapter we will cover third party services such as [Zapier](https://zapi
 
 But before we jump to Zapier, let's cover something I should of covered in the first chapter.
 
-The [official documentation](https://discordapp.com/developers/docs/intro) for the [webhook endpoints](https://discordapp.com/developers/docs/resources/webhook) for Discord list 3 "types", you have your [Standard Webhook](https://discordapp.com/developers/docs/resources/webhook#execute-webhook), you have a [Slack-Compatible Webhook](https://discordapp.com/developers/docs/resources/webhook#execute-slackcompatible-webhook) and a [Github-Compatible Webhook](https://discordapp.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)
+The [official documentation](https://discord.com/developers/docs/intro) for the [webhook endpoints](https://discord.com/developers/docs/resources/webhook) for Discord list 3 "types", you have your [Standard Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook), you have a [Slack-Compatible Webhook](https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook) and a [Github-Compatible Webhook](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)
 
 ![Standard Webhook](../.gitbook/assets/wh07.png)
 
@@ -59,4 +59,3 @@ And if we go to our channel and check it out we should see the following;
 ## Congratulations
 
 You've successfully managed to use Discord to store your quick image snips, but we're not done yet, in the next chapter we'll cover [Zapier](https://zapier.com/) and [IFTTT](https://ifttt.com/) for more advanced usages.
-

@@ -1,4 +1,3 @@
 # Video Guides
 
-
-
+Coming Soon...?

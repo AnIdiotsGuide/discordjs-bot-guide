@@ -1,22 +1,20 @@
 # Webhooks \(Part 1\)
 
-{% hint style="info" %}
-At the time of writing this guide \(07/02/2017\) there is a bug with how webhooks are created via code, you must supply a webhook name and avatar. **However it does not work as intended.** You must _edit_ the webhook with the same details for the avatar to be applied.
-{% endhint %}
-
 This has been a rather demanded topic recently, everyone wants to know how to use the webhooks, so here I am with this guide to explain the basic coverage of the webhooks.
 
 As per usual let's grab the example source code.
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILD, Intents.FLAGS.GUILD_MESSAGES]
+});
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
@@ -25,16 +23,15 @@ client.on("message", (message) => {
 client.login("SuperSecretBotTokenHere");
 ```
 
-Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/v12/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
+Right, we'll start off slow, we need to create a webhook first, if we look at the [documentation](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook) it comes with an example, that is basically all we need to create a webhook, but we'll add some polish to it and throw it into a basic command.
 
 ```javascript
 // This will create the webhook with the name "Example Webhook" and an example avatar.
-message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.png")
-// This will actually set the webhooks avatar, as mentioned at the start of the guide.
-.then(webhook => webhook.edit("Example Webhook", "https://i.imgur.com/p2qNFag.png")
+message.channel.createWebhook("Example Webhook", { avatar: "https://i.imgur.com/p2qNFag.png" })
 // This will get the bot to DM you the webhook, if you use this in a selfbot,
 // change it to a console.log as you cannot DM yourself
-.then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`)).catch(console.error))
+.then(wb => message.author.send(`Here is your webhook ${wb.url}`))
+.catch(console.error);
 ```
 
 This is what it should look like if you test the code.
@@ -43,23 +40,17 @@ This is what it should look like if you test the code.
 
 ![Successfully created webhook](../.gitbook/assets/wh02.png)
 
-{% hint style="info" %}
-This webhook link has long since been deleted.
-{% endhint %}
-
 Now, that's all well and good, we can create the webhooks and get our bot to DM us, but the values are _hardcoded_, which means if we run that command, we'd get webhooks by the same name / avatar all the time, let's fix that shall we? we'll be looking at the [command arguments](../first-bot/command-with-arguments.md) page.
 
 You should have a message handler that looks something like this.
 
 ```javascript
 let prefix = "~";
-client.on("message", message => {
+client.on("messageCreate", message => {
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "createHook")) {
-    message.channel.createWebhook("Example Webhook", "https://i.imgur.com/p2qNFag.png")
-      .then(webhook => webhook.edit("Example Webhook", "https://i.imgur.com/p2qNFag.png")
-        .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}`))
-        .catch(console.error))
+  if (message.content.startsWith(`${prefix}createHook`)) {
+    message.channel.createWebhook("Example Webhook", { avatar: "https://i.imgur.com/p2qNFag.png" })
+      .then(wb => message.author.send(`Here is your webhook ${wb.url}`))
       .catch(console.error);
   }
 });
@@ -87,12 +78,9 @@ const linkCheck = /https?:\/\/.+\.(?:png|jpg|jpeg)/gi;
 if (!linkCheck.test(nameAvatar)) return message.reply("You must supply an image link.");
 const avatar = nameAvatar.match(linkCheck)[0];
 const name = nameAvatar.replace(linkCheck, "");
-message.channel.createWebhook(name, avatar)
-  .then(webhook => webhook.edit(name, avatar)
-    .catch(error => console.log(error)))
-  .then(wb => message.author.send(`Here is your webhook https://canary.discordapp.com/api/webhooks/${wb.id}/${wb.token}\n\nPlease keep this safe, as you could be exploited.`)
-    .catch(error => console.log(error)))
-  .catch(error => console.log(error));
+message.channel.createWebhook(name, { avatar })
+  .then(wb => message.author.send(`Here is your webhook ${wb.url}. \n\nPlease keep this safe, as you could be exploited.`))
+    .catch(error => console.log(error));
 ```
 
 Alright, now let's throw that together with our bot code and issue the command!
@@ -106,4 +94,3 @@ And let's check the channel webhooks!
 Wooo! we did it!
 
 Now we can create webhooks on the fly via our bot code, but in the next [_chapter_](discord-webhooks-part-2.md) we'll see what we can do with them!
-

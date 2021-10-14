@@ -9,19 +9,21 @@ Now that the permission has been established. Lets get started!
 Firstly, we need to know what we are doing with the audit logs. Let's log who deleted a message using the messageDelete event. This event will fire whenever a cached message is deleted in a server.
 
 ```javascript
-client.on('messageDelete', async (message) => {
+const { Permissions } = require("discord.js");
+
+client.on("messageDelete", async (message) => {
   // Firstly, we need a logs channel. 
   const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
 
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    await message.guild.channels.create('logs', { type: 'text' });
+  if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) && !logs) {
+    await message.guild.channels.create("logs", { type: "GUILD_TEXT" });
   }
 
   // If we do not have permissions, console log both errors
   if (!logs) { 
-    return console.log('The logs channel does not exist and cannot be created');
+    return console.log("The logs channel does not exist and cannot be created");
   }
 
   /*
@@ -31,7 +33,7 @@ client.on('messageDelete', async (message) => {
   Keep in mind the following line uses some advanced async/await promise manipulation. 
   Explaining exactly how this works is beyond the scope of this guide.
   */
-  const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
+  const entry = await message.guild.fetchAuditLogs({ type: "MESSAGE_DELETE" }).then(audit => audit.entries.first())
 
   // Define an empty user for now. This will be used later in the guide.
   let user;
@@ -85,8 +87,10 @@ if (entry.extra.channel.id === message.channel.id
 // We want to check the count as audit logs stores the amount deleted in a channel
 && entry.extra.count >= 1) {
   user = entry.executor.username
-} else { 
-  // When all else fails, we can assume that the deleter is the author.
+}
+
+else { 
+  // When all else fails, we can assume that the author has deleted their message.
   user = message.author.username
 }
 ```
@@ -101,22 +105,26 @@ Let's take a break to explain exactly whats going on in the above code block. Th
 The final code should look like this:
 
 ```javascript
-client.on('messageDelete', async (message) => {
+const { Permissions } = require('discord.js');
+
+client.on("messageDelete", async (message) => {
   const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.channels.create('logs', { type: 'text' });
+  if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) && !logs) {
+    message.guild.channels.create("logs", { type: "GUILD_TEXT" });
   }
-  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
-    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
+  if (!message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) && !logs) { 
+    console.log("The logs channel does not exist and tried to create the channel but I am lacking permissions")
   }  
-  const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
+  const entry = await message.guild.fetchAuditLogs({ type: "MESSAGE_DELETE" }).then(audit => audit.entries.first())
   let user = ""
     if (entry.extra.channel.id === message.channel.id
       && (entry.target.id === message.author.id)
       && (entry.createdTimestamp > (Date.now() - 5000))
       && (entry.extra.count >= 1)) {
     user = entry.executor.username
-  } else { 
+  }
+
+  else { 
     user = message.author.username
   }
   logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
@@ -165,4 +173,3 @@ INTEGRATION_CREATE: 80
 INTEGRATION_UPDATE: 81
 INTEGRATION_DELETE: 82
 ```
-

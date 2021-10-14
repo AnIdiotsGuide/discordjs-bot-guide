@@ -11,7 +11,7 @@ Other alternatives would be VS Code and Sublime Text 3. You'll have to look up s
 Far be it from me to actually show you how to install stuff on your computer - I will pretend for a moment you know what you're doing, and give you the outline:
 
 1. Go to the [Atom.io website](https://atom.io/).
-2. Click the big red **Download Windows Installer** button \(statistically, you're probably on Windows\).
+2. Click the big red **Download Windows Installer** button \(statistically, you're on Windows\).
 3. Once the .exe is downloaded, run it, and install it.
 
 Atom starts off with a simple interface with a nice welcome screen and a guide, so if you feel like it, go ahead and read up a bit.
@@ -21,7 +21,7 @@ Atom starts off with a simple interface with a nice welcome screen and a guide, 
 To the contrary of some more basic editors, Atom has the ability to open a project _folder_ so you don't have to keep opening files individually.
 
 * Go to **File**, **Open Folder** \(CTRL+SHIFT+O\)
-* Browse to the location of your main bot file \(mybot.js, app.js, or whatever\)
+* Browse to the location of your main bot file \(index.js, app.js, or whatever\)
 * Click on **Select Folder** \(_Note: your files will not appear here, only the folder structure. Don't worry they haven't gone anywhere_\)
 
 On the left of the editor you will have all the files. Just double-click any of them to open it. To clean things up, you can close the Welcome Screen and such.
@@ -59,7 +59,7 @@ ESLint, by default, will expect _very_ strict code from you, and will complain f
 ESLint options can be global or local to your project. Let's do a local one as an example.
 
 * Create a new file in Atom
-* Save it as `.eslintrc.json` in your project folder \(where your app.js/mybot.js is\)
+* Save it as `.eslintrc.json` in your project folder \(where your app.js/index.js is\)
 * Copy the code below inside the file and save it again:
 
 ```javascript
@@ -102,4 +102,3 @@ Don't be daunted by this: it's just a little config in JSON format. I won't go i
 * Make linebreaks Windows styles
 * Warn on single quotes, prefer double quotes
 * Warn when the semicolon is absent
-

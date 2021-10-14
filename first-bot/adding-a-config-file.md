@@ -8,7 +8,7 @@ Putting your token in a config file is fine, but **DO NOT COMMIT IT TO GITHUB** 
 
 ## Why a config file?
 
-One of the advantages of having a configuration file is that you can safely copy your bot's code into, say, hastebin.com to show people, and your token won't be in there. A second advantage is that you can upload the code to a repository like github and, as long as you ignore the config file, your bot can be shared but remain secure. We'll see that in action in a future walkthrough.
+One of the advantages of having a configuration file is that you can safely copy your bot's code into, say, hastebin.com to show people, and your token won't be in there. A second advantage is that you can upload the code to a repository like github and, as long as you ignore the config file, your bot can be shared but remain secure. We'll see that in action in a future walk through.
 
 ## Step 1: The config file
 
@@ -31,8 +31,10 @@ Simply take the following example, and create a new file in the same folder as y
 At the top of your bot file, you need to add a line that will load this configuration, and put it in a variable. This is what it looks like:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client,  Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+});
 const config = require("./config.json");
 ```
 
@@ -56,13 +58,14 @@ The other thing we have, is of course the prefix. Again from before, we have thi
 
 ```javascript
 const prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
-  if (message.content.startsWith(prefix + "foo")) {
+
+  if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
 });
@@ -71,25 +74,26 @@ client.on("message", (message) => {
 We're using `prefix` in a few places, so we need to change them all. Here's how it looks like after the changes:
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(config.prefix + "ping")) {
+  if (message.content.startsWith(`${config.prefix}ping`)) {
     message.channel.send("pong!");
   } else
-  if (message.content.startsWith(config.prefix + "foo")) {
+
+  if (message.content.startsWith(`${config.prefix}foo`)) {
     message.channel.send("bar!");
   }
 });
 ```
 
 {% hint style="info" %}
-The removal of the line that sets the prefix. We don't need it anymore!
+We remove the line that sets the prefix. We don't need it anymore!
 {% endhint %}
 
 ## Changing the config
 
-If you're asking yourself "but how do I change the prefix, now?" fear not, we have some help for you. We suggest you start by reading the rest of this section of the guide \("First Bot"\) and then hop on to the [Per-Server Configuration Guide on the Enmap Documentation](https://enmap.evie.codes/examples/settings)!
+If you're asking yourself "but how do I change the prefix, now?" fear not, we have some help for you. We suggest you start by reading the rest of this section of the guide \("First Bot"\) and then hop on to the [Per-Server Configuration Guide on the Enmap Documentation](https://enmap.evie.dev/examples/per-server-settings)!
 
 ## Extending the idea
 
@@ -103,10 +107,10 @@ So is there anything else you could put in that config file? Absolutely. One thi
 }
 ```
 
-Then, in a protected command, I could use the following line to prevent access to all the users that think they can use it!:
+Then, in a protected command ([eval](../examples/making-an-eval-command.md) for example), I could use the following line to prevent access to all the users that think they can use it!:
 
 ```javascript
-if(message.author.id !== config.ownerID) return;
+if (message.author.id !== config.ownerID) return;
 ```
 
 ## What's next _now_?
