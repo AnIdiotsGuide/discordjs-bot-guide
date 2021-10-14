@@ -21,20 +21,20 @@ PREFIX=[DEFAULT_BOT_PREFIX]
 After you create and update this file, save it and head over to your main file. I will build off of the default Discord.js example code.
 
 ```javascript
-const Discord = require('discord.js');
+const { Client } = require("discord.js");
 // Importing this allows you to access the environment variables of the running node process
-require('dotenv').config();
+require("dotenv").config();
 
-const client = new Discord.Client();
+const client = new Client();
 
 // "process.env" accesses the environment variables for the running node process. PREFIX is the environment variable you defined in your .env file
 const prefix = process.env.PREFIX;
 
-client.on('ready', () => {
+client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', message => {
+client.on("messageCreate", message => {
 
   // Here's I'm using one of An Idiot's Guide's basic command handlers. Using the PREFIX environment variable above, I can do the same as the bot token below
   if (message.author.bot) return;
@@ -43,8 +43,8 @@ client.on('message', message => {
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if (command === 'ping') {
-    message.reply('Pong!');
+  if (command === "ping") {
+    message.reply("Pong!");
   }
 });
 
@@ -112,17 +112,19 @@ Here, you can add multiple scripts. Where going to add a few scripts. `productio
 In your code, you can define what should happen depending on the environment loaded. Here's an example where your bot should only show the stream status if the environment is in `production` when the `ready` event is fired:
 
 ```javascript
-require('dotenv').config();
+require("dotenv").config();
 
 // process.env.NODE_ENV allows you to get the environment the node process is in
 let ver = process.env.NODE_ENV;
 
-client.on('ready', () => {
+client.on("ready", () => {
 
-  if (ver === 'production') {
-    client.user.setActivity('An Idiot\'s Guide', { type: 'STREAMING', url: 'https://twitch.tv/something' })
-  } else {
-    client.user.setActivity('in code land', { type: 'PLAYING' });
+  if (ver === "production") {
+    client.user.setActivity("An Idiot's Guide", { type: "STREAMING", url: "https://twitch.tv/something" })
+  }
+
+  else {
+    client.user.setActivity("in code land", { type: "PLAYING" });
   }
 });
 ```
@@ -171,4 +173,3 @@ Here are some links to more information you can read regarding environment varia
 * [Working with Environment Variables in Node.js \(Twilio Blog\)](https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html)
 * [`dotenv` NPM](https://www.npmjs.com/package/dotenv)
 * [`dotenv-flow` NPM \(Used for multiple `.env` file\)](https://www.npmjs.com/package/dotenv-flow)
-

@@ -10,7 +10,7 @@ In this, we need to do 3 things:
 * Grab the _command_ part \(`mycommand`\)
 * Grab the _array_ of _arguments_ which will be:
 
-`['arg1', 'arg2', 'arg3']`
+`["arg1", "arg2", "arg3"]`
 
 In the greatest majority of the code I've seen, arguments are _split_ at the beginning of the code, and each command will put the argument array back together as necessary within the command code.
 
@@ -34,12 +34,13 @@ On the second line:
 
 ## Using the `command` variable properly
 
-So now that we have our `command` variable, we no longer need to use the `if(message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands:
+So now that we have our `command` variable, we no longer need to use the `if (message.content.startsWith(prefix+'command'))` for every command. We can simplify this by looking only at the `command` variable itself. For example, these 2 very basic commands:
 
 ```javascript
-if(command === 'ping') {
+if (command === 'ping') {
   message.channel.send('Pong!');
 } else
+
 if (command === 'blah') {
   message.channel.send('Meh.');
 }
@@ -63,7 +64,7 @@ switch (command) {
 Here's a complete example that's very often the command handler I've used as a base to build on:
 
 ```javascript
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
   // This is where we'll put our code.
   if (message.content.indexOf(config.prefix) !== 0) return;
@@ -71,9 +72,10 @@ client.on("message", message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if(command === 'ping') {
+  if (command === 'ping') {
     message.channel.send('Pong!');
   } else
+
   if (command === 'blah') {
     message.channel.send('Meh.');
   }
@@ -117,7 +119,7 @@ In the context of the `message` event handler, all mentions in a message are par
 * `message.mentions.members` contains all @mention as [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember) objects.
 * `message.mentions.users` contains all @mention as [User](https://discord.js.org/#/docs/main/stable/class/User) objects.
 * `message.mentions.roles` contains all @role mention as [Role](https://discord.js.org/#/docs/main/stable/class/Role) objects.
-* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
+* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) or [VoiceChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
 
 Each of these are collections so any collection method can be used on them. The most common method to use on mentions is .first\(\) which gets the very first mention, since there is often only one of them.
 
@@ -140,7 +142,7 @@ Let's make the above kick command a little better. Because Discord now supports 
 So let's do this now, with what we've already learned, and a little extra:
 
 ```javascript
-if(command === "kick") {
+if (command === "kick") {
   let member = message.mentions.members.first();
   let reason = args.slice(1).join(" ");
   member.kick(reason);
@@ -154,7 +156,7 @@ To use this command, a user would do something like: `!kick @SuperGamerDude Obvi
 Here's another example, with a super simple command, the `say` command. It makes the bot say what you just sent, and then delete your message:
 
 ```javascript
-if(command === "say"){
+if (command === "say"){
   let text = args.join(" ");
   message.delete();
   message.channel.send(text);

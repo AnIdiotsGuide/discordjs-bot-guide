@@ -9,18 +9,20 @@ We have two choices, either create a stand-alone bot, or throw it in an existing
 Let's grab some example code...
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+});
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
 let prefix = "~";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -33,19 +35,21 @@ Now, we've got the example code, we want to take our previously made webhook and
 You want to start off by defining your webhook at the top of your code, don't forget to replace `Webhook ID` and `Webhook Token` with their respective values.
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const mentionHook = new Discord.WebhookClient("Webhook ID", "Webhook Token");
+const { Client, Intents, WebhookClient } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+});
+const mentionHook = new WebhookClient({ id: "Webhook ID", token: "Webhook Token" });
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
 let prefix = "~";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -58,13 +62,13 @@ Now, this bit will be a little long winded; but inside the message event you wan
 The official documentation has the wonderful `Message.mentions.has(data)` boolean, that data can be a `GuildChannel`, `User` or `Role` Object, or a `string` representing the ID of any of the previously mentioned things, so inside the message event create a new `if statement`.
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   if (message.mentions.has("YOUR USER ID")) {
       // Additional Code
   }
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -75,13 +79,13 @@ Okay, that covers direct mentions, but what about the mentioned `@everyone`, `@h
 Well the `message` object has `mentions` which has both `everyone` and `roles`, so this is what the code will look like so far...
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   if (message.mentions.has("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)) {
       // Additional Code
   }
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -98,14 +102,14 @@ The `message.guild` check will make sure we're being mentioned inside a guild ch
 So far so good, we're almost half way there... We've set up the conditions to check for mentions, now we just need to ignore a few things, namely ourselves, and bots.
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   if (message.mentions.has("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)) {
       if (message.author.id === "YOUR USER ID") return;
       // Additional Code
   }
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -116,23 +120,23 @@ This code may look familiar, and you would be right. It's what we use to get bot
 Alright, now we're done with the conditions for the webhook, let's actually use the webhook! Take your code so far \(or copy the code from below\)...
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const mentionHook = new Discord.WebhookClient('Webhook ID', 'Webhook Token');
+const { Client, WebhookClient } = require("discord.js");
+const client = new Client();
+const mentionHook = new WebhookClient({ id: 'Webhook ID', token: 'Webhook Token' });
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
 let prefix = "~";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   if (message.mentions.has("YOUR USER ID") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("YOUR USER ID").roles.cache.has(r.id)).size > 0)) {
       if (message.author.id === "YOUR USER ID") return;
       // Additional Code
   }
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -153,16 +157,16 @@ This webhook has long since been deleted.
 {% endhint %}
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const mentionHook = new Discord.WebhookClient("336099488869384192", "UT_jumpd9cEi3X7Dxls0pv9_dscvTSB5oDAVHEWhMh2Psz8n0ZwAVr7JjSszfu5z7BGH");
+const { Client, WebhookClient } = require("discord.js");
+const client = new Client();
+const mentionHook = new WebhookClient({ id: "WEBHOOK_ID", token: "WEBHOOK_TOKEN" });
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
 let prefix = "~";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.id === client.user.id || message.author.bot) return;
   if (message.mentions.has("146048938242211840") || message.mentions.everyone || (message.guild && message.mentions.roles.filter(r => message.guild.members.cache.get("146048938242211840").roles.cache.has(r.id)).size > 0)) {
       if (message.author.id === "146048938242211840") return;
@@ -170,7 +174,7 @@ client.on("message", (message) => {
       mentionHook.send("You were mentioned!");
   }
   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   }
 });
@@ -189,4 +193,3 @@ If all goes well, check the channel you set the webhook for and you should see s
 That's basically it for this guide, but you can spice up the webhook notification by grabbing who mentioned you, what channel/guild you were mentioned in and what the content was \(in cases of deletion.\)
 
 In _Chapter 3_ I'll be covering third party websites such as [Zapier](https://zapier.com/) and [IFTT](https://ifttt.com/), which allows you to expand your webhook reach to things like Facebook, Twitter, GMail, and more!
-

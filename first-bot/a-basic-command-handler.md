@@ -20,90 +20,80 @@ In order to correctly write and use a command handler, I would suggest you get f
 
 Because we're creating a separate file \(module\) for each event and each commands, our main file \(app.js, or index.js, or whatever you're calling it\) will change drastically from a list of commands to a simple file that loads other files.
 
-Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `message` we want `./events/message.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc.
+Two main loops are needed to execute this master plan. First off, the one that will load all the `events` files. Each event will need to have a file in that folder, named _exactly_ like the event itself. So for `messageCreate` we want `./events/messageCreate.js`, for `guildBanAdd` we want `./events/guildBanAdd.js` , etc.
 
 ```javascript
-// This loop reads the /events/ folder and attaches each event file to the appropriate event.
-fs.readdir("./events/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    // If the file is not a JS file, ignore it (thanks, Apple)
-    if (!file.endsWith(".js")) return;
-    // Load the event file itself
-    const event = require(`./events/${file}`);
-    // Get just the event name from the file name
-    let eventName = file.split(".")[0];
+// Read the Files in the Events Directory and filter files that ends with .js
+const files = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+// Loop over each file
+for (const file of files) {
+  // Split the file at its extension and get the event name
+  const eventName = file.split(".")[0];
+  // Require the file
+  const event = require(`./events/${file}`);
     // super-secret recipe to call events with all their proper arguments *after* the `client` var.
     // without going into too many details, this means each event will be called with the client argument,
     // followed by its "normal" arguments, like message, member, etc etc.
     // This line is awesome by the way. Just sayin'.
-    client.on(eventName, event.bind(null, client));
-    delete require.cache[require.resolve(`./events/${file}`)];
-  });
-});
+  client.on(eventName, event.bind(null, client));
+}
 ```
 
 The second loop is going to be for the commands themselves. For a couple of reasons, we want to put the commands inside of a structure that we can refer to later - we'll use a Discord Collection:
 
 ```javascript
 client.commands = new Discord.Collection();
+// Read the Commands Directory, and filter the files that end with .js
+const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+// Loop over the Command files
+for (const file of commands) {
+  // Get the command name from splitting the file
+  const commandName = file.split(".")[0];
+  // Require the file
+  const command = require(`./commands/${file}`);
 
-fs.readdir("./commands/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    // Load the command file itself
-    let props = require(`./commands/${file}`);
-    // Get just the command name from the file name
-    let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
-    // Here we simply store the whole thing in the command Enmap. We're not running it right now.
-    client.commands.set(commandName, props);
-  });
-});
+  console.log(`Attempting to load command ${commandName}`);
+  // Set the command to a collection
+  client.commands.set(command.name, command);
+}
 ```
 
 Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\):
 
 ```javascript
-const Discord = require("discord.js");
+const { Client, Intents } = require("discord.js");
 const fs = require("fs");
 
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
-
-fs.readdir("./events/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    const event = require(`./events/${file}`);
-    let eventName = file.split(".")[0];
-    client.on(eventName, event.bind(null, client));
-  });
-});
-
 client.commands = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    let props = require(`./commands/${file}`);
-    let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
-    client.commands.set(commandName, props);
-  });
-});
+const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+for (const file of events) {
+  const eventName = file.split(".")[0];
+  const event = require(`./events/${file}`);
+  client.on(eventName, event.bind(null, client));
+}
+
+const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+for (const file of commands) {
+  const commandName = file.split(".")[0];
+  const command = require(`./commands/${file}`);
+
+  console.log(`Attempting to load command ${commandName}`);
+  client.commands.set(command.name, command);
+}
 
 client.login(config.token);
 ```
 
 ## Our first Event: Message
 
-The `message` event is obviously the most important one, as it will receive all messages sent to the bot. Create the `./events/message.js` file \(make sure it's spelled _exactly_ like that\) and look at this bit of code:
+The `messageCreate` event is obviously the most important one, as it will receive all messages sent to the bot. Create the `./events/messageCreate.js` file \(make sure it's spelled _exactly_ like that\) and look at this bit of code:
 
 ```javascript
 module.exports = (client, message) => {
@@ -182,8 +172,10 @@ Note that the `ready` event normally doesn't have any arguments, it's just `()`.
 Here's another example with the `guildMemberAdd` event:
 
 ```javascript
+const { Permissions } = require("discord.js");
+
 module.exports = (client, member) => {
-  const defaultChannel = member.guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has("SEND_MESSAGES"));
+  const defaultChannel = member.guild.channels.cache.find(channel => channel.permissionsFor(guild.me).has(Permissions.FLAGS.SEND_MESSAGES));
   defaultChannel.send(`Welcome ${member.user} to this server.`).catch(console.error);
 }
 ```
@@ -198,10 +190,10 @@ The _Reload_ command does just that, simply deletes the cache so the next time t
 
 ```javascript
 exports.run = (client, message, args) => {
-  if(!args || args.length < 1) return message.reply("Must provide a command name to reload.");
+  if (!args || args.length < 1) return message.reply("Must provide a command name to reload.");
   const commandName = args[0];
   // Check if the command exists and is valid
-  if(!client.commands.has(commandName)) {
+  if (!client.commands.has(commandName)) {
     return message.reply("That command does not exist");
   }
   // the path is relative to the *current folder*, so just ./filename.js

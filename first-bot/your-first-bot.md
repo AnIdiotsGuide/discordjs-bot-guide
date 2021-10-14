@@ -5,16 +5,16 @@ This chapter assumes you've followed the Getting Started chapter and your bot co
 In this chapter I'll guide you through the development of a simple bot with some useful commands. We'll start with the example we created in the first chapter:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
 client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   }
@@ -30,7 +30,7 @@ Before we dive into any further coding, we need to first understand what an _Eve
 This is an event:
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   // This code runs when the event is triggered
 });
 ```
@@ -39,7 +39,7 @@ This is, specifically, an event in _discord.js_ but it's similar to how other AP
 
 Why is this important? Well, if you intend to use your bot on a large server, or if you want it to be on multiple servers, this becomes a large number of events triggering at every moment. I don't want to go into too much optimization talk, but for a single point: **use a single event function for each event**.
 
-Discord.js contains a large number of events that can trigger under certain situations. For instance, the `ready` event triggers when the bot comes online. The `guildMemberAdd` event triggers when a new user joins a server shared with the bot. For a full list of events, see [Events in the documentation](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=channelCreate). We will come back to some of those later in this chapter.
+Discord.js contains a large number of events that can trigger under certain situations. For instance, the `ready` event triggers when the bot comes online. The `guildMemberAdd` event triggers when a new user joins a server shared with the bot. For a full list of events, see [Events in the documentation](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandCreate). We will come back to some of those later in this chapter.
 
 ## Adding a second command
 
@@ -50,7 +50,7 @@ From now on I will omit the code that requires and initiates the discord.js and 
 {% endhint %}
 
 ```javascript
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.content.startsWith("ping")) {
     message.channel.send("pong!");
   } else
@@ -61,7 +61,7 @@ client.on("message", (message) => {
 });
 ```
 
-Save your code and reload your bot. To do so, use `CTRL+C` in the command line, and re-run `node index.js`. Yes, there are better ways to reload the code, as you will see later in this book.
+Save your code and restart your bot. To do so, use `CTRL+C` in the command line, and re-run `node index.js`. Yes, there are better ways to reload the code, as you will see later in this book.
 
 You can test your new command by saying `foo` in a channel you share with the bot. You can also confirm that `ping` still returns `pong`!
 
@@ -78,14 +78,16 @@ To work around this, we'll be using prefix, which we will store in a variable. T
 ```javascript
 // Set the prefix
 const prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
+  // The back ticks are Template Literals introduced in Javascript in ES6 or ES2015, as an replacement for String Concatenation Read them up here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
-  if (message.content.startsWith(prefix + "foo")) {
+
+  if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
 });
@@ -95,7 +97,7 @@ The changes to the code are still simple. Let's go through them:
 
 * `const prefix = "!";` defines the prefix as the exclamation mark. You can change it to something else, of course.
 * The line `if (!msg.content.startsWith(prefix)) return;` is a small bit of optimization which reads: "If the message does not start with my prefix, stop what you're doing". This prevents the rest of the function from running, making your bot faster and more responsive.
-* The commands have changed so use this prefix, where `startsWith(prefix + "ping")` would only be triggered when the message starts with `!ping`.
+* The commands have changed so use this prefix, where `startsWith(\`${prefix}ping\`)` would only be triggered when the message starts with `!ping`.
 
 The second point is just as important as having a single `message` event handler. Let's say the bot receives a hundred messages every minute \(not much of an exaggeration on popular bots\). If the function does not break off at the beginning, you are processing these hundred messages in each of your command conditions. If, on the other hand, you break off when the prefix is not present, you are saving all these processor cycles for better things. If commands are 1% of your messages, you are saving 99% processing power...
 
@@ -111,7 +113,7 @@ Now, one person types `!help` in a channel, and both bots respond. But, they wil
 
 ```javascript
 const prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   // our new check:
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   // [rest of the code]
@@ -129,21 +131,22 @@ And now, we have a bot that only responds to 2 commands and does not waste any p
 The full bot code would now be:
 
 ```javascript
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: ["GUILDS", "GUILD_MESSAGES"]
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
 // Set the prefix
 let prefix = "!";
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(prefix + "ping")) {
+  if (message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("pong!");
   } else
-  if (message.content.startsWith(prefix + "foo")) {
+
+  if (message.content.startsWith(`${prefix}foo`)) {
     message.channel.send("bar!");
   }
 });

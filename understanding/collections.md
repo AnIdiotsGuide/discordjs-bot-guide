@@ -32,7 +32,7 @@ Want a great example? Here's getting the first role that matches one of 4 role n
 ```javascript
 const acceptedRoles = ["Mod", "Moderator", "Staff", "Mod Staff"];
 const modRole = member.roles.cache.find(role => acceptedRoles.includes(role.name));
-if(!modRole) return "No role found";
+if (!modRole) return "No role found";
 ```
 
 {% hint style="info" %}

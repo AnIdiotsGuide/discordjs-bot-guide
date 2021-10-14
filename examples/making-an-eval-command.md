@@ -88,7 +88,7 @@ client.on("messageCreate", async (message) => {
   const args = message.content.split(" ").slice(1);
 
   // The actual eval command
-  if (message.content.startsWith(config.prefix + "eval")) {
+  if (message.content.startsWith(`${config.prefix}eval`)) {
 
     // If the message author's ID does not equal
     // our ownerID, get outta there!
@@ -148,31 +148,6 @@ Be sure to supply the client as an input when we call the function later in the 
 
     // ...
 ```
-
-* **For NodeJS versions 12.x through 14.x** (For NodeJS 15.x+, see next bullet)
-
-```javascript
-// If you are on NodeJS versions 12.x-14.x, in
-// order to replace all instances of our input
-// we need to add this function to the file (it
-// can be defined in the same area as the clean()
-// function).
-function replaceAll(haystack, needle, replacement) {
-  return haystack.split(needle).join(replacement)
-}
-
-const clean = async (client, text) => { 
-  // ...
-
-  // Then you will need to place this inside the
-  // clean function, before the result is returned.
-  text = replaceAll(text, client.token, "[REDACTED]");
-
-  // ...
-}
-```
-
-* **For Node 15.x and higher**, you do not need to define the [`replaceAll`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll) function, as it is native after Node v15 as a string prototype. A slight modification to the code will be required:
 
 ```javascript
 const clean = async (client, text) => { 

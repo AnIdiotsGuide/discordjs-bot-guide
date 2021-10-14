@@ -44,7 +44,7 @@ const embed = new Discord.MessageEmbed()
   /*
    * Blank field, useful to create some space.
    */
-  .addField('\u200b', '\u200b' )
+  .addField("\u200b", "\u200b")
   /*
    * Takes a Date object, defaults to current date.
    */

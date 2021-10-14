@@ -57,7 +57,7 @@ In this example, you can list all custom emojis with \(emoji.id, emoji.image and
 
 ```javascript
 if (message.content === "listemojis") {
-   const emojiList = message.guild.emojis.cache.map((e, x) => (x + ' = ' + e) + ' | ' + e.name).join('\n');
+   const emojiList = message.guild.emojis.cache.map((e, x) => `${x} = ${e} | ${e.name}`).join("\n");
    message.channel.send(emojiList);
 }
 
