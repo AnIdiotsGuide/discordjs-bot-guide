@@ -54,7 +54,7 @@ for (const file of commands) {
 
   console.log(`Attempting to load command ${commandName}`);
   // Set the command to a collection
-  client.commands.set(command.name, command);
+  client.commands.set(commandName, command);
 }
 ```
 
