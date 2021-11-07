@@ -183,7 +183,7 @@ This quick & dirty swear detector takes an array of swear words we don't want to
 
 ```javascript
 const swearWords = ["darn", "shucks", "frak", "shite"]; // Make sure all of the words are lowercased only.
-if (swearWords.forEach(word => message.content.toLowerCase().includes(word.toLowerCase()))) { // Lowercase the message content for better matching
+if (swearWords.some(word => message.content.toLowerCase().includes(word.toLowerCase()))) { // Lowercase the message content for better matching
   message.reply("Oh no you said a bad word!!!");
   // Or just do message.delete();
 }
