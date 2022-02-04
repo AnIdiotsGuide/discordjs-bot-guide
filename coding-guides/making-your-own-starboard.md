@@ -6,6 +6,10 @@ description: >-
 
 # Making a Starboard
 
+{% hint style="info" %}
+In order to receive the events used in this code `messageReactionAdd` and `messageReactionRemove`, you need to enable the `GUILD_MESSAGE_REACTIONS` intent, along with `GUILD_MESSAGES` and `GUILDS`.
+{% endhint %}
+
 This is a long awaited feature, requested by many people.
 
 Let's begin by talking about what a starboard is. This is an example taken from the Discord.js Official Server.
@@ -83,7 +87,7 @@ if (stars) {
   const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
     .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
     .setImage(image);

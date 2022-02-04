@@ -20,11 +20,11 @@ While the below is a fair approximation of invite tracking, it's still not perfe
 
 ## Caching Invites
 
-The first part is to fetch all the invites and keep them cached in an Map. This is done in the `ready` event. First, however, we must ensure that the cache is initialized _outside_ of the ready event.
+The first part is to fetch all the invites and keep them cached in a [Collection](https://anidiots.guide/understanding/collections/). This is done in the `ready` event. First, however, we must ensure that the cache is initialized _outside_ of the ready event.
 
 ```javascript
 // Initialize the invite cache
-const invites = new Map();
+const invites = new Collection();
 
 // A pretty useful method to create a delay without blocking the whole script.
 const wait = require("timers/promises").setTimeout;
@@ -38,7 +38,7 @@ client.on("ready", async () => {
     // Fetch all Guild Invites
     const firstInvites = await guild.invites.fetch();
     // Set the key as Guild ID, and create a map which has the invite code, and the number of uses
-    invites.set(guild.id, new Map(firstInvites.map((invite) => [invite.code, invite.uses])));
+    invites.set(guild.id, new Collection(firstInvites.map((invite) => [invite.code, invite.uses])));
   });
 });
 ```
@@ -82,22 +82,21 @@ client.on("guildDelete", (guild) => {
 So now that we have our `invites` object, we're ready to listen to the `guildMemberAdd` event. When a new member joins, we need to fetch all of the guild's invites once again. Then, we look through our _cached_ invites and see which one has been used, by comparing the current invite's use with the cached ones.
 
 ```javascript
-client.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", async (member) => {
   // To compare, we need to load the current invite list.
-  member.guild.invites.fetch().then(newInvites => {
-    // This is the *existing* invites for the guild.
-    const oldInvites = invites.get(member.guild.id);
-    // Look through the invites, find the one for which the uses went up.
-    const invite = newInvites.find(i => i.uses > oldInvites.get(i.code));
-    // This is just to simplify the message being sent below (inviter doesn't have a tag property)
-    const inviter = client.users.cache.get(invite.inviter.id);
-    // Get the log channel (change to your liking)
-    const logChannel = member.guild.channels.cache.find(channel => channel.name === "join-logs");
-    // A real basic message with the information we need. 
-    inviter
-      ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
-      : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
-  });
+  const newInvites = await member.guild.invites.fetch()
+  // This is the *existing* invites for the guild.
+  const oldInvites = invites.get(member.guild.id);
+  // Look through the invites, find the one for which the uses went up.
+  const invite = newInvites.find(i => i.uses > oldInvites.get(i.code));
+  // This is just to simplify the message being sent below (inviter doesn't have a tag property)
+  const inviter = await client.users.fetch(invite.inviter.id);
+  // Get the log channel (change to your liking)
+  const logChannel = member.guild.channels.cache.find(channel => channel.name === "join-logs");
+  // A real basic message with the information we need. 
+  inviter
+    ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
+    : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
 });
 ```
 
@@ -112,4 +111,3 @@ The more guilds you have, the more invites are in each guild, the more data you'
 Furthermore, the cache itself grows in size, so you're using more memory. On top of which, it takes more time to sort through the invites the more invites exist. It might make the bot appear as being slower to respond to members joining.
 
 So to conclude, the above code works perfectly well and it _should_ not get you in trouble with Discord, but I wouldn't recommend implementing this on larger bots, especially if you're worried about memory and performance.
-

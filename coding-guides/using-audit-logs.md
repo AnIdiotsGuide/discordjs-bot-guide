@@ -13,12 +13,12 @@ const { Permissions } = require("discord.js");
 
 client.on("messageDelete", async (message) => {
   // Firstly, we need a logs channel. 
-  const logs = message.guild.channels.cache.find(channel => channel.name === "logs");
+  let logs = message.guild.channels.cache.find(channel => channel.name === "logs");
 
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
   if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) && !logs) {
-    await message.guild.channels.create("logs", { type: "GUILD_TEXT" });
+    logs = await message.guild.channels.create("logs", { type: "GUILD_TEXT" }).catch(console.error);
   }
 
   // If we do not have permissions, console log both errors
