@@ -128,6 +128,8 @@ This would be the content of the `./commands/ping.js` file, which is called with
 exports.run = (client, message, args) => {
     message.channel.send("pong!").catch(console.error);
 }
+
+exports.name = "ping";
 ```
 
 Another example would be the more complex `./commands/kick.js` command, called using `!kick @user`
@@ -153,6 +155,8 @@ exports.run = (client, message, [mention, ...reason]) => {
     message.reply(`${member.user.username} was successfully kicked.`);
   });
 };
+
+exports.name = "kick";
 ```
 
 Notice the structure on the first line. `exports.run` is the "function name" that is exported, with 3 arguments: `client` \(the client\), `message` \(the message variable from the handler\) and `args`. Here, `args` is replaced by fancy destructuring that captures the `reason` \(the rest of the message after the mention\) in an array. See [Commands with Arguments](command-with-arguments.md) for details.
@@ -204,6 +208,8 @@ exports.run = (client, message, args) => {
   client.commands.set(commandName, props);
   message.reply(`The command ${commandName} has been reloaded`);
 };
+
+exports.name = "reload";
 ```
 
 Remember that all of this is just a fairly basic version of the GuideBot command handler which also has permissions, levels, per-guild configurations, and a whole lot of example commands and events! [Head on over to Github](https://github.com/AnIdiotsGuide/guidebot/) to see the completed handler.

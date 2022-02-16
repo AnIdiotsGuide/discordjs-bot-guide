@@ -1,0 +1,15 @@
+input: .
+output: .retype
+url: anidiots.guide
+branding:
+  title: An Idiot's Guide
+favicon: .gitbook/assets/favicon.ico
+links:
+- text: Github
+  link: https://github.com/AnIdiotsGuide/discordjs-bot-guide
+- text: Discord
+  link: https://discord.gg/vXVxsAjSMF
+edit:
+  repo: "https://github.com/AnIdiotsGuide/discordjs-bot-guide/edit/"
+footer:
+  copyright: "&copy; Copyright {{ year }}. All rights reserved."
