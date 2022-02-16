@@ -74,8 +74,6 @@ const fetch = await starChannel.messages.fetch({ limit: 100 });
 const stars = fetch.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(message.id)); 
 // Now we setup an if statement for if the message is found within the starboard.
 if (stars) {
-  // Regex to check how many stars the embed has.
-  const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   // A variable that allows us to use the color of the pre-existing embed.
   const foundStar = stars.embeds[0];
   // We use the this.extension function to see if there is anything attached to the message.
@@ -83,9 +81,9 @@ if (stars) {
   const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
     .setTimestamp()
-    .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
+    .setFooter({ text: `⭐ ${reaction.count} | ${message.id}` })
     .setImage(image);
   // We fetch the ID of the message already on the starboard.
   const starMsg = await starChannel.messages.fetch(stars.id);
@@ -117,9 +115,9 @@ if (!stars) {
     // At the date of this edit (09/06/18) embeds do not mention yet.
     // But nothing is stopping Discord from enabling mentions from embeds in a future update.
     .setDescription(message.cleanContent) 
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
-    .setTimestamp(new Date())
-    .setFooter(`⭐ 1 | ${message.id}`)
+    .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setTimestamp()
+    .setFooter({ text: `⭐ 1 | ${message.id}` })
     .setImage(image);
   await starChannel.send({ embeds: [embed] });
 }
@@ -144,15 +142,14 @@ module.exports = class {
     const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(message.id));
     if (stars) {
-      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
       const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
+        .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
         .setTimestamp()
-        .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
+        .setFooter({ text: `⭐ ${reaction.count} | ${message.id}` })
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embeds: [embed] });
@@ -163,9 +160,9 @@ module.exports = class {
       const embed = new MessageEmbed()
         .setColor(15844367)
         .setDescription(message.cleanContent)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
-        .setTimestamp(new Date())
-        .setFooter(`⭐ 1 | ${message.id}`)
+        .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
+        .setTimestamp()
+        .setFooter({ text: `⭐ 1 | ${message.id}` })
         .setImage(image);
       await starChannel.send({ embeds: [embed] });
     }
@@ -192,20 +189,19 @@ There's only a slight difference between the `messageReactionAdd` and the `messa
 // Here we need to check if the user who removed the reaction is not the message author, as the star would then only remove one star as we did return when he added it
 if (message.author.id === user.id) return;
 if (stars) {
-  const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
   const foundStar = stars.embeds[0];
   const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
   const embed = new MessageEmbed()
     .setColor(foundStar.color)
     .setDescription(foundStar.description)
-    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
     .setTimestamp()
-    .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
+    .setFooter({ text: `⭐ ${reaction.count} | ${message.id}` })
     .setImage(image);
   const starMsg = await starChannel.messages.fetch(stars.id);
   await starMsg.edit({ embeds: [embed] });
   // Here we want to check if the message now has 0 Stars
-  if (parseInt(star[1]) - 1 == 0) return setTimeout(() => starMsg.delete(), 1000);
+  if (reaction.count == 0) return setTimeout(() => starMsg.delete(), 1000);
 }
 ```
 
@@ -227,19 +223,18 @@ module.exports = class {
     const fetchedMessages = await starChannel.messages.fetch({ limit: 100 });
     const stars = fetchedMessages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(reaction.message.id));
     if (stars) {
-      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       const foundStar = stars.embeds[0];
       const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : "";
       const embed = new MessageEmbed()
         .setColor(foundStar.color)
         .setDescription(foundStar.description)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
+        .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
         .setTimestamp()
-        .setFooter(`⭐ ${parseInt(star[1])-1} | ${message.id}`)
+        .setFooter({ text: `⭐ ${reaction.count} | ${message.id}` })
         .setImage(image);
       const starMsg = await starChannel.messages.fetch(stars.id);
       await starMsg.edit({ embeds: [embed] });
-      if (parseInt(star[1]) - 1 == 0) return setTimeout(() => starMsg.delete(), 1000);
+      if (reaction.count == 0) return setTimeout(() => starMsg.delete(), 1000);
     }
   }
 
