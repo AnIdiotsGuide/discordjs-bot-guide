@@ -85,7 +85,7 @@ for (const file of commands) {
   const command = require(`./commands/${file}`);
 
   console.log(`Attempting to load command ${commandName}`);
-  client.commands.set(command.name, command);
+  client.commands.set(commandName, command);
 }
 
 client.login(config.token);
