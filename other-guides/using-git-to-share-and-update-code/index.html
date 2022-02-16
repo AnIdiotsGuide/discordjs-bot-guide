@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="turbo-cache-control" content="no-cache">
+
+    <!-- Primary Meta Tags -->
+    <title>Using Git to share and update code</title>
+    <meta name="title" content="Using Git to share and update code">
+    <meta name="description" content="Have you ever come to a point where you're editing code, removing and adding and changing stuff and all of a sudden you realize," />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anidiots.guide/other-guides/using-git-to-share-and-update-code/">
+    <meta property="og:title" content="Using Git to share and update code">
+    <meta property="og:description" content="Have you ever come to a point where you're editing code, removing and adding and changing stuff and all of a sudden you realize,">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://anidiots.guide/other-guides/using-git-to-share-and-update-code/">
+    <meta property="twitter:title" content="Using Git to share and update code">
+    <meta property="twitter:description" content="Have you ever come to a point where you're editing code, removing and adding and changing stuff and all of a sudden you realize,">
+    
+    <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
+
+    <link href="/.gitbook/assets/favicon.ico" rel="icon" />
+    <link href="/resources/css/retype.css?v=1.11.2.698289927980" rel="stylesheet" data-turbo-track="reload" />
+
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698289927980" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698289927980" defer></script>
+</head>
+    <body>
+        <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
+    <div class="absolute bottom-0 left-0 bg-gray-100 dark:bg-dark-800" style="top: 5rem; right: 50%"></div>
+
+    <header id="docs-site-header" class="sticky top-0 z-30 flex w-full h-16 bg-white border-b border-gray-200 md:h-20 dark:bg-dark-850 dark:border-dark-650">
+    <div class="container relative flex items-center justify-between flex-grow pr-6 md:justify-start">
+        <!-- Mobile menu button skeleton -->
+        <button v-cloak class="skeleton docs-mobile-menu-button flex items-center justify-center flex-shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+        <div v-cloak id="docs-sidebar-toggle"></div>
+
+        <!-- Logo -->
+        <div class="flex items-center justify-between h-full py-2 md:w-75">
+            <div class="flex items-center px-2 md:px-6">
+                <a id="docs-site-logo" href="/" class="flex items-center leading-snug text-xl">
+                    <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">An Idiot&#x27;s Guide</span>
+                </a>
+            </div>
+
+            <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
+        </div>
+
+        <div class="flex justify-between md:flex-grow">
+            <!-- Top Nav -->
+            <nav class="hidden md:flex">
+    <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://github.com/AnIdiotsGuide/discordjs-bot-guide">Github</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://discord.gg/vXVxsAjSMF">Discord</a>
+        </li>
+    </ul>
+</nav>
+
+            <!-- Header Right Skeleton -->
+            <div v-cloak class="flex justify-end flex-grow skeleton">
+
+                <!-- Search input mock -->
+                <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                    <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation"  style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                    </div>
+
+                    <input class="w-full h-10 transition-colors duration-200 ease-in bg-gray-200 border border-transparent rounded md:text-sm hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-dark-600 dark:border-dark-600 placeholder-gray-400 dark:placeholder-dark-400"
+                    style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search" />
+                </div>
+
+                <!-- Mobile search button mock -->
+                <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation"  style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                </div>
+
+                <!-- Dark mode switch placehokder -->
+                <div class="w-10 h-10 lg:ml-2"></div>
+
+                <!-- History button mock -->
+                <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation"  style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                </div>
+            </div>
+
+            <div v-cloak class="flex items-center justify-end flex-grow">
+                <div id="docs-mobile-search-button"></div>
+                <doc-search-desktop></doc-search-desktop>
+
+                <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                <doc-history></doc-history>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <div class="container relative flex bg-white">
+        <!-- Sidebar Skeleton -->
+<div v-cloak class="fixed flex flex-col flex-shrink-0 duration-300 ease-in-out bg-gray-100 border-gray-200 sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton dark:bg-dark-800 dark:border-dark-650">
+
+    <!-- Render this div, if config.showSidebarFilter is `true` -->
+    <div class="flex items-center h-16 px-6">
+        <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-white border border-gray-200 rounded shadow-none text-sm focus:outline-none focus:border-gray-600 dark:bg-dark-600 dark:border-dark-600" type="text" placeholder="Filter" />
+    </div>
+
+    <div class="pl-6 mb-4 mt-1">
+        <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+    </div>
+
+
+    <div class="flex-shrink-0 mt-auto bg-transparent dark:border-dark-650">
+        <a
+    class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by"
+    target="_blank"
+    href="https://retype.com/"
+    rel="noopener"
+>
+    <span class="text-xs whitespace-nowrap">Powered by</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+</a>
+
+    </div>
+</div>
+
+<!-- Sidebar component -->
+<doc-sidebar v-cloak>
+    <template #sidebar-footer>
+        <div
+            class="flex-shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-dark-650"
+        >
+
+            <div class="py-3 px-6 md:hidden border-b dark:border-dark-650">
+                <nav>
+                    <ul class="flex flex-wrap justify-center items-center">
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://github.com/AnIdiotsGuide/discordjs-bot-guide">Github</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://discord.gg/vXVxsAjSMF">Discord</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
+            <a
+    class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by"
+    target="_blank"
+    href="https://retype.com/"
+    rel="noopener"
+>
+    <span class="text-xs whitespace-nowrap">Powered by</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+</a>
+
+        </div>
+    </template>
+</doc-sidebar>
+
+
+        <div class="flex-grow min-w-0 dark:bg-dark-850">
+            <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+            <div class="flex">
+    <div class="flex-grow min-w-0 px-6 md:px-16">
+        <main class="relative pt-6 pb-16">
+            <div class="docs-markdown" id="docs-content">
+                <!-- Rendered if sidebar right is enabled -->
+                <div id="docs-sidebar-right-toggle"></div>
+               
+                <!-- Page content  -->
+<doc-anchor-target id="using-git-to-share-and-update-code" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-git-to-share-and-update-code">#</doc-anchor-trigger>
+        <span>Using Git to share and update code</span>
+    </h1>
+</doc-anchor-target>
+<p>Have you ever come to a point where you&#x27;re editing code, removing and adding and changing stuff and all of a sudden you realize, <em>Shit, I deleted this piece and I need to rewrite or re-use it now. Damn!</em></p>
+<p>Have you ever wished there was a simpler way to transfer your code to your hosting, rather than having to connect to an FTP, or zip your file, upload to your host and unzip... you know the drill, right? Ugh!</p>
+<p>Have you ever wished you could easily share your code and have other people help you out in some bits, making your bot better?</p>
+<p>If you answered <strong>Yes</strong> to any of these questions, boy do I have a product for <em>you</em>! It&#x27;s called <code v-pre>git</code> and it&#x27;s a pretty magical tool.</p>
+<doc-anchor-target id="pre-requisites-and-software">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisites-and-software">#</doc-anchor-trigger>
+        <span>Pre-requisites and Software</span>
+    </h2>
+</doc-anchor-target>
+<p>To take full advantage of <code v-pre>git</code> you need to first have <em>at least</em> completed the <a href="../../first-bot/your-first-bot/#adding-a-configjson-file-to-your-bot">Adding a config.json file</a> walkthrough. This means that at the very least, your token is located in a separate file, and not within your javascript files. Having the prefix and the owner ID in that separate configuration file means that you get the advantage of easy testing: Change the prefix and token, and you have a secondary bot you can test your code with, wooh!</p>
+<p>What else do you need? <code v-pre>git</code> itself, of course! For Windows get <a href="https://git-scm.com/download/win">Git SCM</a> , on Linux run <code v-pre>sudo apt-get install git-all</code> or <code v-pre>sudo yum install git-all</code> depending on your distro&#x27;s install method. Mac users also have a <a href="http://git-scm.com/download/mac">Git SCM</a> installer.</p>
+<p>Anything else? Eeeeeh, nope! That&#x27;s all, really. Let&#x27;s get on to usage!</p>
+<doc-anchor-target id="initialization-and-gitignore">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#initialization-and-gitignore">#</doc-anchor-trigger>
+        <span>Initialization and <code v-pre>.gitignore</code></span>
+    </h2>
+</doc-anchor-target>
+<p>So the first baby step into the world of git, is to initialize your project folder as a git repository. To do that, you need to navigate to that folder in your command line. Or use an OS shortcut:</p>
+<ul>
+<li>Mac users can use <a href="http://lifehacker.com/launch-an-os-x-terminal-window-from-a-specific-folder-1466745514">this trick from lifehacker.com</a>.</li>
+<li>Windows users, remember the magic trick: SHIFT+Right-Click in your project folder, then choose <strong>Open command window here</strong>.</li>
+<li>Most Linux distros have an <strong>Open in Terminal</strong> option. But you use Linux, you can figure it out, right?</li>
+</ul>
+<p>Once you have your prompt open in that folder, go ahead and run <code v-pre>git init</code>. It doesn&#x27;t have any options or questions - it just inits the folder.</p>
+<doc-anchor-target id="ignoring-files">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ignoring-files">#</doc-anchor-trigger>
+        <span>Ignoring Files</span>
+    </h3>
+</doc-anchor-target>
+<p>In git, one of the most important files is <code v-pre>.gitignore</code> which, as the name would imply, ignores certain files. This is pretty critical with node.js apps, and our bot: you definitely want and need to ignore both the <code v-pre>node_modules</code> folder and the <code v-pre>config.json</code> file. The former because you don&#x27;t want thousands of files being uploaded (and they don&#x27;t work on other systems anyway), the latter because you don&#x27;t want your token to end up on a public <code v-pre>git</code> repository!</p>
+<p>There are pre-built <code v-pre>.gitignore</code> files you can grab off the internet, but for the purpose of this exercise you only need 2 lines in that file:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">node_modules
+config.json</code></pre>
+</doc-codeblock></div>
+<p>But how do you create it? Linux and Mac users, you can probably easily create the file directly. Windows users, you have to take a tiny detour - Windows doesn&#x27;t like files with only an extension and no filename. Don&#x27;t worry thought it&#x27;s simple. Start by creating a new file called, for example, <code v-pre>gitignore.txt</code> and put in the 2 lines above. Then, in your console, run <code v-pre>rename gitignore.txt .gitignore</code> and this will rename it as expected.</p>
+<doc-anchor-target id="your-first-git-command">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#your-first-git-command">#</doc-anchor-trigger>
+        <span>Your first <code v-pre>git</code> command</span>
+    </h2>
+</doc-anchor-target>
+<p>And now we&#x27;re ready to start to <code v-pre>git gud</code> (no no don&#x27;t type that it&#x27;s a meme!)</p>
+<p>The first command you can try is <code v-pre>git status</code>. This will show you a list of all your files and in all subfolders and indicate them as <strong>untracked files</strong>, meaning they&#x27;re not being tracked (saved) by git.</p>
+<p>Let&#x27;s resolve that with our second command, which essentially tells git to track all these files and start doing its magic on them: <code v-pre>git add .</code> where <code v-pre>.</code> is just a shortcut to &#x27;all the files including subfolders&#x27;.</p>
+<p>And now it&#x27;s time to <em>commit</em> to the task. <em>Commiting</em> basically means you&#x27;re creating a snapshot of your project, that is forever saved in your history. A commit can be a small as a tiny bugfix of one line or rewriting a complete function or module. Committing is always going to be with a message that describes the change, so smaller commits can be easier to manage and track in the future. So here goes:</p>
+<p><code v-pre>git commit -m 'Initial Project Commit'</code></p>
+<p>This will output a new commit with some stats including the number of changed lines, and the list of changed files. Great! Now we&#x27;ve got a commit. Funny story: you can continue committing changes locally, and do all the great things <code v-pre>git</code> does without every pushing to a remote repository. But that&#x27;s what we&#x27;re here for, right? So let&#x27;s move on!</p>
+<doc-anchor-target id="creating-a-githubgitlabbitbucket-account">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-a-githubgitlabbitbucket-account">#</doc-anchor-trigger>
+        <span>Creating a GitHub/GitLab/BitBucket account</span>
+    </h2>
+</doc-anchor-target>
+<p>With <code v-pre>git</code> you have a lot of choices when it comes to hosting your projects online. Pushing to an online repository gives you the safety in backups - your whole commit history is available, and nothing is lost whatever happens. Also gives you the ability to share your projects either publicly or privately with other people, and have them contribute to your project if you want them to.</p>
+<p>The 3 main <code v-pre>git</code> hosting services that are free are GitHub, GitLab and BitBucket. I&#x27;ll be going with GitHub in this case, but most of the steps I&#x27;ll take here are the same for all 3 services. You just need an account and you&#x27;re good to go!</p>
+<p>So let&#x27;s go ahead and prepare GitHub. On <a href="https://github.com/">GitHub.com</a> , create an account and then create a <strong>New Repository</strong>. Give it a name that identifies your project - it doesn&#x27;t need to be identical to your folder name, and you can change it later if you want. Don&#x27;t add a readme for now.</p>
+<p>In the page that displays after creating the repository you actually get the instructions you need to do, under <strong>push an existing repository from the command line</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">git remote add origin git@github.com:your-username/your-repo-name.git
+git push -u origin master</code></pre>
+</doc-codeblock></div>
+<p>Obviously, change <code v-pre>your-username</code> and <code v-pre>your-repo-name</code> to the appropriate strings. The first line <em>links</em> your local repository to the GitHub website. The second line actually takes all your local commit history, and it <em>pushes</em> it directly to github. Note that this action will ask you to enter your github username and password.</p>
+<p>&#x27;Wait, really? That&#x27;s it?&#x27; you ask. Yep, your code is now on github. Refresh the github page and you&#x27;ll see all your code there - without the <code v-pre>node_modules</code> and <code v-pre>config.json</code> if you&#x27;ve followed correctly!</p>
+<doc-anchor-target id="pushing-further-updates">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pushing-further-updates">#</doc-anchor-trigger>
+        <span>Pushing further updates</span>
+    </h2>
+</doc-anchor-target>
+<p>Linking your account doesn&#x27;t save you from future commands. Actually, every time you make a change and want to push it to the repository you have to use that <code v-pre>push</code> command again. Note that you don&#x27;t <em>need</em> to push every commit individually - you can work for a day and do multiple commits, and push them all at once at the end of the day.</p>
+<p>A small shortcut that you can use is to <code v-pre>add</code> and <code v-pre>commit</code> at the same time. This only works if you have changed files but not created new ones (for that just do <code v-pre>git add .</code> separately). So if you&#x27;re done just small changes, you can use this:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">git commit -am 'Fixed permission issue in 8ball command'</code></pre>
+</doc-codeblock></div>
+<p>And don&#x27;t forget to <code v-pre>git push origin master</code> again!</p>
+<doc-anchor-target id="getting-your-code-to-another-machine">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#getting-your-code-to-another-machine">#</doc-anchor-trigger>
+        <span>Getting your code to another machine</span>
+    </h2>
+</doc-anchor-target>
+<p>So, let&#x27;s say you have a VPS hosting somewhere. Or a Raspberry Pi. Or whatever other machine. You want to get that code of yours onto it. You first need to follow the <code v-pre>install</code> steps above to get <code v-pre>git</code> installed on the machine, and then you need to <em>clone</em> the repository from the git remote:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">git clone git@github.com:your-username/your-repo-name.git</code></pre>
+</doc-codeblock></div>
+<p>That&#x27;s all! Well, you need to enter your username and password again, but once that&#x27;s done, that code is available!</p>
+<p>Don&#x27;t forget that any file that&#x27;s been added to your <code v-pre>.gitignore</code> file isn&#x27;t present here, so you&#x27;ll need to do 2 things:</p>
+<ol>
+<li>Create your <code v-pre>config.json</code> again, either with the same token and prefix, or different ones.</li>
+<li>Install your node modules again. If you&#x27;ve properly run <code v-pre>npm init</code> and installed all your modules with the <code v-pre>-S</code> or <code v-pre>--save</code> argument, you should only need to do <code v-pre>npm install</code>. Otherwise, you need to install all of them again, for example using <code v-pre>npm install discord.js</code></li>
+</ol>
+<p>Now, remember that these files aren&#x27;t synced so they won&#x27;t be overwritten or modified whenever you push or pull to and from the repo.</p>
+<p>Speaking of which, any time you have <code v-pre>push</code>ed to GitHub, you can get an updated copy of the code by simply running <code v-pre>git pull origin master</code>.</p>
+<p>You&#x27;ll have to reset your bot for the changes to take effect, of course.</p>
+<doc-anchor-target id="some-last-tips">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#some-last-tips">#</doc-anchor-trigger>
+        <span>Some Last Tips</span>
+    </h2>
+</doc-anchor-target>
+<p>The process isn&#x27;t one-way. If you modify files on <em>any</em> computer you can <code v-pre>git push origin master</code> and <code v-pre>git pull origin master</code> on the other one. Be careful about editing on both locations though, as this may cause conflicts that are annoying to resolve (and are beyond this guide&#x27;s scope)</p>
+<p>IF you ever have &#x27;temporary&#x27; changes and you want to overwrite them - like a quick path on your VPS that you&#x27;ve also fixed locally - you can avoid the whole &#x27;conflict&#x27; process by <em>Resetting</em> a repository to your last <code v-pre>pull</code>. Simply run <code v-pre>git reset --hard HEAD</code> to erase any local changes, then run <code v-pre>git pull origin master</code> to grab the latest changes.</p>
+<p>You can connect to multiple remote repositories by running the <code v-pre>remote add</code> command above. You&#x27;ll need a different name, for example instead of <code v-pre>origin</code> you can call a remote <code v-pre>gitlab</code> and then any command should reflect that, like <code v-pre>git pull gitlab master</code>.</p>
+<p>There is a <strong>lot</strong> more to <code v-pre>git</code> than what was shown here (and I&#x27;m aware even that&#x27;s already a shitton of information). You can create and merge <code v-pre>branches</code>, <code v-pre>revert</code> to previous commits, make and accept <code v-pre>PR</code>s... <a href="https://www.google.com/search?q=git+tutorials">There is a lot more</a> that you can you can learn!</p>
+<p>But for now... I think this massive wall of text is plenty.</p>
+
+
+
+
+                <!-- Required only on API pages -->
+                <doc-toolbar-member-filter-no-results />
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between mt-14">
+    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/AnIdiotsGuide/discordjs-bot-guide/edit/main/other-guides/using-git-to-share-and-update-code.md" target="_blank" rel="noopener">
+        <svg class="mr-1.5" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M20 12c-.55 0-1 .45-1 1v7c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h7c.55 0 1-.45 1-1s-.45-1-1-1H4C2.35 3 1 4.35 1 6v14c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-7c0-.55-.45-1-1-1z" /><path d="M22.21 1.79c-1.18-1.18-3.24-1.18-4.41 0l-9.5 9.5c-.13.13-.22.29-.26.46l-1 4c-.08.34.01.7.26.95.18.2.44.3.7.3.08 0 .16-.01.24-.03l4-1c.18-.04.34-.13.46-.26l9.5-9.5c1.22-1.22 1.22-3.2.01-4.42zm-1.42 3l-9.3 9.3-2.11.53.53-2.11 9.3-9.3c.42-.42 1.16-.42 1.59 0 .43.43.43 1.15-.01 1.58z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+        <span>Edit this page</span>
+    </a>
+
+    <!--<p class="my-2.5 text-gray-500 dark:text-dark-350 text-sm">Last updated on <strong>2021-03-14</strong> by <strong>Geoffrey McGill</strong></p>-->
+</div>
+
+<nav class="flex mt-14">
+    <div class="w-1/2">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/other-guides/installing-and-using-a-proper-editor/">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+            <span>
+                <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
+                <span class="block mt-1">Installing and Using Atom</span>
+            </span>
+        </a>
+    </div>
+
+    <div class="w-1/2">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/other-guides/env-files/">
+            <span>
+                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
+                <span class="block mt-1">Using Environment Variables</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+        </a>
+    </div>
+</nav>
+
+
+        </main>
+
+        <div class="border-t dark:border-dark-650 pt-6 mb-8">
+            <footer class="flex flex-wrap items-center justify-between">
+    <div>
+        <ul class="flex flex-wrap items-center text-sm">
+</ul>
+
+    </div>
+    <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2022. All rights reserved.</p>
+</div>
+</footer>
+
+        </div>
+    </div>
+    
+    <!-- Rendered if sidebar right is enabled -->
+    <!-- Sidebar right skeleton-->
+    <div v-cloak class="fixed top-0 bottom-0 right-0 transform translate-x-full bg-white border-gray-200 lg:sticky lg:border-l lg:flex-shrink-0 lg:pt-6 lg:transform-none lg:w-56 lg:z-0 md:w-72 sidebar-right skeleton dark:bg-dark-850 dark:border-dark-650">
+        <div class="pl-5">
+            <div class="w-32 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+            <div class="w-48 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+            <div class="w-40 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+        </div>
+    </div>
+    
+    <!-- User should be able to hide sidebar right -->
+    <doc-sidebar-right v-cloak></doc-sidebar-right>
+</div>
+
+        </div>
+    </div>
+
+    <doc-search-mobile></doc-search-mobile>
+    <doc-back-to-top></doc-back-to-top>
+</div>
+
+
+        <div id="docs-overlay-target"></div>
+
+        <script>window.__DOCS__ = { "title": "Using Git to share and update code", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    </body>
+</html>

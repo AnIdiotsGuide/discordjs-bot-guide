@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anidiots.guide/sitemap.xml.gz
