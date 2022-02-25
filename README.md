@@ -1,8 +1,10 @@
-<h1 align='center'>An Idiots Guide</h1>
-<h4 align='center'>Discord.JS Bot Guide</h4>
-<p align='center'>
-    <em>The unofficial Discord.JS beginner's guide, written by idiots, for beginners</em>
-</p>
+<div align='center'>
+    <h1>An Idiots Guide</h1>
+    <h4>Discord.JS Bot Guide</h4>
+    <p>
+        <em>The unofficial Discord.JS beginner's guide, written by idiots, for beginners</em>
+    </p>
+</div>
 
 Table of Contents
 ==============
