@@ -25,12 +25,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/.gitbook/assets/favicon.ico" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.698325849993" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.701012877884" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698325849993" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.701012877884" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698325849993" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.698325849993" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.701012877884" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.701012877884" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -317,15 +317,15 @@ if (command === 'blah') {
 <p>Another way to use arguments, when the command should target a specific user (or users), is to use <em>Mentions</em>. For instance, to kick annoying shit-posters with <code v-pre>!kick @Xx_SniperBitch_xX @UselessIdiot</code> can be done with ease, instead of attempting to grab their ID or their name.</p>
 <p>In the context of the <code v-pre>message</code> event handler, all mentions in a message are part of the <code v-pre>message.mentions</code> object. This object then contains multiple <a href="../../understanding/collections/">Collections</a> of different mention types. Here are the various available mention types:</p>
 <ul>
-<li><code v-pre>message.mentions.members</code> contains all @mention as <a href="https://discord.js.org/#/docs/main/stable/class/GuildMember">GuildMember</a> objects.</li>
-<li><code v-pre>message.mentions.users</code> contains all @mention as <a href="https://discord.js.org/#/docs/main/stable/class/User">User</a> objects.</li>
-<li><code v-pre>message.mentions.roles</code> contains all @role mention as <a href="https://discord.js.org/#/docs/main/stable/class/Role">Role</a> objects.</li>
-<li><code v-pre>message.mentions.channels</code> contains all #channel mentions as <a href="https://discord.js.org/#/docs/main/stable/class/TextChannel">TextChannel</a> or <a href="https://discord.js.org/#/docs/main/stable/class/TextChannel">VoiceChannel</a> objects.</li>
+<li><code v-pre>message.mentions.members</code> contains all @mention as <a href="https://discord.js.org/#/docs/discord.js/stable/class/GuildMember">GuildMember</a> objects.</li>
+<li><code v-pre>message.mentions.users</code> contains all @mention as <a href="https://discord.js.org/#/docs/discord.js/stable/class/User">User</a> objects.</li>
+<li><code v-pre>message.mentions.roles</code> contains all @role mention as <a href="https://discord.js.org/#/docs/discord.js/stable/class//Role">Role</a> objects.</li>
+<li><code v-pre>message.mentions.channels</code> contains all #channel mentions as <a href="https://discord.js.org/#/docs/discord.js/stable/class/TextChannel">TextChannel</a> or <a href="https://discord.js.org/#/docs/discord.js/stable/class/VoiceChannel">VoiceChannel</a> objects.</li>
 </ul>
 <p>Each of these are collections so any collection method can be used on them. The most common method to use on mentions is .first() which gets the very first mention, since there is often only one of them.</p>
 <p>Let&#x27;s build a quick and dirty <code v-pre>kick</code> command, then. No error handling or mod checks - just straight up! (<em>Cul Sec</em>, as the French would say):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">// Kick a single user in the mention
+<pre class="language-javascript"><code v-pre class="language-javascript">// Kick a single member in the mention
 if (command === &quot;kick&quot;) {
   let member = message.mentions.members.first();
   member.kick();

@@ -25,12 +25,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/.gitbook/assets/favicon.ico" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.698325849993" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.701012877884" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698325849993" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.701012877884" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698325849993" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.698325849993" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.701012877884" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.701012877884" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -219,10 +219,10 @@
         <span>Caching Invites</span>
     </h2>
 </doc-anchor-target>
-<p>The first part is to fetch all the invites and keep them cached in an Map. This is done in the <code v-pre>ready</code> event. First, however, we must ensure that the cache is initialized <em>outside</em> of the ready event.</p>
+<p>The first part is to fetch all the invites and keep them cached in a <a href="https://anidiots.guide/understanding/collections/">Collection</a>. This is done in the <code v-pre>ready</code> event. First, however, we must ensure that the cache is initialized <em>outside</em> of the ready event.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-javascript"><code v-pre class="language-javascript">// Initialize the invite cache
-const invites = new Map();
+const invites = new Collection();
 
 // A pretty useful method to create a delay without blocking the whole script.
 const wait = require(&quot;timers/promises&quot;).setTimeout;
@@ -236,7 +236,7 @@ client.on(&quot;ready&quot;, async () =&gt; {
     // Fetch all Guild Invites
     const firstInvites = await guild.invites.fetch();
     // Set the key as Guild ID, and create a map which has the invite code, and the number of uses
-    invites.set(guild.id, new Map(firstInvites.map((invite) =&gt; [invite.code, invite.uses])));
+    invites.set(guild.id, new Collection(firstInvites.map((invite) =&gt; [invite.code, invite.uses])));
   });
 });</code></pre>
 </doc-codeblock></div>
@@ -282,22 +282,21 @@ client.on(&quot;guildDelete&quot;, (guild) =&gt; {
 </doc-anchor-target>
 <p>So now that we have our <code v-pre>invites</code> object, we&#x27;re ready to listen to the <code v-pre>guildMemberAdd</code> event. When a new member joins, we need to fetch all of the guild&#x27;s invites once again. Then, we look through our <em>cached</em> invites and see which one has been used, by comparing the current invite&#x27;s use with the cached ones.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">client.on(&quot;guildMemberAdd&quot;, member =&gt; {
+<pre class="language-javascript"><code v-pre class="language-javascript">client.on(&quot;guildMemberAdd&quot;, async (member) =&gt; {
   // To compare, we need to load the current invite list.
-  member.guild.invites.fetch().then(newInvites =&gt; {
-    // This is the *existing* invites for the guild.
-    const oldInvites = invites.get(member.guild.id);
-    // Look through the invites, find the one for which the uses went up.
-    const invite = newInvites.find(i =&gt; i.uses &gt; oldInvites.get(i.code));
-    // This is just to simplify the message being sent below (inviter doesn't have a tag property)
-    const inviter = client.users.cache.get(invite.inviter.id);
-    // Get the log channel (change to your liking)
-    const logChannel = member.guild.channels.cache.find(channel =&gt; channel.name === &quot;join-logs&quot;);
-    // A real basic message with the information we need. 
-    inviter
-      ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
-      : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
-  });
+  const newInvites = await member.guild.invites.fetch()
+  // This is the *existing* invites for the guild.
+  const oldInvites = invites.get(member.guild.id);
+  // Look through the invites, find the one for which the uses went up.
+  const invite = newInvites.find(i =&gt; i.uses &gt; oldInvites.get(i.code));
+  // This is just to simplify the message being sent below (inviter doesn't have a tag property)
+  const inviter = await client.users.fetch(invite.inviter.id);
+  // Get the log channel (change to your liking)
+  const logChannel = member.guild.channels.cache.find(channel =&gt; channel.name === &quot;join-logs&quot;);
+  // A real basic message with the information we need. 
+  inviter
+    ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
+    : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
 });</code></pre>
 </doc-codeblock></div>
 <p>And... well, that&#x27;s pretty much it. But....</p>

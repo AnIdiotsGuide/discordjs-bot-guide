@@ -25,12 +25,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/.gitbook/assets/favicon.ico" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.698325849993" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.701012877884" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698325849993" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.701012877884" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698325849993" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.698325849993" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.701012877884" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.701012877884" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -293,10 +293,10 @@ client.on(&quot;messageCreate&quot;, (message) =&gt; {
 <p>The changes to the code are still simple. Let&#x27;s go through them:</p>
 <ul>
 <li><code v-pre>const prefix = &quot;!&quot;;</code> defines the prefix as the exclamation mark. You can change it to something else, of course.</li>
-<li>The line <code v-pre>if (!msg.content.startsWith(prefix)) return;</code> is a small bit of optimization which reads: &quot;If the message does not start with my prefix, stop what you&#x27;re doing&quot;. This prevents the rest of the function from running, making your bot faster and more responsive.</li>
-<li>The commands have changed so use this prefix, where <code v-pre>startsWith(</code>&#x60;${prefix}ping&#x60;)<code v-pre>would only be triggered when the message starts with</code>!ping&#x60;.</li>
+<li>The line <code v-pre>if (!message.content.startsWith(prefix)) return;</code> is a small bit of optimization which reads: &quot;If the message does not start with my prefix, stop what you&#x27;re doing&quot;. This prevents the rest of the function from running, making your bot faster and more responsive.</li>
+<li>The commands have changed so use this prefix, where <code v-pre>startsWith(\</code>${prefix}ping&#x60;)<code v-pre>would only be triggered when the message starts with</code>!ping&#x60;.</li>
 </ul>
-<p>The second point is just as important as having a single <code v-pre>message</code> event handler. Let&#x27;s say the bot receives a hundred messages every minute (not much of an exaggeration on popular bots). If the function does not break off at the beginning, you are processing these hundred messages in each of your command conditions. If, on the other hand, you break off when the prefix is not present, you are saving all these processor cycles for better things. If commands are 1% of your messages, you are saving 99% processing power...</p>
+<p>The second point is just as important as having a single <code v-pre>messageCreate</code> event handler. Let&#x27;s say the bot receives a hundred messages every minute (not much of an exaggeration on popular bots). If the function does not break off at the beginning, you are processing these hundred messages in each of your command conditions. If, on the other hand, you break off when the prefix is not present, you are saving all these processor cycles for better things. If commands are 1% of your messages, you are saving 99% processing power...</p>
 <div class="flex mb-6">
     <div class="flex-shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">

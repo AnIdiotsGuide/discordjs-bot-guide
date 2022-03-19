@@ -25,12 +25,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/.gitbook/assets/favicon.ico" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.698325849993" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.701012877884" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698325849993" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.701012877884" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698325849993" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.698325849993" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.701012877884" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.701012877884" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -264,7 +264,7 @@ for (const file of commands) {
 </doc-codeblock></div>
 <p>Ok so with that being said, our main file now looks like this (how <em>clean</em> is that, really?):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">const { Client, Intents } = require(&quot;discord.js&quot;);
+<pre class="language-javascript"><code v-pre class="language-javascript">const { Client, Intents, Collection } = require(&quot;discord.js&quot;);
 const fs = require(&quot;fs&quot;);
 
 const client = new Client({
@@ -273,7 +273,7 @@ const client = new Client({
 const config = require(&quot;./config.json&quot;);
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 
 const events = fs.readdirSync(&quot;./events&quot;).filter(file =&gt; file.endsWith(&quot;.js&quot;));
 for (const file of events) {
@@ -350,7 +350,7 @@ exports.name = &quot;ping&quot;;</code></pre>
   if (message.mentions.members.size === 0)
     return message.reply(&quot;Please mention a user to kick&quot;);
 
-  if (!message.guild.me.hasPermission(&quot;KICK_MEMBERS&quot;))
+  if (!message.guild.me.permissions.has(&quot;KICK_MEMBERS&quot;))
     return message.reply(&quot;I don't have the `KICK_MEMBERS` permission&quot;);
 
   const kickMember = message.mentions.members.first();

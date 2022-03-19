@@ -25,12 +25,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/.gitbook/assets/favicon.ico" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.698325849993" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.701012877884" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698325849993" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.701012877884" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698325849993" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.698325849993" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.701012877884" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.701012877884" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -199,12 +199,12 @@
 
 client.on(&quot;messageDelete&quot;, async (message) =&gt; {
   // Firstly, we need a logs channel. 
-  const logs = message.guild.channels.cache.find(channel =&gt; channel.name === &quot;logs&quot;);
+  let logs = message.guild.channels.cache.find(channel =&gt; channel.name === &quot;logs&quot;);
 
   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
   // Remember, this is completely options. Use to your best judgement.
   if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) &amp;&amp; !logs) {
-    await message.guild.channels.create(&quot;logs&quot;, { type: &quot;GUILD_TEXT&quot; });
+    logs = await message.guild.channels.create(&quot;logs&quot;, { type: &quot;GUILD_TEXT&quot; }).catch(console.error);
   }
 
   // If we do not have permissions, console log both errors
