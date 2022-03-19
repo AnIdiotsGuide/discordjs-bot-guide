@@ -61,7 +61,7 @@ for (const file of commands) {
 Ok so with that being said, our main file now looks like this \(how _clean_ is that, really?\):
 
 ```javascript
-const { Client, Intents } = require("discord.js");
+const { Client, Intents, Collection } = require("discord.js");
 const fs = require("fs");
 
 const client = new Client({
@@ -70,7 +70,7 @@ const client = new Client({
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 
 const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 for (const file of events) {
@@ -146,7 +146,7 @@ exports.run = (client, message, [mention, ...reason]) => {
   if (message.mentions.members.size === 0)
     return message.reply("Please mention a user to kick");
 
-  if (!message.guild.me.hasPermission("KICK_MEMBERS"))
+  if (!message.guild.me.permissions.has("KICK_MEMBERS"))
     return message.reply("I don't have the `KICK_MEMBERS` permission");
 
   const kickMember = message.mentions.members.first();

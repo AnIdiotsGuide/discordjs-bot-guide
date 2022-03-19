@@ -19,6 +19,10 @@ When I want to write this emoji in my chat, I simply type `:ayy:` and it turns i
 
 There are two places where you can grab emojis using discord.js: in the client, and in the guilds. `client.emojis.cache` is a collection of every emoji the client has access to, and `guild.emojis.cache` is a collection of the emojis of a specific guild.
 
+{% hint style="info" %}
+In order for the emojis to be cached, you need to have the `GUILD_EMOJIS_AND_STICKERS` intents enabled
+{% endhint %}
+
 If you've learned anything from [Understanding Collections](../understanding/collections.md), you might already know how to get something by ID from a collection:
 
 ```javascript

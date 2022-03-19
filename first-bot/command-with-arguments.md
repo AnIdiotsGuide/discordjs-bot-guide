@@ -116,17 +116,17 @@ Another way to use arguments, when the command should target a specific user \(o
 
 In the context of the `message` event handler, all mentions in a message are part of the `message.mentions` object. This object then contains multiple [Collections](../understanding/collections.md) of different mention types. Here are the various available mention types:
 
-* `message.mentions.members` contains all @mention as [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember) objects.
-* `message.mentions.users` contains all @mention as [User](https://discord.js.org/#/docs/main/stable/class/User) objects.
-* `message.mentions.roles` contains all @role mention as [Role](https://discord.js.org/#/docs/main/stable/class/Role) objects.
-* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) or [VoiceChannel](https://discord.js.org/#/docs/main/stable/class/TextChannel) objects.
+* `message.mentions.members` contains all @mention as [GuildMember](https://discord.js.org/#/docs/discord.js/stable/class/GuildMember) objects.
+* `message.mentions.users` contains all @mention as [User](https://discord.js.org/#/docs/discord.js/stable/class/User) objects.
+* `message.mentions.roles` contains all @role mention as [Role](https://discord.js.org/#/docs/discord.js/stable/class//Role) objects.
+* `message.mentions.channels` contains all \#channel mentions as [TextChannel](https://discord.js.org/#/docs/discord.js/stable/class/TextChannel) or [VoiceChannel](https://discord.js.org/#/docs/discord.js/stable/class/VoiceChannel) objects.
 
 Each of these are collections so any collection method can be used on them. The most common method to use on mentions is .first\(\) which gets the very first mention, since there is often only one of them.
 
 Let's build a quick and dirty `kick` command, then. No error handling or mod checks - just straight up! \(_Cul Sec_, as the French would say\):
 
 ```javascript
-// Kick a single user in the mention
+// Kick a single member in the mention
 if (command === "kick") {
   let member = message.mentions.members.first();
   member.kick();

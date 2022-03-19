@@ -151,7 +151,7 @@ message.channel.messages.fetch("352292052538753025")
   .then(message => {
     // do something with it
     // Check if the author of the message is the bot
-    if (message.client.user.id !== message.id) return console.log("I'm not the author of that message!");
+    if (message.client.user.id !== message.author.id) return console.log("I'm not the author of that message!");
     // Edit the message
     message.edit("This fetched message was edited");
   });
