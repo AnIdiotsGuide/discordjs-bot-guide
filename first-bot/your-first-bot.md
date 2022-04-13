@@ -97,7 +97,7 @@ The changes to the code are still simple. Let's go through them:
 
 * `const prefix = "!";` defines the prefix as the exclamation mark. You can change it to something else, of course.
 * The line `if (!message.content.startsWith(prefix)) return;` is a small bit of optimization which reads: "If the message does not start with my prefix, stop what you're doing". This prevents the rest of the function from running, making your bot faster and more responsive.
-* The commands have changed so use this prefix, where `startsWith(\`${prefix}ping\`)`would only be triggered when the message starts with`!ping`.
+* The commands have changed so use this prefix, where ``startsWith(`${prefix}ping`)`` would only be triggered when the message starts with `!ping`.
 
 The second point is just as important as having a single `messageCreate` event handler. Let's say the bot receives a hundred messages every minute \(not much of an exaggeration on popular bots\). If the function does not break off at the beginning, you are processing these hundred messages in each of your command conditions. If, on the other hand, you break off when the prefix is not present, you are saving all these processor cycles for better things. If commands are 1% of your messages, you are saving 99% processing power...
 
