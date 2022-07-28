@@ -109,7 +109,7 @@ client.on("messageCreate", async (message) => {
       message.channel.send(`\`\`\`js\n${cleaned}\n\`\`\``);
     } catch (err) {
       // Reply in the channel with our error
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${cleaned}\n\`\`\``);
+      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
 
     // End of our command
